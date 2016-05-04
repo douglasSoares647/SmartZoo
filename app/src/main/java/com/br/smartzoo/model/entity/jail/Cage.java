@@ -11,6 +11,8 @@ import java.util.List;
  */
 public class Cage {
 
+    private int dirtyFactor;
+
     private String name;
     private List<Animal> animals;
     private List<Food> foods;
@@ -81,8 +83,18 @@ public class Cage {
     public void setIsSupplied(boolean isSupplied) {
         this.isSupplied = isSupplied;
     }
-    
-    
+
+    public int getDirtyFactor() {
+        return dirtyFactor;
+    }
+
+    public void setDirtyFactor(int dirtyFactor) {
+        this.dirtyFactor = dirtyFactor;
+        if(dirtyFactor> animals.size()*2/3){
+            isClean = false;
+        }
+    }
+
     public String toString(){
     	StringBuilder info = new StringBuilder();
     	
@@ -91,7 +103,7 @@ public class Cage {
     	for(Animal animal : animals){
     		info.append("\n" + animal.getName());
     	}
-    	info.append("\nJaula est� limpa?: "+ isClean);
+    	info.append("\nJaula está limpa?: "+ isClean);
     	info.append("Jaula possui comida?:"+ isSupplied );
     	return info.toString();
     }

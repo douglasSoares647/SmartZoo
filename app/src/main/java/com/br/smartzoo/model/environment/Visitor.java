@@ -13,7 +13,7 @@ import java.util.TimerTask;
 public class Visitor {
 
     private Date arrivalDate;
-
+    private Double reputationGenerated = 0.0;
 
     public Visitor() {
         arrivalDate = Calendar.getInstance().getTime();
@@ -24,6 +24,10 @@ public class Visitor {
                 ZooInfo.visitors.remove(Visitor.this);
             }
         },60);
+    }
+
+    public void visit(){
+
     }
 
 }

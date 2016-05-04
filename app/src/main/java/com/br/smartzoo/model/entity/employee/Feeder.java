@@ -79,9 +79,6 @@ public class Feeder extends Employee implements Manageable {
     @Override
     public void toRetain(Cage cage) {
     	if(!cage.getFoods().isEmpty()){
-    		for(Food food : cage.getFoods()){
-    			System.out.println("Foods retained :" + food.getWeight());
-    		}
     		stock.putFoods(cage.getFoods());
     		cage.getFoods().clear();
     		cages.add(cage);

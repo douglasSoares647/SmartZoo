@@ -1,11 +1,9 @@
 package com.br.smartzoo.model.singleton;
 
 import com.br.smartzoo.model.entity.food.Food;
-import com.br.smartzoo.model.entity.food.FoodEnum;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -29,7 +27,7 @@ public class Supplier {
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.MONTH,3);
             food.setExpirationDate(calendar.getTime());
-            food.setWeight(50.0);
+            food.setWeight(1.0);
             foodsToReturn.add(food);
         }
 
