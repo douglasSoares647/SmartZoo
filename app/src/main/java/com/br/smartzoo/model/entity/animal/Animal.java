@@ -18,7 +18,7 @@ import java.util.TimerTask;
  */
 public class Animal {
 
-    private int timeToFeelHungry = 10800000;// 30 minutes
+    private int timeToFeelHungry = 10800000;// 3 hours
     private int timeToDigest = 1800000; // 30 minutes
     private int digestingInterval = 60000; // 1 minute
     private String status;
@@ -34,6 +34,7 @@ public class Animal {
     private Timer biologicalClock;
     //fragilidade do animal a contrair doenças ao comer
     private Integer resistence;
+    private Integer popularity;
 
 
 
@@ -130,7 +131,13 @@ public class Animal {
         this.status = status;
     }
 
+    public Integer getPopularity() {
+        return popularity;
+    }
 
+    public void setPopularity(Integer popularity) {
+        this.popularity = popularity;
+    }
 
     public void  eat() {
         Double foodEaten = 0.0;
