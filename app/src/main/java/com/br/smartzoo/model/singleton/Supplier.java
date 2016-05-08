@@ -4,6 +4,7 @@ import com.br.smartzoo.model.entity.food.Food;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -36,9 +37,9 @@ public class Supplier {
     }
 
 
-    public TreeMap<String,List<Food>> buyFoods (TreeMap<String,Integer> foodsToBuy){
+    public HashMap<String,List<Food>> buyFoods (HashMap<String,Integer> foodsToBuy){
 
-        TreeMap<String,List<Food>> foods = new TreeMap<>();
+        HashMap<String,List<Food>> foods = new HashMap<>();
 
         for(Map.Entry<String,Integer> item : foodsToBuy.entrySet()){
             String foodName = item.getKey();

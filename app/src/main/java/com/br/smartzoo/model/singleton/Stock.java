@@ -6,6 +6,7 @@ import com.br.smartzoo.model.entity.jail.Cage;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -17,10 +18,10 @@ import java.util.TreeMap;
 public class Stock {
 
     public static Stock _INSTANCE;
-    private TreeMap<String,List<Food>> foods;
+    private HashMap<String,List<Food>> foods;
 
     private Stock() {
-        this.foods = new TreeMap<String,List<Food>>();
+        this.foods = new HashMap<String,List<Food>>();
     }
 
     public static Stock getInstance() {

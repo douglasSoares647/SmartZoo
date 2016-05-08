@@ -18,12 +18,13 @@ import java.util.TimerTask;
  */
 public class Animal {
 
-    private int timeToFeelHungry = 10800000;// 30 minutes
+    private int timeToFeelHungry = 10800000;// 3 hours
     private int timeToDigest = 1800000; // 30 minutes
     private int digestingInterval = 60000; // 1 minute
     private String status;
 
 
+    private Long id;
     private String name;
     private Integer age;
     private Double weight;
@@ -34,10 +35,11 @@ public class Animal {
     private Timer biologicalClock;
     //fragilidade do animal a contrair doenças ao comer
     private Integer resistence;
+    private Integer popularity;
 
 
 
-    public Animal(String name, Integer age, Double weight, Cage cage, Integer resistence,  boolean isHealthy) {
+    public Animal(Long id, String name, Integer age, Double weight, Cage cage, Integer resistence,  boolean isHealthy) {
         this.name = name;
         this.age = age;
         this.weight = weight;
@@ -63,6 +65,13 @@ public class Animal {
         this.cage.getAnimals().add(this);
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -130,7 +139,13 @@ public class Animal {
         this.status = status;
     }
 
+    public Integer getPopularity() {
+        return popularity;
+    }
 
+    public void setPopularity(Integer popularity) {
+        this.popularity = popularity;
+    }
 
     public void  eat() {
         Double foodEaten = 0.0;
