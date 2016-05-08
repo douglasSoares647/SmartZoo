@@ -112,6 +112,8 @@ public class BusinessRules {
         price +=ZooInfo.reputation*0.05;
         price = price*1.1;
 
+        price = price/3000;//30 dias contando que 100 pessoas visitem o zoo
+
         idealPrice = price;
 
     }
