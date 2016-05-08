@@ -24,6 +24,7 @@ public class Animal {
     private String status;
 
 
+    private Long id;
     private String name;
     private Integer age;
     private Double weight;
@@ -38,7 +39,7 @@ public class Animal {
 
 
 
-    public Animal(String name, Integer age, Double weight, Cage cage, Integer resistence,  boolean isHealthy) {
+    public Animal(Long id, String name, Integer age, Double weight, Cage cage, Integer resistence,  boolean isHealthy) {
         this.name = name;
         this.age = age;
         this.weight = weight;
@@ -64,6 +65,13 @@ public class Animal {
         this.cage.getAnimals().add(this);
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

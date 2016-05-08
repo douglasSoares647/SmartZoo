@@ -13,6 +13,7 @@ public class Cage {
 
     private int dirtyFactor;
 
+    private Long id;
     private String name;
     private List<Animal> animals;
     private List<Food> foods;
@@ -24,12 +25,20 @@ public class Cage {
         animals = new ArrayList<Animal>();
     }
 
-    public Cage(String name, List<Animal> animals, List<Food> foods, boolean isClean, boolean isSupplied) {
+    public Cage(Long id, String name, List<Animal> animals, List<Food> foods, boolean isClean, boolean isSupplied) {
         this.name = name;
         this.animals = animals;
         this.foods = foods;
         this.isClean = isClean;
         this.isSupplied = isSupplied;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public List<Food> getFoods() {
@@ -107,4 +116,6 @@ public class Cage {
     	info.append("Jaula possui comida?:"+ isSupplied );
     	return info.toString();
     }
+
+
 }
