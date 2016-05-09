@@ -16,4 +16,10 @@ public interface OnDrawerOptionClick {
     void onCagesClick();
 
     void onSettingsClick();
+
+    void onBuyFruitClick();
+
+    void onContractEmployeeClick();
+
+    void onBuyAnimalClick();
 }
