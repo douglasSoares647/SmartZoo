@@ -49,7 +49,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     mMediaPlayerSound.start();
-                    startActivity(new Intent(SplashScreenActivity.this, TimeLineActivity.class));
+                    startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
                 }
             });
         }
@@ -80,7 +80,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     mMediaPlayerSound.start();
-                    startActivity(new Intent(SplashScreenActivity.this, TimeLineActivity.class));
+                    startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
                 }
             });
         }
