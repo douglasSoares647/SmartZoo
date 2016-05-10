@@ -12,6 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.br.smartzoo.R;
@@ -32,34 +35,119 @@ public class NavigationDrawerFragment extends Fragment {
     private boolean mFromSavedInstanceState;
     private OnDrawerOptionClick mOnDrawerOptionClick;
     private RelativeLayout mRelativeSelected;
+    private LinearLayout mLinearSubOption;
+    private boolean subOptionVisible = false;
 
-    public NavigationDrawerFragment() {}
+    public NavigationDrawerFragment() {
+    }
 
-        @Override
-        public void onCreate (Bundle savedInstanceState){
-            super.onCreate(savedInstanceState);
-            mUserLearnedDrawer = Boolean.valueOf(readToPreferences(getContext(), KEY_USER_LEARNED_DRAWER, "false"));
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mUserLearnedDrawer = Boolean.valueOf(readToPreferences(getContext()
+                , KEY_USER_LEARNED_DRAWER, "false"));
 
-            if (savedInstanceState != null) {
-                mFromSavedInstanceState = true;
+        if (savedInstanceState != null) {
+            mFromSavedInstanceState = true;
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.navigation_drawer, container, false);
+
+        bindOptionAnimals(view);
+        bindOptionNews(view);
+        bindOptionCages(view);
+        bindOptionEmployees(view);
+        bindOptionSubOptions(view);
+        bindOptionBuy(view);
+        bindOptionSettings(view);
+
+
+        return view;
+    }
+
+    private void bindOptionSubOptions(View view) {
+        mLinearSubOption = (LinearLayout) view.findViewById(R.id.sub_options_buy);
+
+        bindRelativeOptionBuyAnimal(view);
+        bindRelativeOptionContractEmployee(view);
+        bindRelativeOptionBuyFruit(view);
+
+
+    }
+
+    private void bindRelativeOptionBuyFruit(View view) {
+        final RelativeLayout relativeOptionBuyFruit =
+                (RelativeLayout) view.findViewById(R.id.relative_option_buy_fruit);
+        relativeOptionBuyFruit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeOptionSelected(relativeOptionBuyFruit);
+                mOnDrawerOptionClick.onBuyFruitClick();
+                mDrawerLayout.closeDrawers();
             }
-        }
+        });
+    }
 
-        @Override
-        public View onCreateView (LayoutInflater inflater, ViewGroup container,
-                                  Bundle savedInstanceState){
+    private void changeOptionSelected(RelativeLayout relativeOption) {
+        mRelativeSelected.setBackgroundColor(getResources().getColor(R.color.white));
+        mRelativeSelected = relativeOption;
+        relativeOption.setBackgroundColor(getResources()
+                .getColor(R.color.yellow_300));
+    }
 
-            View view = inflater.inflate(R.layout.navigation_drawer, container, false);
+    private void bindRelativeOptionContractEmployee(View view) {
+        final RelativeLayout relativeOptionContractEmployee =
+                (RelativeLayout) view.findViewById(R.id.relative_option_contract_employee);
+        relativeOptionContractEmployee.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeOptionSelected(relativeOptionContractEmployee);
+                mOnDrawerOptionClick.onContractEmployeeClick();
+                mDrawerLayout.closeDrawers();
+            }
+        });
+    }
 
-            bindOptionAnimals(view);
-            bindOptionNews(view);
-            bindOptionCages(view);
-            bindOptionEmployees(view);
-            bindOptionSettings(view);
+    private void bindRelativeOptionBuyAnimal(View view) {
+        final RelativeLayout relativeOptionBuyAnimal =
+                (RelativeLayout) view.findViewById(R.id.relative_option_buy_animal);
+        relativeOptionBuyAnimal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeOptionSelected(relativeOptionBuyAnimal);
+                mOnDrawerOptionClick.onBuyAnimalClick();
+                mDrawerLayout.closeDrawers();
+            }
+        });
+    }
+
+    private void bindOptionBuy(View view) {
+        final RelativeLayout relativeOptionBuy =
+                (RelativeLayout) view.findViewById(R.id.relative_option_buy);
+        final ImageView icExpand = (ImageView) view.findViewById(R.id.ic_expand);
+
+        relativeOptionBuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!subOptionVisible) {
+                    subOptionVisible = true;
+                    mLinearSubOption.setVisibility(View.VISIBLE);
+                    icExpand.animate().rotation(180).setDuration(100);
+                } else {
+                    subOptionVisible = false;
+                    mLinearSubOption.setVisibility(View.GONE);
+                    icExpand.animate().rotation(0).setDuration(100);
+                }
+            }
+        });
 
 
-            return view;
-        }
+    }
 
     private void bindOptionSettings(View view) {
         final RelativeLayout relativeOptionSettings =
@@ -67,9 +155,7 @@ public class NavigationDrawerFragment extends Fragment {
         relativeOptionSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mRelativeSelected.setBackgroundColor(getResources().getColor(R.color.white));
-                mRelativeSelected = relativeOptionSettings;
-                relativeOptionSettings.setBackgroundColor(getResources().getColor(R.color.yellow_300));
+                changeOptionSelected(relativeOptionSettings);
                 mOnDrawerOptionClick.onSettingsClick();
                 mDrawerLayout.closeDrawers();
             }
@@ -82,9 +168,7 @@ public class NavigationDrawerFragment extends Fragment {
         relativeOptionEmployees.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mRelativeSelected.setBackgroundColor(getResources().getColor(R.color.white));
-                mRelativeSelected = relativeOptionEmployees;
-                relativeOptionEmployees.setBackgroundColor(getResources().getColor(R.color.yellow_300));
+                changeOptionSelected(relativeOptionEmployees);
                 mOnDrawerOptionClick.onEmployeeClick();
                 mDrawerLayout.closeDrawers();
             }
@@ -97,9 +181,7 @@ public class NavigationDrawerFragment extends Fragment {
         relativeOptionCages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mRelativeSelected.setBackgroundColor(getResources().getColor(R.color.white));
-                mRelativeSelected = relativeOptionCages;
-                relativeOptionCages.setBackgroundColor(getResources().getColor(R.color.yellow_300));
+                changeOptionSelected(relativeOptionCages);
                 mOnDrawerOptionClick.onCagesClick();
                 mDrawerLayout.closeDrawers();
             }
@@ -114,9 +196,7 @@ public class NavigationDrawerFragment extends Fragment {
         relativeOptionNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mRelativeSelected.setBackgroundColor(getResources().getColor(R.color.white));
-                mRelativeSelected = relativeOptionNews;
-                relativeOptionNews.setBackgroundColor(getResources().getColor(R.color.yellow_300));
+                changeOptionSelected(relativeOptionNews);
                 mOnDrawerOptionClick.onNewsClick();
                 mDrawerLayout.closeDrawers();
             }
@@ -130,9 +210,7 @@ public class NavigationDrawerFragment extends Fragment {
         relativeOptionAnimals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mRelativeSelected.setBackgroundColor(getResources().getColor(R.color.white));
-                mRelativeSelected = relativeOptionAnimals;
-                relativeOptionAnimals.setBackgroundColor(getResources().getColor(R.color.yellow_300));
+                changeOptionSelected(relativeOptionAnimals);
                 mOnDrawerOptionClick.onAnimalsClick();
                 mDrawerLayout.closeDrawers();
             }
@@ -143,12 +221,14 @@ public class NavigationDrawerFragment extends Fragment {
     public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar) {
         mContainerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
-        mDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+        mDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             @Override
             public void onDrawerOpened(View drawerView) {
                 if (!mUserLearnedDrawer) {
                     mUserLearnedDrawer = true;
-                    saveToPreferences(getActivity(), KEY_USER_LEARNED_DRAWER, mUserLearnedDrawer + "");
+                    saveToPreferences(getActivity(), KEY_USER_LEARNED_DRAWER,
+                            mUserLearnedDrawer + "");
                 }
                 getActivity().invalidateOptionsMenu();
             }
@@ -161,7 +241,7 @@ public class NavigationDrawerFragment extends Fragment {
 
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
-                toolbar.setAlpha(1 - slideOffset);
+                toolbar.setAlpha(1 - slideOffset / 2);
 
             }
         };
@@ -180,19 +260,23 @@ public class NavigationDrawerFragment extends Fragment {
 
     }
 
-    public static void saveToPreferences(Context context, String preferenceName, String preferenceValue) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_FILE_NAME, context.MODE_PRIVATE);
+    public static void saveToPreferences(Context context, String preferenceName
+            , String preferenceValue) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_FILE_NAME
+                , context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(preferenceName, preferenceValue);
         editor.apply();
     }
 
-    public static String readToPreferences(Context context, String preferenceName, String preferenceValue) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_FILE_NAME, context.MODE_PRIVATE);
+    public static String readToPreferences(Context context, String preferenceName
+            , String preferenceValue) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_FILE_NAME
+                , context.MODE_PRIVATE);
         return sharedPreferences.getString(preferenceName, preferenceValue);
     }
 
-    public void attachView(OnDrawerOptionClick onDrawerOptionClick){
+    public void attachView(OnDrawerOptionClick onDrawerOptionClick) {
         this.mOnDrawerOptionClick = onDrawerOptionClick;
     }
 }

@@ -16,8 +16,7 @@ import com.br.smartzoo.ui.fragment.NavigationDrawerFragment;
 public class MainActivity extends AppCompatActivity implements OnDrawerOptionClick {
     private DrawerLayout mDrawerLayout;
     private Toolbar mToolbar;
-    private RelativeLayout mRelativeSelected;
-
+t
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +67,21 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
     @Override
     public void onSettingsClick() {
+
+    }
+
+    @Override
+    public void onBuyFruitClick() {
+
+    }
+
+    @Override
+    public void onContractEmployeeClick() {
+
+    }
+
+    @Override
+    public void onBuyAnimalClick() {
 
     }
 }
