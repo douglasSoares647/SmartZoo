@@ -15,6 +15,7 @@ public class Janitor extends Employee {
     private int timeToRest = 1000*60*30;
     private String status;
 
+    private Long id;
     private List<Cage> cages;
     private int expedient;
     private Timer tasks;
@@ -25,8 +26,8 @@ public class Janitor extends Employee {
         this.tasks = new Timer();
     }
 
-    public Janitor(Long id, String name, Integer age, String cpf, String startDate, String endDate, Double salary, List<Cage> cages, int expedient) {
-        super(id , name, age, cpf, startDate, endDate, salary);
+    public Janitor(String name, Integer age, String cpf, String startDate, String endDate, Double salary, List<Cage> cages, int expedient) {
+        super(name, age, cpf, startDate, endDate, salary);
         this.cages = cages;
         this.expedient = expedient;
         this.tasks = new Timer();
@@ -40,6 +41,17 @@ public class Janitor extends Employee {
     @Override
     public Double calculateSalary() {
         return cages.isEmpty() && expedient == 0 ? super.getSalary() : super.getSalary() +(cages.size() * expedient);
+    }
+
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public List<Cage> getCages() {

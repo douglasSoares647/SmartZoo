@@ -72,7 +72,7 @@ public class AnimalContract {
     private static Animal getAnimal(Cursor cursor){
         Animal animal = new Animal();
 
-        while(!cursor.isBeforeFirst() ||cursor.moveToNext()) {
+        if(!cursor.isBeforeFirst() ||cursor.moveToNext()) {
             animal.setId(cursor.getLong(cursor.getColumnIndex(ID)));
             animal.setName(cursor.getString(cursor.getColumnIndex(NAME)));
             animal.setAge(cursor.getInt(cursor.getColumnIndex(AGE)));

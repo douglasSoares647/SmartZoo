@@ -40,8 +40,6 @@ public class FeederRepository {
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
         for(Cage cage : feeder.getCages()) {
-
-
             db.execSQL(" insert into " + FeederContract.CAGESTABLE + " ( "+ FeederContract.FEEDERID + ", "+FeederContract.CAGEID + "), values (" + feeder.getId() +", "+cage.getId());
 
         }

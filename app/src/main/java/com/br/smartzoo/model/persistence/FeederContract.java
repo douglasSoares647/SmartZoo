@@ -5,8 +5,10 @@ import android.database.Cursor;
 
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Feeder;
+import com.br.smartzoo.model.util.DateUtil;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -49,16 +51,6 @@ public class FeederContract {
     }
 
 
-    public static ContentValues createContentFeederCageContentValues(Feeder feeder, Cage cage){
-        ContentValues values = new ContentValues();
-
-        values.put(FEEDERID, feeder.getId());
-        values.put(CAGEID, cage.getId());
-
-        return values;
-    }
-
-
 
     public static ContentValues createContentValues(Feeder feeder){
         ContentValues contentValues = new ContentValues();
@@ -74,13 +66,18 @@ public class FeederContract {
     public static Feeder getFeeder(Cursor cursor){
         Feeder feeder =  new Feeder();
 
-        while(!cursor.isBeforeFirst() || cursor.moveToNext()){
+        if(!cursor.isBeforeFirst() || cursor.moveToNext()){
             feeder.setId(cursor.getLong(cursor.getColumnIndex(ID)));
             feeder.setAge(cursor.getInt(cursor.getColumnIndex(EmployeeContract.AGE)));
             feeder.setName(cursor.getString(cursor.getColumnIndex(EmployeeContract.NAME)));
             feeder.setSalary(cursor.getDouble(cursor.getColumnIndex(EmployeeContract.SALARY)));
-            feeder.setStartDate(cursor.getString(cursor.getColumnIndex(EmployeeContract.STARTDATE)));
-            feeder.setEndDate((cursor.getString(cursor.getColumnIndex(EmployeeContract.ENDDATE)))==null?"" :(cursor.getString(cursor.getColumnIndex(EmployeeContract.ENDDATE))) );
+
+            Date startDate  = DateUtil.stringToDate(cursor.getString(cursor.getColumnIndex(EmployeeContract.STARTDATE)));
+            Date endDate = DateUtil.stringToDate(cursor.getString(cursor.getColumnIndex(EmployeeContract.ENDDATE)));
+
+            feeder.setStartDate(startDate);
+            feeder.setEndDate(endDate);
+
             feeder.setCpf(cursor.getString(cursor.getColumnIndex(EmployeeContract.CPF)));
         }
 

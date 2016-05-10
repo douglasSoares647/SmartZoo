@@ -23,8 +23,8 @@ public class Veterinary extends Employee {
         this.animals = animals;
     }
 
-    public Veterinary(Long id, String name, Integer age, String cpf, String startDate, String endDate, Double salary, String credential, List<Animal> animals) {
-        super(id, name, age, cpf, startDate, endDate, salary);
+    public Veterinary(String name, Integer age, String cpf, String startDate, String endDate, Double salary, String credential, List<Animal> animals) {
+        super(name, age, cpf, startDate, endDate, salary);
         this.credential = credential;
         this.animals = animals;
     }

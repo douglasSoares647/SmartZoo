@@ -55,7 +55,7 @@ public class CageContract {
     public static Cage getCage(Cursor cursor){
         Cage cage = new Cage();
 
-        while(!cursor.isBeforeFirst()||cursor.moveToNext()){
+        if(!cursor.isBeforeFirst()||cursor.moveToNext()){
 
             cage.setId(cursor.getLong(cursor.getColumnIndex(ID)));
             cage.setName(cursor.getString(cursor.getColumnIndex(NAME)));

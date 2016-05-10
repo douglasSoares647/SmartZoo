@@ -3,6 +3,7 @@ package com.br.smartzoo.model.persistence;
 import android.content.ContentValues;
 
 import com.br.smartzoo.model.entity.Employee;
+import com.br.smartzoo.model.util.DateUtil;
 
 /**
  * Created by dhb_s on 5/9/2016.
@@ -48,8 +49,8 @@ public class EmployeeContract {
         values.put(NAME, employee.getName());
         values.put(AGE, employee.getAge());
         values.put(CPF, employee.getCpf());
-        values.put(STARTDATE, employee.getStartDate());
-        values.put(ENDDATE, employee.getEndDate());
+        values.put(STARTDATE, DateUtil.dateToString(employee.getStartDate()));
+        values.put(ENDDATE, DateUtil.dateToString(employee.getEndDate()));
         values.put(SALARY, employee.getSalary());
 
         return values;
