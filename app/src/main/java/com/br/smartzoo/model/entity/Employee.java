@@ -1,10 +1,11 @@
-package com.br.smartzoo.model.entity.employee;
+package com.br.smartzoo.model.entity;
 
 /**
  * Created by taibic on 14/04/16.
  */
 public abstract class Employee {
 
+    private Long id;
     private String name;
     private Integer age;
     private String cpf;
@@ -15,13 +16,22 @@ public abstract class Employee {
     public Employee() {
     }
 
-    public Employee(String name, Integer age, String cpf, String startDate,String endDate, Double salary) {
+    public Employee(Long id, String name, Integer age, String cpf, String startDate,String endDate, Double salary) {
+        this.id = id;
         this.name = name;
         this.age = age;
         this.cpf = cpf;
         this.startDate = startDate;
         this.endDate = endDate;
         this.salary = salary;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

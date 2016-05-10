@@ -1,6 +1,6 @@
 package com.br.smartzoo.model.business;
 
-import com.br.smartzoo.model.entity.animal.Animal;
+import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.persistence.AnimalRepository;
 
 import java.util.List;

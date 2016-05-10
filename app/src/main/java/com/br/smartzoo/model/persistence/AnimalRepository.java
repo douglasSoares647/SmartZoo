@@ -3,9 +3,8 @@ package com.br.smartzoo.model.persistence;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
-import com.br.smartzoo.model.entity.animal.Animal;
+import com.br.smartzoo.model.entity.Animal;
 
 import java.util.ArrayList;
 import java.util.List;

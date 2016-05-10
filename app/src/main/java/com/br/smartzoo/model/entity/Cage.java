@@ -1,7 +1,7 @@
-package com.br.smartzoo.model.entity.jail;
+package com.br.smartzoo.model.entity;
 
-import com.br.smartzoo.model.entity.animal.Animal;
-import com.br.smartzoo.model.entity.food.Food;
+import com.br.smartzoo.model.entity.Animal;
+import com.br.smartzoo.model.entity.Food;
 
 import java.util.ArrayList;
 import java.util.List;

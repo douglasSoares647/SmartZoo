@@ -3,7 +3,7 @@ package com.br.smartzoo.model.persistence;
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import com.br.smartzoo.model.entity.jail.Cage;
+import com.br.smartzoo.model.entity.Cage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,8 @@ public class CageContract {
         table.append(ID + " integer primary key, ");
         table.append(NAME + " text unique, ");
         table.append(ISCLEAN + " integer not null, ");
-        table.append(ISSUPPLIED + " integer not null;");
+        table.append(ISSUPPLIED + " integer not null ");
+        table.append(" ); ");
 
         return table.toString();
     }

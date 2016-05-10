@@ -1,14 +1,7 @@
 package com.br.smartzoo.model.business;
 
-import android.content.ContentUris;
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-
-import com.br.smartzoo.model.entity.jail.Cage;
-import com.br.smartzoo.model.persistence.CageContract;
+import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.persistence.CageRepository;
-import com.br.smartzoo.model.persistence.DatabaseHelper;
 
 import java.util.ArrayList;
 import java.util.List;

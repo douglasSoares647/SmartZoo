@@ -1,11 +1,7 @@
-package com.br.smartzoo.model.entity.employee;
-
-
+package com.br.smartzoo.model.entity;
 
 
 import android.os.CountDownTimer;
-
-import com.br.smartzoo.model.entity.jail.Cage;
 
 import java.util.List;
 import java.util.Timer;
@@ -29,8 +25,8 @@ public class Janitor extends Employee {
         this.tasks = new Timer();
     }
 
-    public Janitor(String name, Integer age, String cpf, String startDate, String endDate, Double salary, List<Cage> cages, int expedient) {
-        super(name, age, cpf, startDate, endDate, salary);
+    public Janitor(Long id, String name, Integer age, String cpf, String startDate, String endDate, Double salary, List<Cage> cages, int expedient) {
+        super(id , name, age, cpf, startDate, endDate, salary);
         this.cages = cages;
         this.expedient = expedient;
         this.tasks = new Timer();

@@ -1,15 +1,14 @@
-package com.br.smartzoo.model.environment;
+package com.br.smartzoo.model.business;
 
-import android.os.CountDownTimer;
-
-import com.br.smartzoo.model.entity.animal.Animal;
-import com.br.smartzoo.model.entity.employee.Employee;
-import com.br.smartzoo.model.entity.jail.Cage;
+import com.br.smartzoo.model.entity.Animal;
+import com.br.smartzoo.model.entity.Employee;
+import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.enums.FoodEnum;
+import com.br.smartzoo.model.environment.Visitor;
+import com.br.smartzoo.model.environment.ZooInfo;
 
 import java.util.Random;
 import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by douglas on 03/05/16.

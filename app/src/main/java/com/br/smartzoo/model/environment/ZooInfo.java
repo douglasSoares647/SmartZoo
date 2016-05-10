@@ -1,7 +1,7 @@
 package com.br.smartzoo.model.environment;
 
-import com.br.smartzoo.model.entity.employee.Employee;
-import com.br.smartzoo.model.entity.jail.Cage;
+import com.br.smartzoo.model.entity.Employee;
+import com.br.smartzoo.model.entity.Cage;
 
 import java.util.ArrayList;
 import java.util.List;

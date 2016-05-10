@@ -1,11 +1,10 @@
-package com.br.smartzoo.model.entity.employee;
+package com.br.smartzoo.model.entity;
 
-import com.br.smartzoo.model.entity.food.Food;
-import com.br.smartzoo.model.entity.jail.Cage;
 import com.br.smartzoo.model.interfaces.Manageable;
 import com.br.smartzoo.model.singleton.Stock;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -25,8 +24,8 @@ public class Feeder extends Employee implements Manageable {
     
     
 
-    public Feeder(String name, Integer age, String cpf, String startDate, String endDate, Double salary, List<Cage> cages) {
-		super(name, age, cpf, startDate, endDate, salary);
+    public Feeder(Long id, String name, Integer age, String cpf, String startDate, String endDate, Double salary, List<Cage> cages) {
+		super(id, name, age, cpf, startDate, endDate, salary);
 		this.cages = cages;
 		stock = Stock.getInstance();
 	}

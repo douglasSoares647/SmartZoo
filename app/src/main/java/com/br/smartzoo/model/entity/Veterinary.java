@@ -1,6 +1,7 @@
-package com.br.smartzoo.model.entity.employee;
+package com.br.smartzoo.model.entity;
 
-import com.br.smartzoo.model.entity.animal.Animal;
+import com.br.smartzoo.model.entity.Animal;
+import com.br.smartzoo.model.entity.Employee;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 /**
  * Created by adenilson on 18/04/16.
  */
-public class Veterinary extends Employee{
+public class Veterinary extends Employee {
 
     private String credential;
     private List<Animal> animals;
@@ -22,8 +23,8 @@ public class Veterinary extends Employee{
         this.animals = animals;
     }
 
-    public Veterinary(String name, Integer age, String cpf, String startDate, String endDate, Double salary, String credential, List<Animal> animals) {
-        super(name, age, cpf, startDate, endDate, salary);
+    public Veterinary(Long id, String name, Integer age, String cpf, String startDate, String endDate, Double salary, String credential, List<Animal> animals) {
+        super(id, name, age, cpf, startDate, endDate, salary);
         this.credential = credential;
         this.animals = animals;
     }

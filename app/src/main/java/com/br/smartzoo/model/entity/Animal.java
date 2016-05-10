@@ -1,10 +1,7 @@
-package com.br.smartzoo.model.entity.animal;
+package com.br.smartzoo.model.entity;
 
 
 import android.os.CountDownTimer;
-
-import com.br.smartzoo.model.entity.food.Food;
-import com.br.smartzoo.model.entity.jail.Cage;
 
 import java.util.ArrayList;
 import java.util.Calendar;
