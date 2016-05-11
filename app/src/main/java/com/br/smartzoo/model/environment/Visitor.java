@@ -33,7 +33,7 @@ public class Visitor{
     public void visit(){
         List<Cage> cagesToVisit = ZooInfo.cages;
 
-        Double reputationGeneratedByPrice = 10/ZooInfo.priceToVisit;
+        Double reputationGeneratedByPrice = 10/ZooInfo.price;
         reputationGenerated += reputationGeneratedByPrice;
         status = "Visitando";
 

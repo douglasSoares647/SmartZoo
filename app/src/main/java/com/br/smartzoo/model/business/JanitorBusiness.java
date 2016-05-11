@@ -1,5 +1,6 @@
 package com.br.smartzoo.model.business;
 
+import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Janitor;
 import com.br.smartzoo.model.persistence.JanitorRepository;
 
@@ -17,8 +18,8 @@ public class JanitorBusiness {
     }
 
 
-    public static void saveCages(Janitor janitor){
-        JanitorRepository.saveCages(janitor);
+    public static void saveCageOnHistory(Janitor janitor , Cage cage){
+        JanitorRepository.saveCageOnHistory(janitor,cage);
     }
 
 

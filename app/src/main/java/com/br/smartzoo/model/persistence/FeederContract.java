@@ -9,6 +9,7 @@ import com.br.smartzoo.model.util.DateUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -19,6 +20,7 @@ public class FeederContract {
     public static String CAGESTABLE = "cagesOfFeeder";
     public static String CAGEID = "cageId";
     public static String FEEDERID = "feederId";
+    public static String DATE = "date";
     public static String ID = "id";
 
 
@@ -43,6 +45,7 @@ public class FeederContract {
         table.append(ID + " integer primary key autoincrement, ");
         table.append(FEEDERID + " integer not null, ");
         table.append(CAGEID + " integer not null, ");
+        table.append(DATE + " text not null,");
         table.append("FOREIGN KEY ("+FEEDERID+") references " + EmployeeContract.TABLE + "("+EmployeeContract.ID+"),");
         table.append("FOREIGN KEY ("+CAGEID+") references " + CageContract.TABLE + "("+CageContract.ID+")");
         table.append(" ); ");
@@ -92,6 +95,17 @@ public class FeederContract {
         }
 
         return feeders;
+    }
+
+
+    public static HashMap<Integer,Integer> getCagesCount(Cursor cursor){
+        HashMap<Integer, Integer> cagesCount = new HashMap<>();
+
+        while(cursor.moveToNext()){
+            cagesCount.put(cursor.getInt(cursor.getColumnIndex("cageId")), cursor.getInt(cursor.getColumnIndex("count")));
+        }
+
+        return cagesCount;
     }
 
 

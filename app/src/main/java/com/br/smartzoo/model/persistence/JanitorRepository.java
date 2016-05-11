@@ -5,8 +5,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.br.smartzoo.model.entity.Cage;
+import com.br.smartzoo.model.entity.Feeder;
 import com.br.smartzoo.model.entity.Janitor;
+import com.br.smartzoo.model.util.DateUtil;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -35,27 +40,46 @@ public class JanitorRepository {
     }
 
 
-    public static void saveCages(Janitor janitor){
+    public static void saveCageOnHistory(Janitor janitor, Cage cage){
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
-        for(Cage cage : janitor.getCages()) {
-            db.execSQL(" insert into " + JanitorContract.CAGESTABLE + " ( "+ JanitorContract.JANITORID + ", "+JanitorContract.CAGEID + "), values (" + janitor.getId() +", "+cage.getId());
+        db.execSQL(" insert into " + JanitorContract.CAGESTABLE + " ( "+ JanitorContract.JANITORID + ", "+JanitorContract.CAGEID + "), values (" + janitor.getId() +", "+cage.getId());
 
-        }
+        db.close();
+        databaseHelper.close();
     }
 
 
-    public static List<Cage> getCagesOfJanitor(Janitor janitor){
+    public static HashMap<Integer,Integer> getCagesHistoryOfJanitor(Janitor janitor, Date startDate, Date endDate){
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
 
-        String sql = " select c.id, c.name, c.isSupplied, c.isClean from cage c join " + JanitorContract.CAGESTABLE + " ct on ct.cageId = c.id;";
+        String start = DateUtil.dateToString(startDate);
+        String end = DateUtil.dateToString(endDate);
+
+        String sql = " select cageId, count(cageId) as 'count' from " + JanitorContract.CAGESTABLE + " where janitorId like "+janitor.getId() +
+                " and date between " + start + " and  " + end + " group by cageId;";
 
         Cursor cursor = db.rawQuery(sql,null);
 
-        return CageContract.getCages(cursor);
+        db.close();
+        databaseHelper.close();
 
+        return FeederContract.getCagesCount(cursor);
+
+    }
+
+    public static HashMap<Integer,Integer> getCagesHistoryOfJanitor(Feeder feeder){
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
+        SQLiteDatabase db = databaseHelper.getReadableDatabase();
+
+        String sql = " select cageId, count(cageId) as 'count' from " + JanitorContract.CAGESTABLE + " where janitorId like " + feeder.getId() +
+                " group by cageId";
+
+        Cursor cursor = db.rawQuery(sql,null);
+
+        return FeederContract.getCagesCount(cursor);
 
     }
 

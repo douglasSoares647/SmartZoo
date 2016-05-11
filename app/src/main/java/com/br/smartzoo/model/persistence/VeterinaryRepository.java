@@ -8,7 +8,10 @@ import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Janitor;
 import com.br.smartzoo.model.entity.Veterinary;
+import com.br.smartzoo.model.util.DateUtil;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -36,14 +39,51 @@ public class VeterinaryRepository {
 
 
 
-    public static void saveAnimals(Veterinary veterinary){
+    public static void saveAnimalHistory(Veterinary veterinary, Animal animal){
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
-        for(Animal animal : veterinary.getAnimals()) {
-            db.execSQL(" insert into " + VeterinaryContract.ANIMALSTABLE + " ( "+ VeterinaryContract.VETERINARYID + ", "+VeterinaryContract.ANIMALID + "), values (" + veterinary.getId() +", "+animal.getId());
+        db.execSQL(" insert into " + VeterinaryContract.ANIMALSTABLE + " ( "+ VeterinaryContract.VETERINARYID + ", "+VeterinaryContract.ANIMALID + "), values (" + veterinary.getId() +", "+animal.getId());
 
-        }
+
+        db.close();
+        databaseHelper.close();
+    }
+
+    public static HashMap<Integer,Integer> getAnimalsOnHistory(Veterinary veterinary, Date startDate, Date endDate){
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
+        SQLiteDatabase db = databaseHelper.getReadableDatabase();
+
+        String start = DateUtil.dateToString(startDate);
+        String end = DateUtil.dateToString(endDate);
+
+        String sql = " select animalId, count(animalId) as 'count' from " + VeterinaryContract.ANIMALSTABLE+ " where veterinaryId like "+veterinary.getId() +
+                " and date between " + start + " and  " + end + " group by animalId;";
+
+        Cursor cursor = db.rawQuery(sql,null);
+
+        db.close();
+        databaseHelper.close();
+
+        return VeterinaryContract.getAnimalsCount(cursor);
+
+    }
+
+
+    public static HashMap<Integer,Integer> getAnimalsOnHistory(Veterinary veterinary){
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
+        SQLiteDatabase db = databaseHelper.getReadableDatabase();
+
+        String sql = " select animalId, count(animalId) as 'count' from " + VeterinaryContract.ANIMALSTABLE+ " where veterinaryId like "+veterinary.getId() +
+                " group by animalId;";
+
+        Cursor cursor = db.rawQuery(sql,null);
+
+        db.close();
+        databaseHelper.close();
+
+        return VeterinaryContract.getAnimalsCount(cursor);
+
     }
 
 

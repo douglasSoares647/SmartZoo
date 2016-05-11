@@ -22,42 +22,42 @@ public class BusinessRules {
     public static void generateVisitor(){
 
         Random random = new Random();
-        if(ZooInfo.priceToVisit>=idealPrice*1.8){
+        if(ZooInfo.price >=idealPrice*1.8){
             if(random.nextInt(10)>8){
                 createVisitor();
             }
         }
-        else if(ZooInfo.priceToVisit>=idealPrice*1.7){
+        else if(ZooInfo.price >=idealPrice*1.7){
             if(random.nextInt(10)>7){
                 createVisitor();
             }
         }
-        else if(ZooInfo.priceToVisit>=idealPrice*1.6){
+        else if(ZooInfo.price >=idealPrice*1.6){
             if(random.nextInt(10)>6){
                 createVisitor();
             }
         }
-        else if(ZooInfo.priceToVisit>=idealPrice*1.5){
+        else if(ZooInfo.price >=idealPrice*1.5){
             if(random.nextInt(10)>5){
                 createVisitor();
             }
         }
-        else if(ZooInfo.priceToVisit>=idealPrice*1.4){
+        else if(ZooInfo.price >=idealPrice*1.4){
             if(random.nextInt(10)>4){
                 createVisitor();
             }
         }
-        else if(ZooInfo.priceToVisit>=idealPrice*1.3){
+        else if(ZooInfo.price >=idealPrice*1.3){
             if(random.nextInt(10)>3){
                 createVisitor();
             }
         }
-        else if(ZooInfo.priceToVisit>=idealPrice*1.2){
+        else if(ZooInfo.price >=idealPrice*1.2){
             if(random.nextInt(10)>2){
                 createVisitor();
             }
         }
-        else if(ZooInfo.priceToVisit>=idealPrice*1.1){
+        else if(ZooInfo.price >=idealPrice*1.1){
             if(random.nextInt(10)>1){
                 createVisitor();
             }
@@ -73,7 +73,7 @@ public class BusinessRules {
     private static void createVisitor(){
         Visitor visitor = new Visitor();
         ZooInfo.visitors.add(visitor);
-        ZooInfo.money += ZooInfo.priceToVisit;
+        ZooInfo.money += ZooInfo.price;
     }
 
 

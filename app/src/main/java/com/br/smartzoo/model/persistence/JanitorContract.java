@@ -10,6 +10,7 @@ import com.br.smartzoo.model.util.DateUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -19,21 +20,19 @@ public class JanitorContract {
 
     public static String TABLE = "janitor";
     public static String ID = "id";
-    public static String EXPEDIENT = "expedient";
     public static String CAGEID = "cageId";
     public static String JANITORID = "janitorId";
     public static String CAGESTABLE = "cagesOfJanitor";
 
 
-    public static String[] columns = {ID,EXPEDIENT};
+    public static String[] columns = {ID};
 
 
     public static String createTable(){
         StringBuilder table = new StringBuilder();
 
         table.append(" create table " + TABLE + " ( ");
-        table.append(ID + " integer primary key, ");
-        table.append(EXPEDIENT + " integer not null ");
+        table.append(ID + " integer primary key ");
         table.append( " ); ");
 
         return table.toString();
@@ -59,7 +58,6 @@ public class JanitorContract {
     public static ContentValues createContentValues(Janitor janitor){
         ContentValues values = new ContentValues();
 
-        values.put(EXPEDIENT, janitor.getExpedient());
         values.put(ID, janitor.getId());
 
         return values;
@@ -72,7 +70,6 @@ public class JanitorContract {
 
         if(!cursor.isBeforeFirst() || cursor.moveToNext()){
             janitor.setId(cursor.getLong(cursor.getColumnIndex(ID)));
-            janitor.setExpedient(cursor.getInt(cursor.getColumnIndex(EXPEDIENT)));
             janitor.setAge(cursor.getInt(cursor.getColumnIndex(EmployeeContract.AGE)));
             janitor.setName(cursor.getString(cursor.getColumnIndex(EmployeeContract.NAME)));
             janitor.setSalary(cursor.getDouble(cursor.getColumnIndex(EmployeeContract.SALARY)));
@@ -99,6 +96,17 @@ public class JanitorContract {
         }
 
         return janitors;
+    }
+
+
+    public static HashMap<Integer,Integer> getCagesCount(Cursor cursor){
+        HashMap<Integer, Integer> cagesCount = new HashMap<>();
+
+        while(cursor.moveToNext()){
+            cagesCount.put(cursor.getInt(cursor.getColumnIndex("cageId")), cursor.getInt(cursor.getColumnIndex("count")));
+        }
+
+        return cagesCount;
     }
 
 }

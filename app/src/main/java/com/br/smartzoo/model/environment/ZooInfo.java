@@ -11,9 +11,10 @@ import java.util.List;
  */
 public class ZooInfo {
 
+    public static String name;
     public static Double money;
     public static Double reputation;
-    public static Double priceToVisit;
+    public static Double price;
     public static List<Visitor> visitors = new ArrayList<>();
     public static List<Cage> cages;
     public static List<Employee> employees;

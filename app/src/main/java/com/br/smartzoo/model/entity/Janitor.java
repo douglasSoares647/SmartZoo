@@ -3,7 +3,10 @@ package com.br.smartzoo.model.entity;
 
 import android.os.CountDownTimer;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -16,20 +19,15 @@ public class Janitor extends Employee {
     private String status;
 
     private Long id;
-    private List<Cage> cages;
-    private int expedient;
+    private HashMap<Integer,Integer> cagesCleanedThisMonth;
     private Timer tasks;
 
     public Janitor(List<Cage> cages, int expedient) {
-        this.cages = cages;
-        this.expedient = expedient;
         this.tasks = new Timer();
     }
 
-    public Janitor(String name, Integer age, String cpf, String startDate, String endDate, Double salary, List<Cage> cages, int expedient) {
+    public Janitor(String name, Integer age, String cpf, Date startDate, Date endDate, Double salary) {
         super(name, age, cpf, startDate, endDate, salary);
-        this.cages = cages;
-        this.expedient = expedient;
         this.tasks = new Timer();
     }
 
@@ -40,7 +38,19 @@ public class Janitor extends Employee {
 
     @Override
     public Double calculateSalary() {
-        return cages.isEmpty() && expedient == 0 ? super.getSalary() : super.getSalary() +(cages.size() * expedient);
+        if(cagesCleanedThisMonth.isEmpty()){
+            return super.getSalary();
+        }
+        else {
+            int sum = 0;
+            for(Map.Entry<Integer,Integer> entry : cagesCleanedThisMonth.entrySet()){
+                Integer cageId = entry.getKey();
+                Integer quantity = entry.getValue();
+                sum += quantity;
+            }
+
+            return super.getSalary()* + 10*sum;
+        }
     }
 
 
@@ -52,22 +62,6 @@ public class Janitor extends Employee {
     @Override
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public List<Cage> getCages() {
-        return cages;
-    }
-
-    public void setCages(List<Cage> cages) {
-        this.cages = cages;
-    }
-
-    public int getExpedient() {
-        return expedient;
-    }
-
-    public void setExpedient(int expedient) {
-        this.expedient = expedient;
     }
     
     public void clear(final Cage cage){
@@ -88,9 +82,6 @@ public class Janitor extends Employee {
             }
         }.start();
 
-    	if(!cages.contains(cage)){
-    		cages.add(cage);
-    	}
 
         //Descansando
         tasks.schedule(new TimerTask() {

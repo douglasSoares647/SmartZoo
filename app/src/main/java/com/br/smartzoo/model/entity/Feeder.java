@@ -5,8 +5,9 @@ import com.br.smartzoo.model.singleton.Stock;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 
 /**
@@ -14,19 +15,18 @@ import java.util.List;
  */
 public class Feeder extends Employee implements Manageable {
 
-    private List<Cage> cages;
+    private HashMap<Integer,Integer> cagesFeededThisMonth;
     private Stock stock;
     
     public Feeder(){
-    	cages = new ArrayList<Cage>();
+		cagesFeededThisMonth = new HashMap<Integer,Integer>();
     	stock = Stock.getInstance();
     }
     
     
 
-    public Feeder(String name, Integer age, String cpf, Date startDate, Date endDate, Double salary, List<Cage> cages) {
+    public Feeder(String name, Integer age, String cpf, Date startDate, Date endDate, Double salary) {
 		super(name, age, cpf, startDate, endDate, salary);
-		this.cages = cages;
 		stock = Stock.getInstance();
 	}
 
@@ -34,7 +34,20 @@ public class Feeder extends Employee implements Manageable {
 
 	@Override
     public Double calculateSalary() {
-        return cages.isEmpty() ? super.getSalary() : super.getSalary() * cages.size();
+		if(cagesFeededThisMonth.isEmpty()){
+			return super.getSalary();
+		}
+		else {
+			int sum = 0;
+			for(Map.Entry<Integer,Integer> entry : cagesFeededThisMonth.entrySet()){
+				Integer cageId = entry.getKey();
+				Integer quantity = entry.getValue();
+				sum += quantity;
+			}
+
+			return super.getSalary()* + 10*sum;
+		}
+
     }
 
   
@@ -71,7 +84,6 @@ public class Feeder extends Employee implements Manageable {
     		}
        		cage.getFoods().addAll(foodsToAliment);
     		cage.setIsSupplied(true);
-    		cages.add(cage);
        		
     }
 
@@ -80,21 +92,17 @@ public class Feeder extends Employee implements Manageable {
     	if(!cage.getFoods().isEmpty()){
     		stock.putFoods(cage.getFoods());
     		cage.getFoods().clear();
-    		cages.add(cage);
     	}
     }
 
-	public List<Cage> getCages() {
-		return cages;
+
+	public HashMap<Integer, Integer> getCagesFeededThisMonth() {
+		return cagesFeededThisMonth;
 	}
 
-
-
-	public void setCages(List<Cage> cages) {
-		this.cages = cages;
+	public void setCagesFeededThisMonth(HashMap<Integer, Integer> cagesFeededThisMonth) {
+		this.cagesFeededThisMonth = cagesFeededThisMonth;
 	}
-
-
 
 	public Stock getStock() {
 		return stock;

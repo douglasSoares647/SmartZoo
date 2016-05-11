@@ -9,6 +9,7 @@ import com.br.smartzoo.model.util.DateUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -22,6 +23,7 @@ public class VeterinaryContract {
     public static String ANIMALSTABLE = "animalsTreatedByVet";
     public static String ANIMALID = "animalId";
     public static String VETERINARYID = "veterinaryId";
+    public static String DATE = "date";
 
 
     public static String[] columns = {ID,CREDENTIAL};
@@ -47,6 +49,7 @@ public class VeterinaryContract {
         table.append(ID + " integer primary key, ");
         table.append(ANIMALID + " integer not null, ");
         table.append(VETERINARYID + " integer not null, ");
+        table.append(DATE + " text not null,");
         table.append("Foreign key ("+ANIMALID+") references " + AnimalContract.TABLE +"(" + AnimalContract.ID+")," );
         table.append("Foreign key ("+VETERINARYID+") references " + TABLE +"(" +ID+") ");
 
@@ -93,6 +96,17 @@ public class VeterinaryContract {
         }
 
         return veterinaries;
+    }
+
+
+    public static HashMap<Integer,Integer> getAnimalsCount(Cursor cursor){
+        HashMap<Integer, Integer> animalsCount = new HashMap<>();
+
+        while(cursor.moveToNext()){
+            animalsCount.put(cursor.getInt(cursor.getColumnIndex("animalId")), cursor.getInt(cursor.getColumnIndex("count")));
+        }
+
+        return animalsCount;
     }
 
 }
