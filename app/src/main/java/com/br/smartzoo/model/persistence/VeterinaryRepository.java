@@ -46,6 +46,8 @@ public class VeterinaryRepository {
         }
     }
 
+
+
     public static List<Veterinary> getVeterinaries(){
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();

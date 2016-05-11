@@ -7,6 +7,7 @@ import android.provider.ContactsContract;
 
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Feeder;
+import com.br.smartzoo.model.entity.Janitor;
 
 import java.util.List;
 
@@ -43,6 +44,20 @@ public class FeederRepository {
             db.execSQL(" insert into " + FeederContract.CAGESTABLE + " ( "+ FeederContract.FEEDERID + ", "+FeederContract.CAGEID + "), values (" + feeder.getId() +", "+cage.getId());
 
         }
+    }
+
+
+    public static List<Cage> getCagesOfFeeder(Feeder feeder){
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
+        SQLiteDatabase db = databaseHelper.getReadableDatabase();
+
+        String sql = " select c.id, c.name, c.isSupplied, c.isClean from cage c join " + FeederContract.CAGESTABLE + " ft on ft.cageId = c.id;";
+
+        Cursor cursor = db.rawQuery(sql,null);
+
+        return CageContract.getCages(cursor);
+
+
     }
 
     public static List<Feeder> getAllFeeders(){

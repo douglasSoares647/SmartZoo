@@ -11,7 +11,7 @@ public class DateUtil {
 
     public static Date stringToDate(String date) {
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         Date newDate = null;
         if(date!=null || !date.isEmpty()) {
@@ -27,7 +27,7 @@ public class DateUtil {
 
 
     public static String dateToString(Date date){
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         String format = null;
         if(date!=null) {

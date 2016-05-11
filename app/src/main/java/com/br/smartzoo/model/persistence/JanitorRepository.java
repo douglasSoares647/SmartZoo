@@ -45,6 +45,20 @@ public class JanitorRepository {
         }
     }
 
+
+    public static List<Cage> getCagesOfJanitor(Janitor janitor){
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
+        SQLiteDatabase db = databaseHelper.getReadableDatabase();
+
+        String sql = " select c.id, c.name, c.isSupplied, c.isClean from cage c join " + JanitorContract.CAGESTABLE + " ct on ct.cageId = c.id;";
+
+        Cursor cursor = db.rawQuery(sql,null);
+
+        return CageContract.getCages(cursor);
+
+
+    }
+
     public static List<Janitor> getJanitors(){
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
