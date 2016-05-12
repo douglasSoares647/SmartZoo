@@ -3,8 +3,8 @@ package com.br.smartzoo.model.persistence;
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import com.br.smartzoo.model.entity.animal.Animal;
-import com.br.smartzoo.model.entity.jail.Cage;
+import com.br.smartzoo.model.entity.Animal;
+import com.br.smartzoo.model.entity.Cage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +42,8 @@ public class AnimalContract {
         table.append(CAGEID + " integer not null, ");
         table.append(ISHEALTHY + " integer not null, ");
         table.append(RESISTENCE + " integer not null, ");
-        table.append(POPULARITY + " integer not null;");
+        table.append(POPULARITY + " integer not null ");
+        table.append(" ); ");
 
         return table.toString();
 
@@ -71,7 +72,7 @@ public class AnimalContract {
     private static Animal getAnimal(Cursor cursor){
         Animal animal = new Animal();
 
-        while(!cursor.isBeforeFirst() ||cursor.moveToNext()) {
+        if(!cursor.isBeforeFirst() ||cursor.moveToNext()) {
             animal.setId(cursor.getLong(cursor.getColumnIndex(ID)));
             animal.setName(cursor.getString(cursor.getColumnIndex(NAME)));
             animal.setAge(cursor.getInt(cursor.getColumnIndex(AGE)));

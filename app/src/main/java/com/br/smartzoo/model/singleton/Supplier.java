@@ -1,13 +1,12 @@
 package com.br.smartzoo.model.singleton;
 
-import com.br.smartzoo.model.entity.food.Food;
+import com.br.smartzoo.model.entity.Food;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * Created by dhb_s on 4/28/2016.

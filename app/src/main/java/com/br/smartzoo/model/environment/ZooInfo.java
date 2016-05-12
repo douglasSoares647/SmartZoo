@@ -1,7 +1,7 @@
 package com.br.smartzoo.model.environment;
 
-import com.br.smartzoo.model.entity.employee.Employee;
-import com.br.smartzoo.model.entity.jail.Cage;
+import com.br.smartzoo.model.entity.Employee;
+import com.br.smartzoo.model.entity.Cage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +11,10 @@ import java.util.List;
  */
 public class ZooInfo {
 
+    public static String name;
     public static Double money;
     public static Double reputation;
-    public static Double priceToVisit;
+    public static Double price;
     public static List<Visitor> visitors = new ArrayList<>();
     public static List<Cage> cages;
     public static List<Employee> employees;

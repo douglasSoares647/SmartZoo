@@ -4,6 +4,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.br.smartzoo.model.entity.Animal;
+import com.br.smartzoo.model.entity.Cage;
+import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.util.ApplicationUtil;
 
 /**
@@ -24,7 +27,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-      //  sqLiteDatabase.execSQL(TaskContract.createTableTask());
+        sqLiteDatabase.execSQL(AnimalContract.createTable());
+        sqLiteDatabase.execSQL(EmployeeContract.createTable());
+        sqLiteDatabase.execSQL(CageContract.createTable());
+        sqLiteDatabase.execSQL(FeederContract.createTable());
+        sqLiteDatabase.execSQL(VeterinaryContract.createTable());
+        sqLiteDatabase.execSQL(JanitorContract.createTable());
+
+        sqLiteDatabase.execSQL(JanitorContract.createTableCages());
+        sqLiteDatabase.execSQL(FeederContract.createTableFeederCages());
+        sqLiteDatabase.execSQL(VeterinaryContract.createTableAnimalsTreatedByVet());
+
+
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.br.smartzoo.model.entity.food;
+package com.br.smartzoo.model.entity;
 
 import java.util.Date;
 

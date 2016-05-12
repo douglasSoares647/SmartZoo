@@ -1,11 +1,10 @@
 package com.br.smartzoo.model.environment;
 
-import com.br.smartzoo.model.entity.animal.Animal;
-import com.br.smartzoo.model.entity.jail.Cage;
+import com.br.smartzoo.model.entity.Animal;
+import com.br.smartzoo.model.entity.Cage;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,7 +33,7 @@ public class Visitor{
     public void visit(){
         List<Cage> cagesToVisit = ZooInfo.cages;
 
-        Double reputationGeneratedByPrice = 10/ZooInfo.priceToVisit;
+        Double reputationGeneratedByPrice = 10/ZooInfo.price;
         reputationGenerated += reputationGeneratedByPrice;
         status = "Visitando";
 

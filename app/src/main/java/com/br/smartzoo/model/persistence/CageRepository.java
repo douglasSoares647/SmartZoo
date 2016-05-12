@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.br.smartzoo.model.entity.jail.Cage;
+import com.br.smartzoo.model.entity.Cage;
 
 import java.util.List;
 
