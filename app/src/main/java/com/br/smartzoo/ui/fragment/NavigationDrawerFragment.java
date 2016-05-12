@@ -76,8 +76,22 @@ public class NavigationDrawerFragment extends Fragment {
         bindRelativeOptionBuyAnimal(view);
         bindRelativeOptionContractEmployee(view);
         bindRelativeOptionBuyFruit(view);
+        bindRelativeOptionBuildCage(view);
 
 
+    }
+
+    private void bindRelativeOptionBuildCage(View view) {
+        final RelativeLayout relativeOptionBuildCage =
+                (RelativeLayout) view.findViewById(R.id.relative_option_build_cage);
+        relativeOptionBuildCage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeOptionSelected(relativeOptionBuildCage);
+                mOnDrawerOptionClick.onBuildCageClick();
+                mDrawerLayout.closeDrawers();
+            }
+        });
     }
 
     private void bindRelativeOptionBuyFruit(View view) {

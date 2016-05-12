@@ -22,4 +22,6 @@ public interface OnDrawerOptionClick {
     void onContractEmployeeClick();
 
     void onBuyAnimalClick();
+
+    void onBuildCageClick();
 }

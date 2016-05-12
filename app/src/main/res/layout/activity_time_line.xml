@@ -12,13 +12,15 @@
 
         <include
             android:id="@+id/app_bar"
-            layout="@layout/app_bar"/>
+            layout="@layout/app_bar" />
 
         <!-- The main content view -->
         <FrameLayout
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_below="@id/app_bar"
+            android:padding="16dp" />
 
 
     </RelativeLayout>
