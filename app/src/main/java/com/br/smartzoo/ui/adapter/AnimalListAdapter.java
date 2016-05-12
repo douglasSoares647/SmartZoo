@@ -1,6 +1,5 @@
 package com.br.smartzoo.ui.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,7 +11,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
-import com.br.smartzoo.model.entity.animal.Animal;
+import com.br.smartzoo.model.entity.Animal;
 import com.bumptech.glide.Glide;
 
 import java.util.List;

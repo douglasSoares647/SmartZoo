@@ -19,9 +19,7 @@ public class FeederBusiness {
     }
 
 
-    public static void saveCages(Feeder feeder){
-        FeederRepository.saveCages(feeder);
-    }
+
 
 
     public static List<Feeder> getFeeders(){
