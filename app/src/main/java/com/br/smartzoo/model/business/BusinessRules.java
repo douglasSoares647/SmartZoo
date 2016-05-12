@@ -4,6 +4,7 @@ import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.enums.FoodEnum;
+import com.br.smartzoo.model.environment.Player;
 import com.br.smartzoo.model.environment.Visitor;
 import com.br.smartzoo.model.environment.ZooInfo;
 
@@ -23,47 +24,47 @@ public class BusinessRules {
 
         Random random = new Random();
         if(ZooInfo.price >=idealPrice*1.8){
-            if(random.nextInt(10)>8){
+            if(random.nextInt(10)- Player.dificultity>8){
                 createVisitor();
             }
         }
         else if(ZooInfo.price >=idealPrice*1.7){
-            if(random.nextInt(10)>7){
+            if(random.nextInt(10)- Player.dificultity>7){
                 createVisitor();
             }
         }
         else if(ZooInfo.price >=idealPrice*1.6){
-            if(random.nextInt(10)>6){
+            if(random.nextInt(10)- Player.dificultity>6){
                 createVisitor();
             }
         }
         else if(ZooInfo.price >=idealPrice*1.5){
-            if(random.nextInt(10)>5){
+            if(random.nextInt(10)- Player.dificultity>5){
                 createVisitor();
             }
         }
         else if(ZooInfo.price >=idealPrice*1.4){
-            if(random.nextInt(10)>4){
+            if(random.nextInt(10)- Player.dificultity>4){
                 createVisitor();
             }
         }
         else if(ZooInfo.price >=idealPrice*1.3){
-            if(random.nextInt(10)>3){
+            if(random.nextInt(10)- Player.dificultity>3){
                 createVisitor();
             }
         }
         else if(ZooInfo.price >=idealPrice*1.2){
-            if(random.nextInt(10)>2){
+            if(random.nextInt(10)- Player.dificultity>2){
                 createVisitor();
             }
         }
         else if(ZooInfo.price >=idealPrice*1.1){
-            if(random.nextInt(10)>1){
+            if(random.nextInt(10)- Player.dificultity>1){
                 createVisitor();
             }
         }
         else{
-            if(random.nextInt(10)>0) {
+            if(random.nextInt(10)- Player.dificultity>0) {
                 createVisitor();
             }
         }
@@ -115,6 +116,13 @@ public class BusinessRules {
 
         idealPrice = price;
 
+    }
+
+
+    public static void buyAnimal(Animal animal, Double animalCost, Cage cage){
+        ZooInfo.money -= animalCost;
+
+        animal.setCage(cage);
     }
 
 }

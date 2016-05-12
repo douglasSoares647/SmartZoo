@@ -41,9 +41,10 @@ public class Visitor{
             Integer timeToVisitCage = 0;
             for(Animal animal : cage.getAnimals()){
                 Random random = new Random();
-                if(random.nextInt(11)+1 < animal.getPopularity()){
+                int chance = random.nextInt(11)+1;
+                if( chance < animal.getPopularity()){
                     reputationGenerated +=  animal.getPopularity()*0.01;
-                    timeToVisitCage+= animal.getPopularity() * 60000;
+                    timeToVisitCage+= chance*60000;
                 }
             }
 

@@ -70,11 +70,11 @@ public class JanitorRepository {
 
     }
 
-    public static HashMap<Integer,Integer> getCagesHistoryOfJanitor(Feeder feeder){
+    public static HashMap<Integer,Integer> getCagesHistoryOfJanitor(Janitor janitor){
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
 
-        String sql = " select cageId, count(cageId) as 'count' from " + JanitorContract.CAGESTABLE + " where janitorId like " + feeder.getId() +
+        String sql = " select cageId, count(cageId) as 'count' from " + JanitorContract.CAGESTABLE + " where janitorId like " + janitor.getId() +
                 " group by cageId";
 
         Cursor cursor = db.rawQuery(sql,null);

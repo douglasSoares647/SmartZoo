@@ -17,6 +17,7 @@ public class Cage {
     private String name;
     private List<Animal> animals;
     private List<Food> foods;
+    private Integer capacity;
     private boolean isClean;
     private boolean isSupplied;
 
@@ -93,6 +94,14 @@ public class Cage {
         this.isSupplied = isSupplied;
     }
 
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
+    }
+
     public int getDirtyFactor() {
         return dirtyFactor;
     }
@@ -115,6 +124,14 @@ public class Cage {
     	info.append("\nJaula está limpa?: "+ isClean);
     	info.append("Jaula possui comida?:"+ isSupplied );
     	return info.toString();
+    }
+
+
+    public boolean checkCapacity(){
+        if(animals.size()<=capacity){
+            return true;
+        }
+        return false;
     }
 
 

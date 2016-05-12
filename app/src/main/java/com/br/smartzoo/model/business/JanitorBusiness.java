@@ -4,6 +4,8 @@ import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Janitor;
 import com.br.smartzoo.model.persistence.JanitorRepository;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -22,6 +24,14 @@ public class JanitorBusiness {
         JanitorRepository.saveCageOnHistory(janitor,cage);
     }
 
+
+    public static HashMap<Integer,Integer> getCagesCleanedHistory(Janitor janitor){
+        return JanitorRepository.getCagesHistoryOfJanitor(janitor);
+    }
+
+    public static HashMap<Integer,Integer> getCagesCleanedHistoryByDate(Janitor janitor, Date startDate, Date endDate){
+        return JanitorRepository.getCagesHistoryOfJanitor(janitor,startDate,endDate);
+    }
 
     public static List<Janitor> getJanitors(){
        return JanitorRepository.getJanitors();

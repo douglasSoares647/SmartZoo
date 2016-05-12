@@ -8,6 +8,4 @@ public class Player {
     public static String name;
     public static Double experience;
     public static Integer dificultity;
-
-
 }
