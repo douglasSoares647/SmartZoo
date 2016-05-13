@@ -9,15 +9,15 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="0.8"
-        android:text="@string/available_animals"
+        android:text="@string/available_fruits"
         android:textSize="24sp"
         android:textStyle="bold" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/list_view_available_animals"
+        android:id="@+id/list_view_available_fruits"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="8"/>
+        android:layout_weight="8" />
 
 
     <View
@@ -34,7 +34,7 @@
         android:layout_weight="1">
 
         <TextView
-            android:id="@+id/text_view_price_animals"
+            android:id="@+id/text_view_price_fruits"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -43,13 +43,13 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/text_view_total_animals"
+            android:id="@+id/text_view_total_fruits"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
-            android:text="@string/total_animals"
+            android:text="@string/total_fruits"
             android:textSize="18sp" />
 
     </RelativeLayout>
@@ -61,7 +61,7 @@
         android:padding="4dp">
 
         <Button
-            android:id="@+id/button_buy_animals"
+            android:id="@+id/button_buy_fruits"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/button_buy"
@@ -72,7 +72,7 @@
             android:visibility="gone" />
 
         <Button
-            android:id="@+id/button_insufficient_funds_animals"
+            android:id="@+id/button_insufficient_funds_fruits"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/button_disable"

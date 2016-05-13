@@ -1,4 +1,4 @@
-package com.br.smartzoo.model.util;
+package com.br.smartzoo.util;
 
 import android.content.Context;
 

@@ -5,10 +5,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.br.smartzoo.model.entity.Animal;
-import com.br.smartzoo.model.entity.Cage;
-import com.br.smartzoo.model.entity.Janitor;
 import com.br.smartzoo.model.entity.Veterinary;
-import com.br.smartzoo.model.util.DateUtil;
+import com.br.smartzoo.util.DateUtil;
 
 import java.util.Date;
 import java.util.HashMap;

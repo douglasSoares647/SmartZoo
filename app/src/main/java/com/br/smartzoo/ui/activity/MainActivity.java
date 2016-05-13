@@ -1,21 +1,30 @@
 package com.br.smartzoo.ui.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.widget.RelativeLayout;
+import android.widget.FrameLayout;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.interfaces.OnDrawerOptionClick;
+import com.br.smartzoo.presenter.MainActivityPresenter;
+import com.br.smartzoo.ui.fragment.BuyAnimalFragment;
+import com.br.smartzoo.ui.fragment.BuyFruitFragment;
 import com.br.smartzoo.ui.fragment.NavigationDrawerFragment;
+import com.br.smartzoo.ui.view.MainActivityView;
 
 /**
  * Created by adenilson on 05/05/16.
  */
-public class MainActivity extends AppCompatActivity implements OnDrawerOptionClick {
+public class MainActivity extends AppCompatActivity implements OnDrawerOptionClick
+        , MainActivityView {
     private DrawerLayout mDrawerLayout;
     private Toolbar mToolbar;
+    private int mFrameContainer;
+    private MainActivityPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +32,20 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
         setContentView(R.layout.activity_time_line);
 
+        bindmPresenter();
         bindToolbar();
         bindDrawerLayout();
         bindNavigationDrawer();
+        bindContainerFragment();
+    }
+
+    private void bindmPresenter() {
+        mPresenter = new MainActivityPresenter(this);
+        mPresenter.attachView(this);
+    }
+
+    private void bindContainerFragment() {
+        mFrameContainer = R.id.frame_container;
     }
 
     private void bindNavigationDrawer() {
@@ -39,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
     private void bindToolbar() {
         mToolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(mToolbar);
+
     }
 
     private void bindDrawerLayout() {
@@ -72,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
     @Override
     public void onBuyFruitClick() {
-
+        mPresenter.startTransaction(mFrameContainer, new BuyFruitFragment());
     }
 
     @Override
@@ -82,11 +104,16 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
     @Override
     public void onBuyAnimalClick() {
-
+        mPresenter.startTransaction(mFrameContainer, new BuyAnimalFragment());
     }
 
     @Override
     public void onBuildCageClick() {
+
+    }
+
+    @Override
+    public void changeFragment(Fragment fragment) {
 
     }
 }

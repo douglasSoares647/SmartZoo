@@ -25,4 +25,10 @@
     <string name="total_price">Preço total: </string>
     <string name="total_animals">Total de animais</string>
     <string name="msg_dont_have_money">Fundos insuficiente</string>
+    <string name="navigation_drawer_open">open</string>
+    <string name="navigation_drawer_close">close</string>
+    <string name="title_news">Notícias</string>
+    <string name="available_fruits">Frutas disponíveis:</string>
+    <string name="total_fruits">Total de frutas:</string>
+    <string name="text_buy">Comprar</string>
 </resources>

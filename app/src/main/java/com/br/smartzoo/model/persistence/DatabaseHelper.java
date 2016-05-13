@@ -4,10 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.br.smartzoo.model.entity.Animal;
-import com.br.smartzoo.model.entity.Cage;
-import com.br.smartzoo.model.entity.Employee;
-import com.br.smartzoo.model.util.ApplicationUtil;
+import com.br.smartzoo.util.ApplicationUtil;
 
 /**
  * Created by dhb_s on 5/7/2016.

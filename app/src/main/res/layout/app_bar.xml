@@ -6,7 +6,8 @@
 
     <TextView
         android:textSize="18sp"
-        android:text="News"
+        android:text="@string/title_news"
+        android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

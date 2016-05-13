@@ -2,7 +2,7 @@ package com.br.smartzoo;
 
 import android.app.Application;
 
-import com.br.smartzoo.model.util.ApplicationUtil;
+import com.br.smartzoo.util.ApplicationUtil;
 
 /**
  * Created by dhb_s on 5/7/2016.

@@ -3,10 +3,8 @@ package com.br.smartzoo.model.persistence;
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import com.br.smartzoo.model.entity.Cage;
-import com.br.smartzoo.model.entity.Feeder;
 import com.br.smartzoo.model.entity.Janitor;
-import com.br.smartzoo.model.util.DateUtil;
+import com.br.smartzoo.util.DateUtil;
 
 import java.util.ArrayList;
 import java.util.Date;

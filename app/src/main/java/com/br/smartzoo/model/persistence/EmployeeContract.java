@@ -3,7 +3,7 @@ package com.br.smartzoo.model.persistence;
 import android.content.ContentValues;
 
 import com.br.smartzoo.model.entity.Employee;
-import com.br.smartzoo.model.util.DateUtil;
+import com.br.smartzoo.util.DateUtil;
 
 /**
  * Created by dhb_s on 5/9/2016.

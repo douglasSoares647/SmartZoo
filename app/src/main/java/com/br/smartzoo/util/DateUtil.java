@@ -1,4 +1,4 @@
-package com.br.smartzoo.model.util;
+package com.br.smartzoo.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

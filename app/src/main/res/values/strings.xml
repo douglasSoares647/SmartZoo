@@ -23,4 +23,10 @@
     <string name="total_price">Total price:</string>
     <string name="total_animals">Total animals</string>
     <string name="msg_dont_have_money">Insufficient funds</string>
+    <string name="navigation_drawer_open">open</string>
+    <string name="navigation_drawer_close">close</string>
+    <string name="title_news">News</string>
+    <string name="available_fruits">Available fruits</string>
+    <string name="total_fruits">Total fruits:</string>
+    <string name="text_buy">Buy</string>
 </resources>
