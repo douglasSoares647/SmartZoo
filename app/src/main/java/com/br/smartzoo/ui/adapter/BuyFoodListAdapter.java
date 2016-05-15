@@ -6,22 +6,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.SeekBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.entity.Food;
 import com.br.smartzoo.model.interfaces.OnChangeBuyListener;
-import com.br.smartzoo.ui.fragment.BuyFoodFragment;
-import com.br.smartzoo.util.BuyHelper;
 import com.bumptech.glide.Glide;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by adenilson on 15/05/16.
@@ -31,12 +29,22 @@ public class BuyFoodListAdapter extends RecyclerView.Adapter<BuyFoodListAdapter.
     private List<Food> mFoodList;
     private Context mContext;
     private OnChangeBuyListener mOnChangeBuyListener;
-
+    private HashMap<Food, Integer> mQuantity;
+    public static int sTotalQuantity;
+    public static Double sTotalPrice;
 
 
     public BuyFoodListAdapter(Context context, List<Food> foods) {
         this.mContext = context;
         this.mFoodList = foods;
+        mQuantity = new HashMap<>();
+
+        //TODO for each food, add new instance into hash to calculate total price
+        for (Food f : foods) {
+            mQuantity.put(f, 0);
+        }
+
+
     }
 
     @Override
@@ -65,6 +73,9 @@ public class BuyFoodListAdapter extends RecyclerView.Adapter<BuyFoodListAdapter.
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 holder.mTextViewQuantity.setText(String.valueOf(progress));
+                mQuantity.put(food, progress);
+                calculateQuantityAndPrice();
+
             }
 
             @Override
@@ -83,6 +94,21 @@ public class BuyFoodListAdapter extends RecyclerView.Adapter<BuyFoodListAdapter.
 
     private void calculateQuantityAndPrice() {
 
+        sTotalQuantity = 0;
+        sTotalPrice = 0D;
+
+        Iterator it = mQuantity.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
+            Integer value = (Integer) pair.getValue();
+            sTotalQuantity += value;
+            Food food = (Food) pair.getKey();
+            sTotalPrice +=  food.getPrice() * value;
+
+        }
+
+
+        mOnChangeBuyListener.onQuantityChange(sTotalPrice, sTotalQuantity);
     }
 
     @Override
@@ -101,6 +127,7 @@ public class BuyFoodListAdapter extends RecyclerView.Adapter<BuyFoodListAdapter.
         private TextView mTextViewPrice;
         private TextView mTextViewQuantity;
         private SeekBar mSeekBarQuantity;
+
         public MyViewHolder(View itemView) {
             super(itemView);
 

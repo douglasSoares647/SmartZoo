@@ -19,6 +19,7 @@ import com.br.smartzoo.presenter.BuyFoodPresenter;
 import com.br.smartzoo.ui.adapter.BuyFoodListAdapter;
 import com.br.smartzoo.ui.view.BuyFoodFragmentView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -29,7 +30,7 @@ public class BuyFoodFragment extends Fragment implements BuyFoodFragmentView, On
     private List<Food> mFoods;
     private RecyclerView mRecyclerViewFoods;
     private BuyFoodPresenter mPresenter;
-    private TextView mTextViewTotalFruits;
+    private TextView mTextViewTotalFoods;
     private TextView mTextViewTotalPrice;
 
     @Nullable
@@ -50,9 +51,9 @@ public class BuyFoodFragment extends Fragment implements BuyFoodFragmentView, On
     }
 
     private void bindPriceAndQuantity(View view) {
-        mTextViewTotalFruits = (TextView) view.findViewById(R.id.text_view_total_fruits);
+        mTextViewTotalFoods = (TextView) view.findViewById(R.id.text_view_total_fruits);
         String totalFruits = getString(R.string.total_fruits) + " 0";
-        mTextViewTotalFruits.setText(totalFruits);
+        mTextViewTotalFoods.setText(totalFruits);
 
         mTextViewTotalPrice = (TextView) view.findViewById(R.id.text_view_price_fruits);
         String totalPrice = getString(R.string.total_price) + " 0,00 $";
@@ -106,7 +107,14 @@ public class BuyFoodFragment extends Fragment implements BuyFoodFragmentView, On
     }
 
     @Override
-    public void onQuantityChange(Double food, int quantity) {
+    public void onQuantityChange(Double totalPrice, int quantity) {
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
+        String format = decimalFormat.format(totalPrice);
+        String price = getString(R.string.total_price) + " " + format + "$";
+        mTextViewTotalPrice.setText(price);
+
+        String totalQuantity = getString(R.string.total_fruits) + " " + quantity;
+        mTextViewTotalFoods.setText(totalQuantity);
 
     }
 }

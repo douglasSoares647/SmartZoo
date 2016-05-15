@@ -12,7 +12,7 @@ public enum FoodEnum {
 
         Beef(R.drawable.ic_beef,  R.string.food_beef, 10.0, 2D),
         Chicken(R.drawable.ic_chicken, R.string.food_chicken, 8.0, 1D),
-        Pork(R.drawable.ic_pork,R.string.food_pork, 9.0, 1.5D);
+        Pork(R.drawable.ic_pork,R.string.food_pork, 9.75, 1.5D);
 
         private int image;
         private Double price;
@@ -44,7 +44,7 @@ public enum FoodEnum {
 
     public enum Fruit {
 
-        Apple(R.drawable.ic_apple, R.string.food_apple, 5.0, 0.4D),
+        Apple(R.drawable.ic_apple, R.string.food_apple, 5.5, 0.4D),
         Grape(R.drawable.ic_grape, R.string.food_grape, 5.0, 0.2D),
         Banana(R.drawable.ic_banana, R.string.food_banana, 6.0, 0.5D);
 

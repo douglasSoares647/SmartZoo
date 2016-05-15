@@ -33,13 +33,16 @@ public class Animal {
     //fragilidade do animal a contrair doenças ao comer
     private Integer resistence;
     private Integer popularity;
+    private Double price;
 
 
 
-    public Animal(Long id, String name, Integer age, Double weight, Cage cage, Integer resistence,  boolean isHealthy) {
+    public Animal(Long id, String name, Integer age,Double price, Double weight
+            , Cage cage, Integer resistence,  boolean isHealthy) {
         this.name = name;
         this.age = age;
         this.weight = weight;
+        this.price = price;
         this.cage = cage;
         this.cage.getAnimals().add(this);
         this.isHealthy = isHealthy;
@@ -138,6 +141,14 @@ public class Animal {
 
     public Integer getPopularity() {
         return popularity;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public void setPopularity(Integer popularity) {
