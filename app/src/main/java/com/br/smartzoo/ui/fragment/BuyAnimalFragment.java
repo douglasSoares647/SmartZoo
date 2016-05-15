@@ -20,8 +20,8 @@ public class BuyAnimalFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container
             , @Nullable Bundle savedInstanceState) {
 
-        View inflate = inflater.inflate(R.layout.fragment_buy_animal, container, false);
+        View view = inflater.inflate(R.layout.fragment_buy_animal, container, false);
 
-        return inflate;
+        return view;
     }
 }

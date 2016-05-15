@@ -31,4 +31,11 @@
     <string name="available_fruits">Frutas disponíveis:</string>
     <string name="total_fruits">Total de frutas:</string>
     <string name="text_buy">Comprar</string>
+    <string name="message_insufficient_funds">Dinheiro insuficiente</string>
+    <string name="food_beef">Bife</string>
+    <string name="food_chicken">Carne de frango</string>
+    <string name="food_pork">Carne de porco</string>
+    <string name="food_apple">Maçã</string>
+    <string name="food_grape">Uva</string>
+    <string name="food_banana">Banana</string>
 </resources>

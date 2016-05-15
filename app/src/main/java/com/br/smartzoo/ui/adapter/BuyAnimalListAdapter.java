@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.entity.Animal;
+import com.br.smartzoo.util.BuyHelper;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -19,28 +20,27 @@ import java.util.List;
 /**
  * Created by adenilson on 11/05/16.
  */
-public class AnimalListAdapter extends RecyclerView.Adapter<AnimalListAdapter.ViewHolder> {
+public class BuyAnimalListAdapter extends RecyclerView.Adapter<BuyAnimalListAdapter.ViewHolder> {
 
     private List<Animal> mAnimalList;
     private Context mContext;
-    private Integer[] mIntegers = {0,1,2,3,4,5,6,7,8,9};
 
-    public AnimalListAdapter(Context context, List<Animal> animalList) {
+    public BuyAnimalListAdapter(Context context, List<Animal> animalList) {
         this.mAnimalList = animalList;
         this.mContext = context;
     }
 
 
     @Override
-    public AnimalListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_animal_list, parent, false);
+    public BuyAnimalListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(mContext)
+                .inflate(R.layout.item_buy_animal_list, parent, false);
 
         return new ViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(AnimalListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(BuyAnimalListAdapter.ViewHolder holder, int position) {
         Animal animal = mAnimalList.get(position);
         Glide.with(mContext).load(R.drawable.ic_buy_animal).into(holder.mImageViewAnimal);
         holder.mTextViewNameAnimal.setText(animal.getName());
@@ -53,7 +53,7 @@ public class AnimalListAdapter extends RecyclerView.Adapter<AnimalListAdapter.Vi
 
         holder.mTextViewCostAnimal.setText("2000");
         holder.mSpinnerAnimal.setAdapter(new ArrayAdapter<Integer>(mContext
-                , android.R.layout.simple_list_item_1, mIntegers));
+                , android.R.layout.simple_list_item_1, BuyHelper.QUANTITY_BUY));
 
     }
 

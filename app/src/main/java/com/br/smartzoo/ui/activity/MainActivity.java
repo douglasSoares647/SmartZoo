@@ -2,17 +2,15 @@ package com.br.smartzoo.ui.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.widget.FrameLayout;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.interfaces.OnDrawerOptionClick;
 import com.br.smartzoo.presenter.MainActivityPresenter;
 import com.br.smartzoo.ui.fragment.BuyAnimalFragment;
-import com.br.smartzoo.ui.fragment.BuyFruitFragment;
+import com.br.smartzoo.ui.fragment.BuyFoodFragment;
 import com.br.smartzoo.ui.fragment.NavigationDrawerFragment;
 import com.br.smartzoo.ui.view.MainActivityView;
 
@@ -94,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
     @Override
     public void onBuyFruitClick() {
-        mPresenter.startTransaction(mFrameContainer, new BuyFruitFragment());
+        mPresenter.startTransaction(mFrameContainer, new BuyFoodFragment());
     }
 
     @Override

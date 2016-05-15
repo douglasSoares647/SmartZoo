@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="16dp"
+    android:paddingTop="16dp">
+
+    <ImageView
+        android:id="@+id/image_view_fruit"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:src="@drawable/ic_fruit" />
+
+    <TextView
+        android:id="@+id/text_view_fruit_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/image_view_fruit"
+        android:text="Fruit name" />
+
+    <TextView
+        android:id="@+id/text_view_weight_fruit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginRight="32dp"
+        android:layout_toLeftOf="@+id/text_view_fruit_price"
+        android:maxLines="1"
+        android:text="1kg" />
+
+    <TextView
+        android:id="@+id/text_view_fruit_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:maxLines="1"
+        android:text="100,00" />
+
+    <TextView
+        android:id="@+id/text_view_food_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_view_weight_fruit"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="12dp"
+        android:layout_toLeftOf="@id/text_view_fruit_price"
+        android:text="0" />
+
+    <SeekBar
+        android:id="@+id/seek_bar_food_quantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/text_view_fruit_name"
+        android:layout_below="@id/text_view_fruit_name"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_toLeftOf="@+id/text_view_food_quantity" />
+
+
+</RelativeLayout>

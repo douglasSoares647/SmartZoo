@@ -7,15 +7,19 @@ import java.util.Date;
  */
 public class Food {
 
-       private String name;
-       private Double weight;
-       private Date expirationDate;
+    private int image;
+    private Double price;
+    private String name;
+    private Double weight;
+    private Date expirationDate;
 
     public Food() {
     }
 
-    public Food(String name, Double weight, Date expirationDate) {
+    public Food(int image, String name, Double price, Double weight, Date expirationDate) {
+        this.image = image;
         this.name = name;
+        this.price = price;
         this.weight = weight;
         this.expirationDate = expirationDate;
     }
@@ -44,5 +48,19 @@ public class Food {
         this.weight = weight;
     }
 
- 
+    public int getImage() {
+        return image;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
 }

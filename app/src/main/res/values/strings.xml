@@ -29,4 +29,11 @@
     <string name="available_fruits">Available fruits</string>
     <string name="total_fruits">Total fruits:</string>
     <string name="text_buy">Buy</string>
+    <string name="message_insufficient_funds">Insufficient funds</string>
+    <string name="food_beef">Beef</string>
+    <string name="food_chicken">Chicken</string>
+    <string name="food_pork">Pork</string>
+    <string name="food_apple">Apple</string>
+    <string name="food_grape">Grape</string>
+    <string name="food_banana">Banana</string>
 </resources>

@@ -1,58 +1,82 @@
 package com.br.smartzoo.model.enums;
 
+import com.br.smartzoo.R;
+
 /**
  * Created by taibic on 19/04/16.
  */
-public enum FoodEnum {;
+public enum FoodEnum {
+    ;
 
     public enum Meat {
 
-        Beef("Beef", 10.0),
-        Chicken("Chicken",8.0),
-        Pork("Pork",9.0);
+        Beef(R.drawable.ic_beef,  R.string.food_beef, 10.0, 2D),
+        Chicken(R.drawable.ic_chicken, R.string.food_chicken, 8.0, 1D),
+        Pork(R.drawable.ic_pork,R.string.food_pork, 9.0, 1.5D);
 
-        Meat(String meat, Double price){
-        this.value = meat;
-        }
-
+        private int image;
         private Double price;
-        private String value;
+        private int name;
+        private Double weight;
 
-
-        public String getName() {
-            return value;
+        Meat(int ic, int meat, Double price, Double weight) {
+            this.image = ic;
+            this.name = meat;
+            this.price = price;
+            this.weight = weight;
         }
-        public Double getPrice(){
+
+
+        public Double getWeight() {
+            return weight;
+        }
+
+        public int getName() {
+            return name;
+        }
+
+        public Double getPrice() {
             return price;
         }
 
+        public int getImage() { return image; }
     }
 
     public enum Fruit {
 
-        Apple("Apple", 5.0),
-        Grappe("Grappe", 5.0),
-        Banana("Banana", 6.0);
+        Apple(R.drawable.ic_apple, R.string.food_apple, 5.0, 0.4D),
+        Grape(R.drawable.ic_grape, R.string.food_grape, 5.0, 0.2D),
+        Banana(R.drawable.ic_banana, R.string.food_banana, 6.0, 0.5D);
 
-        Fruit (String fruit, Double price){
-            this.value = fruit;
+        Fruit(int ic, int fruit, Double price, Double weight) {
+            this.image = ic;
+            this.name = fruit;
             this.price = price;
+            this.weight = weight;
+
+
 
         }
 
-        private String value;
+        private int image;
+        private int name;
         private Double price;
+        private Double weight;
 
-        public String getName() {
-            return value;
+        public int getName() {
+            return name;
         }
-        public Double getPrice(){
+
+        public Double getPrice() {
             return price;
         }
 
+        public int getImage() { return image; }
 
+        public Double getWeight() {
+            return weight;
+        }
     }
-
 
 
 }
