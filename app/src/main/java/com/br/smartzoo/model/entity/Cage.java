@@ -24,6 +24,8 @@ public class Cage {
     public Cage(){
         foods = new ArrayList<Food>();
         animals = new ArrayList<Animal>();
+        isClean = true;
+        isSupplied = false;
     }
 
     public Cage(Long id, String name, List<Animal> animals, List<Food> foods, boolean isClean, boolean isSupplied) {

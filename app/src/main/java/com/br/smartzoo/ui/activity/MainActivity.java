@@ -1,10 +1,12 @@
 package com.br.smartzoo.ui.activity;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.Chronometer;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.interfaces.OnDrawerOptionClick;
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
         bindNavigationDrawer();
         bindContainerFragment();
     }
-
+    
     private void bindmPresenter() {
         mPresenter = new MainActivityPresenter(this);
         mPresenter.attachView(this);

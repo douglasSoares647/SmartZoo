@@ -27,11 +27,13 @@ public class Visitor{
 
     public Visitor() {
         arrivalDate = Calendar.getInstance().getTime();
+        timeToVisitEachCage = new HashMap<>();
         visit();
     }
 
     public void visit(){
         List<Cage> cagesToVisit = ZooInfo.cages;
+        ZooInfo.visitors.add(this);
 
         Double reputationGeneratedByPrice = 10/ZooInfo.price;
         reputationGenerated += reputationGeneratedByPrice;

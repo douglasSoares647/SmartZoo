@@ -2,31 +2,43 @@ package com.br.smartzoo.model.entity;
 
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Employee;
+import com.br.smartzoo.util.TimeUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by adenilson on 18/04/16.
  */
 public class Veterinary extends Employee {
 
+    public String status;
+
     private String credential;
     private HashMap<Integer,Integer> animalsTreatedThisMonth;
+    private Timer treatmentTime;
 
     public Veterinary(){
+        treatmentTime = new Timer();
     }
 
     public Veterinary(String credential, List<Animal> animals) {
         this.credential = credential;
+        treatmentTime = new Timer();
+        status = " Sem serviço ";
     }
 
     public Veterinary(String name, Integer age, String cpf, Date startDate, Date endDate, Double salary, String credential) {
         super(name, age, cpf, startDate, endDate, salary);
+        treatmentTime = new Timer();
         this.credential = credential;
+        treatmentTime = new Timer();
+        status = " Sem serviço ";
     }
 
     public String getCredential() {
@@ -38,14 +50,32 @@ public class Veterinary extends Employee {
     }
 
     
-    public void treat(Animal animal){
-    	animal.setIsHealthy(true);
+    public void treat(final Animal animal){
+        status = "Tratando animal " + animal.getName();
+        treatmentTime.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                animal.setIsHealthy(true);
+                status = "Tratamento do animal " + animal.getName() + " finalizado!";
+            }
+        }, TimeUtil.timeToTreat);
+
 
     }
 
     public void treat(List<Animal> animals){
-    	for(Animal animal : animals){
-    		animal.setIsHealthy(true);
+        status = "Tratando dos animais";
+    	for(final Animal animal : animals){
+
+            treatmentTime.schedule(new TimerTask() {
+
+                @Override
+                public void run() {
+                    animal.setIsHealthy(true);
+                    status = "Animal " + animal.getName() + " curado!";
+                }
+            },TimeUtil.timeToTreat);
+
     	}
     }
     
@@ -65,8 +95,9 @@ public class Veterinary extends Employee {
             return super.getSalary()* + 20*sum;
         }
     }
-    
-   
-    
-    
+
+
+    public String getStatus() {
+        return status;
+    }
 }

@@ -3,19 +3,21 @@ package com.br.smartzoo.model.entity;
 
 import android.os.CountDownTimer;
 
+import com.br.smartzoo.util.TimeUtil;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by adenilson on 18/04/16.
  */
 public class Janitor extends Employee {
 
-    private int timeToRest = 1000*60*30;
     private String status;
 
     private Long id;
@@ -65,10 +67,10 @@ public class Janitor extends Employee {
     }
     
     public void clear(final Cage cage){
-        long timeToCleanCage = cage.getDirtyFactor() * 30000;
+        long timeToCleanCage = cage.getDirtyFactor() * TimeUtil.timeToCleanEachDirty;
 
         //Limpando jaula
-        new CountDownTimer(30000,timeToCleanCage){
+        new CountDownTimer(TimeUtil.timeToCleanEachDirty,timeToCleanCage){
             int dirtyCleaned = 0;
             @Override
             public void onTick(long millisUntilFinished) {
@@ -89,6 +91,6 @@ public class Janitor extends Employee {
             public void run() {
               status = "Pronto";
             }
-        },timeToRest);
+        }, TimeUtil.timeToRest);
     }
 }

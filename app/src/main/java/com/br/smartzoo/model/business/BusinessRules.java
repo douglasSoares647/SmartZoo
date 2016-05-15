@@ -122,7 +122,19 @@ public class BusinessRules {
     public static void buyAnimal(Animal animal, Double animalCost, Cage cage){
         ZooInfo.money -= animalCost;
 
-        animal.setCage(cage);
+        if(cage.checkCapacity()) {
+            animal.setCage(cage);
+        }
+        else{
+
+        }
+    }
+
+
+    public static void buyCage(Cage cage, Double cageCost){
+        ZooInfo.money-=cageCost;
+
+        ZooInfo.cages.add(cage);
     }
 
 }
