@@ -9,13 +9,15 @@ import android.support.annotation.Nullable;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.environment.ZooInfo;
+import com.br.smartzoo.model.interfaces.OnClockTickListener;
 import com.br.smartzoo.util.TimeUtil;
 
 /**
  * Created by Douglas on 5/16/2016.
  */
-public class AnimalService extends Service {
+public class ClockService extends Service {
 
+    public static OnClockTickListener context;
 
     @Nullable
     @Override
@@ -26,26 +28,8 @@ public class AnimalService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while(true){
-                    try {
-                        Thread.sleep(TimeUtil.timeToFeelHungry);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-                    for(Cage cage : ZooInfo.cages){
-                        for(Animal animal : cage.getAnimals()){
-                            animal.eat();
-                        }
-                    }
-                }
-            }
-        });
-
-        thread.start();
+        TimeUtil clock = new TimeUtil();
+        clock.startClock();
 
         return super.onStartCommand(intent, flags, startId);
     }

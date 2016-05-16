@@ -3,6 +3,7 @@ package com.br.smartzoo.model.entity;
 
 import android.os.CountDownTimer;
 
+import com.br.smartzoo.model.interfaces.Observer;
 import com.br.smartzoo.util.TimeUtil;
 
 import java.util.Date;
@@ -16,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by adenilson on 18/04/16.
  */
-public class Janitor extends Employee {
+public class Janitor extends Employee implements Observer{
 
     private String status;
 
@@ -92,5 +93,10 @@ public class Janitor extends Employee {
               status = "Pronto";
             }
         }, TimeUtil.timeToRest);
+    }
+
+    @Override
+    public void onTick() {
+
     }
 }

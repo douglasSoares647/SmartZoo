@@ -74,6 +74,7 @@ public class BusinessRules {
     private static void createVisitor(){
         Visitor visitor = new Visitor();
         ZooInfo.visitors.add(visitor);
+        visitor.visit();
         ZooInfo.money += ZooInfo.price;
     }
 
@@ -112,7 +113,7 @@ public class BusinessRules {
         price +=ZooInfo.reputation*0.05;
         price = price*1.1;
 
-        price = price/3000;//30 dias contando que 100 pessoas visitem o zoo
+       // price = price;//30 dias contando que 100 pessoas visitem o zoo
 
         idealPrice = price;
 

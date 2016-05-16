@@ -1,31 +1,40 @@
 package com.br.smartzoo.ui.activity;
 
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Chronometer;
+import android.widget.TextView;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
+import com.br.smartzoo.model.interfaces.OnClockTickListener;
 import com.br.smartzoo.model.interfaces.OnDrawerOptionClick;
+import com.br.smartzoo.model.service.ClockService;
 import com.br.smartzoo.presenter.MainActivityPresenter;
 import com.br.smartzoo.ui.fragment.BuyAnimalFragment;
 import com.br.smartzoo.ui.fragment.BuyFoodFragment;
 import com.br.smartzoo.ui.fragment.NavigationDrawerFragment;
 import com.br.smartzoo.ui.view.MainActivityView;
+import com.br.smartzoo.util.ServiceHelper;
+import com.br.smartzoo.util.TimeUtil;
 
 /**
  * Created by adenilson on 05/05/16.
  */
-public class MainActivity extends AppCompatActivity implements OnDrawerOptionClick
+public class MainActivity extends AppCompatActivity implements OnDrawerOptionClick, OnClockTickListener
         , MainActivityView {
     private DrawerLayout mDrawerLayout;
     private Toolbar mToolbar;
     private int mFrameContainer;
     private MainActivityPresenter mPresenter;
+    private TextView clock;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +42,23 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
         setContentView(R.layout.activity_time_line);
 
-        loadZooInfo();
+        //loadZooInfo();
         bindmPresenter();
         bindToolbar();
         bindDrawerLayout();
         bindNavigationDrawer();
         bindContainerFragment();
+
+
+        startClockService();
+
+
+    }
+
+    private void startClockService() {
+        ClockService.context = this;
+        if(!ServiceHelper.isMyServiceRunning(ClockService.class,this))
+            startService(new Intent(this, ClockService.class));
     }
 
     private void loadZooInfo() {
@@ -68,6 +88,8 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
         mToolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(mToolbar);
 
+
+        clock = (TextView) mToolbar.findViewById(R.id.text_view_clock);
     }
 
     private void bindDrawerLayout() {
@@ -123,4 +145,11 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
     public void changeFragment(Fragment fragment) {
 
     }
+
+    @Override
+    public void onTick(String time) {
+        clock.setText(time);
+    }
+
+
 }

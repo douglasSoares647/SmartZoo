@@ -1,6 +1,22 @@
 package com.br.smartzoo.util;
 
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Handler;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.br.smartzoo.model.business.BusinessRules;
+import com.br.smartzoo.model.entity.Animal;
+import com.br.smartzoo.model.entity.Cage;
+import com.br.smartzoo.model.environment.Visitor;
+import com.br.smartzoo.model.environment.ZooInfo;
+import com.br.smartzoo.model.interfaces.OnClockTickListener;
+import com.br.smartzoo.model.service.ClockService;
+
+import java.sql.Time;
+import java.util.List;
+import java.util.Observer;
 
 /**
  * Created by Taibic on 5/15/2016.
@@ -22,23 +38,22 @@ public class TimeUtil {
     //Veterinary
     public static int timeToTreat = 1800000;
 
-    //VisitorService
-    public static int generateVisitorTime = 5000;
+
+
+    public int day=1;
+    public int month=1;
+    public int year=2016;
+
+    public int second = 0;
+    public int minute = 0;
+    public int hour = 0;
 
 
 
+    public void startClock() {
+        final Handler accessUIHandler = new Handler();
 
-    public static int day=1;
-    public static int month=1;
-    public static int year=2016;
-
-    public static int second = 0;
-    public static int minute = 0;
-    public static int hour = 0;
-
-
-
-    public static void startClock() {
+        //Creation of the timer. It was created manually so we can change his speed
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -49,25 +64,25 @@ public class TimeUtil {
                         e.printStackTrace();
                     }
                     second++;
+                    if(second%5==0){
+                        fiveSecondsTick();
+                    }
                     if (second == 60) {
                         second = 0;
                         minute++;
-                        if(minute%30==0){
-                            halfHour();
-                        }
                         if (minute == 60) {
                             minute = 0;
                             hour++;
-                            if(hour%3==0){
+                            if (hour % 3 == 0) {
                                 threeHours();
                             }
                             if (hour == 24) {
                                 hour = 0;
                                 day++;
-                                if(day==30){
+                                if (day == 30) {
                                     day = 0;
                                     month++;
-                                    if(month == 12){
+                                    if (month == 12) {
                                         month = 0;
                                         year++;
                                     }
@@ -75,6 +90,43 @@ public class TimeUtil {
                             }
                         }
                     }
+
+                    //Handler to access the UI Thread
+                    accessUIHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            String strHour;
+                            String strMinute;
+                            String strSecond;
+
+                            if(hour<10)
+                                strHour = "0" +hour;
+                            else
+                                strHour = String.valueOf(hour);
+
+
+                            if(minute<10)
+                                strMinute = "0" + minute;
+                            else
+                                strMinute = String.valueOf(minute);
+
+
+                            if(second<10)
+                                strSecond = "0" + second;
+                            else
+                                strSecond = String.valueOf(second);
+
+
+                            //Send an message to update the current context
+                            ClockService.context.onTick(strHour+":"+strMinute+":"+strSecond);
+
+                            //OBSERVERS
+                            for(Visitor visitor : ZooInfo.visitors){
+                                visitor.onTick();
+                            }
+                        }
+                    });
+
                 }
             }
         });
@@ -83,16 +135,24 @@ public class TimeUtil {
 
     }
 
-    private static void halfHour() {
-
+    //Called every 5 ingame seconds to create visitors
+    private static void fiveSecondsTick() {
+        BusinessRules.calculateIdealPrice();
+        BusinessRules.generateVisitor();
     }
 
+
+    //Called every 3 ingame hours to call the animal eat method
     private static void threeHours() {
-
+        for(Cage cage : ZooInfo.cages){
+            for(Animal animal : cage.getAnimals()){
+                animal.eat();
+            }
+        }
     }
 
 
-    public static void saveToPreferences(){
+    public void saveToPreferences(){
         SharedPreferences preferences = ApplicationUtil.applicationContext
                                         .getSharedPreferences(my_pref,ApplicationUtil.applicationContext.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
@@ -107,7 +167,7 @@ public class TimeUtil {
     }
 
 
-    public static void getFromPreferences(){
+    public void getFromPreferences(){
         SharedPreferences preferences = ApplicationUtil.applicationContext
                 .getSharedPreferences(my_pref,ApplicationUtil.applicationContext.MODE_PRIVATE);
 

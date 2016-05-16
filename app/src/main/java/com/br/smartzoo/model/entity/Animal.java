@@ -3,6 +3,7 @@ package com.br.smartzoo.model.entity;
 
 import android.os.CountDownTimer;
 
+import com.br.smartzoo.model.interfaces.Observer;
 import com.br.smartzoo.util.TimeUtil;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.TimerTask;
 /**
  * Created by taibic on 12/04/16.
  */
-public class Animal {
+public class Animal implements Observer {
 
 
     private String status;
@@ -257,4 +258,8 @@ public class Animal {
     	
     }
 
+    @Override
+    public void onTick() {
+
+    }
 }
