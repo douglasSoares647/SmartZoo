@@ -157,14 +157,31 @@ public class Animal {
 
     public void  eat() {
         Double foodEaten = 0.0;
-        List<Food> cageFoods = cage.getFoods();
+        final List<Food> cageFoods = cage.getFoods();
         List<Food> foodsToRemove = new ArrayList<>();
 
-        status = "Comendo";
+
         if(cageFoods.isEmpty()){
-            setWeight(weight*0.95);
+            status = "Faminto";
+            Thread starving = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        while (cageFoods.isEmpty()) {
+                            try {
+                                Thread.sleep(TimeUtil.starvingTime);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            setWeight(weight*0.99);
+                            status = "Perdendo peso";
+                        }
+                        eat();
+                    }
+                });
+                 starving.start();
         }
         else {
+            status = "Comendo";
             //SE O ANIMAL COMEÇAR A COMER O FOOD E FICAR SATISFEITO ENQUANTO ESTIVER COMENDO, ELE COME O FOOD ATÉ O FIM
             for (Food food : cageFoods) {
                 if (foodEaten < foodToBeSatisfied) {
