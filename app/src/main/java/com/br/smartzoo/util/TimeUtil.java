@@ -1,9 +1,13 @@
 package com.br.smartzoo.util;
 
+import android.content.SharedPreferences;
+
 /**
  * Created by Taibic on 5/15/2016.
  */
 public class TimeUtil {
+
+    public static String my_pref = "timePreferences";
 
     //Animal
     public static int timeToFeelHungry = 10800000;// 3 hours
@@ -85,6 +89,36 @@ public class TimeUtil {
 
     private static void threeHours() {
 
+    }
+
+
+    public static void saveToPreferences(){
+        SharedPreferences preferences = ApplicationUtil.applicationContext
+                                        .getSharedPreferences(my_pref,ApplicationUtil.applicationContext.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("day", day);
+        editor.putInt("month", month);
+        editor.putInt("year", year);
+        editor.putInt("hour", hour);
+        editor.putInt("minute", minute);
+        editor.putInt("second", second);
+
+        editor.apply();
+    }
+
+
+    public static void getFromPreferences(){
+        SharedPreferences preferences = ApplicationUtil.applicationContext
+                .getSharedPreferences(my_pref,ApplicationUtil.applicationContext.MODE_PRIVATE);
+
+        day = preferences.getInt("day",1);
+        month = preferences.getInt("month",1);
+        year = preferences.getInt("year",2016);
+
+
+        hour = preferences.getInt("hour",0);
+        minute = preferences.getInt("minute",0);
+        second = preferences.getInt("second",0);
     }
 
 }

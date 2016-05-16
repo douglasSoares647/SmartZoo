@@ -19,6 +19,8 @@ import java.util.TimerTask;
 public class Visitor{
 
     private String status;
+
+    private String name;
     private Date arrivalDate;
     private Double reputationGenerated = 0.0;
     private Cage currentCage;
@@ -74,7 +76,7 @@ public class Visitor{
         timerToControlVisits.schedule(new TimerTask() {
             @Override
             public void run() {
-                status = "Indo embora do Zoo";
+                status = "Visitante " + name + " indo embora do zoo!";
                 ZooInfo.visitors.remove(Visitor.this);
                 ZooInfo.reputation += reputationGenerated;
             }
@@ -88,5 +90,13 @@ public class Visitor{
 
     public void setCurrentCage(Cage currentCage) {
         this.currentCage = currentCage;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

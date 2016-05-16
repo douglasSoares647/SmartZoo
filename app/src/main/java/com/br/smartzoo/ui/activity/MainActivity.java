@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Chronometer;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.interfaces.OnDrawerOptionClick;
 import com.br.smartzoo.presenter.MainActivityPresenter;
 import com.br.smartzoo.ui.fragment.BuyAnimalFragment;
@@ -32,13 +33,19 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
         setContentView(R.layout.activity_time_line);
 
+        loadZooInfo();
         bindmPresenter();
         bindToolbar();
         bindDrawerLayout();
         bindNavigationDrawer();
         bindContainerFragment();
     }
-    
+
+    private void loadZooInfo() {
+        ZooInfoBusiness.getFromPreferences();
+        ZooInfoBusiness.load();
+    }
+
     private void bindmPresenter() {
         mPresenter = new MainActivityPresenter(this);
         mPresenter.attachView(this);
