@@ -44,7 +44,7 @@ public class BuyAnimalListAdapter extends RecyclerView.Adapter<BuyAnimalListAdap
     @Override
     public void onBindViewHolder(BuyAnimalListAdapter.ViewHolder holder, int position) {
         final Animal animal = mAnimalList.get(position);
-        Glide.with(mContext).load(R.drawable.ic_buy_animal).into(holder.mImageViewAnimal);
+        Glide.with(mContext).load(animal.getImage()).into(holder.mImageViewAnimal);
         holder.mTextViewNameAnimal.setText(animal.getName());
         holder.mTextViewAgeAnimal.setText(String.valueOf(animal.getAge()));
         boolean healthy = animal.isHealthy();
@@ -53,7 +53,7 @@ public class BuyAnimalListAdapter extends RecyclerView.Adapter<BuyAnimalListAdap
         else
             holder.mTextViewHealthAnimal.setText("Doente");
 
-        holder.mTextViewCostAnimal.setText("2000");
+        holder.mTextViewCostAnimal.setText(String.valueOf(animal.getPrice()));
         holder.mButtonAnimal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

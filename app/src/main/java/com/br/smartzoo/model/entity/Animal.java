@@ -39,6 +39,8 @@ public class Animal implements Observer {
     public Animal(int image, Long id, String name, Integer age,Double price, Double weight
             , Cage cage, Integer resistance,  boolean isHealthy) {
         this.name = name;
+        this.image= image;
+        this.id = id;
         this.age = age;
         this.weight = weight;
         this.price = price;
