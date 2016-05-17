@@ -34,7 +34,8 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
     private Toolbar mToolbar;
     private int mFrameContainer;
     private MainActivityPresenter mPresenter;
-    private TextView clock;
+    private TextView textViewclock;
+    private TextView textViewdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +58,9 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
     private void startClockService() {
         ClockService.context = this;
-        if(!ServiceHelper.isMyServiceRunning(ClockService.class,this))
+        if(!ServiceHelper.isMyServiceRunning(ClockService.class,this)) {
             startService(new Intent(this, ClockService.class));
+        }
     }
 
     private void loadZooInfo() {
@@ -89,7 +91,8 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
         setSupportActionBar(mToolbar);
 
 
-        clock = (TextView) mToolbar.findViewById(R.id.text_view_clock);
+        textViewclock = (TextView) mToolbar.findViewById(R.id.text_view_clock);
+        textViewdate = (TextView) mToolbar.findViewById(R.id.text_view_date);
     }
 
     private void bindDrawerLayout() {
@@ -147,8 +150,9 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
     }
 
     @Override
-    public void onTick(String time) {
-        clock.setText(time);
+    public void onTick(String date, String time) {
+        textViewdate.setText(date);
+        textViewclock.setText(time);
     }
 
 

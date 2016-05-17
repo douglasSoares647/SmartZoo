@@ -28,9 +28,19 @@ public class ClockService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        TimeUtil clock = new TimeUtil();
-        clock.startClock();
 
-        return super.onStartCommand(intent, flags, startId);
+        TimeUtil.getFromPreferences();
+
+        TimeUtil.startClock();
+
+        return START_STICKY;
+    }
+
+    @Override
+    public void onDestroy() {
+
+        TimeUtil.clock.interrupt();
+
+        super.onDestroy();
     }
 }

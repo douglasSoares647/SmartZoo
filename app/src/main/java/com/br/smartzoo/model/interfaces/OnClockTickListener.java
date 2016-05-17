@@ -5,5 +5,5 @@ package com.br.smartzoo.model.interfaces;
  */
 public interface OnClockTickListener {
 
-    public void onTick(String time);
+    public void onTick(String date, String time);
 }

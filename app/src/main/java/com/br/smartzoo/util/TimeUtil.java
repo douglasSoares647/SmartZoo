@@ -40,21 +40,23 @@ public class TimeUtil {
 
 
 
-    public int day=1;
-    public int month=1;
-    public int year=2016;
+    public static int day=1;
+    public static int month=1;
+    public static int year=2016;
 
-    public int second = 0;
-    public int minute = 0;
-    public int hour = 0;
+    public static int second = 0;
+    public static int minute = 0;
+    public static int hour = 0;
+
+    public static Thread clock;
 
 
 
-    public void startClock() {
+    public static void startClock() {
         final Handler accessUIHandler = new Handler();
 
         //Creation of the timer. It was created manually so we can change his speed
-        Thread thread = new Thread(new Runnable() {
+        clock = new Thread(new Runnable() {
             @Override
             public void run() {
                 while (true) {
@@ -98,6 +100,9 @@ public class TimeUtil {
                             String strHour;
                             String strMinute;
                             String strSecond;
+                            String strDay;
+                            String strMonth;
+                            String strYear;
 
                             if(hour<10)
                                 strHour = "0" +hour;
@@ -117,8 +122,16 @@ public class TimeUtil {
                                 strSecond = String.valueOf(second);
 
 
+                            strDay = String.valueOf(day);
+                            strMonth = String.valueOf(month);
+                            strYear = String.valueOf(year);
+
                             //Send an message to update the current context
-                            ClockService.context.onTick(strHour+":"+strMinute+":"+strSecond);
+                            if(ClockService.context!=null) {
+                                ClockService.context.onTick(strDay + "/" + strMonth + "/" + strYear, strHour + ":" + strMinute + ":" + strSecond);
+                            }
+                            saveToPreferences();
+
 
                             //OBSERVERS
                             for(Visitor visitor : ZooInfo.visitors){
@@ -131,8 +144,7 @@ public class TimeUtil {
             }
         });
 
-        thread.start();
-
+        clock.start();
     }
 
     //Called every 5 ingame seconds to create visitors
@@ -152,7 +164,7 @@ public class TimeUtil {
     }
 
 
-    public void saveToPreferences(){
+    public static void saveToPreferences(){
         SharedPreferences preferences = ApplicationUtil.applicationContext
                                         .getSharedPreferences(my_pref,ApplicationUtil.applicationContext.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
@@ -167,18 +179,20 @@ public class TimeUtil {
     }
 
 
-    public void getFromPreferences(){
+    public static void getFromPreferences(){
         SharedPreferences preferences = ApplicationUtil.applicationContext
                 .getSharedPreferences(my_pref,ApplicationUtil.applicationContext.MODE_PRIVATE);
 
-        day = preferences.getInt("day",1);
-        month = preferences.getInt("month",1);
-        year = preferences.getInt("year",2016);
+        if(preferences.contains("day")) {
+            day = preferences.getInt("day", 1);
+            month = preferences.getInt("month", 1);
+            year = preferences.getInt("year", 2016);
 
 
-        hour = preferences.getInt("hour",0);
-        minute = preferences.getInt("minute",0);
-        second = preferences.getInt("second",0);
+            hour = preferences.getInt("hour", 0);
+            minute = preferences.getInt("minute", 0);
+            second = preferences.getInt("second", 0);
+        }
     }
 
 }
