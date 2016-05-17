@@ -1,6 +1,7 @@
 package com.br.smartzoo.model.entity;
 
 import com.br.smartzoo.model.interfaces.Manageable;
+import com.br.smartzoo.model.interfaces.Observer;
 import com.br.smartzoo.model.singleton.Stock;
 
 import java.util.ArrayList;
@@ -13,10 +14,11 @@ import java.util.Map;
 /**
  * Created by adenilson on 18/04/16.
  */
-public class Feeder extends Employee implements Manageable {
+public class Feeder extends Employee implements Manageable{
 
     private HashMap<Integer,Integer> cagesFeededThisMonth;
     private Stock stock;
+	private int clock=0;
     
     public Feeder(){
 		cagesFeededThisMonth = new HashMap<Integer,Integer>();
@@ -115,9 +117,8 @@ public class Feeder extends Employee implements Manageable {
 	}
 
 
-
-	
-    
-
-	
+	@Override
+	public void onTick() {
+		clock++;
+	}
 }

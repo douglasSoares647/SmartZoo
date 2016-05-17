@@ -6,6 +6,7 @@ import android.os.CountDownTimer;
 import com.br.smartzoo.model.interfaces.Observer;
 import com.br.smartzoo.util.TimeUtil;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.TimerTask;
  */
 public class Animal implements Observer {
 
+    private int tick = 0;
 
     private int image;
     private String status;
@@ -29,7 +31,6 @@ public class Animal implements Observer {
     private Cage cage;
     private boolean isHealthy;
     private Double foodToBeSatisfied;
-    private Timer biologicalClock;
     private Integer resistance;
     private Integer popularity;
     private Double price;
@@ -47,11 +48,10 @@ public class Animal implements Observer {
         this.isHealthy = isHealthy;
         this.resistance = resistance;
         foodToBeSatisfied = weight*0.15;
-        biologicalClock = new Timer();
     }
 
     public Animal(){
-        biologicalClock = new Timer();
+
     }
 
 
@@ -212,26 +212,23 @@ public class Animal implements Observer {
             cageFoods.removeAll(foodsToRemove);
 
 
-            weight = weight + foodEaten;
-            final Double foodEaten2 = foodEaten * 0.95;
+            weight = weight + foodEaten;;
+
+
             status = "Digerindo";
 
-
             //Digerindo
-            new CountDownTimer(TimeUtil.digestingInterval, TimeUtil.timeToDigest) {
-                @Override
-                public void onTick(long l) {
-                    weight = weight - foodEaten2 / 30;
-                }
+            tick = 0;
+            while(tick<TimeUtil.timeToDigest){
+                    if(tick%TimeUtil.digestingInterval==0)
+                    weight = weight - foodEaten / 30;
 
-                @Override
-                public void onFinish() {
-                    setWeight(weight - foodEaten2);
-                    afterDigest();
+            }
+            setWeight(weight - foodEaten*0.95);
+            afterDigest();
 
                 }
-            }.start();
-        }
+
 
     }
 
@@ -240,12 +237,14 @@ public class Animal implements Observer {
         status = "Digestão finalizada";
 
         //Tempo para sentir fome novamente
-        biologicalClock.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                status = "Faminto";
-            }
-        },TimeUtil.timeToFeelHungry);
+        tick = 0;
+        while(tick< TimeUtil.timeToFeelHungry){
+            status = "Sem fome";
+        }
+
+        status = "Faminto";
+
+
 
     }
 
@@ -258,6 +257,7 @@ public class Animal implements Observer {
 
     @Override
     public void onTick() {
+        tick++;
 
     }
 

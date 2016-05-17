@@ -2,7 +2,10 @@ package com.br.smartzoo.util;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.content.ComponentName;
 import android.content.Context;
+
+import java.util.List;
 
 /**
  * Created by Taibic on 5/16/2016.
@@ -19,5 +22,6 @@ public class ServiceHelper {
         }
         return false;
     }
+
 
 }

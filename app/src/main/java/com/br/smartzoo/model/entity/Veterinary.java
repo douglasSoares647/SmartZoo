@@ -21,23 +21,20 @@ public class Veterinary extends Employee {
 
     private String credential;
     private HashMap<Integer,Integer> animalsTreatedThisMonth;
-    private Timer treatmentTime;
+    private int clock = 0;
 
     public Veterinary(){
-        treatmentTime = new Timer();
+
     }
 
     public Veterinary(String credential, List<Animal> animals) {
         this.credential = credential;
-        treatmentTime = new Timer();
         status = " Sem serviço ";
     }
 
     public Veterinary(String name, Integer age, String cpf, Date startDate, Date endDate, Double salary, String credential) {
         super(name, age, cpf, startDate, endDate, salary);
-        treatmentTime = new Timer();
         this.credential = credential;
-        treatmentTime = new Timer();
         status = " Sem serviço ";
     }
 
@@ -50,33 +47,33 @@ public class Veterinary extends Employee {
     }
 
     
-    public void treat(final Animal animal){
+    public void treat(final Animal animal) {
         status = "Tratando animal " + animal.getName();
-        treatmentTime.schedule(new TimerTask() {
-            @Override
-            public void run() {
+        clock = 0;
+
+        while (clock <= TimeUtil.timeToTreat) {
+            if (clock == TimeUtil.timeToTreat) {
                 animal.setIsHealthy(true);
                 status = "Tratamento do animal " + animal.getName() + " finalizado!";
             }
-        }, TimeUtil.timeToTreat);
 
-
+        }
     }
 
-    public void treat(List<Animal> animals){
+    public void treat(List<Animal> animals) {
         status = "Tratando dos animais";
-    	for(final Animal animal : animals){
+        for (final Animal animal : animals) {
 
-            treatmentTime.schedule(new TimerTask() {
+            clock = 0;
 
-                @Override
-                public void run() {
+            while (clock <= TimeUtil.timeToTreat) {
+                if (clock == TimeUtil.timeToTreat) {
                     animal.setIsHealthy(true);
-                    status = "Animal " + animal.getName() + " curado!";
+                    status = "Tratamento do animal " + animal.getName() + " finalizado!";
                 }
-            },TimeUtil.timeToTreat);
 
-    	}
+            }
+        }
     }
     
     @Override
@@ -99,5 +96,10 @@ public class Veterinary extends Employee {
 
     public String getStatus() {
         return status;
+    }
+
+    @Override
+    public void onTick() {
+
     }
 }

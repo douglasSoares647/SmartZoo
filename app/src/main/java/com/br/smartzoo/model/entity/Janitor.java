@@ -17,25 +17,22 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by adenilson on 18/04/16.
  */
-public class Janitor extends Employee implements Observer{
+public class Janitor extends Employee{
 
     private String status;
+    private int clock = 0;
 
     private Long id;
     private HashMap<Integer,Integer> cagesCleanedThisMonth;
-    private Timer tasks;
 
     public Janitor(List<Cage> cages, int expedient) {
-        this.tasks = new Timer();
     }
 
     public Janitor(String name, Integer age, String cpf, Date startDate, Date endDate, Double salary) {
         super(name, age, cpf, startDate, endDate, salary);
-        this.tasks = new Timer();
     }
 
     public Janitor(){
-        this.tasks = new Timer();
     }
 
 
@@ -67,36 +64,28 @@ public class Janitor extends Employee implements Observer{
         this.id = id;
     }
     
-    public void clear(final Cage cage){
+    public void clear(final Cage cage) {
         long timeToCleanCage = cage.getDirtyFactor() * TimeUtil.timeToCleanEachDirty;
 
-        //Limpando jaula
-        new CountDownTimer(TimeUtil.timeToCleanEachDirty,timeToCleanCage){
-            int dirtyCleaned = 0;
-            @Override
-            public void onTick(long millisUntilFinished) {
-               dirtyCleaned++;
-            }
 
-            @Override
-            public void onFinish() {
-                cage.setClean(true);
-                status = "Descansando";
-            }
-        }.start();
+        int dirtyCleaned = 0;
+        status = "Limpando jaula " + cage.getName();
+        while (clock < timeToCleanCage) {
+            if (clock % TimeUtil.timeToCleanEachDirty == 0)
+                dirtyCleaned++;
+        }
+        cage.setClean(true);
+        status = "Descansando";
 
+        clock  = 0;
+        while(clock<TimeUtil.timeToRest)
+        status = "Pronto";
 
-        //Descansando
-        tasks.schedule(new TimerTask() {
-            @Override
-            public void run() {
-              status = "Pronto";
-            }
-        }, TimeUtil.timeToRest);
     }
 
     @Override
     public void onTick() {
 
+        clock++;
     }
 }

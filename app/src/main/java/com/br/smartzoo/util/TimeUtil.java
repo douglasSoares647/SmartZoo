@@ -1,22 +1,16 @@
 package com.br.smartzoo.util;
 
-import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.br.smartzoo.model.business.BusinessRules;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
+import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.environment.Visitor;
 import com.br.smartzoo.model.environment.ZooInfo;
-import com.br.smartzoo.model.interfaces.OnClockTickListener;
 import com.br.smartzoo.model.service.ClockService;
-
-import java.sql.Time;
-import java.util.List;
-import java.util.Observer;
 
 /**
  * Created by Taibic on 5/15/2016.
@@ -26,17 +20,17 @@ public class TimeUtil {
     public static String my_pref = "timePreferences";
 
     //Animal
-    public static int timeToFeelHungry = 10800000;// 3 hours
-    public static int timeToDigest = 1800000; // 30 minutes
-    public static int digestingInterval = 60000; // 1 minute
-    public static int starvingTime = 60000;
+    public static int timeToFeelHungry = 10800;// 3 hours
+    public static int timeToDigest = 1800; // 30 minutes
+    public static int digestingInterval = 60; // 1 minute
+    public static int starvingTime = 600; // 10 minutes
 
     //Janitor
-    public static int timeToRest = 1800000;//30 minutes
-    public static int timeToCleanEachDirty = 30000; //30 seconds
+    public static int timeToRest = 1800;//30 minutes
+    public static int timeToCleanEachDirty = 30; //30 seconds
 
     //Veterinary
-    public static int timeToTreat = 1800000;
+    public static int timeToTreat = 1800;
 
 
 
@@ -49,7 +43,7 @@ public class TimeUtil {
     public static int hour = 0;
 
     public static Thread clock;
-
+    public static Boolean isRunning = true;
 
 
     public static void startClock() {
@@ -59,7 +53,7 @@ public class TimeUtil {
         clock = new Thread(new Runnable() {
             @Override
             public void run() {
-                while (true) {
+                while (isRunning) {
                     try {
                         Thread.sleep(500);
                     } catch (InterruptedException e) {
@@ -137,6 +131,15 @@ public class TimeUtil {
                             for(Visitor visitor : ZooInfo.visitors){
                                 visitor.onTick();
                             }
+                            for(Employee employee : ZooInfo.employees){
+                                employee.onTick();
+                            }
+                            for(Cage cage : ZooInfo.cages){
+                                for(Animal animal : cage.getAnimals()){
+                                    animal.onTick();
+                                }
+                            }
+
                         }
                     });
 
@@ -157,8 +160,14 @@ public class TimeUtil {
     //Called every 3 ingame hours to call the animal eat method
     private static void threeHours() {
         for(Cage cage : ZooInfo.cages){
-            for(Animal animal : cage.getAnimals()){
-                animal.eat();
+            for(final Animal animal : cage.getAnimals()){
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        animal.eat();
+                    }
+                });
+                thread.start();
             }
         }
     }
