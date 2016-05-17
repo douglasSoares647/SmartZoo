@@ -26,8 +26,8 @@
     <string name="navigation_drawer_open">open</string>
     <string name="navigation_drawer_close">close</string>
     <string name="title_news">News</string>
-    <string name="available_fruits">Available fruits</string>
-    <string name="total_fruits">Total fruits:</string>
+    <string name="available_fruits">Available foods</string>
+    <string name="total_fruits">Total foods:</string>
     <string name="text_buy">Buy</string>
     <string name="message_insufficient_funds">Insufficient funds</string>
     <string name="food_beef">Beef</string>
@@ -36,4 +36,21 @@
     <string name="food_apple">Apple</string>
     <string name="food_grape">Grape</string>
     <string name="food_banana">Banana</string>
+    <string name="animal_lion">Lion</string>
+    <string name="animal_jaguar">Jaguar</string>
+    <string name="animal_tiger">Tiger</string>
+    <string name="animal_boar">Boar</string>
+    <string name="animal_macaw">Macaw</string>
+    <string name="animal_snake">Snake</string>
+    <string name="animal_turtle">Turtle</string>
+    <string name="animal_goose">Goose</string>
+    <string name="animal_monkey">Monkey</string>
+    <string name="animal_giraffe">Giraffe</string>
+    <string name="animal_elephant">Elephant</string>
+    <string name="animal_spider">Spider</string>
+    <string name="animal_parrot">Parrot</string>
+    <string name="animal_toucan">Toucan</string>
+    <string name="animal_bear">Bear</string>
+    <string name="animal_leopard">Leopard</string>
+
 </resources>

@@ -19,9 +19,8 @@ import java.util.TimerTask;
 public class Animal implements Observer {
 
 
+    private int image;
     private String status;
-
-
     private Long id;
     private String name;
     private Integer age;
@@ -31,15 +30,14 @@ public class Animal implements Observer {
     private boolean isHealthy;
     private Double foodToBeSatisfied;
     private Timer biologicalClock;
-    //fragilidade do animal a contrair doenças ao comer
-    private Integer resistence;
+    private Integer resistance;
     private Integer popularity;
     private Double price;
 
 
 
-    public Animal(Long id, String name, Integer age,Double price, Double weight
-            , Cage cage, Integer resistence,  boolean isHealthy) {
+    public Animal(int image, Long id, String name, Integer age,Double price, Double weight
+            , Cage cage, Integer resistance,  boolean isHealthy) {
         this.name = name;
         this.age = age;
         this.weight = weight;
@@ -47,7 +45,7 @@ public class Animal implements Observer {
         this.cage = cage;
         this.cage.getAnimals().add(this);
         this.isHealthy = isHealthy;
-        this.resistence = resistence;
+        this.resistance = resistance;
         foodToBeSatisfied = weight*0.15;
         biologicalClock = new Timer();
     }
@@ -124,12 +122,12 @@ public class Animal implements Observer {
         this.foodToBeSatisfied = foodToBeSatisfied;
     }
 
-    public Integer getResistence() {
-        return resistence;
+    public Integer getResistance() {
+        return resistance;
     }
 
-    public void setResistence(Integer resistence) {
-        this.resistence = resistence;
+    public void setResistance(Integer resistance) {
+        this.resistance = resistance;
     }
 
     public String getStatus() {
@@ -199,7 +197,7 @@ public class Animal implements Observer {
                         Random random = new Random();
                         int i = random.nextInt(8) + 1;
                         if (this.isHealthy) {
-                            if (i > resistence) {
+                            if (i > resistance) {
                                 isHealthy = false;
                             }
                         }
@@ -261,5 +259,17 @@ public class Animal implements Observer {
     @Override
     public void onTick() {
 
+    }
+
+    public int getImage() {
+        return image;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
+    }
+
+    public void setHealthy(boolean healthy) {
+        isHealthy = healthy;
     }
 }

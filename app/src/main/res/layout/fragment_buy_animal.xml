@@ -14,7 +14,7 @@
         android:textStyle="bold" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/list_view_available_animals"
+        android:id="@+id/recicler_view_available_animals"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="8"/>

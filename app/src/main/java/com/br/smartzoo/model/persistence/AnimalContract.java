@@ -61,7 +61,7 @@ public class AnimalContract {
         contentValues.put(SEX, animal.getSex());
         contentValues.put(CAGEID, animal.getCage().getId());
         contentValues.put(ISHEALTHY, animal.isHealthy()==true? 1 : 0);
-        contentValues.put(RESISTENCE,animal.getResistence());
+        contentValues.put(RESISTENCE,animal.getResistance());
         contentValues.put(POPULARITY, animal.getPopularity());
 
 
@@ -84,7 +84,7 @@ public class AnimalContract {
             animal.setCage(cage);
 
             animal.setIsHealthy((cursor.getInt(cursor.getColumnIndex(ISHEALTHY)))==1?true: false);
-            animal.setResistence(cursor.getInt(cursor.getColumnIndex(RESISTENCE)));
+            animal.setResistance(cursor.getInt(cursor.getColumnIndex(RESISTENCE)));
             animal.setPopularity(cursor.getInt(cursor.getColumnIndex(POPULARITY)));
         }
 

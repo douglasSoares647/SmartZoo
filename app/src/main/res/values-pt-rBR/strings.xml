@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-
     <string name="text_load_game">Carregar Jogo</string>
     <string name="text_new_game">Novo Jogo</string>
     <string name="available_animals">Animais disponíveis: </string>
@@ -28,8 +26,8 @@
     <string name="navigation_drawer_open">open</string>
     <string name="navigation_drawer_close">close</string>
     <string name="title_news">Notícias</string>
-    <string name="available_fruits">Frutas disponíveis:</string>
-    <string name="total_fruits">Total de frutas:</string>
+    <string name="available_fruits">Alimentos disponíveis:</string>
+    <string name="total_fruits">Total de alimentos:</string>
     <string name="text_buy">Comprar</string>
     <string name="message_insufficient_funds">Dinheiro insuficiente</string>
     <string name="food_beef">Bife</string>
@@ -38,4 +36,21 @@
     <string name="food_apple">Maçã</string>
     <string name="food_grape">Uva</string>
     <string name="food_banana">Banana</string>
+    <string name="animal_lion">Leão</string>
+    <string name="animal_jaguar">Leopardo</string>
+    <string name="animal_tiger">Tigre</string>
+    <string name="animal_boar">Javali</string>
+    <string name="animal_macaw">Arara</string>
+    <string name="animal_snake">Cobra</string>
+    <string name="animal_turtle">Tartaruga</string>
+    <string name="animal_goose">Ganso</string>
+    <string name="animal_monkey">Macaco</string>
+    <string name="animal_giraffe">Girafa</string>
+    <string name="animal_elephant">Elefante</string>
+    <string name="animal_spider">Aranha</string>
+    <string name="animal_parrot">Papagaio</string>
+    <string name="animal_toucan">Tucano</string>
+    <string name="animal_bear">Urso</string>
+    <string name="animal_leopard">Leopardo</string>
+
 </resources>

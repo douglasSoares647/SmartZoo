@@ -4,7 +4,7 @@ import android.app.Activity;
 
 import com.br.smartzoo.model.entity.Food;
 import com.br.smartzoo.model.enums.FoodEnum;
-import com.br.smartzoo.ui.view.BuyFoodFragmentView;
+import com.br.smartzoo.ui.view.BuyFoodView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -16,13 +16,13 @@ import java.util.List;
 public class BuyFoodPresenter {
 
     private Activity mActivity;
-    private BuyFoodFragmentView mBuyFragmentView;
+    private BuyFoodView mBuyFragmentView;
 
     public BuyFoodPresenter(Activity activity) {
         this.mActivity = activity;
     }
 
-    public void attachView(BuyFoodFragmentView buyFoodFragmentView) {
+    public void attachView(BuyFoodView buyFoodFragmentView) {
         this.mBuyFragmentView = buyFoodFragmentView;
     }
 

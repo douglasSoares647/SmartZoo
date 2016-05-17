@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.entity.Animal;
@@ -41,10 +43,10 @@ public class BuyAnimalListAdapter extends RecyclerView.Adapter<BuyAnimalListAdap
 
     @Override
     public void onBindViewHolder(BuyAnimalListAdapter.ViewHolder holder, int position) {
-        Animal animal = mAnimalList.get(position);
+        final Animal animal = mAnimalList.get(position);
         Glide.with(mContext).load(R.drawable.ic_buy_animal).into(holder.mImageViewAnimal);
         holder.mTextViewNameAnimal.setText(animal.getName());
-        holder.mTextViewAgeAnimal.setText(animal.getAge());
+        holder.mTextViewAgeAnimal.setText(String.valueOf(animal.getAge()));
         boolean healthy = animal.isHealthy();
         if (healthy)
             holder.mTextViewHealthAnimal.setText("Saudável");
@@ -52,8 +54,12 @@ public class BuyAnimalListAdapter extends RecyclerView.Adapter<BuyAnimalListAdap
             holder.mTextViewHealthAnimal.setText("Doente");
 
         holder.mTextViewCostAnimal.setText("2000");
-        holder.mSpinnerAnimal.setAdapter(new ArrayAdapter<Integer>(mContext
-                , android.R.layout.simple_list_item_1, BuyHelper.QUANTITY_BUY));
+        holder.mButtonAnimal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext, "Comprou animal" + animal.getName(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -68,7 +74,7 @@ public class BuyAnimalListAdapter extends RecyclerView.Adapter<BuyAnimalListAdap
         private TextView mTextViewAgeAnimal;
         private TextView mTextViewHealthAnimal;
         private TextView mTextViewCostAnimal;
-        private Spinner mSpinnerAnimal;
+        private Button mButtonAnimal;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -77,7 +83,7 @@ public class BuyAnimalListAdapter extends RecyclerView.Adapter<BuyAnimalListAdap
             mTextViewAgeAnimal = (TextView) itemView.findViewById(R.id.text_view_age_animal);
             mTextViewHealthAnimal = (TextView) itemView.findViewById(R.id.text_view_health_animal);
             mTextViewCostAnimal = (TextView) itemView.findViewById(R.id.text_view_cost_animal);
-            mSpinnerAnimal = (Spinner) itemView.findViewById(R.id.spinner_number_buy_animal);
+            mButtonAnimal = (Button) itemView.findViewById(R.id.button_number_buy_animal);
         }
     }
 }

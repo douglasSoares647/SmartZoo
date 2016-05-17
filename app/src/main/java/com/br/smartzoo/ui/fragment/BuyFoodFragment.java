@@ -17,7 +17,7 @@ import com.br.smartzoo.model.entity.Food;
 import com.br.smartzoo.model.interfaces.OnChangeBuyListener;
 import com.br.smartzoo.presenter.BuyFoodPresenter;
 import com.br.smartzoo.ui.adapter.BuyFoodListAdapter;
-import com.br.smartzoo.ui.view.BuyFoodFragmentView;
+import com.br.smartzoo.ui.view.BuyFoodView;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * Created by adenilson on 12/05/16.
  */
-public class BuyFoodFragment extends Fragment implements BuyFoodFragmentView, OnChangeBuyListener {
+public class BuyFoodFragment extends Fragment implements BuyFoodView, OnChangeBuyListener {
 
     private List<Food> mFoods;
     private RecyclerView mRecyclerViewFoods;
