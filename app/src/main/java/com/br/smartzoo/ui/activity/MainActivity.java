@@ -1,15 +1,11 @@
 package com.br.smartzoo.ui.activity;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.widget.Chronometer;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
@@ -23,7 +19,6 @@ import com.br.smartzoo.ui.fragment.BuyFoodFragment;
 import com.br.smartzoo.ui.fragment.NavigationDrawerFragment;
 import com.br.smartzoo.ui.view.MainActivityView;
 import com.br.smartzoo.util.ServiceHelper;
-import com.br.smartzoo.util.TimeUtil;
 
 /**
  * Created by adenilson on 05/05/16.

@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.br.smartzoo.R;
-import com.br.smartzoo.model.business.ZooInfoBusiness;
+import com.br.smartzoo.util.ServiceHelper;
 import com.bumptech.glide.Glide;
 
 
@@ -33,6 +33,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         bindImageViewLogo();
         bindButtonNewGame();
         bindButtonLoadGame();
+
 
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
     }
@@ -94,4 +95,6 @@ public class SplashScreenActivity extends AppCompatActivity {
             Glide.with(this).load(R.drawable.logo_splash).into(imageViewLogo);
         }
     }
+
+
 }

@@ -1,11 +1,14 @@
 package com.br.smartzoo.model.entity;
 
+import com.br.smartzoo.model.interfaces.Observer;
+
 import java.util.Date;
+
 
 /**
  * Created by taibic on 14/04/16.
  */
-public abstract class Employee {
+public abstract class Employee implements Observer{
 
     private Long id;
     private String name;
