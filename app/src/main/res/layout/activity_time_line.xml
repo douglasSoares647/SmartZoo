@@ -20,7 +20,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/app_bar"
-            android:padding="16dp" />
+            android:layout_above="@+id/footer_bar"
+            android:padding="16dp"
+            />
+
+        <include layout="@layout/footer_bar"
+            android:id="@+id/footer_bar"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </include>
 
 
     </RelativeLayout>

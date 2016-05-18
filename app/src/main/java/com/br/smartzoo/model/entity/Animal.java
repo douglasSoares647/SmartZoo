@@ -3,7 +3,9 @@ package com.br.smartzoo.model.entity;
 
 import android.os.CountDownTimer;
 
+import com.br.smartzoo.R;
 import com.br.smartzoo.model.interfaces.Observer;
+import com.br.smartzoo.util.ApplicationUtil;
 import com.br.smartzoo.util.TimeUtil;
 
 import java.sql.Time;
@@ -148,6 +150,12 @@ public class Animal implements Observer {
     }
 
     public void setPrice(Double price) {
+        //Calculate the price based on animal age and health status. If the animal is a newborn, the price is equal the default price offered by the enum
+        price -= (price*age*0.02);
+        if(!isHealthy){
+            price = price*0.5;
+        }
+
         this.price = price;
     }
 
@@ -162,7 +170,7 @@ public class Animal implements Observer {
 
 
         if(cageFoods.isEmpty()){
-            status = "Faminto";
+            status = ApplicationUtil.applicationContext.getString(R.string.starving);
             Thread starving = new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -173,7 +181,7 @@ public class Animal implements Observer {
                                 e.printStackTrace();
                             }
                             setWeight(weight*0.99);
-                            status = "Perdendo peso";
+                            status = ApplicationUtil.applicationContext.getString(R.string.losing_weight);
                         }
                         eat();
                     }
@@ -181,7 +189,7 @@ public class Animal implements Observer {
                  starving.start();
         }
         else {
-            status = "Comendo";
+            status = ApplicationUtil.applicationContext.getString(R.string.eating);
             //SE O ANIMAL COMEÇAR A COMER O FOOD E FICAR SATISFEITO ENQUANTO ESTIVER COMENDO, ELE COME O FOOD ATÉ O FIM
             for (Food food : cageFoods) {
                 if (foodEaten < foodToBeSatisfied) {
@@ -216,7 +224,7 @@ public class Animal implements Observer {
             weight = weight + foodEaten;;
 
 
-            status = "Digerindo";
+            status = ApplicationUtil.applicationContext.getString(R.string.digesting);
 
             //Digerindo
             tick = 0;
@@ -235,15 +243,15 @@ public class Animal implements Observer {
 
     private void afterDigest() {
         cage.setDirtyFactor(cage.getDirtyFactor()+1);
-        status = "Digestão finalizada";
+        status = ApplicationUtil.applicationContext.getString(R.string.digestion_finished);
 
         //Tempo para sentir fome novamente
         tick = 0;
         while(tick< TimeUtil.timeToFeelHungry){
-            status = "Sem fome";
+            status = ApplicationUtil.applicationContext.getString(R.string.not_hungry);
         }
 
-        status = "Faminto";
+        status = ApplicationUtil.applicationContext.getString(R.string.starving);
 
 
 
@@ -270,7 +278,4 @@ public class Animal implements Observer {
         this.image = image;
     }
 
-    public void setHealthy(boolean healthy) {
-        isHealthy = healthy;
-    }
 }

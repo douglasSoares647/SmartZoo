@@ -6,6 +6,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
@@ -19,6 +22,12 @@ import com.br.smartzoo.ui.fragment.BuyFoodFragment;
 import com.br.smartzoo.ui.fragment.NavigationDrawerFragment;
 import com.br.smartzoo.ui.view.MainActivityView;
 import com.br.smartzoo.util.ServiceHelper;
+import com.br.smartzoo.util.TimeUtil;
+import com.bumptech.glide.Glide;
+
+import org.w3c.dom.Text;
+
+import java.sql.Time;
 
 /**
  * Created by adenilson on 05/05/16.
@@ -31,6 +40,13 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
     private MainActivityPresenter mPresenter;
     private TextView mTextViewClock;
     private TextView mTextViewDate;
+    private TextView textViewclock;
+    private TextView textViewdate;
+    private ImageView backward;
+    private ImageView start;
+    private ImageView foward;
+    TextView textViewSpeed;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,21 +57,85 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
       //  loadZooInfo();
         bindmPresenter();
         bindToolbar();
+        bindFooterBar();
         bindDrawerLayout();
         bindNavigationDrawer();
         bindContainerFragment();
 
 
-        startClockService();
+        setContextToService();
+
+
+    }
+
+    private void setContextToService() {
+        ClockService.context = this;
+    }
+
+    private void bindFooterBar() {
+        RelativeLayout footerBar = (RelativeLayout) findViewById(R.id.footer_bar);
+
+        backward = (ImageView) findViewById(R.id.image_view_backward);
+        start = (ImageView) findViewById(R.id.image_view_start);
+        foward = (ImageView) findViewById(R.id.image_view_foward);
+        textViewSpeed = (TextView) findViewById(R.id.text_view_speed);
+        textViewSpeed.setText(getString(R.string.speed) + TimeUtil.speedFactor);
+
+        Glide.with(this).load(R.drawable.ic_backward_button).asBitmap().into(backward);
+        Glide.with(this).load(R.drawable.ic_foward_button).asBitmap().into(foward);
+
+        if(ServiceHelper.isMyServiceRunning(ClockService.class,this))
+            Glide.with(this).load(R.drawable.ic_pause_button).asBitmap().into(start);
+        else
+            Glide.with(this).load(R.drawable.ic_start_button).asBitmap().into(start);
+
+
+
+
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(ServiceHelper.isMyServiceRunning(ClockService.class,MainActivity.this)){
+                    stopService(new Intent(MainActivity.this, ClockService.class));
+                    Glide.with(MainActivity.this).load(R.drawable.ic_start_button).asBitmap().into(start);
+                }
+                else{
+                    Glide.with(MainActivity.this).load(R.drawable.ic_pause_button).asBitmap().into(start);
+                    startClockService();
+                }
+            }
+        });
+
+
+        foward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(TimeUtil.speedFactor<3)
+                TimeUtil.speedFactor++;
+                textViewSpeed.setText(getString(R.string.speed) + TimeUtil.speedFactor);
+            }
+        });
+
+
+        backward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(TimeUtil.speedFactor>1){
+                    TimeUtil.speedFactor--;
+                    textViewSpeed.setText(getString(R.string.speed) + TimeUtil.speedFactor);
+                }
+            }
+        });
+
+
+
 
 
     }
 
     private void startClockService() {
         ClockService.context = this;
-        if(!ServiceHelper.isMyServiceRunning(ClockService.class,this)) {
-            startService(new Intent(this, ClockService.class));
-        }
+        startService(new Intent(this, ClockService.class));
     }
 
     private void loadZooInfo() {
@@ -85,8 +165,16 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
         mToolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(mToolbar);
 
-        mTextViewClock = (TextView) mToolbar.findViewById(R.id.text_view_clock);
-        mTextViewDate = (TextView) mToolbar.findViewById(R.id.text_view_date);
+
+        textViewclock = (TextView) mToolbar.findViewById(R.id.text_view_clock);
+        textViewdate = (TextView) mToolbar.findViewById(R.id.text_view_date);
+
+
+        TimeUtil.getFromPreferences();
+
+        textViewclock.setText(TimeUtil.getTimeString());
+        textViewdate.setText(TimeUtil.getDateString());
+
     }
 
     private void bindDrawerLayout() {
