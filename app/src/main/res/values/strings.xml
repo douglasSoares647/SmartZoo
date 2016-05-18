@@ -52,5 +52,21 @@
     <string name="animal_toucan">Toucan</string>
     <string name="animal_bear">Bear</string>
     <string name="animal_leopard">Leopard</string>
+    <string name="male">male</string>
+    <string name="female">female</string>
+    <string name="starving">Faminto</string>
+    <string name="losing_weight">Perdendo peso</string>
+    <string name="eating">Comendo</string>
+    <string name="digesting">Digerindo</string>
+    <string name="digestion_finished">Digestão finalizada</string>
+    <string name="not_hungry">Sem fome</string>
+    <string name="cleaning_cage">"Limpando jaula "</string>
+    <string name="resting">Descansando</string>
+    <string name="ready">Pronto</string>
+    <string name="veterinary_idle">" Sem serviço "</string>
+    <string name="treating_animal">"Tratando animal "</string>
+    <string name="animal_treatment">"Tratamento do animal "</string>
+    <string name="done">" finalizado"</string>
+    <string name="treating_animals">Tratando dos animais</string>
 
 </resources>

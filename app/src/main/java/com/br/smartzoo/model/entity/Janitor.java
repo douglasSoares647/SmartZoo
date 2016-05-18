@@ -3,7 +3,9 @@ package com.br.smartzoo.model.entity;
 
 import android.os.CountDownTimer;
 
+import com.br.smartzoo.R;
 import com.br.smartzoo.model.interfaces.Observer;
+import com.br.smartzoo.util.ApplicationUtil;
 import com.br.smartzoo.util.TimeUtil;
 
 import java.util.Date;
@@ -69,17 +71,17 @@ public class Janitor extends Employee{
 
 
         int dirtyCleaned = 0;
-        status = "Limpando jaula " + cage.getName();
+        status = ApplicationUtil.applicationContext.getString(R.string.cleaning_cage) + cage.getName();
         while (clock < timeToCleanCage) {
             if (clock % TimeUtil.timeToCleanEachDirty == 0)
                 dirtyCleaned++;
         }
         cage.setClean(true);
-        status = "Descansando";
+        status = ApplicationUtil.applicationContext.getString(R.string.resting);
 
         clock  = 0;
         while(clock<TimeUtil.timeToRest)
-        status = "Pronto";
+        status = ApplicationUtil.applicationContext.getString(R.string.ready);
 
     }
 

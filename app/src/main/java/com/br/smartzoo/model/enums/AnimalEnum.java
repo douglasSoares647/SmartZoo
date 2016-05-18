@@ -47,6 +47,9 @@ public enum AnimalEnum {
         return this.name;
     }
 
+    public int getImage() {
+        return image;
+    }
 
     public int getReputationToUnlock() {
         return reputationToUnlock;

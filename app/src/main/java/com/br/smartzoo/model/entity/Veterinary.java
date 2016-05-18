@@ -1,7 +1,9 @@
 package com.br.smartzoo.model.entity;
 
+import com.br.smartzoo.R;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Employee;
+import com.br.smartzoo.util.ApplicationUtil;
 import com.br.smartzoo.util.TimeUtil;
 
 import java.util.ArrayList;
@@ -29,13 +31,13 @@ public class Veterinary extends Employee {
 
     public Veterinary(String credential, List<Animal> animals) {
         this.credential = credential;
-        status = " Sem serviço ";
+        status = ApplicationUtil.applicationContext.getString(R.string.veterinary_idle);
     }
 
     public Veterinary(String name, Integer age, String cpf, Date startDate, Date endDate, Double salary, String credential) {
         super(name, age, cpf, startDate, endDate, salary);
         this.credential = credential;
-        status = " Sem serviço ";
+        status = ApplicationUtil.applicationContext.getString(R.string.veterinary_idle);
     }
 
     public String getCredential() {
@@ -48,20 +50,20 @@ public class Veterinary extends Employee {
 
     
     public void treat(final Animal animal) {
-        status = "Tratando animal " + animal.getName();
+        status = ApplicationUtil.applicationContext.getString(R.string.treating_animal) + animal.getName();
         clock = 0;
 
         while (clock <= TimeUtil.timeToTreat) {
             if (clock == TimeUtil.timeToTreat) {
                 animal.setIsHealthy(true);
-                status = "Tratamento do animal " + animal.getName() + " finalizado!";
+                status = ApplicationUtil.applicationContext.getString(R.string.animal_treatment) + animal.getName() + ApplicationUtil.applicationContext.getString(R.string.done);
             }
 
         }
     }
 
     public void treat(List<Animal> animals) {
-        status = "Tratando dos animais";
+        status = ApplicationUtil.applicationContext.getString(R.string.treating_animals);
         for (final Animal animal : animals) {
 
             clock = 0;
@@ -69,7 +71,7 @@ public class Veterinary extends Employee {
             while (clock <= TimeUtil.timeToTreat) {
                 if (clock == TimeUtil.timeToTreat) {
                     animal.setIsHealthy(true);
-                    status = "Tratamento do animal " + animal.getName() + " finalizado!";
+                    status = ApplicationUtil.applicationContext.getString(R.string.animal_treatment) + animal.getName() + ApplicationUtil.applicationContext.getString(R.string.done);
                 }
 
             }
