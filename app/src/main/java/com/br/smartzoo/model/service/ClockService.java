@@ -37,7 +37,6 @@ public class ClockService extends Service {
 
 
         TimeUtil.getFromPreferences();
-
         TimeUtil.isRunning = true;
         TimeUtil.startClock();
 

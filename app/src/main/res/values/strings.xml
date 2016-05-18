@@ -68,5 +68,6 @@
     <string name="animal_treatment">"Tratamento do animal "</string>
     <string name="done">" finalizado"</string>
     <string name="treating_animals">Tratando dos animais</string>
+    <string name="speed">"Speed : "</string>
 
 </resources>

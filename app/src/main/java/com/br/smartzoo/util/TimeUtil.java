@@ -46,6 +46,8 @@ public class TimeUtil {
     public static Boolean isRunning = true;
 
 
+    public static int speedFactor = 1;
+
     public static void startClock() {
         final Handler accessUIHandler = new Handler();
 
@@ -55,7 +57,7 @@ public class TimeUtil {
             public void run() {
                 while (isRunning) {
                     try {
-                        Thread.sleep(500);
+                        Thread.sleep(1000/speedFactor);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -91,38 +93,9 @@ public class TimeUtil {
                     accessUIHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            String strHour;
-                            String strMinute;
-                            String strSecond;
-                            String strDay;
-                            String strMonth;
-                            String strYear;
-
-                            if(hour<10)
-                                strHour = "0" +hour;
-                            else
-                                strHour = String.valueOf(hour);
-
-
-                            if(minute<10)
-                                strMinute = "0" + minute;
-                            else
-                                strMinute = String.valueOf(minute);
-
-
-                            if(second<10)
-                                strSecond = "0" + second;
-                            else
-                                strSecond = String.valueOf(second);
-
-
-                            strDay = String.valueOf(day);
-                            strMonth = String.valueOf(month);
-                            strYear = String.valueOf(year);
-
                             //Send an message to update the current context
                             if(ClockService.context!=null) {
-                                ClockService.context.onTick(strDay + "/" + strMonth + "/" + strYear, strHour + ":" + strMinute + ":" + strSecond);
+                                ClockService.context.onTick(getDateString(),getTimeString());
                             }
                             saveToPreferences();
 
@@ -202,6 +175,48 @@ public class TimeUtil {
             minute = preferences.getInt("minute", 0);
             second = preferences.getInt("second", 0);
         }
+    }
+
+
+   public static String getTimeString(){
+       String strHour;
+       String strMinute;
+       String strSecond;
+
+       if(hour<10)
+           strHour = "0" +hour;
+       else
+           strHour = String.valueOf(hour);
+
+
+       if(minute<10)
+           strMinute = "0" + minute;
+       else
+           strMinute = String.valueOf(minute);
+
+
+       if(second<10)
+           strSecond = "0" + second;
+       else
+           strSecond = String.valueOf(second);
+
+       return strHour + ":" + strMinute + ":" + strSecond;
+   }
+
+
+    public static String getDateString(){
+
+        String strDay;
+        String strMonth;
+        String strYear;
+
+        strDay = String.valueOf(day);
+        strMonth = String.valueOf(month);
+        strYear = String.valueOf(year);
+
+
+       return strDay + "/" + strMonth + "/" + strYear;
+
     }
 
 }
