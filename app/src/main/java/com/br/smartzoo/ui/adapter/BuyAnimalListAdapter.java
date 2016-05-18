@@ -46,12 +46,13 @@ public class BuyAnimalListAdapter extends RecyclerView.Adapter<BuyAnimalListAdap
         final Animal animal = mAnimalList.get(position);
         Glide.with(mContext).load(animal.getImage()).into(holder.mImageViewAnimal);
         holder.mTextViewNameAnimal.setText(animal.getName());
-        holder.mTextViewAgeAnimal.setText(String.valueOf(animal.getAge()));
+        holder.mTextViewAgeAnimal.setText(String.valueOf(animal.getAge() + " "
+                + mContext.getString(R.string.text_age)));
         boolean healthy = animal.isHealthy();
         if (healthy)
-            holder.mTextViewHealthAnimal.setText("Saudável");
+            holder.mTextViewHealthAnimal.setText(R.string.text_healthy);
         else
-            holder.mTextViewHealthAnimal.setText("Doente");
+            holder.mTextViewHealthAnimal.setText(R.string.text_sick);
 
         holder.mTextViewCostAnimal.setText(String.valueOf(animal.getPrice()));
         holder.mButtonAnimal.setOnClickListener(new View.OnClickListener() {

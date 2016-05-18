@@ -24,4 +24,6 @@ public interface OnDrawerOptionClick {
     void onBuyAnimalClick();
 
     void onBuildCageClick();
+
+    void onStockClick();
 }

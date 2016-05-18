@@ -15,22 +15,26 @@ public class Cage {
 
     private Long id;
     private String name;
+    private Double price;
     private List<Animal> animals;
     private List<Food> foods;
     private Integer capacity;
     private boolean isClean;
     private boolean isSupplied;
 
-    public Cage(){
-        foods = new ArrayList<Food>();
-        animals = new ArrayList<Animal>();
+    public Cage() {
+        foods = new ArrayList<>();
+        animals = new ArrayList<>();
         isClean = true;
         isSupplied = false;
     }
 
-    public Cage(Long id, String name, List<Animal> animals, List<Food> foods, boolean isClean, boolean isSupplied) {
+    public Cage(String name, List<Animal> animals, List<Food> foods, Double price, boolean isClean
+            , boolean isSupplied, Integer capacity) {
         this.name = name;
         this.animals = animals;
+        this.capacity = capacity;
+        this.price = price;
         this.foods = foods;
         this.isClean = isClean;
         this.isSupplied = isSupplied;
@@ -52,8 +56,8 @@ public class Cage {
         this.foods = foods;
     }
 
-    public void setFoods(Food food){
-            foods.add(food);
+    public void setFoods(Food food) {
+        foods.add(food);
     }
 
     public void setClean(boolean clean) {
@@ -110,31 +114,31 @@ public class Cage {
 
     public void setDirtyFactor(int dirtyFactor) {
         this.dirtyFactor = dirtyFactor;
-        if(dirtyFactor> animals.size()*2/3){
+        if (dirtyFactor > animals.size() * 2 / 3) {
             isClean = false;
         }
     }
 
-    public String toString(){
-    	StringBuilder info = new StringBuilder();
-    	
-    	info.append("Nome da Jaula:" + name);
-    	info.append("\nAnimais na jaula:");
-    	for(Animal animal : animals){
-    		info.append("\n" + animal.getName());
-    	}
-    	info.append("\nJaula está limpa?: "+ isClean);
-    	info.append("Jaula possui comida?:"+ isSupplied );
-    	return info.toString();
-    }
+    public String toString() {
+        StringBuilder info = new StringBuilder();
 
-
-    public boolean checkCapacity(){
-        if(animals.size()<=capacity){
-            return true;
+        info.append("Nome da Jaula:" + name);
+        info.append("\nAnimais na jaula:");
+        for (Animal animal : animals) {
+            info.append("\n" + animal.getName());
         }
-        return false;
+        info.append("\nJaula está limpa?: " + isClean);
+        info.append("Jaula possui comida?:" + isSupplied);
+        return info.toString();
     }
+
+
+    public boolean checkCapacity() {
+        return animals.size() <= capacity;
+    }
+
+
+
 
 
 }

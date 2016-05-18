@@ -62,12 +62,26 @@ public class NavigationDrawerFragment extends Fragment {
         bindOptionNews(view);
         bindOptionCages(view);
         bindOptionEmployees(view);
+        bindOptionStock(view);
         bindOptionSubOptions(view);
         bindOptionBuy(view);
         bindOptionSettings(view);
 
 
         return view;
+    }
+
+    private void bindOptionStock(View view) {
+        final RelativeLayout relativeOptionStock =
+                (RelativeLayout) view.findViewById(R.id.relative_option_stock);
+        relativeOptionStock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeOptionSelected(relativeOptionStock);
+                mOnDrawerOptionClick.onStockClick();
+                mDrawerLayout.closeDrawers();
+            }
+        });
     }
 
     private void bindOptionSubOptions(View view) {

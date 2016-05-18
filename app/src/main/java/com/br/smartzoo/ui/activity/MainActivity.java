@@ -23,14 +23,14 @@ import com.br.smartzoo.util.ServiceHelper;
 /**
  * Created by adenilson on 05/05/16.
  */
-public class MainActivity extends AppCompatActivity implements OnDrawerOptionClick, OnClockTickListener
-        , MainActivityView {
+public class MainActivity extends AppCompatActivity implements OnDrawerOptionClick
+        , OnClockTickListener, MainActivityView {
     private DrawerLayout mDrawerLayout;
     private Toolbar mToolbar;
     private int mFrameContainer;
     private MainActivityPresenter mPresenter;
-    private TextView textViewclock;
-    private TextView textViewdate;
+    private TextView mTextViewClock;
+    private TextView mTextViewDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
         setContentView(R.layout.activity_time_line);
 
-        //loadZooInfo();
+      //  loadZooInfo();
         bindmPresenter();
         bindToolbar();
         bindDrawerLayout();
@@ -85,9 +85,8 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
         mToolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(mToolbar);
 
-
-        textViewclock = (TextView) mToolbar.findViewById(R.id.text_view_clock);
-        textViewdate = (TextView) mToolbar.findViewById(R.id.text_view_date);
+        mTextViewClock = (TextView) mToolbar.findViewById(R.id.text_view_clock);
+        mTextViewDate = (TextView) mToolbar.findViewById(R.id.text_view_date);
     }
 
     private void bindDrawerLayout() {
@@ -140,14 +139,19 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
     }
 
     @Override
+    public void onStockClick() {
+
+    }
+
+    @Override
     public void changeFragment(Fragment fragment) {
 
     }
 
     @Override
     public void onTick(String date, String time) {
-        textViewdate.setText(date);
-        textViewclock.setText(time);
+        mTextViewDate.setText(date);
+        mTextViewClock.setText(time);
     }
 
 

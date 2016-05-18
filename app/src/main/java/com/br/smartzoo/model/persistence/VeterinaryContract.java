@@ -17,7 +17,7 @@ import java.util.List;
 public class VeterinaryContract {
 
     public static String TABLE = "veterinary";
-    public static String ID =  "id";
+    public static String ID = "id";
     public static String CREDENTIAL = "credential";
     public static String ANIMALSTABLE = "animalsTreatedByVet";
     public static String ANIMALID = "animalId";
@@ -25,37 +25,36 @@ public class VeterinaryContract {
     public static String DATE = "date";
 
 
-    public static String[] columns = {ID,CREDENTIAL};
+    public static String[] columns = {ID, CREDENTIAL};
 
 
-
-    public static String createTable(){
+    public static String createTable() {
         StringBuilder table = new StringBuilder();
 
         table.append(" create table " + TABLE + " ( ");
         table.append(ID + " integer primary key, ");
-        table.append(CREDENTIAL + " text not null, ");
+        table.append(CREDENTIAL + " text not null ");
         table.append(" ); ");
 
         return table.toString();
     }
 
 
-    public static String createTableAnimalsTreatedByVet(){
+    public static String createTableAnimalsTreatedByVet() {
         StringBuilder table = new StringBuilder();
 
-        table.append(" create table " + ANIMALSTABLE + " ( " );
+        table.append(" create table " + ANIMALSTABLE + " ( ");
         table.append(ID + " integer primary key, ");
         table.append(ANIMALID + " integer not null, ");
         table.append(VETERINARYID + " integer not null, ");
         table.append(DATE + " text not null,");
-        table.append("Foreign key ("+ANIMALID+") references " + AnimalContract.TABLE +"(" + AnimalContract.ID+")," );
-        table.append("Foreign key ("+VETERINARYID+") references " + TABLE +"(" +ID+") ");
+        table.append("Foreign key (" + ANIMALID + ") references " + AnimalContract.TABLE + "(" + AnimalContract.ID + "),");
+        table.append("Foreign key (" + VETERINARYID + ") references " + TABLE + "(" + ID + ") ");
 
         return table.toString();
     }
 
-    public static ContentValues createContentValues(Veterinary veterinary){
+    public static ContentValues createContentValues(Veterinary veterinary) {
         ContentValues values = new ContentValues();
 
         values.put(ID, veterinary.getId());
@@ -65,18 +64,17 @@ public class VeterinaryContract {
     }
 
 
-
-    public static Veterinary getVeterinary(Cursor cursor){
+    public static Veterinary getVeterinary(Cursor cursor) {
         Veterinary veterinary = new Veterinary();
 
-        if(!cursor.isBeforeFirst() || cursor.moveToNext()){
+        if (!cursor.isBeforeFirst() || cursor.moveToNext()) {
             veterinary.setId(cursor.getLong(cursor.getColumnIndex(ID)));
             veterinary.setCredential(cursor.getString(cursor.getColumnIndex(CREDENTIAL)));
             veterinary.setAge(cursor.getInt(cursor.getColumnIndex(EmployeeContract.AGE)));
             veterinary.setName(cursor.getString(cursor.getColumnIndex(EmployeeContract.NAME)));
             veterinary.setSalary(cursor.getDouble(cursor.getColumnIndex(EmployeeContract.SALARY)));
 
-            Date startDate  = DateUtil.stringToDate(cursor.getString(cursor.getColumnIndex(EmployeeContract.STARTDATE)));
+            Date startDate = DateUtil.stringToDate(cursor.getString(cursor.getColumnIndex(EmployeeContract.STARTDATE)));
             Date endDate = DateUtil.stringToDate(cursor.getString(cursor.getColumnIndex(EmployeeContract.ENDDATE)));
             veterinary.setStartDate(startDate);
             veterinary.setEndDate(endDate);
@@ -87,10 +85,10 @@ public class VeterinaryContract {
     }
 
 
-    public static List<Veterinary> getVeterinaries(Cursor cursor){
+    public static List<Veterinary> getVeterinaries(Cursor cursor) {
         List<Veterinary> veterinaries = new ArrayList<>();
 
-        while(cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             veterinaries.add(getVeterinary(cursor));
         }
 
@@ -98,10 +96,10 @@ public class VeterinaryContract {
     }
 
 
-    public static HashMap<Integer,Integer> getAnimalsCount(Cursor cursor){
+    public static HashMap<Integer, Integer> getAnimalsCount(Cursor cursor) {
         HashMap<Integer, Integer> animalsCount = new HashMap<>();
 
-        while(cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             animalsCount.put(cursor.getInt(cursor.getColumnIndex("animalId")), cursor.getInt(cursor.getColumnIndex("count")));
         }
 

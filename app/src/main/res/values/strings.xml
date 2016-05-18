@@ -52,5 +52,8 @@
     <string name="animal_toucan">Toucan</string>
     <string name="animal_bear">Bear</string>
     <string name="animal_leopard">Leopard</string>
+    <string name="text_age">age</string>
+    <string name="text_healthy">Healthy</string>
+    <string name="text_sick">Sick</string>
 
 </resources>
