@@ -59,6 +59,7 @@ public class BuyAnimalListAdapter extends RecyclerView.Adapter<BuyAnimalListAdap
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext, "Comprou animal" + animal.getName(), Toast.LENGTH_SHORT).show();
+
             }
         });
 

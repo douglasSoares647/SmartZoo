@@ -36,4 +36,21 @@ public class DateUtil {
 
         return format;
     }
+
+
+
+    public static Date stringToDateWithBrazilianFormat(String date){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        Date newDate = null;
+        if(date!=null || !date.isEmpty()) {
+            try {
+                newDate = dateFormat.parse(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return newDate;
+    }
 }

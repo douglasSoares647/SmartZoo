@@ -55,9 +55,10 @@ public class Feeder extends Employee implements Manageable{
   
    
     @Override
-    public void prepareFoodAndFillCage(List<Food> foods , Cage cage) {
+    public void prepareFoodAndFillCage(String foodName, Cage cage) {
+			List<Food> foodsFromStock = stock.takeFoods(foodName,cage);
     		List<Food> foodsToAliment = new ArrayList<Food>();
-       		for(Food food : foods){
+       		for(Food food : foodsFromStock){
     			if(food.getWeight()>5.0){
     				Integer quantity = 0;
 

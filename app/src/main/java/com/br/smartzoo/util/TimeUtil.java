@@ -211,7 +211,14 @@ public class TimeUtil {
         String strYear;
 
         strDay = String.valueOf(day);
+        if(day<10)
+            strDay = "0" + strDay;
+
         strMonth = String.valueOf(month);
+        if(month<10)
+            strMonth = "0"+strMonth;
+
+
         strYear = String.valueOf(year);
 
 
