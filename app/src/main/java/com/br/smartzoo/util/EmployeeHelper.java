@@ -59,7 +59,6 @@ public class EmployeeHelper {
         Employee employee;
         if(type.equals("Veterinary")){
             employee = new Veterinary();
-            ((Veterinary)employee).setCredential(generateCPF());
         }
         else if(type.equals("Janitor")){
             employee = new Janitor();
@@ -75,7 +74,6 @@ public class EmployeeHelper {
         while(!EmployeeHelper.validateCPF(cpf)){
             cpf = EmployeeHelper.generateCPF();
         }
-        employee.setCpf(cpf);
 
         employee.setStartDate(DateUtil.stringToDateWithBrazilianFormat(TimeUtil.getDateString()));
 

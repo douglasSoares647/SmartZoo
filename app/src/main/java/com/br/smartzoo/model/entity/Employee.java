@@ -10,21 +10,23 @@ import java.util.Date;
  */
 public abstract class Employee implements Observer{
 
+    private int image;
     private Long id;
     private String name;
     private Integer age;
-    private String cpf;
     private Date startDate;
     private Date endDate;
     private Double salary;
+    private String profession;
 
     public Employee() {
     }
 
-    public Employee(String name, Integer age, String cpf, Date startDate, Date endDate, Double salary) {
+    public Employee(int image, String name, Integer age, Date startDate, Date endDate
+            , Double salary, String profession) {
+        this.image = image;
+        this.profession = profession;
         this.name = name;
-        this.age = age;
-        this.cpf = cpf;
         this.startDate = startDate;
         this.endDate = endDate;
         this.salary = salary;
@@ -62,13 +64,6 @@ public abstract class Employee implements Observer{
         this.age = age;
     }
 
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
 
     public Date getStartDate() {
         return startDate;
@@ -88,7 +83,19 @@ public abstract class Employee implements Observer{
 
     public abstract Double calculateSalary();
 
+    public int getImage() {
+        return image;
+    }
 
+    public void setImage(int image) {
+        this.image = image;
+    }
 
+    public String getProfession() {
+        return profession;
+    }
 
+    public void setProfession(String profression) {
+        this.profession = profression;
+    }
 }

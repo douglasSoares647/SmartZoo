@@ -20,6 +20,7 @@ import com.br.smartzoo.model.service.ClockService;
 import com.br.smartzoo.presenter.MainActivityPresenter;
 import com.br.smartzoo.ui.fragment.BuyAnimalFragment;
 import com.br.smartzoo.ui.fragment.BuyFoodFragment;
+import com.br.smartzoo.ui.fragment.HireEmployeeFragment;
 import com.br.smartzoo.ui.fragment.NavigationDrawerFragment;
 import com.br.smartzoo.ui.view.MainActivityView;
 import com.br.smartzoo.util.AnimUtil;
@@ -242,7 +243,8 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
     }
 
     @Override
-    public void onContractEmployeeClick() {
+    public void onHireEmployeeClick() {
+        mPresenter.startTransaction(mFrameContainer, new HireEmployeeFragment());
 
     }
 

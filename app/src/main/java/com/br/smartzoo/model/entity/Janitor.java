@@ -19,39 +19,39 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by adenilson on 18/04/16.
  */
-public class Janitor extends Employee{
+public class Janitor extends Employee {
 
     private String status;
     private int clock = 0;
 
     private Long id;
-    private HashMap<Integer,Integer> cagesCleanedThisMonth;
+    private HashMap<Integer, Integer> cagesCleanedThisMonth;
 
     public Janitor(List<Cage> cages, int expedient) {
     }
 
-    public Janitor(String name, Integer age, String cpf, Date startDate, Date endDate, Double salary) {
-        super(name, age, cpf, startDate, endDate, salary);
+    public Janitor(int image, String name, Integer age, Date startDate, Date endDate, Double salary
+            , String profession) {
+        super(image, name, age, startDate, endDate, salary, profession);
     }
 
-    public Janitor(){
+    public Janitor() {
     }
 
 
     @Override
     public Double calculateSalary() {
-        if(cagesCleanedThisMonth.isEmpty()){
+        if (cagesCleanedThisMonth.isEmpty()) {
             return super.getSalary();
-        }
-        else {
+        } else {
             int sum = 0;
-            for(Map.Entry<Integer,Integer> entry : cagesCleanedThisMonth.entrySet()){
+            for (Map.Entry<Integer, Integer> entry : cagesCleanedThisMonth.entrySet()) {
                 Integer cageId = entry.getKey();
                 Integer quantity = entry.getValue();
                 sum += quantity;
             }
 
-            return super.getSalary()* + 10*sum;
+            return super.getSalary() * +10 * sum;
         }
     }
 
@@ -65,7 +65,7 @@ public class Janitor extends Employee{
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     public void clear(final Cage cage) {
         long timeToCleanCage = cage.getDirtyFactor() * TimeUtil.timeToCleanEachDirty;
 
@@ -79,9 +79,9 @@ public class Janitor extends Employee{
         cage.setClean(true);
         status = ApplicationUtil.applicationContext.getString(R.string.resting);
 
-        clock  = 0;
-        while(clock<TimeUtil.timeToRest)
-        status = ApplicationUtil.applicationContext.getString(R.string.ready);
+        clock = 0;
+        while (clock < TimeUtil.timeToRest)
+            status = ApplicationUtil.applicationContext.getString(R.string.ready);
 
     }
 

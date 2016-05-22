@@ -19,7 +19,7 @@ public interface OnDrawerOptionClick {
 
     void onBuyFruitClick();
 
-    void onContractEmployeeClick();
+    void onHireEmployeeClick();
 
     void onBuyAnimalClick();
 

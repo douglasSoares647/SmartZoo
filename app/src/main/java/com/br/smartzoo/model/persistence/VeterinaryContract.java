@@ -16,24 +16,22 @@ import java.util.List;
  */
 public class VeterinaryContract {
 
-    public static String TABLE = "veterinary";
-    public static String ID = "id";
-    public static String CREDENTIAL = "credential";
-    public static String ANIMALSTABLE = "animalsTreatedByVet";
-    public static String ANIMALID = "animalId";
-    public static String VETERINARYID = "veterinaryId";
-    public static String DATE = "date";
+    public static String TABLE = "veterinary" ;
+    public static String ID = "id" ;
+    public static String ANIMALSTABLE = "animalsTreatedByVet" ;
+    public static String ANIMALID = "animalId" ;
+    public static String VETERINARYID = "veterinaryId" ;
+    public static String DATE = "date" ;
 
 
-    public static String[] columns = {ID, CREDENTIAL};
+    public static String[] columns = {ID};
 
 
     public static String createTable() {
         StringBuilder table = new StringBuilder();
 
         table.append(" create table " + TABLE + " ( ");
-        table.append(ID + " integer primary key, ");
-        table.append(CREDENTIAL + " text not null ");
+        table.append(ID + " integer primary key ");
         table.append(" ); ");
 
         return table.toString();
@@ -48,7 +46,8 @@ public class VeterinaryContract {
         table.append(ANIMALID + " integer not null, ");
         table.append(VETERINARYID + " integer not null, ");
         table.append(DATE + " text not null,");
-        table.append("Foreign key (" + ANIMALID + ") references " + AnimalContract.TABLE + "(" + AnimalContract.ID + "),");
+        table.append("Foreign key (" + ANIMALID + ") references " + AnimalContract.TABLE
+                + "(" + AnimalContract.ID + "),");
         table.append("Foreign key (" + VETERINARYID + ") references " + TABLE + "(" + ID + ") ");
 
         return table.toString();
@@ -58,7 +57,6 @@ public class VeterinaryContract {
         ContentValues values = new ContentValues();
 
         values.put(ID, veterinary.getId());
-        values.put(CREDENTIAL, veterinary.getCredential());
 
         return values;
     }
@@ -69,7 +67,6 @@ public class VeterinaryContract {
 
         if (!cursor.isBeforeFirst() || cursor.moveToNext()) {
             veterinary.setId(cursor.getLong(cursor.getColumnIndex(ID)));
-            veterinary.setCredential(cursor.getString(cursor.getColumnIndex(CREDENTIAL)));
             veterinary.setAge(cursor.getInt(cursor.getColumnIndex(EmployeeContract.AGE)));
             veterinary.setName(cursor.getString(cursor.getColumnIndex(EmployeeContract.NAME)));
             veterinary.setSalary(cursor.getDouble(cursor.getColumnIndex(EmployeeContract.SALARY)));
@@ -78,7 +75,6 @@ public class VeterinaryContract {
             Date endDate = DateUtil.stringToDate(cursor.getString(cursor.getColumnIndex(EmployeeContract.ENDDATE)));
             veterinary.setStartDate(startDate);
             veterinary.setEndDate(endDate);
-            veterinary.setCpf(cursor.getString(cursor.getColumnIndex(EmployeeContract.CPF)));
         }
 
         return veterinary;

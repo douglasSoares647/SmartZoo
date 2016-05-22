@@ -55,5 +55,9 @@
     <string name="text_age">anos</string>
     <string name="text_healthy">Saudável</string>
     <string name="text_sick">Doente</string>
+    <string name="text_available_employee">Funcionários disponíveis</string>
+    <string name="name_veterinary">Veterinário</string>
+    <string name="name_janitor">Limpador</string>
+    <string name="name_feeder">Alimentador</string>
 
 </resources>

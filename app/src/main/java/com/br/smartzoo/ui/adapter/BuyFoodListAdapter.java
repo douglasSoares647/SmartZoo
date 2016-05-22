@@ -24,7 +24,7 @@ import java.util.Map;
 /**
  * Created by adenilson on 15/05/16.
  */
-public class BuyFoodListAdapter extends RecyclerView.Adapter<BuyFoodListAdapter.MyViewHolder> {
+public class BuyFoodListAdapter extends RecyclerView.Adapter<BuyFoodListAdapter.ViewHolder> {
 
     private List<Food> mFoodList;
     private Context mContext;
@@ -48,16 +48,16 @@ public class BuyFoodListAdapter extends RecyclerView.Adapter<BuyFoodListAdapter.
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Log.i("onCreateViewHolder", "");
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_buy_food_list, parent, false);
 
-        return new MyViewHolder(itemView);
+        return new ViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         Log.i("onBindViewHolder", "");
         final Food food = mFoodList.get(position);
 
@@ -120,7 +120,7 @@ public class BuyFoodListAdapter extends RecyclerView.Adapter<BuyFoodListAdapter.
         this.mOnChangeBuyListener = buyFoodListener;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView mImageViewFruit;
         private TextView mTextViewName;
         private TextView mTextViewWeight;
@@ -128,7 +128,7 @@ public class BuyFoodListAdapter extends RecyclerView.Adapter<BuyFoodListAdapter.
         private TextView mTextViewQuantity;
         private SeekBar mSeekBarQuantity;
 
-        public MyViewHolder(View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
 
             mImageViewFruit = (ImageView) itemView.findViewById(R.id.image_view_fruit);

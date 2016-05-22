@@ -80,7 +80,6 @@ public class FeederContract {
             feeder.setStartDate(startDate);
             feeder.setEndDate(endDate);
 
-            feeder.setCpf(cursor.getString(cursor.getColumnIndex(EmployeeContract.CPF)));
         }
 
         return feeder;

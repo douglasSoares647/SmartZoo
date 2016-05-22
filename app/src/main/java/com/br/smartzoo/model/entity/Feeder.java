@@ -27,8 +27,9 @@ public class Feeder extends Employee implements Manageable{
     
     
 
-    public Feeder(String name, Integer age, String cpf, Date startDate, Date endDate, Double salary) {
-		super(name, age, cpf, startDate, endDate, salary);
+    public Feeder(int image, String name, Integer age, Date startDate, Date endDate
+			, Double salary, String profession) {
+		super(image, name, age, startDate, endDate, salary, profession);
 		stock = Stock.getInstance();
 	}
 

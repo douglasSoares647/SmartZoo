@@ -72,5 +72,9 @@
     <string name="text_age">age</string>
     <string name="text_healthy">Healthy</string>
     <string name="text_sick">Sick</string>
+    <string name="text_available_employee">Available employees</string>
+    <string name="name_veterinary">Veterinary</string>
+    <string name="name_janitor">Janitor</string>
+    <string name="name_feeder">Feeder</string>
 
 </resources>

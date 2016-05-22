@@ -77,7 +77,6 @@ public class JanitorContract {
 
             janitor.setStartDate(startDate);
             janitor.setEndDate(endDate);
-            janitor.setCpf(cursor.getString(cursor.getColumnIndex(EmployeeContract.CPF)));
         }
 
         return janitor;

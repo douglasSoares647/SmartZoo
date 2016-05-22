@@ -48,7 +48,6 @@ public class EmployeeContract {
         values.put(ID, employee.getId());
         values.put(NAME, employee.getName());
         values.put(AGE, employee.getAge());
-        values.put(CPF, employee.getCpf());
         values.put(STARTDATE, DateUtil.dateToString(employee.getStartDate()));
         values.put(ENDDATE, DateUtil.dateToString(employee.getEndDate()));
         values.put(SALARY, employee.getSalary());
