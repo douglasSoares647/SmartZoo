@@ -1,38 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/footer_bar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/footer_bar">
+    android:background="@android:color/transparent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@+id/image_view_start"
+        android:background="@drawable/back_controller_time">
+
+
+    </RelativeLayout>
 
 
     <ImageView
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/image_view_backward"
-        />
-
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
         android:id="@+id/image_view_start"
-        android:layout_toRightOf="@+id/image_view_backward" />
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="36dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_button_play" />
 
     <ImageView
+        android:id="@+id/image_view_normal"
         android:layout_width="40dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/image_view_foward"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/image_view_start" />
+        android:layout_height="40dp"
+        android:layout_alignBottom="@+id/image_view_start"
+        android:layout_marginLeft="32dp"
+        android:layout_toRightOf="@id/image_view_start"
+        android:padding="5dp"
+        android:src="@drawable/ic_play_normal_button" />
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/green_500"
-        android:id="@+id/text_view_speed"
-        android:hint="@string/text_buy"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-/>
+    <ImageView
+        android:id="@+id/image_view_forward"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@+id/image_view_start"
+        android:layout_marginLeft="32dp"
+        android:layout_toRightOf="@id/image_view_normal"
+        android:src="@drawable/ic_forward_button" />
+
+
+    <ImageView
+        android:id="@+id/image_view_fast_forward"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@+id/image_view_start"
+        android:layout_marginLeft="32dp"
+        android:layout_toRightOf="@id/image_view_forward"
+        android:padding="5dp"
+        android:src="@drawable/ic_fast_foward" />
+
+
 
 </RelativeLayout>

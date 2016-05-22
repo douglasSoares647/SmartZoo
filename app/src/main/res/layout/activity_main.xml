@@ -14,22 +14,34 @@
             android:id="@+id/app_bar"
             layout="@layout/app_bar" />
 
+        <ImageView
+            android:id="@+id/image_view_panel_time"
+            android:padding="4dp"
+            android:background="@color/green_700"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/footer_bar"
+            android:src="@drawable/ic_arrow_up"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+
         <!-- The main content view -->
         <FrameLayout
             android:id="@+id/frame_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/app_bar"
             android:layout_above="@+id/footer_bar"
-            android:padding="16dp"
-            />
+            android:layout_below="@id/app_bar"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp" />
 
-        <include layout="@layout/footer_bar"
+
+        <include
             android:id="@+id/footer_bar"
-            android:layout_alignParentBottom="true"
+            layout="@layout/footer_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </include>
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"/>
 
 
     </RelativeLayout>

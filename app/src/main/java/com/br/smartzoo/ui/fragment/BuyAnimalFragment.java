@@ -14,6 +14,8 @@ import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.interfaces.OnChangeBuyListener;
 import com.br.smartzoo.presenter.BuyAnimalPresenter;
 import com.br.smartzoo.ui.adapter.BuyAnimalListAdapter;
+import com.br.smartzoo.ui.adapter.DividerItemDecoration;
+import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.ui.view.BuyAnimalView;
 
 import java.util.List;
@@ -23,6 +25,7 @@ import java.util.List;
  */
 public class BuyAnimalFragment extends Fragment implements BuyAnimalView{
 
+    private static final int VERTICAL_ITEM_SPACE = 30;
     private BuyAnimalPresenter mPresenter;
     private List<Animal> mAnimalList;
     private RecyclerView mRecyclerViewAnimals;
@@ -38,10 +41,13 @@ public class BuyAnimalFragment extends Fragment implements BuyAnimalView{
         populateAnimalList();
 
         mRecyclerViewAnimals =
-                (RecyclerView) view.findViewById(R.id.recicler_view_available_animals);
+                (RecyclerView) view.findViewById(R.id.recycler_view_available_animals);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerViewAnimals.setLayoutManager(layoutManager);
+        mRecyclerViewAnimals.addItemDecoration(new VerticalSpaceItemDecoration(VERTICAL_ITEM_SPACE));
+        mRecyclerViewAnimals.addItemDecoration(
+                new DividerItemDecoration(getActivity(), R.drawable.divider_recycler_view));
         mRecyclerViewAnimals.setItemViewCacheSize(mAnimalList.size());
         BuyAnimalListAdapter buyAnimalListAdapter =
                 new BuyAnimalListAdapter(getActivity(), mAnimalList);

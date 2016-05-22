@@ -17,6 +17,8 @@ import com.br.smartzoo.model.entity.Food;
 import com.br.smartzoo.model.interfaces.OnChangeBuyListener;
 import com.br.smartzoo.presenter.BuyFoodPresenter;
 import com.br.smartzoo.ui.adapter.BuyFoodListAdapter;
+import com.br.smartzoo.ui.adapter.DividerItemDecoration;
+import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.ui.view.BuyFoodView;
 
 import java.text.DecimalFormat;
@@ -26,6 +28,8 @@ import java.util.List;
  * Created by adenilson on 12/05/16.
  */
 public class BuyFoodFragment extends Fragment implements BuyFoodView, OnChangeBuyListener {
+
+    private static final int VERTICAL_ITEM_SPACE = 30;
 
     private List<Food> mFoods;
     private RecyclerView mRecyclerViewFoods;
@@ -100,6 +104,9 @@ public class BuyFoodFragment extends Fragment implements BuyFoodView, OnChangeBu
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerViewFoods.setLayoutManager(layoutManager);
+        mRecyclerViewFoods.addItemDecoration(new VerticalSpaceItemDecoration(VERTICAL_ITEM_SPACE));
+        mRecyclerViewFoods.addItemDecoration(
+                new DividerItemDecoration(getActivity(), R.drawable.divider_recycler_view));
         mRecyclerViewFoods.setItemViewCacheSize(mFoods.size());
         mRecyclerViewFoods.setAdapter(buyFoodListAdapter);
 

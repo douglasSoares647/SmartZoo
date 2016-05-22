@@ -8,9 +8,9 @@
         android:id="@+id/label_available_animals"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="0.8"
+        android:layout_weight="0.6"
         android:text="@string/available_fruits"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <android.support.v7.widget.RecyclerView
@@ -26,7 +26,7 @@
         android:layout_height="0dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_weight="0.03"
+        android:layout_weight="0.05"
         android:background="@color/grey_500" />
 
     <RelativeLayout
