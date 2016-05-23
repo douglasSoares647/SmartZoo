@@ -76,5 +76,6 @@
     <string name="name_veterinary">Veterinary</string>
     <string name="name_janitor">Janitor</string>
     <string name="name_feeder">Feeder</string>
+    <string name="option_stock">Stock</string>
 
 </resources>

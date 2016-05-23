@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="6dp"
+    android:paddingTop="6dp">
+
+
+    <ImageView
+        android:id="@+id/image_view_cage"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:src="@drawable/ic_cage" />
+
+    <TextView
+        android:id="@+id/text_view_name_cage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/image_view_cage"
+        android:text="Name of cage" />
+
+    <TextView
+        android:id="@+id/text_view_capacity_cage"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/text_view_name_cage"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/image_view_cage"
+        android:text="8 animals"
+        android:layout_marginTop="8dp"/>
+
+
+    <Button
+        android:textColor="@color/white"
+        android:text="Construct"
+        android:background="@drawable/button_buy"
+        android:layout_alignParentRight="true"
+        android:id="@+id/button_construct_cage"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp" />
+
+
+    <TextView
+        android:layout_marginRight="16dp"
+        android:layout_centerVertical="true"
+        android:text="5000,00 $"
+        android:id="@+id/text_view_price_cage"
+        android:layout_toLeftOf="@id/button_construct_cage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

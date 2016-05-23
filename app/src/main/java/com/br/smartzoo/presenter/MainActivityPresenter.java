@@ -50,8 +50,8 @@ public class MainActivityPresenter {
             transaction.replace(container, buyFruitFragment);
             transaction.commit();
         }else if(fragment instanceof HireEmployeeFragment){
-            HireEmployeeFragment buyFruitFragment = (HireEmployeeFragment) fragment;
-            transaction.replace(container, buyFruitFragment);
+            HireEmployeeFragment hireEmployeeFragment = (HireEmployeeFragment) fragment;
+            transaction.replace(container, hireEmployeeFragment);
             transaction.commit();
         }
 

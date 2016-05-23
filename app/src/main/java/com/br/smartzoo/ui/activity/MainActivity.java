@@ -19,6 +19,7 @@ import com.br.smartzoo.model.interfaces.OnDrawerOptionClick;
 import com.br.smartzoo.model.service.ClockService;
 import com.br.smartzoo.presenter.MainActivityPresenter;
 import com.br.smartzoo.ui.fragment.BuyAnimalFragment;
+import com.br.smartzoo.ui.fragment.BuyCageFragment;
 import com.br.smartzoo.ui.fragment.BuyFoodFragment;
 import com.br.smartzoo.ui.fragment.HireEmployeeFragment;
 import com.br.smartzoo.ui.fragment.NavigationDrawerFragment;
@@ -255,7 +256,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
     @Override
     public void onBuildCageClick() {
-
+        mPresenter.startTransaction(mFrameContainer, new BuyCageFragment());
     }
 
     @Override
