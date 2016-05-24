@@ -60,5 +60,7 @@
     <string name="name_janitor">Limpador</string>
     <string name="name_feeder">Alimentador</string>
     <string name="option_stock">Estoque</string>
+    <string name="text_food_stock">Alimentos no estoque:</string>
+    <string name="text_prepare">Preparar</string>
 
 </resources>
