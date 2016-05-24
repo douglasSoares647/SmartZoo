@@ -48,7 +48,7 @@ public class BuyCageAdapter extends RecyclerView.Adapter<BuyCageAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Cage cage = mCagesList.get(position);
+        final Cage cage = mCagesList.get(position);
 
         Glide.with(mContext).load(R.drawable.ic_cage).into(holder.mImageViewCage);
         holder.mTextViewName.setText(cage.getName());
@@ -58,7 +58,7 @@ public class BuyCageAdapter extends RecyclerView.Adapter<BuyCageAdapter.ViewHold
         holder.mButtonConstruct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mOnConstructListener.onConstruct();
+                mOnConstructListener.onConstruct(cage);
             }
         });
 

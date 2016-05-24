@@ -11,7 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.model.business.EmployeeBusiness;
 import com.br.smartzoo.model.entity.Employee;
+import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnHireListener;
 import com.br.smartzoo.presenter.HireEmployeePresenter;
 import com.br.smartzoo.ui.adapter.BuyFoodListAdapter;
@@ -69,7 +71,8 @@ public class HireEmployeeFragment extends Fragment  implements OnHireListener, H
 
 
     @Override
-    public void onHire() {
-
+    public void onHire(Employee employee) {
+        ZooInfo.employees.add(employee);
+        EmployeeBusiness.save(employee);
     }
 }

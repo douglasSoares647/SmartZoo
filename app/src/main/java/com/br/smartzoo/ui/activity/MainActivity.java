@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
         setContentView(R.layout.activity_main);
 
-        //  loadZooInfo();
+        loadZooInfo();
         bindmPresenter();
         bindToolbar();
         bindFooterBar();

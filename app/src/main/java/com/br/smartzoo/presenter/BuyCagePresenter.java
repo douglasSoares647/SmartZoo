@@ -3,7 +3,9 @@ package com.br.smartzoo.presenter;
 import android.app.Activity;
 import android.widget.ArrayAdapter;
 
+import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
+import com.br.smartzoo.model.entity.Food;
 import com.br.smartzoo.model.enums.CageEnum;
 import com.br.smartzoo.ui.view.BuyCageView;
 
@@ -35,23 +37,23 @@ public class BuyCagePresenter {
 
     public List<Cage> createCages() {
         List<Cage> cages = new ArrayList<>();
-        cages.add(new Cage(CageEnum.Cage1.getName(), null,  null, CageEnum.Cage1.getPrice(), true
+        cages.add(new Cage(CageEnum.Cage1.getName(), new ArrayList<Animal>(),  new ArrayList<Food>(), CageEnum.Cage1.getPrice(), true
                 , false, CageEnum.Cage1.getCapacity()));
-        cages.add(new Cage(CageEnum.Cage2.getName(), null,  null, CageEnum.Cage2.getPrice(), true
+        cages.add(new Cage(CageEnum.Cage2.getName(), new ArrayList<Animal>(),  new ArrayList<Food>(), CageEnum.Cage2.getPrice(), true
                 , false, CageEnum.Cage2.getCapacity()));
-        cages.add(new Cage(CageEnum.Cage3.getName(), null,  null, CageEnum.Cage3.getPrice(), true
+        cages.add(new Cage(CageEnum.Cage3.getName(),new ArrayList<Animal>(),  new ArrayList<Food>(), CageEnum.Cage3.getPrice(), true
                 , false, CageEnum.Cage3.getCapacity()));
-        cages.add(new Cage(CageEnum.Cage4.getName(), null,  null, CageEnum.Cage4.getPrice(), true
+        cages.add(new Cage(CageEnum.Cage4.getName(), new ArrayList<Animal>(),  new ArrayList<Food>(), CageEnum.Cage4.getPrice(), true
                 , false, CageEnum.Cage4.getCapacity()));
-        cages.add(new Cage(CageEnum.Cage5.getName(), null,  null, CageEnum.Cage5.getPrice(), true
+        cages.add(new Cage(CageEnum.Cage5.getName(), new ArrayList<Animal>(),  new ArrayList<Food>(), CageEnum.Cage5.getPrice(), true
                 , false, CageEnum.Cage5.getCapacity()));
-        cages.add(new Cage(CageEnum.Cage1.getName(), null,  null, CageEnum.Cage1.getPrice(), true
+        cages.add(new Cage(CageEnum.Cage1.getName(), new ArrayList<Animal>(),  new ArrayList<Food>(), CageEnum.Cage1.getPrice(), true
                 , false, CageEnum.Cage1.getCapacity()));
-        cages.add(new Cage(CageEnum.Cage1.getName(), null,  null, CageEnum.Cage1.getPrice(), true
+        cages.add(new Cage(CageEnum.Cage1.getName(), new ArrayList<Animal>(),  new ArrayList<Food>(), CageEnum.Cage1.getPrice(), true
                 , false, CageEnum.Cage1.getCapacity()));
-        cages.add(new Cage(CageEnum.Cage1.getName(), null,  null, CageEnum.Cage1.getPrice(), true
+        cages.add(new Cage(CageEnum.Cage1.getName(), new ArrayList<Animal>(),  new ArrayList<Food>(), CageEnum.Cage1.getPrice(), true
                 , false, CageEnum.Cage1.getCapacity()));
-        cages.add(new Cage(CageEnum.Cage1.getName(), null,  null, CageEnum.Cage1.getPrice(), true
+        cages.add(new Cage(CageEnum.Cage1.getName(), new ArrayList<Animal>(),  new ArrayList<Food>(), CageEnum.Cage1.getPrice(), true
                 , false, CageEnum.Cage1.getCapacity()));
 
         return cages;

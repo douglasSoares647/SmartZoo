@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.entity.Food;
 import com.br.smartzoo.model.interfaces.OnChangeBuyListener;
+import com.br.smartzoo.model.singleton.Stock;
+import com.br.smartzoo.model.singleton.Supplier;
 import com.br.smartzoo.presenter.BuyFoodPresenter;
 import com.br.smartzoo.ui.adapter.BuyFoodListAdapter;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
@@ -22,7 +24,10 @@ import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.ui.view.BuyFoodView;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by adenilson on 12/05/16.
@@ -36,6 +41,9 @@ public class BuyFoodFragment extends Fragment implements BuyFoodView, OnChangeBu
     private BuyFoodPresenter mPresenter;
     private TextView mTextViewTotalFoods;
     private TextView mTextViewTotalPrice;
+    private int mTotalQuantity;
+    private Double mTotalPrice;
+    private HashMap<String,Integer> totalFoods;
 
     @Nullable
     @Override
@@ -82,7 +90,8 @@ public class BuyFoodFragment extends Fragment implements BuyFoodView, OnChangeBu
         buttonBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Supplier.buyFoods(totalFoods);
+                Stock.getInstance().putFoods(Supplier.buyFoods(totalFoods));
             }
         });
     }
@@ -114,14 +123,37 @@ public class BuyFoodFragment extends Fragment implements BuyFoodView, OnChangeBu
     }
 
     @Override
-    public void onQuantityChange(Double totalPrice, int quantity) {
+    public void onQuantityChange(HashMap<String,Integer> foods) {
+
+        calculateQuantityAndPrice(foods);
+
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
-        String format = decimalFormat.format(totalPrice);
+        String format = decimalFormat.format(mTotalPrice);
         String price = getString(R.string.total_price) + " " + format + "$";
         mTextViewTotalPrice.setText(price);
 
-        String totalQuantity = getString(R.string.total_fruits) + " " + quantity;
+        String totalQuantity = getString(R.string.total_fruits) + " " + mTotalQuantity;
         mTextViewTotalFoods.setText(totalQuantity);
+
+    }
+
+
+    private void calculateQuantityAndPrice(HashMap<String,Integer> foods) {
+
+        mTotalQuantity = 0;
+        mTotalPrice = 0D;
+
+        Iterator it = foods.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
+            Integer value = (Integer) pair.getValue();
+            mTotalQuantity += value;
+            Food food = (Food) pair.getKey();
+            mTotalPrice +=  food.getPrice() * value;
+
+        }
+
+
 
     }
 }

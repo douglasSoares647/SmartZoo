@@ -29,9 +29,8 @@ public class BuyFoodListAdapter extends RecyclerView.Adapter<BuyFoodListAdapter.
     private List<Food> mFoodList;
     private Context mContext;
     private OnChangeBuyListener mOnChangeBuyListener;
-    private HashMap<Food, Integer> mQuantity;
-    public static int sTotalQuantity;
-    public static Double sTotalPrice;
+    private HashMap<String, Integer> mQuantity;
+
 
 
     public BuyFoodListAdapter(Context context, List<Food> foods) {
@@ -41,7 +40,7 @@ public class BuyFoodListAdapter extends RecyclerView.Adapter<BuyFoodListAdapter.
 
         //TODO for each food, add new instance into hash to calculate total price
         for (Food f : foods) {
-            mQuantity.put(f, 0);
+            mQuantity.put(f.getName(), 0);
         }
 
 
@@ -73,8 +72,8 @@ public class BuyFoodListAdapter extends RecyclerView.Adapter<BuyFoodListAdapter.
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 holder.mTextViewQuantity.setText(String.valueOf(progress));
-                mQuantity.put(food, progress);
-                calculateQuantityAndPrice();
+                mQuantity.put(food.getName(), progress);
+                mOnChangeBuyListener.onQuantityChange(mQuantity);
 
             }
 
@@ -92,24 +91,7 @@ public class BuyFoodListAdapter extends RecyclerView.Adapter<BuyFoodListAdapter.
 
     }
 
-    private void calculateQuantityAndPrice() {
 
-        sTotalQuantity = 0;
-        sTotalPrice = 0D;
-
-        Iterator it = mQuantity.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry) it.next();
-            Integer value = (Integer) pair.getValue();
-            sTotalQuantity += value;
-            Food food = (Food) pair.getKey();
-            sTotalPrice +=  food.getPrice() * value;
-
-        }
-
-
-        mOnChangeBuyListener.onQuantityChange(sTotalPrice, sTotalQuantity);
-    }
 
     @Override
     public int getItemCount() {

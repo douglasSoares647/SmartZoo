@@ -33,7 +33,7 @@ public class EmployeeContract {
         table.append(AGE + " integer not null, ");
         table.append(CPF + " text unique, ");
         table.append(STARTDATE + " text not null, ");
-        table.append(ENDDATE + " text ");
+        table.append(ENDDATE + " text, ");
         table.append(SALARY + " real not null ");
         table.append(" ) ;");
 
