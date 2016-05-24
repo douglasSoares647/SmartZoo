@@ -65,7 +65,7 @@ public class HireEmployeeListAdapter extends
         holder.mButtonEmployee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showConfirmationDialog(employee);
+                mOnHireListener.onHire(employee);
             }
 
 
@@ -96,25 +96,7 @@ public class HireEmployeeListAdapter extends
     }
 
 
-
-    private void showConfirmationDialog(final Employee employee) {
-        AlertDialog dialog = new AlertDialog.Builder(mContext)
-                .setPositiveButton(mContext.getString(R.string.btn_yes), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            mEmployeeList.remove(employee);
-                            mOnHireListener.onHire(employee);
-                            notifyDataSetChanged();
-                        }})
-                .setNegativeButton(mContext.getString(R.string.btn_no), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();      
-                        }
-                    })
-                .setMessage(mContext.getString(R.string.msg_hire_employee_confirm)).create();
-
-        dialog.show();
-
+    public List<Employee> getEmployeeList() {
+        return mEmployeeList;
     }
 }

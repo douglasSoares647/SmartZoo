@@ -1,20 +1,15 @@
 package com.br.smartzoo.model.entity;
 
 
-import android.os.CountDownTimer;
-
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.interfaces.Observer;
 import com.br.smartzoo.util.ApplicationUtil;
-import com.br.smartzoo.util.TimeUtil;
+import com.br.smartzoo.model.environment.Clock;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by taibic on 12/04/16.
@@ -176,7 +171,7 @@ public class Animal implements Observer {
                     public void run() {
                         while (cageFoods.isEmpty()) {
                             try {
-                                Thread.sleep(TimeUtil.starvingTime);
+                                Thread.sleep(Clock.starvingTime);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
@@ -228,8 +223,8 @@ public class Animal implements Observer {
 
             //Digerindo
             tick = 0;
-            while(tick<TimeUtil.timeToDigest){
-                    if(tick%TimeUtil.digestingInterval==0)
+            while(tick< Clock.timeToDigest){
+                    if(tick% Clock.digestingInterval==0)
                     weight = weight - foodEaten / 30;
 
             }
@@ -247,7 +242,7 @@ public class Animal implements Observer {
 
         //Tempo para sentir fome novamente
         tick = 0;
-        while(tick< TimeUtil.timeToFeelHungry){
+        while(tick< Clock.timeToFeelHungry){
             status = ApplicationUtil.applicationContext.getString(R.string.not_hungry);
         }
 

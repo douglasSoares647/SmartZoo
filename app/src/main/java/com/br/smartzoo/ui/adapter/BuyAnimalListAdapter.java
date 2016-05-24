@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.model.business.BusinessRules;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.interfaces.OnBuyAnimalListener;
 import com.br.smartzoo.util.BuyHelper;

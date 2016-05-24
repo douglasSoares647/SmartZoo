@@ -1,21 +1,23 @@
-package com.br.smartzoo.util;
+package com.br.smartzoo.model.environment;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 
 import com.br.smartzoo.model.business.BusinessRules;
+import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.environment.Visitor;
 import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.service.ClockService;
+import com.br.smartzoo.util.ApplicationUtil;
 
 /**
  * Created by Taibic on 5/15/2016.
  */
-public class TimeUtil {
+public class Clock {
 
     public static String my_pref = "timePreferences";
 
@@ -98,6 +100,7 @@ public class TimeUtil {
                                 ClockService.context.onTick(getDateString(),getTimeString());
                             }
                             saveToPreferences();
+                            ZooInfoBusiness.saveToPreferences();
 
 
                             //OBSERVERS

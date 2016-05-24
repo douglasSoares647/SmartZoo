@@ -10,10 +10,9 @@ import com.br.smartzoo.model.entity.Veterinary;
 import com.br.smartzoo.model.enums.EmployeeEnum;
 import com.br.smartzoo.ui.view.HireEmployeeView;
 import com.br.smartzoo.util.DateUtil;
-import com.br.smartzoo.util.TimeUtil;
+import com.br.smartzoo.model.environment.Clock;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -58,22 +57,25 @@ public class HireEmployeePresenter {
             employee.setSalary(EmployeeEnum.Veterinary.getPrice());
             employee.setImage(EmployeeEnum.Veterinary.getImage());
             employee.setProfession(mContext.getString(EmployeeEnum.Veterinary.getProfession()));
+            employee.setPrice(EmployeeEnum.Veterinary.getPrice());
         } else if (type.equals(EmployeeEnum.Janitor)) {
             employee = new Janitor();
             employee.setSalary(EmployeeEnum.Janitor.getPrice());
             employee.setImage(EmployeeEnum.Janitor.getImage());
             employee.setProfession(mContext.getString(EmployeeEnum.Janitor.getProfession()));
+            employee.setPrice(EmployeeEnum.Janitor.getPrice());
         } else {
             employee = new Feeder();
             employee.setSalary(EmployeeEnum.Feeder.getPrice());
             employee.setImage(EmployeeEnum.Feeder.getImage());
             employee.setProfession(mContext.getString(EmployeeEnum.Feeder.getProfession()));
+            employee.setPrice(EmployeeEnum.Feeder.getPrice());
         }
 
         employee.setName(mContext.getString(R.string.random_employee));
         employee.setAge(random.nextInt(50));
 
-        employee.setStartDate(DateUtil.stringToDateWithBrazilianFormat(TimeUtil.getDateString()));
+        employee.setStartDate(DateUtil.stringToDateWithBrazilianFormat(Clock.getDateString()));
 
 
         return employee;

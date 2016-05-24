@@ -1,16 +1,20 @@
 package com.br.smartzoo.ui.fragment;
 
 import android.animation.FloatArrayEvaluator;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.model.business.BusinessRules;
 import com.br.smartzoo.model.business.EmployeeBusiness;
 import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.environment.ZooInfo;
@@ -72,7 +76,39 @@ public class HireEmployeeFragment extends Fragment  implements OnHireListener, H
 
     @Override
     public void onHire(Employee employee) {
-        ZooInfo.employees.add(employee);
-        EmployeeBusiness.save(employee);
+        Boolean haveMoney = BusinessRules.buyEmployee(employee);
+        if(haveMoney) {
+            showConfirmationDialog(employee);
+        }
+        else{
+            Toast.makeText(getContext(),R.string.msg_dont_have_money,Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    private void showConfirmationDialog(final Employee employee) {
+        AlertDialog dialog = new AlertDialog.Builder(getContext())
+                .setPositiveButton(getContext().getString(R.string.btn_yes), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ZooInfo.employees.add(employee);
+                        EmployeeBusiness.save(employee);
+
+                       HireEmployeeListAdapter hireEmployeeListAdapter = ((HireEmployeeListAdapter)mRecyclerViewEmployee.getAdapter());
+                        hireEmployeeListAdapter.getEmployeeList().remove(employee);
+
+                        hireEmployeeListAdapter.notifyDataSetChanged();
+                        Toast.makeText(getContext(), R.string.msg_employee_hired,Toast.LENGTH_SHORT).show();
+                    }})
+                .setNegativeButton(getContext().getString(R.string.btn_no), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setMessage(getContext().getString(R.string.msg_hire_employee_confirm)).create();
+
+        dialog.show();
+
     }
 }

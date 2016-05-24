@@ -1,23 +1,16 @@
 package com.br.smartzoo.model.service;
 
-import android.app.IntentService;
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 
 import com.br.smartzoo.R;
-import com.br.smartzoo.model.entity.Animal;
-import com.br.smartzoo.model.entity.Cage;
-import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnClockTickListener;
 import com.br.smartzoo.ui.activity.MainActivity;
-import com.br.smartzoo.util.TimeUtil;
+import com.br.smartzoo.model.environment.Clock;
 
 /**
  * Created by Douglas on 5/16/2016.
@@ -36,9 +29,9 @@ public class ClockService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
 
-        TimeUtil.getFromPreferences();
-        TimeUtil.isRunning = true;
-        TimeUtil.startClock();
+        Clock.getFromPreferences();
+        Clock.isRunning = true;
+        Clock.startClock();
 
 
         //Notification to show to the player that the game is running. StartForeground used to garantee that the server
@@ -62,7 +55,7 @@ public class ClockService extends Service {
     @Override
     public void onDestroy() {
 
-        TimeUtil.isRunning = false;
+        Clock.isRunning = false;
 
         super.onDestroy();
     }

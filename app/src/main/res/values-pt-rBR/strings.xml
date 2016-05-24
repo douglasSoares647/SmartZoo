@@ -67,5 +67,7 @@
     <string name="btn_no">Não</string>
     <string name="msg_hire_employee_confirm">Você tem certeza de que deseja comprar este funcionário?</string>
     <string name="msg_cage_sucessfully_built"> Jaula construida com sucesso!</string>
+    <string name="msg_employee_hired">Funcionário contratado com sucesso!</string>
+    <string name="msg_cage_full">Esta jaula está cheia, por favor selecione outra!</string>
 
 </resources>

@@ -25,8 +25,8 @@ import com.br.smartzoo.ui.fragment.HireEmployeeFragment;
 import com.br.smartzoo.ui.fragment.NavigationDrawerFragment;
 import com.br.smartzoo.ui.view.MainActivityView;
 import com.br.smartzoo.util.AnimUtil;
+import com.br.smartzoo.model.environment.Clock;
 import com.br.smartzoo.util.ServiceHelper;
-import com.br.smartzoo.util.TimeUtil;
 import com.bumptech.glide.Glide;
 
 /**
@@ -126,24 +126,24 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
         mForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TimeUtil.speedFactor <= 3)
-                    TimeUtil.speedFactor = 2;
+                if (Clock.speedFactor <= 3)
+                    Clock.speedFactor = 2;
                 mNormal.clearColorFilter();
                 mForward.setColorFilter(Color.parseColor("#757575"));
                 mFastForward.clearColorFilter();
-                //         mTextViewSpeed.setText(getString(R.string.speed) + TimeUtil.speedFactor);
+                //         mTextViewSpeed.setText(getString(R.string.speed) + Clock.speedFactor);
             }
         });
 
         mFastForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TimeUtil.speedFactor <= 3)
-                    TimeUtil.speedFactor = 3;
+                if (Clock.speedFactor <= 3)
+                    Clock.speedFactor = 3;
                 mNormal.clearColorFilter();
                 mFastForward.setColorFilter(Color.parseColor("#757575"));
                 mForward.clearColorFilter();
-                //         mTextViewSpeed.setText(getString(R.string.speed) + TimeUtil.speedFactor);
+                //         mTextViewSpeed.setText(getString(R.string.speed) + Clock.speedFactor);
             }
         });
 
@@ -151,12 +151,12 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
         mNormal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TimeUtil.speedFactor > 1) {
-                    TimeUtil.speedFactor = 1;
+                if (Clock.speedFactor > 1) {
+                    Clock.speedFactor = 1;
                     mNormal.setColorFilter(Color.parseColor("#757575"));
                     mForward.clearColorFilter();
                     mFastForward.clearColorFilter();
-                    //            mTextViewSpeed.setText(getString(R.string.speed) + TimeUtil.speedFactor);
+                    //            mTextViewSpeed.setText(getString(R.string.speed) + Clock.speedFactor);
                 }
             }
         });
@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
     }
 
     private void loadZooInfo() {
-        ZooInfoBusiness.getFromPreferences();
+      //  ZooInfoBusiness.getFromPreferences();
         ZooInfoBusiness.load();
     }
 
@@ -202,10 +202,10 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
         mTextViewDate = (TextView) mToolbar.findViewById(R.id.text_view_date);
 
 
-        TimeUtil.getFromPreferences();
+        Clock.getFromPreferences();
 
-        mTextViewClock.setText(TimeUtil.getTimeString());
-        mTextViewDate.setText(TimeUtil.getDateString());
+        mTextViewClock.setText(Clock.getTimeString());
+        mTextViewDate.setText(Clock.getDateString());
 
     }
 

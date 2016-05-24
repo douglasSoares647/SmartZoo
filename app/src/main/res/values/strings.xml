@@ -84,5 +84,7 @@
     <string name="btn_cancel">Cancel</string>
     <string name="msg_animal_succesfully_bought">Animal sucessfully bought!</string>
     <string name="msg_cage_sucessfully_built">Cage succesfully bought!</string>
+    <string name="msg_employee_hired">Employee successfully hired!</string>
+    <string name="msg_cage_full">This cage is full, please select another one!</string>
 
 </resources>
