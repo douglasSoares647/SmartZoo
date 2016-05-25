@@ -14,6 +14,7 @@ import com.br.smartzoo.util.ApplicationUtil;
 public class ZooInfoBusiness {
 
     public static String ZooPref = "ZooPref";
+    public static boolean isLoaded = false;
 
     public static void save(){
         ZooInfoRepository.save();

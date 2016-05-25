@@ -54,20 +54,20 @@
     <string name="animal_leopard">Leopard</string>
     <string name="male">male</string>
     <string name="female">female</string>
-    <string name="starving">Faminto</string>
-    <string name="losing_weight">Perdendo peso</string>
-    <string name="eating">Comendo</string>
-    <string name="digesting">Digerindo</string>
-    <string name="digestion_finished">Digestão finalizada</string>
-    <string name="not_hungry">Sem fome</string>
-    <string name="cleaning_cage">"Limpando jaula "</string>
-    <string name="resting">Descansando</string>
-    <string name="ready">Pronto</string>
-    <string name="veterinary_idle">" Sem serviço "</string>
-    <string name="treating_animal">"Tratando animal "</string>
-    <string name="animal_treatment">"Tratamento do animal "</string>
-    <string name="done">" finalizado"</string>
-    <string name="treating_animals">Tratando dos animais</string>
+    <string name="starving">Starving</string>
+    <string name="losing_weight">Losing weight</string>
+    <string name="eating">Eating</string>
+    <string name="digesting">Digesting</string>
+    <string name="digestion_finished">Digestion finished</string>
+    <string name="not_hungry">No hungry</string>
+    <string name="cleaning_cage">"Cleaning cage"</string>
+    <string name="resting">Resting</string>
+    <string name="ready">Ready</string>
+    <string name="veterinary_idle">" Idle "</string>
+    <string name="treating_animal">"Treating animal "</string>
+    <string name="animal_treatment">"Treatment of animal "</string>
+    <string name="done">" Finished!"</string>
+    <string name="treating_animals">Treating animals</string>
     <string name="speed">"Speed : "</string>
     <string name="text_age">age</string>
     <string name="text_healthy">Healthy</string>
@@ -94,5 +94,7 @@
     <string name="message_load_foods">Loading foods</string>
     <string name="title_foods">Foods</string>
     <string name="message_food_sold">Food sold!</string>
-
+    <string name="msg_construct_cage_confirm">Are you sure that you want to construct this cage?</string>
+    <string name="msg_buy_animal_confirm">Are you sure you want to buy this animal?</string>
+    <string name="visitors">Visitors:</string>
 </resources>

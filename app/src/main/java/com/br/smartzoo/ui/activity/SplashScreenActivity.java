@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.model.business.ZooInfoBusiness;
+import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.util.ServiceHelper;
 import com.bumptech.glide.Glide;
 
@@ -28,6 +30,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_splash_screen);
 
+        loadZooInfo();
         bindMediaPlayerSound();
         bindRelativeButtons();
         bindImageViewLogo();
@@ -93,6 +96,15 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         if (imageViewLogo != null) {
             Glide.with(this).load(R.drawable.logo_splash).into(imageViewLogo);
+        }
+    }
+
+    private void loadZooInfo() {
+        //  ZooInfoBusiness.getFromPreferences();
+
+        if(!ZooInfoBusiness.isLoaded) {
+            ZooInfoBusiness.load();
+            ZooInfoBusiness.isLoaded = true;
         }
     }
 

@@ -1,9 +1,11 @@
 package com.br.smartzoo.ui.fragment;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,14 +16,18 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.model.business.AnimalBusiness;
 import com.br.smartzoo.model.business.BusinessRules;
+import com.br.smartzoo.model.business.EmployeeBusiness;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
+import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnBuyAnimalListener;
 import com.br.smartzoo.presenter.BuyAnimalPresenter;
 import com.br.smartzoo.ui.adapter.BuyAnimalListAdapter;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
+import com.br.smartzoo.ui.adapter.HireEmployeeListAdapter;
 import com.br.smartzoo.ui.adapter.ListCageAdapter;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.ui.view.BuyAnimalView;
@@ -39,7 +45,6 @@ public class BuyAnimalFragment extends Fragment implements BuyAnimalView, OnBuyA
     private List<Animal> mAnimalList;
     private RecyclerView mRecyclerViewAnimals;
     private Dialog selectCageDialog;
-    private Animal animal;
 
     @Nullable
     @Override
@@ -81,11 +86,10 @@ public class BuyAnimalFragment extends Fragment implements BuyAnimalView, OnBuyA
 
     @Override
     public void onBuy(final Animal animal) {
-        Boolean haveMoney = BusinessRules.buyAnimal(animal);
-        this.animal = animal;
+        Boolean haveMoney = BusinessRules.haveMoneyToBuyAnimal(animal);
 
         if (haveMoney) {
-            showSelectCageDialog(animal);
+            showConfirmationDialog(animal);
         }
         else{
             Toast.makeText(getContext(), R.string.msg_dont_have_money, Toast.LENGTH_SHORT).show();
@@ -123,7 +127,9 @@ public class BuyAnimalFragment extends Fragment implements BuyAnimalView, OnBuyA
                     Toast.makeText(getContext(), R.string.msg_animal_succesfully_bought, Toast.LENGTH_SHORT).show();
                     ((BuyAnimalListAdapter) mRecyclerViewAnimals.getAdapter()).getAnimalList().remove(animal);
                     mRecyclerViewAnimals.getAdapter().notifyDataSetChanged();
+                    AnimalBusiness.save(animal);
 
+                    ZooInfo.money -= animal.getPrice();
                 }
                 else{
                     Toast.makeText(getContext(), R.string.msg_cage_full,Toast.LENGTH_SHORT).show();
@@ -140,6 +146,27 @@ public class BuyAnimalFragment extends Fragment implements BuyAnimalView, OnBuyA
         });
 
         selectCageDialog.show();
+    }
+
+
+
+    private void showConfirmationDialog(final Animal animal) {
+        AlertDialog dialog = new AlertDialog.Builder(getContext())
+                .setPositiveButton(getContext().getString(R.string.btn_yes), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        showSelectCageDialog(animal);
+                    }})
+                .setNegativeButton(getContext().getString(R.string.btn_no), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setMessage(getActivity().getString(R.string.msg_buy_animal_confirm)).create();
+
+        dialog.show();
+
     }
 
 }

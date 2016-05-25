@@ -1,6 +1,5 @@
 package com.br.smartzoo.ui.fragment;
 
-import android.animation.FloatArrayEvaluator;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,7 +19,6 @@ import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnHireListener;
 import com.br.smartzoo.presenter.HireEmployeePresenter;
-import com.br.smartzoo.ui.adapter.BuyFoodListAdapter;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.HireEmployeeListAdapter;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
@@ -76,7 +74,7 @@ public class HireEmployeeFragment extends Fragment  implements OnHireListener, H
 
     @Override
     public void onHire(Employee employee) {
-        Boolean haveMoney = BusinessRules.buyEmployee(employee);
+        Boolean haveMoney = BusinessRules.haveMoneyToBuyEmployee(employee);
         if(haveMoney) {
             showConfirmationDialog(employee);
         }

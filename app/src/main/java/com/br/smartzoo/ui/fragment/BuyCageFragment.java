@@ -1,8 +1,10 @@
 package com.br.smartzoo.ui.fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,12 +15,15 @@ import android.widget.Toast;
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.business.BusinessRules;
 import com.br.smartzoo.model.business.CageBusiness;
+import com.br.smartzoo.model.business.EmployeeBusiness;
 import com.br.smartzoo.model.entity.Cage;
+import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnConstructListener;
 import com.br.smartzoo.presenter.BuyCagePresenter;
 import com.br.smartzoo.ui.adapter.BuyCageAdapter;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
+import com.br.smartzoo.ui.adapter.HireEmployeeListAdapter;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.ui.view.BuyCageView;
 
@@ -72,11 +77,39 @@ public class BuyCageFragment extends Fragment implements BuyCageView, OnConstruc
     @Override
     public void onConstruct(Cage cage) {
 
-        Boolean haveMoney = BusinessRules.buyCage(cage);
-        if(haveMoney)
-        Toast.makeText(getContext(),getString(R.string.msg_cage_sucessfully_built),Toast.LENGTH_SHORT).show();
+        Boolean haveMoney = BusinessRules.haveMoneyToBuyCage(cage);
+        if(haveMoney) {
+            showConfirmationDialog(cage);
+
+        }
+
         else{
             Toast.makeText(getContext(),R.string.msg_dont_have_money,Toast.LENGTH_SHORT).show();
         }
+    }
+
+
+
+    private void showConfirmationDialog(final Cage cage) {
+        AlertDialog dialog = new AlertDialog.Builder(getContext())
+                .setPositiveButton(getContext().getString(R.string.btn_yes), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        CageBusiness.save(cage);
+                        ZooInfo.money -= cage.getPrice();
+                        ZooInfo.cages.add(cage);
+
+                        Toast.makeText(getContext(), getString(R.string.msg_cage_sucessfully_built), Toast.LENGTH_SHORT).show();
+                    }})
+                .setNegativeButton(getContext().getString(R.string.btn_no), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setMessage(getActivity().getString(R.string.msg_construct_cage_confirm)).create();
+
+        dialog.show();
+
     }
 }

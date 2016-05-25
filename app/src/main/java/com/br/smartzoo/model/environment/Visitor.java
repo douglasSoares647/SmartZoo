@@ -66,11 +66,11 @@ public class Visitor implements Observer{
             final Cage cage = entry.getKey();
             Integer timeToVisitCage = entry.getValue();
 
-            while (timeToVisitCage < timeInZoo){
+            timeInZoo = 0;
+            while (timeInZoo<timeToVisitCage){
                 status = "Visitando jaula " + cage.getName();
                 currentCage = cage;
             }
-            timeInZoo = 0;
         }
 
         status = "Visitante " + name + " indo embora do zoo!";

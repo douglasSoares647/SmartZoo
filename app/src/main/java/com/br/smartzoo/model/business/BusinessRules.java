@@ -120,20 +120,16 @@ public class BusinessRules {
     }
 
 
-    public static boolean buyAnimal(Animal animal){
+    public static boolean haveMoneyToBuyAnimal(Animal animal){
         if(ZooInfo.money>animal.getPrice()) {
-            ZooInfo.money -= animal.getPrice();
             return true;
         }
         return false;
     }
 
 
-    public static Boolean buyCage(Cage cage){
+    public static Boolean haveMoneyToBuyCage(Cage cage){
         if(ZooInfo.money>cage.getPrice()) {
-            ZooInfo.money -= cage.getPrice();
-            ZooInfo.cages.add(cage);
-            CageBusiness.save(cage);
             return true;
         }
         else{
@@ -143,7 +139,7 @@ public class BusinessRules {
 
 
 
-    public static Boolean buyEmployee(Employee employee){
+    public static Boolean haveMoneyToBuyEmployee(Employee employee){
         if(ZooInfo.money> employee.getPrice()){
             return true;
         }

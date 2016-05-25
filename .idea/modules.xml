@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Smart-Zoo.iml" filepath="$PROJECT_DIR$/Smart-Zoo.iml" />
       <module fileurl="file://$PROJECT_DIR$/SmartZoo.iml" filepath="$PROJECT_DIR$/SmartZoo.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
