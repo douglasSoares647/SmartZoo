@@ -15,20 +15,18 @@ import java.util.List;
 public class AnimalRepository {
 
 
-
-    public static void save(Animal animal){
+    public static void save(Animal animal) {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
         ContentValues values = AnimalContract.createContentValues(animal);
 
 
-        if(animal.getId()==null){
-            db.insert(AnimalContract.TABLE,null,values);
-        }
-        else{
+        if (animal.getId() == null) {
+            db.insert(AnimalContract.TABLE, null, values);
+        } else {
             String where = " id = " + animal.getId();
-            db.update(AnimalContract.TABLE,values,where,null);
+            db.update(AnimalContract.TABLE, values, where, null);
         }
 
         db.close();
@@ -37,13 +35,14 @@ public class AnimalRepository {
     }
 
 
-    public static List<Animal> getAllAnimals(){
+    public static List<Animal> getAllAnimals() {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
 
 
         List<Animal> animals = new ArrayList<>();
-        Cursor cursor = db.query(AnimalContract.TABLE,AnimalContract.columns,null,null,null,null,AnimalContract.NAME);
+        Cursor cursor = db.query(AnimalContract.TABLE,
+                AnimalContract.COLUMNS, null, null, null, null, AnimalContract.NAME);
 
         animals = AnimalContract.getAnimals(cursor);
 

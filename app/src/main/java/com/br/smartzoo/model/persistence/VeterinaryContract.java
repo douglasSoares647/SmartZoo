@@ -49,6 +49,7 @@ public class VeterinaryContract {
         table.append("Foreign key (" + ANIMALID + ") references " + AnimalContract.TABLE
                 + "(" + AnimalContract.ID + "),");
         table.append("Foreign key (" + VETERINARYID + ") references " + TABLE + "(" + ID + ") ");
+        table.append(");");
 
         return table.toString();
     }

@@ -7,6 +7,7 @@ import java.util.Date;
  */
 public class Food {
 
+    private Long id;
     private int image;
     private Double price;
     private String name;
@@ -62,5 +63,13 @@ public class Food {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

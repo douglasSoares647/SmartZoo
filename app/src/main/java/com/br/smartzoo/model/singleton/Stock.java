@@ -44,6 +44,17 @@ public class Stock {
         	}
         }
     }
+
+	public void putFoods(HashMap<String,List<Food>> foods){
+		for(Map.Entry<String,List<Food>> entry : foods.entrySet()){
+			String foodName = entry.getKey();
+			List<Food> foodsToAdd = entry.getValue();
+
+			if(this.foods.get(foodName)!=null){
+				this.foods.get(foodName).addAll(foodsToAdd);
+			}
+		}
+	}
     
     // Method to take food from stock. The method only return foods with valid expiration date
     public List<Food> takeFoods(String name, Cage cage){

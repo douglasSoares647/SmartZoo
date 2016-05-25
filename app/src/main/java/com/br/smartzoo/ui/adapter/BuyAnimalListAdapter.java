@@ -13,7 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.model.business.BusinessRules;
 import com.br.smartzoo.model.entity.Animal;
+import com.br.smartzoo.model.interfaces.OnBuyAnimalListener;
 import com.br.smartzoo.util.BuyHelper;
 import com.bumptech.glide.Glide;
 
@@ -26,6 +28,12 @@ public class BuyAnimalListAdapter extends RecyclerView.Adapter<BuyAnimalListAdap
 
     private List<Animal> mAnimalList;
     private Context mContext;
+    private OnBuyAnimalListener mOnBuyAnimalListener;
+
+
+    public void setOnBuyAnimalListener (OnBuyAnimalListener onBuyAnimalListener){
+        this.mOnBuyAnimalListener = onBuyAnimalListener;
+    }
 
     public BuyAnimalListAdapter(Context context, List<Animal> animalList) {
         this.mAnimalList = animalList;
@@ -58,7 +66,8 @@ public class BuyAnimalListAdapter extends RecyclerView.Adapter<BuyAnimalListAdap
         holder.mButtonAnimal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Comprou animal" + animal.getName(), Toast.LENGTH_SHORT).show();
+
+                mOnBuyAnimalListener.onBuy(animal);
 
             }
         });
@@ -87,5 +96,10 @@ public class BuyAnimalListAdapter extends RecyclerView.Adapter<BuyAnimalListAdap
             mTextViewCostAnimal = (TextView) itemView.findViewById(R.id.text_view_cost_animal);
             mButtonAnimal = (Button) itemView.findViewById(R.id.button_number_buy_animal);
         }
+    }
+
+
+    public List<Animal> getAnimalList() {
+        return mAnimalList;
     }
 }

@@ -1,18 +1,13 @@
 package com.br.smartzoo.model.entity;
 
 import com.br.smartzoo.R;
-import com.br.smartzoo.model.entity.Animal;
-import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.util.ApplicationUtil;
-import com.br.smartzoo.util.TimeUtil;
+import com.br.smartzoo.model.environment.Clock;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by adenilson on 18/04/16.
@@ -43,8 +38,8 @@ public class Veterinary extends Employee {
         status = ApplicationUtil.applicationContext.getString(R.string.treating_animal) + animal.getName();
         clock = 0;
 
-        while (clock <= TimeUtil.timeToTreat) {
-            if (clock == TimeUtil.timeToTreat) {
+        while (clock <= Clock.timeToTreat) {
+            if (clock == Clock.timeToTreat) {
                 animal.setIsHealthy(true);
                 status = ApplicationUtil.applicationContext.getString(R.string.animal_treatment) + animal.getName() + ApplicationUtil.applicationContext.getString(R.string.done);
             }
@@ -58,8 +53,8 @@ public class Veterinary extends Employee {
 
             clock = 0;
 
-            while (clock <= TimeUtil.timeToTreat) {
-                if (clock == TimeUtil.timeToTreat) {
+            while (clock <= Clock.timeToTreat) {
+                if (clock == Clock.timeToTreat) {
                     animal.setIsHealthy(true);
                     status = ApplicationUtil.applicationContext.getString(R.string.animal_treatment) + animal.getName() + ApplicationUtil.applicationContext.getString(R.string.done);
                 }

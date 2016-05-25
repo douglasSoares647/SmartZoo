@@ -120,22 +120,35 @@ public class BusinessRules {
     }
 
 
-    public static void buyAnimal(Animal animal, Double animalCost, Cage cage){
-        ZooInfo.money -= animalCost;
+    public static boolean buyAnimal(Animal animal){
+        if(ZooInfo.money>animal.getPrice()) {
+            ZooInfo.money -= animal.getPrice();
+            return true;
+        }
+        return false;
+    }
 
-        if(cage.checkCapacity()) {
-            animal.setCage(cage);
+
+    public static Boolean buyCage(Cage cage){
+        if(ZooInfo.money>cage.getPrice()) {
+            ZooInfo.money -= cage.getPrice();
+            ZooInfo.cages.add(cage);
+            CageBusiness.save(cage);
+            return true;
         }
         else{
-
+            return false;
         }
     }
 
 
-    public static void buyCage(Cage cage, Double cageCost){
-        ZooInfo.money-=cageCost;
 
-        ZooInfo.cages.add(cage);
+    public static Boolean buyEmployee(Employee employee){
+        if(ZooInfo.money> employee.getPrice()){
+            return true;
+        }
+        else
+            return false;
     }
 
 }

@@ -60,7 +60,22 @@
     <string name="name_janitor">Limpador</string>
     <string name="name_feeder">Alimentador</string>
     <string name="option_stock">Estoque</string>
+    <string name="btn_cancel">Cancelar</string>
+    <string name="msg_animal_succesfully_bought"> Animal comprado com sucesso! </string>
+    <string name="random_employee">Funcionário aleatório</string>
+    <string name="btn_yes">Sim</string>
+    <string name="btn_no">Não</string>
+    <string name="msg_hire_employee_confirm">Você tem certeza de que deseja comprar este funcionário?</string>
+    <string name="msg_cage_sucessfully_built"> Jaula construida com sucesso!</string>
+    <string name="msg_employee_hired">Funcionário contratado com sucesso!</string>
+    <string name="msg_cage_full">Esta jaula está cheia, por favor selecione outra!</string>
     <string name="text_food_stock">Alimentos no estoque:</string>
     <string name="text_prepare">Preparar</string>
+    <string name="message_load_list_successful">Food list updated!</string>
+    <string name="message_load_list_failed">Failed to load food list</string>
+    <string name="message_load_list_empty">There aren\'t food in the stock!</string>
+    <string name="message_load_foods">Loading foods</string>
+    <string name="title_foods">Foods</string>
+    <string name="message_food_sold">Food sold!</string>
 
 </resources>

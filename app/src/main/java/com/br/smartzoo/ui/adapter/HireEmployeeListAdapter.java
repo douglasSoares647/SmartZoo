@@ -1,7 +1,9 @@
 package com.br.smartzoo.ui.adapter;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.media.Image;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -54,7 +56,7 @@ public class HireEmployeeListAdapter extends
 
 
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Employee employee = mEmployeeList.get(position);
+        final Employee employee = mEmployeeList.get(position);
         Glide.with(mContext).load(employee.getImage()).into(holder.mImageViewIcon);
         holder.mTextViewName.setText(employee.getName());
         holder.mTextViewProfession.setText(employee.getProfession());
@@ -63,8 +65,10 @@ public class HireEmployeeListAdapter extends
         holder.mButtonEmployee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mOnHireListener.onHire();
+                mOnHireListener.onHire(employee);
             }
+
+
         });
     }
 
@@ -89,5 +93,10 @@ public class HireEmployeeListAdapter extends
             mTextViewPrice = (TextView) itemView.findViewById(R.id.text_view_price_employee);
             mButtonEmployee = (Button) itemView.findViewById(R.id.button_hire_employee);
         }
+    }
+
+
+    public List<Employee> getEmployeeList() {
+        return mEmployeeList;
     }
 }

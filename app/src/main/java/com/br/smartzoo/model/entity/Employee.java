@@ -18,6 +18,7 @@ public abstract class Employee implements Observer{
     private Date endDate;
     private Double salary;
     private String profession;
+    private Double price;
 
     public Employee() {
     }
@@ -97,5 +98,13 @@ public abstract class Employee implements Observer{
 
     public void setProfession(String profression) {
         this.profession = profression;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

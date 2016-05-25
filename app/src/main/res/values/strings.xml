@@ -79,5 +79,20 @@
     <string name="option_stock">Stock</string>
     <string name="text_food_stock">Food in your stock:</string>
     <string name="text_prepare">Prepare</string>
+    <string name="random_employee">Random Employee</string>
+    <string name="btn_yes">Yes</string>
+    <string name="btn_no">No</string>
+    <string name="msg_hire_employee_confirm">Are you sure that you want to buy this employee?</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="msg_animal_succesfully_bought">Animal sucessfully bought!</string>
+    <string name="msg_cage_sucessfully_built">Cage succesfully bought!</string>
+    <string name="msg_employee_hired">Employee successfully hired!</string>
+    <string name="msg_cage_full">This cage is full, please select another one!</string>
+    <string name="message_load_list_successful">Food list updated!</string>
+    <string name="message_load_list_failed">Failed to load food list</string>
+    <string name="message_load_list_empty">There aren\'t food in the stock!</string>
+    <string name="message_load_foods">Loading foods</string>
+    <string name="title_foods">Foods</string>
+    <string name="message_food_sold">Food sold!</string>
 
 </resources>

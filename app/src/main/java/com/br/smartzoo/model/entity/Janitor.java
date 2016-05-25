@@ -1,20 +1,14 @@
 package com.br.smartzoo.model.entity;
 
 
-import android.os.CountDownTimer;
-
 import com.br.smartzoo.R;
-import com.br.smartzoo.model.interfaces.Observer;
 import com.br.smartzoo.util.ApplicationUtil;
-import com.br.smartzoo.util.TimeUtil;
+import com.br.smartzoo.model.environment.Clock;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by adenilson on 18/04/16.
@@ -67,20 +61,20 @@ public class Janitor extends Employee {
     }
 
     public void clear(final Cage cage) {
-        long timeToCleanCage = cage.getDirtyFactor() * TimeUtil.timeToCleanEachDirty;
+        long timeToCleanCage = cage.getDirtyFactor() * Clock.timeToCleanEachDirty;
 
 
         int dirtyCleaned = 0;
         status = ApplicationUtil.applicationContext.getString(R.string.cleaning_cage) + cage.getName();
         while (clock < timeToCleanCage) {
-            if (clock % TimeUtil.timeToCleanEachDirty == 0)
+            if (clock % Clock.timeToCleanEachDirty == 0)
                 dirtyCleaned++;
         }
         cage.setClean(true);
         status = ApplicationUtil.applicationContext.getString(R.string.resting);
 
         clock = 0;
-        while (clock < TimeUtil.timeToRest)
+        while (clock < Clock.timeToRest)
             status = ApplicationUtil.applicationContext.getString(R.string.ready);
 
     }

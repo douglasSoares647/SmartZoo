@@ -21,7 +21,7 @@ public class CageContract {
     public static String ISSUPPLIED = "isSupplied";
 
 
-    public static String[] columns = {ID,NAME,ISCLEAN,ISSUPPLIED};
+    public static String[] columns = {ID,NAME,CAPACITY,ISCLEAN,ISSUPPLIED};
 
 
 
@@ -30,7 +30,7 @@ public class CageContract {
 
         table.append(" create table "+ TABLE + " ( ");
         table.append(ID + " integer primary key, ");
-        table.append(NAME + " text unique, ");
+        table.append(NAME + " text , ");
         table.append(CAPACITY + " integer not null, ");
         table.append(ISCLEAN + " integer not null, ");
         table.append(ISSUPPLIED + " integer not null ");

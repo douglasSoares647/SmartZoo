@@ -8,5 +8,5 @@ import android.support.v4.app.FragmentTransaction;
  */
 public interface MainActivityView {
 
-    void changeFragment(Fragment fragment);
+    void showSnackBar(String message);
 }

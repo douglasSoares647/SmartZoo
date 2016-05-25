@@ -3,11 +3,13 @@ package com.br.smartzoo.ui.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,11 +24,12 @@ import com.br.smartzoo.ui.fragment.BuyAnimalFragment;
 import com.br.smartzoo.ui.fragment.BuyCageFragment;
 import com.br.smartzoo.ui.fragment.BuyFoodFragment;
 import com.br.smartzoo.ui.fragment.HireEmployeeFragment;
+import com.br.smartzoo.ui.fragment.ManageStockFragment;
 import com.br.smartzoo.ui.fragment.NavigationDrawerFragment;
 import com.br.smartzoo.ui.view.MainActivityView;
 import com.br.smartzoo.util.AnimUtil;
+import com.br.smartzoo.model.environment.Clock;
 import com.br.smartzoo.util.ServiceHelper;
-import com.br.smartzoo.util.TimeUtil;
 import com.bumptech.glide.Glide;
 
 /**
@@ -36,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
         , OnClockTickListener, MainActivityView {
     private DrawerLayout mDrawerLayout;
     private Toolbar mToolbar;
-    private int mFrameContainer;
+    private int mIdFrameContainer;
     private MainActivityPresenter mPresenter;
     private TextView mTextViewClock;
     private TextView mTextViewDate;
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
     private ImageView mStart;
     private ImageView mForward;
     private TextView mTextViewSpeed;
+    private FrameLayout mFrameContainer;
     private ImageView mFastForward;
     private boolean mCollapseControl;
 
@@ -54,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
         setContentView(R.layout.activity_main);
 
-        //  loadZooInfo();
+        loadZooInfo();
         bindmPresenter();
         bindToolbar();
         bindFooterBar();
@@ -76,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
         final RelativeLayout footerBar = (RelativeLayout) findViewById(R.id.footer_bar);
         final ImageView imageViewPanel = (ImageView) findViewById(R.id.image_view_panel_time);
         AnimUtil.collapseWithoutAnim(footerBar, imageViewPanel);
-        mCollapseControl= true;
+        mCollapseControl = true;
 
         if (imageViewPanel != null) {
             imageViewPanel.setOnClickListener(new View.OnClickListener() {
@@ -126,24 +130,24 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
         mForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TimeUtil.speedFactor <= 3)
-                    TimeUtil.speedFactor = 2;
+                if (Clock.speedFactor <= 3)
+                    Clock.speedFactor = 2;
                 mNormal.clearColorFilter();
                 mForward.setColorFilter(Color.parseColor("#757575"));
                 mFastForward.clearColorFilter();
-                //         mTextViewSpeed.setText(getString(R.string.speed) + TimeUtil.speedFactor);
+                //         mTextViewSpeed.setText(getString(R.string.speed) + Clock.speedFactor);
             }
         });
 
         mFastForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TimeUtil.speedFactor <= 3)
-                    TimeUtil.speedFactor = 3;
+                if (Clock.speedFactor <= 3)
+                    Clock.speedFactor = 3;
                 mNormal.clearColorFilter();
                 mFastForward.setColorFilter(Color.parseColor("#757575"));
                 mForward.clearColorFilter();
-                //         mTextViewSpeed.setText(getString(R.string.speed) + TimeUtil.speedFactor);
+                //         mTextViewSpeed.setText(getString(R.string.speed) + Clock.speedFactor);
             }
         });
 
@@ -151,12 +155,12 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
         mNormal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TimeUtil.speedFactor > 1) {
-                    TimeUtil.speedFactor = 1;
+                if (Clock.speedFactor > 1) {
+                    Clock.speedFactor = 1;
                     mNormal.setColorFilter(Color.parseColor("#757575"));
                     mForward.clearColorFilter();
                     mFastForward.clearColorFilter();
-                    //            mTextViewSpeed.setText(getString(R.string.speed) + TimeUtil.speedFactor);
+                    //            mTextViewSpeed.setText(getString(R.string.speed) + Clock.speedFactor);
                 }
             }
         });
@@ -171,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
     }
 
     private void loadZooInfo() {
-        ZooInfoBusiness.getFromPreferences();
+        //  ZooInfoBusiness.getFromPreferences();
         ZooInfoBusiness.load();
     }
 
@@ -181,7 +185,8 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
     }
 
     private void bindContainerFragment() {
-        mFrameContainer = R.id.frame_container;
+        mFrameContainer = (FrameLayout) findViewById(R.id.frame_container);
+        mIdFrameContainer = R.id.frame_container;
     }
 
     private void bindNavigationDrawer() {
@@ -202,10 +207,10 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
         mTextViewDate = (TextView) mToolbar.findViewById(R.id.text_view_date);
 
 
-        TimeUtil.getFromPreferences();
+        Clock.getFromPreferences();
 
-        mTextViewClock.setText(TimeUtil.getTimeString());
-        mTextViewDate.setText(TimeUtil.getDateString());
+        mTextViewClock.setText(Clock.getTimeString());
+        mTextViewDate.setText(Clock.getDateString());
 
     }
 
@@ -240,33 +245,28 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
     @Override
     public void onBuyFruitClick() {
-        mPresenter.startTransaction(mFrameContainer, new BuyFoodFragment());
+        mPresenter.startTransaction(mIdFrameContainer, new BuyFoodFragment());
     }
 
     @Override
     public void onHireEmployeeClick() {
-        mPresenter.startTransaction(mFrameContainer, new HireEmployeeFragment());
+        mPresenter.startTransaction(mIdFrameContainer, new HireEmployeeFragment());
 
     }
 
     @Override
     public void onBuyAnimalClick() {
-        mPresenter.startTransaction(mFrameContainer, new BuyAnimalFragment());
+        mPresenter.startTransaction(mIdFrameContainer, new BuyAnimalFragment());
     }
 
     @Override
     public void onBuildCageClick() {
-        mPresenter.startTransaction(mFrameContainer, new BuyCageFragment());
+        mPresenter.startTransaction(mIdFrameContainer, new BuyCageFragment());
     }
 
     @Override
     public void onStockClick() {
-
-    }
-
-    @Override
-    public void changeFragment(Fragment fragment) {
-
+        mPresenter.startTransaction(mIdFrameContainer, new ManageStockFragment());
     }
 
     @Override
@@ -278,5 +278,10 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
     @Override
     protected void onResume() {
         super.onResume();
+    }
+
+    @Override
+    public void showSnackBar(String message) {
+        Snackbar.make(mFrameContainer, message, Snackbar.LENGTH_SHORT);
     }
 }

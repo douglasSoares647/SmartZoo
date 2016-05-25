@@ -8,9 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.model.business.BusinessRules;
+import com.br.smartzoo.model.business.CageBusiness;
 import com.br.smartzoo.model.entity.Cage;
+import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnConstructListener;
 import com.br.smartzoo.presenter.BuyCagePresenter;
 import com.br.smartzoo.ui.adapter.BuyCageAdapter;
@@ -66,7 +70,13 @@ public class BuyCageFragment extends Fragment implements BuyCageView, OnConstruc
     }
 
     @Override
-    public void onConstruct() {
+    public void onConstruct(Cage cage) {
 
+        Boolean haveMoney = BusinessRules.buyCage(cage);
+        if(haveMoney)
+        Toast.makeText(getContext(),getString(R.string.msg_cage_sucessfully_built),Toast.LENGTH_SHORT).show();
+        else{
+            Toast.makeText(getContext(),R.string.msg_dont_have_money,Toast.LENGTH_SHORT).show();
+        }
     }
 }

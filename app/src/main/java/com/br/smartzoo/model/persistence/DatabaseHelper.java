@@ -30,7 +30,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(FeederContract.createTable());
         sqLiteDatabase.execSQL(VeterinaryContract.createTable());
         sqLiteDatabase.execSQL(JanitorContract.createTable());
-
+        sqLiteDatabase.execSQL(FoodContract.createTable());
         sqLiteDatabase.execSQL(JanitorContract.createTableCages());
         sqLiteDatabase.execSQL(FeederContract.createTableFeederCages());
         sqLiteDatabase.execSQL(VeterinaryContract.createTableAnimalsTreatedByVet());

@@ -17,30 +17,35 @@ public class Supplier {
     }
 
 
-    private Food createFood(String foodName, Integer quantity) {
+    private static List<Food> createFood(String foodName, Integer quantity) {
 
-            Food food = new Food();
-            food.setName(foodName);
+            List<Food> foods = new ArrayList<>();
+            for(int i=0; i<quantity; i++){
+                Food food = new Food();
+                food.setName(foodName);
 
-            Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.MONTH,3);
-            food.setExpirationDate(calendar.getTime());
-            food.setWeight(Double.valueOf(quantity));
+                Calendar calendar = Calendar.getInstance();
+                calendar.add(Calendar.MONTH,3);
+                food.setExpirationDate(calendar.getTime());
+                food.setWeight(1.0);
 
-        return food;
+                foods.add(food);
+            }
+
+        return foods;
 
     }
 
 
-    public HashMap<String,Food> buyFoods (HashMap<String,Integer> foodsToBuy){
+    public static HashMap<String,List<Food>> buyFoods (HashMap<String,Integer> foodsToBuy){
 
-        HashMap<String,Food> foods = new HashMap<>();
+        HashMap<String,List<Food>> foods = new HashMap<>();
 
         for(Map.Entry<String,Integer> item : foodsToBuy.entrySet()){
             String foodName = item.getKey();
             Integer foodQuantity = item.getValue();
-            Food createdFood =  createFood(foodName,foodQuantity);
-            foods.put(foodName,createdFood);
+            List<Food> createdFoods =  createFood(foodName,foodQuantity);
+            foods.put(foodName,createdFoods);
         }
         return foods;
     }
