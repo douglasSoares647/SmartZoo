@@ -30,7 +30,7 @@ public class FoodContract {
         StringBuilder table = new StringBuilder();
 
         table.append(" create table " + TABLE + " ( ");
-        table.append(ID + "integer primary key, ");
+        table.append(ID + " integer primary key, ");
         table.append(NAME + " text not null, ");
         table.append(PRICE + " double, ");
         table.append(WEIGHT + " double not null, ");

@@ -96,5 +96,7 @@
     <string name="msg_construct_cage_confirm">Are you sure that you want to construct this cage?</string>
     <string name="msg_buy_animal_confirm">Are you sure you want to buy this animal?</string>
     <string name="visitors">Visitantes:</string>
+    <string name="title_exit">Sair</string>
+    <string name="message_exit_game">Tem certeza que deseja sair do jogo atual?</string>
 
 </resources>

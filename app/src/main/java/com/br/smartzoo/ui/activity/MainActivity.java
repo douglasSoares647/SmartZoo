@@ -1,5 +1,7 @@
 package com.br.smartzoo.ui.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -23,10 +26,12 @@ import com.br.smartzoo.presenter.MainActivityPresenter;
 import com.br.smartzoo.ui.fragment.BuyAnimalFragment;
 import com.br.smartzoo.ui.fragment.BuyCageFragment;
 import com.br.smartzoo.ui.fragment.BuyFoodFragment;
+import com.br.smartzoo.ui.fragment.ChooseEmployeeFragment;
 import com.br.smartzoo.ui.fragment.HireEmployeeFragment;
 import com.br.smartzoo.ui.fragment.ManageStockFragment;
 import com.br.smartzoo.ui.fragment.NavigationDrawerFragment;
 import com.br.smartzoo.ui.view.MainActivityView;
+import com.br.smartzoo.util.AlertDialogUtil;
 import com.br.smartzoo.util.AnimUtil;
 import com.br.smartzoo.model.environment.Clock;
 import com.br.smartzoo.util.ServiceHelper;
@@ -211,6 +216,27 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
     }
 
+    @Override
+    public void onBackPressed() {
+
+        DialogInterface.OnClickListener clickYesListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                MainActivity.super.onBackPressed();
+            }
+        };
+
+        AlertDialog.Builder alert = AlertDialogUtil.makeAlertDialogExit(this
+                , getString(R.string.title_exit), getString(R.string.message_exit_game)
+                , clickYesListener);
+        alert.show();
+
+
+
+
+
+    }
+
     private void bindDrawerLayout() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
     }
@@ -227,6 +253,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
     @Override
     public void onEmployeeClick() {
+        mPresenter.startTransaction(mIdFrameContainer, new ChooseEmployeeFragment());
 
     }
 
@@ -280,5 +307,9 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
     @Override
     public void showSnackBar(String message) {
         Snackbar.make(mFrameContainer, message, Snackbar.LENGTH_SHORT);
+    }
+
+    public void startTransaction(Fragment fragment){
+        mPresenter.startTransaction(mIdFrameContainer, fragment);
     }
 }
