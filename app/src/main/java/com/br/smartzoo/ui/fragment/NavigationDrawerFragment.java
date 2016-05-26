@@ -4,8 +4,10 @@ package com.br.smartzoo.ui.fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -14,9 +16,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.model.entity.Animal;
+import com.br.smartzoo.model.entity.Cage;
+import com.br.smartzoo.model.entity.Employee;
+import com.br.smartzoo.model.entity.Feeder;
+import com.br.smartzoo.model.entity.Janitor;
+import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnDrawerOptionClick;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by adenilson on 05/05/16.
@@ -56,6 +67,7 @@ public class NavigationDrawerFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.navigation_drawer, container, false);
 
+        bindHeader(view);
         bindOptionAnimals(view);
         bindOptionNews(view);
         bindOptionCages(view);
@@ -67,6 +79,73 @@ public class NavigationDrawerFragment extends Fragment {
 
 
         return view;
+    }
+
+    private void bindHeader(View view) {
+        final TextView textViewNumberCages = (TextView) view.findViewById(R.id.text_view_number_cages_value);
+        final TextView textViewNumberAnimals = (TextView) view.findViewById(R.id.text_view_number_animals_value);
+        final TextView textViewNumberJanitor = (TextView) view.findViewById(R.id.text_view_number_janitor_value);
+        final TextView textViewNumberFeeders = (TextView) view.findViewById(R.id.text_view_number_feeders_value);
+        final TextView textViewNumberVeterinaries = (TextView) view.findViewById(R.id.text_view_number_veterinaries_value);
+        final TextView textViewPopularity = (TextView) view.findViewById(R.id.text_view_popularity_value);
+        final TextView textViewCash = (TextView) view.findViewById(R.id.text_view_cash_value);
+        final TextView textViewVisitors = (TextView) view.findViewById(R.id.text_view_number_visitors_value);
+
+        final Handler accessUIHandler = new Handler();
+        Thread updateInfosThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    accessUIHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            textViewNumberCages.setText(String.valueOf(ZooInfo.cages.size()));
+
+                            int numberAnimals = 0;
+                            for (Cage cage : ZooInfo.cages) {
+                                numberAnimals += cage.getAnimals().size();
+                            }
+
+                            textViewNumberAnimals.setText(String.valueOf(numberAnimals));
+
+                            textViewNumberCages.setText(String.valueOf(ZooInfo.cages.size()));
+
+                            int numberJanitors = 0;
+                            int numberFeeders = 0;
+                            int numberVets = 0;
+
+                            for (Employee employee : ZooInfo.employees) {
+                                if (employee instanceof Janitor)
+                                    numberJanitors++;
+                                else if (employee instanceof Feeder)
+                                    numberFeeders++;
+                                else
+                                    numberVets++;
+                            }
+
+                            textViewNumberFeeders.setText(String.valueOf(numberFeeders));
+                            textViewNumberVeterinaries.setText(String.valueOf(numberVets));
+                            textViewNumberJanitor.setText(String.valueOf(numberJanitors));
+
+
+                            textViewPopularity.setText(String.format("%.2f",ZooInfo.reputation));
+                            textViewCash.setText(String.format("%.2f",ZooInfo.money));
+
+                            textViewVisitors.setText(String.valueOf(ZooInfo.visitors.size()));
+                        }
+                    });
+
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        updateInfosThread.start();
+
     }
 
     private void bindOptionStock(View view) {

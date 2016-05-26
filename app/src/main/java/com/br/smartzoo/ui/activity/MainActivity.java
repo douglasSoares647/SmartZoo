@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
         setContentView(R.layout.activity_main);
 
-        loadZooInfo();
+
         bindmPresenter();
         bindToolbar();
         bindFooterBar();
@@ -174,10 +174,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
         startService(new Intent(this, ClockService.class));
     }
 
-    private void loadZooInfo() {
-        //  ZooInfoBusiness.getFromPreferences();
-        ZooInfoBusiness.load();
-    }
+
 
     private void bindmPresenter() {
         mPresenter = new MainActivityPresenter(this);

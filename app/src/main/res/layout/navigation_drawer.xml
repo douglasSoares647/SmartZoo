@@ -8,7 +8,7 @@
     <RelativeLayout
         android:id="@+id/relative_header"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="265dp"
         android:background="@color/green_700"
         android:padding="16dp">
 
@@ -33,13 +33,46 @@
 
         <TextView
             android:textColor="@color/white"
-            android:id="@+id/text_view_number_cages"
+            android:id="@+id/text_view_number_visitors"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/text_view_name_zoo"
             android:layout_below="@id/text_view_name_zoo"
             android:layout_marginTop="16dp"
             android:layout_toRightOf="@id/image_view_picture_zoo"
+            android:text="@string/visitors"
+            android:textSize="16sp" />
+
+        <TextView
+            android:textColor="@color/white"
+            android:id="@+id/text_view_number_visitors_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_view_name_zoo"
+            android:layout_marginTop="16dp"
+            android:layout_toRightOf="@id/text_view_number_visitors"
+            android:text="@string/visitors"
+            android:textSize="16sp" />
+
+        <TextView
+            android:textColor="@color/white"
+            android:id="@+id/text_view_number_cages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/text_view_name_zoo"
+            android:layout_below="@id/text_view_number_visitors"
+            android:layout_toRightOf="@id/image_view_picture_zoo"
+            android:text="@string/cages"
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:textColor="@color/white"
+            android:id="@+id/text_view_number_cages_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_view_number_visitors_value"
+            android:layout_toRightOf="@id/text_view_number_cages"
             android:text="@string/cages"
             android:textSize="16sp" />
 
@@ -54,6 +87,16 @@
             android:text="@string/animals"
             android:textSize="16sp" />
 
+        <TextView
+            android:textColor="@color/white"
+            android:id="@+id/text_view_number_animals_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_view_number_cages"
+            android:layout_toRightOf="@+id/text_view_number_animals"
+            android:layout_marginTop="4dp"
+            android:text="@string/animals"
+            android:textSize="16sp" />
 
         <TextView
             android:textColor="@color/white"
@@ -69,6 +112,18 @@
 
         <TextView
             android:textColor="@color/white"
+            android:id="@+id/text_view_number_janitor_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_view_number_animals"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@id/text_view_number_janitor"
+            android:text="@string/janitors"
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:textColor="@color/white"
             android:id="@+id/text_view_number_veterinaries"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -76,6 +131,17 @@
             android:layout_below="@+id/text_view_number_feeders"
             android:layout_marginTop="4dp"
             android:layout_toRightOf="@id/text_view_number_janitor"
+            android:text="@string/veterinaries"
+            android:textSize="16sp" />
+
+        <TextView
+            android:textColor="@color/white"
+            android:id="@+id/text_view_number_veterinaries_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_view_number_feeders"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@id/text_view_number_veterinaries"
             android:text="@string/veterinaries"
             android:textSize="16sp" />
 
@@ -91,16 +157,41 @@
             android:text="@string/feeders"
             android:textSize="16sp" />
 
+        <TextView
+            android:id="@+id/text_view_number_feeders_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_view_number_janitor"
+            android:textColor="@color/white"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@id/text_view_number_feeders"
+            android:text="@string/feeders"
+            android:textSize="16sp" />
+
 
         <TextView
             android:textColor="@color/white"
             android:id="@+id/text_view_popularity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:text="@string/popularity"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_alignTop="@+id/text_view_popularity_value"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:textColor="@color/white"
+            android:id="@+id/text_view_popularity_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/popularity"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_below="@+id/text_view_number_veterinaries"
+            android:layout_toRightOf="@+id/text_view_popularity"
+            android:layout_toEndOf="@+id/text_view_popularity" />
 
         <TextView
             android:textColor="@color/white"
@@ -108,11 +199,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="32dp"
-            android:layout_toRightOf="@id/text_view_popularity"
+            android:layout_below="@+id/text_view_popularity"
             android:text="@string/cash"
             android:textSize="16sp"
             android:textStyle="bold" />
+
+
+        <TextView
+            android:textColor="@color/white"
+            android:id="@+id/text_view_cash_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cash"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_alignTop="@+id/text_view_cash"
+            android:layout_toRightOf="@+id/text_view_cash"
+            android:layout_toEndOf="@+id/text_view_cash" />
 
 
     </RelativeLayout>
