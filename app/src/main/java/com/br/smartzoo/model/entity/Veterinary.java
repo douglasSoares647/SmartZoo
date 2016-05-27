@@ -15,7 +15,6 @@ import java.util.Map;
 public class Veterinary extends Employee {
 
     public String status;
-
     private HashMap<Integer,Integer> animalsTreatedThisMonth;
     private int clock = 0;
 
@@ -88,5 +87,9 @@ public class Veterinary extends Employee {
     @Override
     public void onTick() {
 
+    }
+
+    public Integer getNumberAnimalTreated(){
+       return animalsTreatedThisMonth != null ? animalsTreatedThisMonth.size() : 0;
     }
 }

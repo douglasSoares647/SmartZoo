@@ -98,5 +98,8 @@
     <string name="visitors">Visitantes:</string>
     <string name="title_exit">Sair</string>
     <string name="message_exit_game">Tem certeza que deseja sair do jogo atual?</string>
+    <string name="title_demission">Demission</string>
+    <string name="message_sure">Are you sure this?</string>
+    <string name="title_salary">Salary</string>
 
 </resources>

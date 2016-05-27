@@ -99,4 +99,7 @@
     <string name="visitors">Visitors:</string>
     <string name="title_exit">Exit</string>
     <string name="message_exit_game">Are you sure you want to quit the current game?</string>
+    <string name="title_demission">Demission</string>
+    <string name="message_sure">Are you sure this?</string>
+    <string name="title_salary">Salary</string>
 </resources>
