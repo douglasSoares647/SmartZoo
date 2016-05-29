@@ -15,8 +15,7 @@ public class JanitorBusiness {
 
 
     public static void save(Janitor janitor){
-        EmployeeBusiness.save(janitor);
-        JanitorRepository.save(janitor);
+          JanitorRepository.save(janitor);
     }
 
 

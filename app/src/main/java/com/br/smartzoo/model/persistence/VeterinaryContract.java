@@ -71,7 +71,7 @@ public class VeterinaryContract {
             veterinary.setAge(cursor.getInt(cursor.getColumnIndex(EmployeeContract.AGE)));
             veterinary.setName(cursor.getString(cursor.getColumnIndex(EmployeeContract.NAME)));
             veterinary.setSalary(cursor.getDouble(cursor.getColumnIndex(EmployeeContract.SALARY)));
-
+            veterinary.setImage(cursor.getInt(cursor.getColumnIndex(EmployeeContract.IMAGE)));
             Date startDate = DateUtil.stringToDate(cursor.getString(cursor.getColumnIndex(EmployeeContract.STARTDATE)));
             Date endDate = DateUtil.stringToDate(cursor.getString(cursor.getColumnIndex(EmployeeContract.ENDDATE)));
             veterinary.setStartDate(startDate);

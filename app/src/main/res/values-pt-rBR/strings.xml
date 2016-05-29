@@ -87,9 +87,9 @@
     <string name="msg_cage_full">Esta jaula está cheia, por favor selecione outra!</string>
     <string name="text_food_stock">Alimentos no estoque:</string>
     <string name="text_prepare">Preparar</string>
-    <string name="message_load_list_successful">Food list updated!</string>
-    <string name="message_load_list_failed">Failed to load food list</string>
-    <string name="message_load_list_empty">There aren\'t food in the stock!</string>
+    <string name="message_load_list_food_successful">Food list updated!</string>
+    <string name="message_load_food_list_failed">Failed to load food list</string>
+    <string name="message_load_food_list_empty">There aren\'t food in the stock!</string>
     <string name="message_load_foods">Loading foods</string>
     <string name="title_foods">Foods</string>
     <string name="message_food_sold">Food sold!</string>
@@ -101,5 +101,14 @@
     <string name="title_demission">Demission</string>
     <string name="message_sure">Are you sure this?</string>
     <string name="title_salary">Salary</string>
+    <string name="title_veterinaries">Veterinaries</string>
+    <string name="message_load_veterinaries">Loading veterinaries</string>
+    <string name="message_load_list_veterinary_successful">Veterinary list updated!</string>
+    <string name="message_load_veterinary_list_failed">Failed to load veterinary list</string>
+    <string name="message_load_veterinary_list_empty">There aren\'t veterinary in the stock!</string>
+    <string name="message_demit">Demitting veterinary</string>
+    <string name="message_demit_failed">Demission failed</string>
+    <string name="message_update_salary_failed">Update failed</string>
+    <string name="message_update_salary_success">Update success</string>
 
 </resources>

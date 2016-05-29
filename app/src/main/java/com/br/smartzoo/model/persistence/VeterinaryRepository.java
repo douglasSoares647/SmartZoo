@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.br.smartzoo.model.business.BusinessRules;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Veterinary;
 import com.br.smartzoo.util.DateUtil;
@@ -23,18 +24,37 @@ public class VeterinaryRepository {
 
         ContentValues values = VeterinaryContract.createContentValues(veterinary);
 
-        if(veterinary.getId()==null){
+        if(VeterinaryRepository.existsVeterinary(veterinary)){
+            String where = " id = " + veterinary.getId();
+            db.update(VeterinaryContract.TABLE, values, where, null);
+        }else{
             db.insert(VeterinaryContract.TABLE, null, values);
         }
-        else{
-            String where = " id = " + veterinary.getId();
-            db.update(VeterinaryContract.TABLE,values,where,null);
-        }
+
 
         db.close();
         databaseHelper.close();
+
     }
 
+    private static boolean existsVeterinary(Veterinary veterinary) {
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
+        SQLiteDatabase db = databaseHelper.getReadableDatabase();
+
+        String[] args = {String.valueOf(veterinary.getId())};
+        String where = "Select * from " + VeterinaryContract.TABLE + " where id = ? ;";
+
+
+        Cursor cursor = db.rawQuery(where, args);
+
+        boolean exists = cursor.moveToFirst();
+
+        cursor.close();
+        db.close();
+        databaseHelper.close();
+
+        return exists;
+    }
 
 
     public static void saveAnimalHistory(Veterinary veterinary, Animal animal){
@@ -90,7 +110,8 @@ public class VeterinaryRepository {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
 
-        String sql = " Select v.id, e.name, e.age, e.cpf, e.startDate, e.endDate, e.salary from "+ EmployeeContract.TABLE + " e join " + VeterinaryContract.TABLE + " v on v.id = e.id;";
+        String sql = " Select v.id, e.image, e.name, e.age, e.cpf, e.startDate, e.endDate, e.salary from "
+                + EmployeeContract.TABLE + " e join " + VeterinaryContract.TABLE + " v on v.id = e.id;";
 
         Cursor cursor = db.rawQuery(sql,null);
 

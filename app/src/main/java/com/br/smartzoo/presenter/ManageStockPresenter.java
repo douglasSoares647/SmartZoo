@@ -40,19 +40,19 @@ public class ManageStockPresenter {
             public void onLoadFoodListSuccess(List<Food> foodList) {
                 mManageStockView.onFoodListLoaded(foodList);
                 mManageStockView.showSnackBar(mContext
-                        .getString(R.string.message_load_list_successful));
+                        .getString(R.string.message_load_list_food_successful));
             }
 
             @Override
             public void onLoadFoodListFail() {
                 mManageStockView.showSnackBar(mContext
-                        .getString(R.string.message_load_list_failed));
+                        .getString(R.string.message_load_food_list_failed));
             }
 
             @Override
             public void onLoadFoodListEmpty() {
                 mManageStockView.showSnackBar(mContext
-                        .getString(R.string.message_load_list_empty));
+                        .getString(R.string.message_load_food_list_empty));
             }
         }).execute();
 

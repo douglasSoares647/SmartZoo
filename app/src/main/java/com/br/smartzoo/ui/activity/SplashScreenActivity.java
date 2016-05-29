@@ -100,7 +100,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     private void loadZooInfo() {
-        //  ZooInfoBusiness.getFromPreferences();
+         //ZooInfoBusiness.getFromPreferences();
 
         if(!ZooInfoBusiness.isLoaded) {
             ZooInfoBusiness.load();

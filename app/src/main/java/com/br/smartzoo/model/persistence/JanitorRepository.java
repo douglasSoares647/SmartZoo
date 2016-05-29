@@ -18,48 +18,66 @@ import java.util.List;
 public class JanitorRepository {
 
 
-    public static void save(Janitor janitor){
+    public static void save(Janitor janitor) {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
         ContentValues values = JanitorContract.createContentValues(janitor);
 
-        if(janitor.getId()==null){
-            db.insert(JanitorContract.TABLE,null,values);
-        }
-        else{
-
+        if (JanitorRepository.existsJanitor(janitor)) {
             String where = " id = " + janitor.getId();
-            db.update(JanitorContract.TABLE,values,where,null);
+            db.update(JanitorContract.TABLE, values, where, null);
+        } else {
+            db.insert(JanitorContract.TABLE, null, values);
         }
+
 
         db.close();
         databaseHelper.close();
     }
 
+    private static boolean existsJanitor(Janitor janitor) {
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
+        SQLiteDatabase db = databaseHelper.getReadableDatabase();
 
-    public static void saveCageOnHistory(Janitor janitor, Cage cage){
+        String[] args = {String.valueOf(janitor.getId())};
+        String where = "Select * from " + JanitorContract.TABLE + " where id = ? ;";
+
+
+        Cursor cursor = db.rawQuery(where, args);
+
+        boolean exists = cursor.moveToFirst();
+
+        cursor.close();
+        db.close();
+        databaseHelper.close();
+
+        return exists;
+    }
+
+
+    public static void saveCageOnHistory(Janitor janitor, Cage cage) {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
-        db.execSQL(" insert into " + JanitorContract.CAGESTABLE + " ( "+ JanitorContract.JANITORID + ", "+JanitorContract.CAGEID + "), values (" + janitor.getId() +", "+cage.getId());
+        db.execSQL(" insert into " + JanitorContract.CAGESTABLE + " ( " + JanitorContract.JANITORID + ", " + JanitorContract.CAGEID + "), values (" + janitor.getId() + ", " + cage.getId());
 
         db.close();
         databaseHelper.close();
     }
 
 
-    public static HashMap<Integer,Integer> getCagesHistoryOfJanitor(Janitor janitor, Date startDate, Date endDate){
+    public static HashMap<Integer, Integer> getCagesHistoryOfJanitor(Janitor janitor, Date startDate, Date endDate) {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
 
         String start = DateUtil.dateToString(startDate);
         String end = DateUtil.dateToString(endDate);
 
-        String sql = " select cageId, count(cageId) as 'count' from " + JanitorContract.CAGESTABLE + " where janitorId like "+janitor.getId() +
+        String sql = " select cageId, count(cageId) as 'count' from " + JanitorContract.CAGESTABLE + " where janitorId like " + janitor.getId() +
                 " and date between " + start + " and  " + end + " group by cageId;";
 
-        Cursor cursor = db.rawQuery(sql,null);
+        Cursor cursor = db.rawQuery(sql, null);
 
         db.close();
         databaseHelper.close();
@@ -68,26 +86,26 @@ public class JanitorRepository {
 
     }
 
-    public static HashMap<Integer,Integer> getCagesHistoryOfJanitor(Janitor janitor){
+    public static HashMap<Integer, Integer> getCagesHistoryOfJanitor(Janitor janitor) {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
 
         String sql = " select cageId, count(cageId) as 'count' from " + JanitorContract.CAGESTABLE + " where janitorId like " + janitor.getId() +
                 " group by cageId";
 
-        Cursor cursor = db.rawQuery(sql,null);
+        Cursor cursor = db.rawQuery(sql, null);
 
         return FeederContract.getCagesCount(cursor);
 
     }
 
-    public static List<Janitor> getJanitors(){
+    public static List<Janitor> getJanitors() {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
 
-        String sql = " Select j.id, e.name, e.age, e.cpf, e.startDate, e.endDate, e.salary from "+ EmployeeContract.TABLE + " e join " + JanitorContract.TABLE + " j on j.id = e.id;";
+        String sql = " Select j.id, e.name, e.age, e.cpf, e.startDate, e.endDate, e.salary from " + EmployeeContract.TABLE + " e join " + JanitorContract.TABLE + " j on j.id = e.id;";
 
-        Cursor cursor = db.rawQuery(sql,null);
+        Cursor cursor = db.rawQuery(sql, null);
 
         return JanitorContract.getJanitors(cursor);
     }

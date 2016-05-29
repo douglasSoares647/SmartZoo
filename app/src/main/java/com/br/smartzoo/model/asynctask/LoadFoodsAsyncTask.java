@@ -8,6 +8,7 @@ import android.view.animation.AccelerateInterpolator;
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.business.FoodBusiness;
 import com.br.smartzoo.model.entity.Food;
+import com.br.smartzoo.util.ProgressDialogUtil;
 
 import java.util.List;
 
@@ -30,11 +31,9 @@ public class LoadFoodsAsyncTask extends AsyncTask<Void, Integer, List<Food>> {
     protected void onPreExecute() {
         super.onPreExecute();
 
-        mProgressDialog = new ProgressDialog(mContext);
-        mProgressDialog.setMax(100);
-        mProgressDialog.setProgress(0);
-        mProgressDialog.setMessage(mContext.getString(R.string.message_load_foods));
-        mProgressDialog.setTitle(mContext.getString(R.string.title_foods));
+        mProgressDialog = ProgressDialogUtil
+                .makeProgressDialog(mContext,mContext.getString(R.string.message_load_foods),
+                mContext.getString(R.string.title_foods));
         mProgressDialog.show();
     }
 

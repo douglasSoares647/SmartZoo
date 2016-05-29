@@ -14,7 +14,7 @@ public class DateUtil {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         Date newDate = null;
-        if(date!=null || !date.isEmpty()) {
+        if (date != null && !date.isEmpty()) {
             try {
                 newDate = dateFormat.parse(date);
             } catch (ParseException e) {
@@ -26,11 +26,11 @@ public class DateUtil {
     }
 
 
-    public static String dateToString(Date date){
+    public static String dateToString(Date date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         String format = null;
-        if(date!=null) {
+        if (date != null) {
             format = dateFormat.format(date);
         }
 
@@ -38,12 +38,11 @@ public class DateUtil {
     }
 
 
-
-    public static Date stringToDateWithBrazilianFormat(String date){
+    public static Date stringToDateWithBrazilianFormat(String date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
         Date newDate = null;
-        if(date!=null || !date.isEmpty()) {
+        if (date != null && !date.isEmpty()) {
             try {
                 newDate = dateFormat.parse(date);
             } catch (ParseException e) {

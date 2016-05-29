@@ -16,8 +16,6 @@ import java.util.List;
 public class FeederBusiness {
 
     public static void save(Feeder feeder){
-
-        EmployeeBusiness.save(feeder);
         FeederRepository.save(feeder);
     }
 

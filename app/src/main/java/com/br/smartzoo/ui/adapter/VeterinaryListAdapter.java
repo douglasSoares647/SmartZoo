@@ -2,6 +2,7 @@ package com.br.smartzoo.ui.adapter;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import com.br.smartzoo.R;
 import com.br.smartzoo.model.entity.Veterinary;
 import com.br.smartzoo.model.interfaces.OnManageVeterinary;
 import com.br.smartzoo.util.AlertDialogUtil;
+import com.br.smartzoo.util.DialogUtil;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -21,8 +23,7 @@ import java.util.List;
 /**
  * Created by adenilson on 26/05/16.
  */
-public class VeterinaryListAdapter extends RecyclerView.Adapter<VeterinaryListAdapter.ViewHolder>
-         {
+public class VeterinaryListAdapter extends RecyclerView.Adapter<VeterinaryListAdapter.ViewHolder> {
 
     private OnManageVeterinary mOnManageVeterinary;
     private List<Veterinary> mVeterinaryList;
@@ -38,6 +39,11 @@ public class VeterinaryListAdapter extends RecyclerView.Adapter<VeterinaryListAd
         this.mOnManageVeterinary = onManageVeterinary;
     }
 
+    public void setVeterinaryList(List<Veterinary> veterinaryList) {
+        this.mVeterinaryList = veterinaryList;
+        notifyDataSetChanged();
+    }
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -49,39 +55,42 @@ public class VeterinaryListAdapter extends RecyclerView.Adapter<VeterinaryListAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Veterinary veterinary = mVeterinaryList.get(position);
+         Veterinary veterinary = mVeterinaryList.get(position);
         Glide.with(mContext).load(veterinary.getImage()).into(holder.mImageViewVeterinary);
         Glide.with(mContext).load(R.drawable.ic_demit).into(holder.mImageViewDemission);
         Glide.with(mContext).load(R.drawable.ic_salary).into(holder.mImageViewSalary);
         Glide.with(mContext).load(R.drawable.ic_treatments).into(holder.mImageViewAnimalsTreatments);
         holder.mTextViewName.setText(veterinary.getName());
         holder.mTextViewAge.setText(String.valueOf(veterinary.getAge()));
-        holder.mTextViewSalary.setText(String.valueOf(veterinary.getSalary()));
+        holder.mTextViewSalary.setText(String.valueOf(veterinary.getSalary()) + " $");
         holder.mTextViewStatus.setText(veterinary.getStatus());
-        holder.mTextViewNumberTreatments.setText(veterinary.getNumberAnimalTreated());
+        holder.mTextViewNumberTreatments.setText(String.valueOf(veterinary.getNumberAnimalTreated()));
 
-        addListenerToDemission(holder);
-        addListenerToSalary(holder);
+        addListenerToDemission(holder, veterinary);
+        addListenerToSalary(holder, veterinary);
 
     }
 
-    private void addListenerToSalary(ViewHolder holder) {
+    private void addListenerToSalary(ViewHolder holder, final Veterinary veterinary) {
 
 
         holder.mImageViewSalary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Dialog dialog = DialogUtil.makeDialogSalary(mContext
+                        , mOnManageVeterinary, veterinary);
+                dialog.show();
 
             }
         });
     }
 
-    private void addListenerToDemission(ViewHolder holder) {
+    private void addListenerToDemission(ViewHolder holder, final Veterinary veterinary) {
 
         final DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                mOnManageVeterinary.onDemit();
+                mOnManageVeterinary.onDemit(veterinary);
             }
         };
 
@@ -104,6 +113,8 @@ public class VeterinaryListAdapter extends RecyclerView.Adapter<VeterinaryListAd
     public int getItemCount() {
         return mVeterinaryList.size();
     }
+
+
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {

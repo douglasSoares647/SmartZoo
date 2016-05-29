@@ -140,11 +140,7 @@ public class BusinessRules {
 
 
     public static Boolean haveMoneyToBuyEmployee(Employee employee){
-        if(ZooInfo.money> employee.getPrice()){
-            return true;
-        }
-        else
-            return false;
+        return ZooInfo.money > employee.getPrice();
     }
 
 }

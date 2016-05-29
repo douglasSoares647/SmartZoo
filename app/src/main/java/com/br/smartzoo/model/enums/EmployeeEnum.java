@@ -7,7 +7,7 @@ import com.br.smartzoo.R;
  */
 public enum EmployeeEnum {
 
-    Veterinary(R.drawable.ic_veterinary, 2400D, R.string.name_veterinary),
+    Veterinary(R.drawable.ic_veterinary, 1000D, R.string.name_veterinary),
     Janitor(R.drawable.ic_janitor, 1000D,R.string.name_janitor),
     Feeder(R.drawable.ic_feeder, 1600D, R.string.name_feeder);
 

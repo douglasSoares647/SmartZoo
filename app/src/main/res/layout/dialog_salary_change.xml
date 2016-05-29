@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
 
     <RelativeLayout
-        android:padding="16dp"
-        android:background="@color/green_700"
         android:id="@+id/relative_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/green_700"
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/text_view_title"
-            android:text="Title"
-            android:textColor="@color/white"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="Salary"
+            android:textColor="@color/white" />
 
     </RelativeLayout>
 
 
-
     <RelativeLayout
+        android:paddingTop="32dp"
         android:id="@+id/relative_body"
-        android:padding="16dp"
-        android:layout_below="@id/relative_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relative_header"
+      >
 
         <SeekBar
             android:id="@+id/seek_bar_salary"
@@ -36,17 +37,40 @@
 
 
         <TextView
-            android:layout_below="@id/seek_bar_salary"
-            android:text="Salary: 0,00 $"
-            android:layout_marginTop="8dp"
             android:id="@+id/text_view_salary"
-            android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_below="@id/seek_bar_salary"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:text="Salary: 0,00 $" />
+
+
+        <Button
+            android:id="@+id/button_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/text_view_salary"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/transparent"
+            android:text="OK"
+            android:textColor="@color/green_700" />
+
+
+        <Button
+            android:id="@+id/button_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/button_ok"
+            android:layout_below="@id/text_view_salary"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/transparent"
+            android:text="CANCEL"
+            android:textColor="@color/grey_600" />
 
 
     </RelativeLayout>
-
 
 
 </RelativeLayout>

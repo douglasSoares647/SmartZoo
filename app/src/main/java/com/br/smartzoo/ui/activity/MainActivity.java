@@ -306,7 +306,11 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
     @Override
     public void showSnackBar(String message) {
-        Snackbar.make(mFrameContainer, message, Snackbar.LENGTH_SHORT);
+        Snackbar snack = Snackbar.make(mFrameContainer, message, Snackbar.LENGTH_SHORT);
+        View view = snack.getView();
+        TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+        tv.setTextColor(Color.YELLOW);
+        snack.show();
     }
 
     public void startTransaction(Fragment fragment){
