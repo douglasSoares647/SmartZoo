@@ -17,19 +17,21 @@ public class Supplier {
     }
 
 
-    private static List<Food> createFood(String foodName, Integer quantity) {
+    private static List<Food> createFood(Food food, Integer quantity) {
 
             List<Food> foods = new ArrayList<>();
             for(int i=0; i<quantity; i++){
-                Food food = new Food();
-                food.setName(foodName);
+                Food createdfood = new Food();
+                createdfood.setName(food.getName());
+                createdfood.setImage(food.getImage());
 
                 Calendar calendar = Calendar.getInstance();
                 calendar.add(Calendar.MONTH,3);
-                food.setExpirationDate(calendar.getTime());
-                food.setWeight(1.0);
+                createdfood.setExpirationDate(calendar.getTime());
+                createdfood.setWeight(1.0);
+                createdfood.setPrice(food.getPrice());
 
-                foods.add(food);
+                foods.add(createdfood);
             }
 
         return foods;
@@ -37,15 +39,15 @@ public class Supplier {
     }
 
 
-    public static HashMap<String,List<Food>> buyFoods (HashMap<String,Integer> foodsToBuy){
+    public static HashMap<String,List<Food>> buyFoods (HashMap<Food,Integer> foodsToBuy){
 
         HashMap<String,List<Food>> foods = new HashMap<>();
 
-        for(Map.Entry<String,Integer> item : foodsToBuy.entrySet()){
-            String foodName = item.getKey();
+        for(Map.Entry<Food,Integer> item : foodsToBuy.entrySet()){
+            Food food = item.getKey();
             Integer foodQuantity = item.getValue();
-            List<Food> createdFoods =  createFood(foodName,foodQuantity);
-            foods.put(foodName,createdFoods);
+            List<Food> createdFoods =  createFood(food,foodQuantity);
+            foods.put(food.getName(),createdFoods);
         }
         return foods;
     }

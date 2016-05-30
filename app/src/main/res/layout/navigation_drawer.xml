@@ -502,25 +502,25 @@
                     android:background="@color/green_600" />
 
                 <RelativeLayout
-                    android:id="@+id/relative_option_buy_fruit"
+                    android:id="@+id/relative_option_buy_food"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="4dp">
 
                     <ImageView
-                        android:id="@+id/ic_buy_fruit"
+                        android:id="@+id/ic_buy_food"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginLeft="48dp"
-                        android:src="@drawable/ic_fruit" />
+                        android:src="@drawable/ic_food" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="16dp"
-                        android:layout_toRightOf="@id/ic_buy_fruit"
-                        android:text="@string/option_buy_fruits"
+                        android:layout_toRightOf="@id/ic_buy_food"
+                        android:text="@string/option_buy_foods"
                         android:textColor="@color/green_600"
                         android:textSize="16sp"
                         android:textStyle="bold" />

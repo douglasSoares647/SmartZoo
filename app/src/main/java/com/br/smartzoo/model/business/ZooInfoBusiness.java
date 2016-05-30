@@ -2,11 +2,16 @@ package com.br.smartzoo.model.business;
 
 import android.content.SharedPreferences;
 
+import com.br.smartzoo.model.entity.Animal;
+import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.entity.Veterinary;
 import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.persistence.ZooInfoRepository;
 import com.br.smartzoo.util.ApplicationUtil;
+
+import java.util.List;
+import java.util.concurrent.Exchanger;
 
 /**
  * Created by dhb_s on 5/12/2016.
@@ -27,6 +32,17 @@ public class ZooInfoBusiness {
         ZooInfo.employees.addAll(VeterinaryBusiness.getVeterinaries());
 
         ZooInfo.cages.addAll(CageBusiness.getAllCages());
+
+        List<Animal> animals = AnimalBusiness.getAllAnimals();
+
+        for(Cage cage : ZooInfo.cages){
+            for(Animal animal : animals){
+                if(animal.getCage().getId() == cage.getId()){
+                    animal.setCage(cage);
+                    break;
+                }
+            }
+        }
     }
 
 
@@ -46,13 +62,18 @@ public class ZooInfoBusiness {
 
 
     public static void getFromPreferences(){
-        SharedPreferences preferences = ApplicationUtil.applicationContext
-                .getSharedPreferences(ZooPref,ApplicationUtil.applicationContext.MODE_PRIVATE);
+        try{
+            SharedPreferences preferences = ApplicationUtil.applicationContext
+                    .getSharedPreferences(ZooPref, ApplicationUtil.applicationContext.MODE_PRIVATE);
 
-        ZooInfo.price = Double.parseDouble(preferences.getString("price","0"));
-        ZooInfo.money = Double.parseDouble(preferences.getString("money","0"));
-        ZooInfo.reputation = Double.parseDouble(preferences.getString("reputation", "0"));
-        ZooInfo.name = preferences.getString("name","");
+            ZooInfo.price = Double.parseDouble(preferences.getString("price", "0"));
+            ZooInfo.money = Double.parseDouble(preferences.getString("money", "2000.00"));
+            ZooInfo.reputation = Double.parseDouble(preferences.getString("reputation", "50.00"));
+            ZooInfo.name = preferences.getString("name", "");
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 }

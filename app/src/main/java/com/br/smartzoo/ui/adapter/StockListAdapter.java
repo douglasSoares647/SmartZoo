@@ -51,16 +51,14 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.View
         Glide.with(mContext).load(food.getImage()).into(holder.mImageView);
         holder.mTextViewName.setText(food.getName());
         holder.mTextViewExpiryDate.setText(DateUtil.dateToString(food.getExpirationDate()));
-        holder.mButtonPrepare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
+        holder.mButtonSell.setText(food.getPrice() + " SELL ");
         holder.mButtonSell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mOnManageFood.onSell(food);
+                mFoodList.remove(food);
+                notifyDataSetChanged();
             }
         });
 
@@ -90,10 +88,10 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.View
             mTextViewName = (TextView) itemView.findViewById(R.id.text_view_name_food);
             mTextViewExpiryDate = (TextView) itemView.findViewById(R.id.text_view_expiry_date);
             mButtonSell = (Button) itemView.findViewById(R.id.button_sell_food);
-            mButtonPrepare = (Button) itemView.findViewById(R.id.button_prepare_food);
 
 
         }
     }
+
 
 }

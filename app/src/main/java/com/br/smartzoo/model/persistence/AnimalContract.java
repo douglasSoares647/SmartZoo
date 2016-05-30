@@ -26,7 +26,7 @@ public class AnimalContract {
     public static String RESISTENCE = "resistence";
     public static String POPULARITY = "popularity";
 
-    public static String[] COLUMNS = {NAME,AGE,WEIGHT,SEX,CAGEID,ISHEALTHY,RESISTENCE,POPULARITY};
+    public static String[] COLUMNS = {ID,NAME,AGE,WEIGHT,SEX,CAGEID,ISHEALTHY,RESISTENCE,POPULARITY};
 
 
 
