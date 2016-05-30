@@ -30,6 +30,7 @@ import com.br.smartzoo.ui.fragment.ChooseEmployeeFragment;
 import com.br.smartzoo.ui.fragment.HireEmployeeFragment;
 import com.br.smartzoo.ui.fragment.ManageStockFragment;
 import com.br.smartzoo.ui.fragment.NavigationDrawerFragment;
+import com.br.smartzoo.ui.fragment.StatusZooFragment;
 import com.br.smartzoo.ui.view.MainActivityView;
 import com.br.smartzoo.util.AlertDialogUtil;
 import com.br.smartzoo.util.AnimUtil;
@@ -291,6 +292,11 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
     @Override
     public void onStockClick() {
         mPresenter.startTransaction(mIdFrameContainer, new ManageStockFragment());
+    }
+
+    @Override
+    public void onHeaderClick() {
+        mPresenter.startTransaction(mIdFrameContainer, new StatusZooFragment());
     }
 
     @Override

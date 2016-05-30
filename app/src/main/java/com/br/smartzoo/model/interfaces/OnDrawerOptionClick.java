@@ -26,4 +26,6 @@ public interface OnDrawerOptionClick {
     void onBuildCageClick();
 
     void onStockClick();
+
+    void onHeaderClick();
 }

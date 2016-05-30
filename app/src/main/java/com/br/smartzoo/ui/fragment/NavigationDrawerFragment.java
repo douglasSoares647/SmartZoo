@@ -67,6 +67,7 @@ public class NavigationDrawerFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.navigation_drawer, container, false);
 
+        bindRelativeHeader(view);
         bindHeader(view);
         bindOptionAnimals(view);
         bindOptionNews(view);
@@ -79,6 +80,17 @@ public class NavigationDrawerFragment extends Fragment {
 
 
         return view;
+    }
+
+    private void bindRelativeHeader(View view) {
+        RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.relative_header);
+        relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnDrawerOptionClick.onHeaderClick();
+                mDrawerLayout.closeDrawers();
+            }
+        });
     }
 
     private void bindHeader(View view) {
