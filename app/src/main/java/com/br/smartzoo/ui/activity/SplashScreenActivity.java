@@ -30,7 +30,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_splash_screen);
 
-        loadZooInfo();
+
         bindMediaPlayerSound();
         bindRelativeButtons();
         bindImageViewLogo();
@@ -99,14 +99,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         }
     }
 
-    private void loadZooInfo() {
-         //ZooInfoBusiness.getFromPreferences();
 
-        if(!ZooInfoBusiness.isLoaded) {
-            ZooInfoBusiness.load();
-            ZooInfoBusiness.isLoaded = true;
-        }
-    }
 
 
 }

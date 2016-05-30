@@ -56,39 +56,10 @@ public class Feeder extends Employee implements Manageable{
   
    
     @Override
-    public void prepareFoodAndFillCage(String foodName, Cage cage) {
+    public void feedCage(String foodName, Cage cage) {
 			List<Food> foodsFromStock = stock.takeFoods(foodName,cage);
-    		List<Food> foodsToAliment = new ArrayList<Food>();
-       		for(Food food : foodsFromStock){
-    			if(food.getWeight()>5.0){
-    				Integer quantity = 0;
-
-    					quantity = (int)(food.getWeight()/5.0);
-
-    				for(int i=0; i<quantity; i++){
-    					Food minorFood = new Food();
-    					minorFood.setName(food.getName());
-    					minorFood.setExpirationDate(food.getExpirationDate());
-    					
-    					food.setWeight(food.getWeight()-5);
-    					minorFood.setWeight(5.0);
-    					
-    					foodsToAliment.add(minorFood);
-    				}
-    			}
-    		   if(food.getWeight()>0){
-    				Food minorFood = new Food();
-					minorFood.setName(food.getName());
-					minorFood.setExpirationDate(food.getExpirationDate());
-					minorFood.setWeight(food.getWeight());
-					
-					food.setWeight(0.0);
-					foodsToAliment.add(minorFood);
-    				}
-    		}
-       		cage.getFoods().addAll(foodsToAliment);
+       		cage.getFoods().addAll(foodsFromStock);
     		cage.setIsSupplied(true);
-       		
     }
 
     @Override

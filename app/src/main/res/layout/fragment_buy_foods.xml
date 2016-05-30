@@ -9,12 +9,12 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="0.6"
-        android:text="@string/available_fruits"
+        android:text="@string/available_foods"
         android:textSize="18sp"
         android:textStyle="bold" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_available_fruits"
+        android:id="@+id/recycler_view_available_foods"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="vertical"
@@ -35,7 +35,7 @@
         android:layout_weight="1">
 
         <TextView
-            android:id="@+id/text_view_price_fruits"
+            android:id="@+id/text_view_price_foods"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -44,13 +44,13 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/text_view_total_fruits"
+            android:id="@+id/text_view_total_foods"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
-            android:text="@string/total_fruits"
+            android:text="@string/total_foods"
             android:textSize="14sp" />
 
     </RelativeLayout>
@@ -62,7 +62,7 @@
         android:padding="4dp">
 
         <Button
-            android:id="@+id/button_buy_fruits"
+            android:id="@+id/button_buy_foods"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/button_buy"
@@ -73,14 +73,15 @@
             android:visibility="gone" />
 
         <Button
-            android:id="@+id/button_insufficient_funds_fruits"
+            android:id="@+id/button_insufficient_funds_foods"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/button_disable"
             android:gravity="center"
             android:text="@string/msg_dont_have_money"
             android:textColor="@color/white"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 

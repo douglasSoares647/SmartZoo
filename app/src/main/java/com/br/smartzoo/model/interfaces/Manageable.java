@@ -13,7 +13,7 @@ import java.util.List;
 public interface Manageable {
 
 
-    void prepareFoodAndFillCage(String foodName, Cage cage);
+    void feedCage(String foodName, Cage cage);
 
     void toRetain(Cage cage);
 

@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
         setContentView(R.layout.activity_main);
 
+        loadZooInfo();
 
         bindmPresenter();
         bindToolbar();
@@ -269,7 +270,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
     }
 
     @Override
-    public void onBuyFruitClick() {
+    public void onBuyFoodClick() {
         mPresenter.startTransaction(mIdFrameContainer, new BuyFoodFragment());
     }
 
@@ -321,5 +322,16 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
     public void startTransaction(Fragment fragment){
         mPresenter.startTransaction(mIdFrameContainer, fragment);
+    }
+
+    private void loadZooInfo() {
+
+        ZooInfoBusiness.getFromPreferences();
+
+
+        if(!ZooInfoBusiness.isLoaded) {
+            ZooInfoBusiness.load();
+            ZooInfoBusiness.isLoaded = true;
+        }
     }
 }

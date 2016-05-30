@@ -26,7 +26,7 @@ public class FoodRepository {
             db.insert(FoodContract.TABLE, null, values);
         } else {
             String where = " id = " + food.getId();
-            db.update(AnimalContract.TABLE, values, where, null);
+            db.update(FoodContract.TABLE, values, where, null);
         }
 
         db.close();

@@ -17,7 +17,7 @@ public interface OnDrawerOptionClick {
 
     void onSettingsClick();
 
-    void onBuyFruitClick();
+    void onBuyFoodClick();
 
     void onHireEmployeeClick();
 

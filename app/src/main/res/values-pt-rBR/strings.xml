@@ -17,7 +17,7 @@
     <string name="option_buy_animals">Comprar animais</string>
     <string name="option_market">Mercado</string>
     <string name="option_contract_employee">Contratar funcionários</string>
-    <string name="option_buy_fruits">Comprar frutas</string>
+    <string name="option_buy_foods">Comprar frutas</string>
     <string name="option_build_cages">Comprar jaulas</string>
     <string name="option_settings">Configurações</string>
     <string name="total_price">Preço total: </string>
@@ -26,8 +26,8 @@
     <string name="navigation_drawer_open">open</string>
     <string name="navigation_drawer_close">close</string>
     <string name="title_news">Notícias</string>
-    <string name="available_fruits">Alimentos disponíveis:</string>
-    <string name="total_fruits">Total de alimentos:</string>
+    <string name="available_foods">Alimentos disponíveis:</string>
+    <string name="total_foods">Total de alimentos:</string>
     <string name="text_buy">Comprar</string>
     <string name="message_insufficient_funds">Dinheiro insuficiente</string>
     <string name="food_beef">Bife</string>
@@ -114,5 +114,6 @@
     <string name="messa_load_feeders_successful">Load feeder successful</string>
     <string name="messa_load_feeders_empty">There aren\'t feeders</string>
     <string name="messa_load_feeders_failed">Load failed</string>
+    <string name="msg_food_successfully_bought">Foods successfully bought!</string>
 
 </resources>

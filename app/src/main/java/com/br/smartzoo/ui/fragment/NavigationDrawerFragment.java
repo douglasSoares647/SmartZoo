@@ -178,7 +178,7 @@ public class NavigationDrawerFragment extends Fragment {
 
         bindRelativeOptionBuyAnimal(view);
         bindRelativeOptionContractEmployee(view);
-        bindRelativeOptionBuyFruit(view);
+        bindRelativeOptionBuyfood(view);
         bindRelativeOptionBuildCage(view);
 
 
@@ -197,14 +197,14 @@ public class NavigationDrawerFragment extends Fragment {
         });
     }
 
-    private void bindRelativeOptionBuyFruit(View view) {
-        final RelativeLayout relativeOptionBuyFruit =
-                (RelativeLayout) view.findViewById(R.id.relative_option_buy_fruit);
-        relativeOptionBuyFruit.setOnClickListener(new View.OnClickListener() {
+    private void bindRelativeOptionBuyfood(View view) {
+        final RelativeLayout relativeOptionBuyfood =
+                (RelativeLayout) view.findViewById(R.id.relative_option_buy_food);
+        relativeOptionBuyfood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeOptionSelected(relativeOptionBuyFruit);
-                mOnDrawerOptionClick.onBuyFruitClick();
+                changeOptionSelected(relativeOptionBuyfood);
+                mOnDrawerOptionClick.onBuyFoodClick();
                 mDrawerLayout.closeDrawers();
             }
         });

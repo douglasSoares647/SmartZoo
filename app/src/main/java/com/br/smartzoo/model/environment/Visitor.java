@@ -40,8 +40,8 @@ public class Visitor implements Observer{
     public void visit(){
         List<Cage> cagesToVisit = ZooInfo.cages;
 
-        Double reputationGeneratedByPrice = 10/ZooInfo.price;
-        reputationGenerated += reputationGeneratedByPrice;
+    //    Double reputationGeneratedByPrice = 10/ZooInfo.price;
+        //reputationGenerated += reputationGeneratedByPrice;
         status = "Visitando";
 
         for(Cage cage : cagesToVisit){
