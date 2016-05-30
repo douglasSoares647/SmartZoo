@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.entity.Veterinary;
-import com.br.smartzoo.model.interfaces.OnManageVeterinary;
+import com.br.smartzoo.model.interfaces.OnManageEmployee;
 import com.br.smartzoo.util.AlertDialogUtil;
 import com.br.smartzoo.util.DialogUtil;
 import com.bumptech.glide.Glide;
@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class VeterinaryListAdapter extends RecyclerView.Adapter<VeterinaryListAdapter.ViewHolder> {
 
-    private OnManageVeterinary mOnManageVeterinary;
+    private OnManageEmployee mOnManageVeterinary;
     private List<Veterinary> mVeterinaryList;
     private Activity mContext;
     private AlertDialog.Builder mAlertDialog;
@@ -35,7 +35,7 @@ public class VeterinaryListAdapter extends RecyclerView.Adapter<VeterinaryListAd
         this.mContext = context;
     }
 
-    public void addOnManageVeterinary(OnManageVeterinary onManageVeterinary) {
+    public void addOnManageVeterinary(OnManageEmployee onManageVeterinary) {
         this.mOnManageVeterinary = onManageVeterinary;
     }
 

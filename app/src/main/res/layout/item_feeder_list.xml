@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="6dp"
+    android:paddingTop="6dp">
+
+    <ImageView
+        android:id="@+id/image_view_feeder"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerVertical="true" />
+
+    <TextView
+        android:id="@+id/text_view_name_feeder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/image_view_feeder"
+        android:text="Name of feeder"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/text_view_age_feeder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/text_view_name_feeder"
+        android:layout_below="@+id/text_view_name_feeder"
+        android:layout_marginTop="4dp"
+        android:text="22 anos" />
+
+    <TextView
+        android:id="@+id/text_view_salary_feeder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/text_view_age_feeder"
+        android:layout_below="@id/text_view_age_feeder"
+        android:layout_marginTop="8dp"
+        android:text="Salary: 2000,00 $"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/text_view_status_feeder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_view_salary_feeder"
+        android:layout_toRightOf="@id/image_view_feeder"
+        android:text="Exausto"
+        android:textColor="@color/red_700"
+        android:textSize="16sp" />
+
+
+    <ImageView
+        android:id="@+id/image_view_salary"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_toLeftOf="@+id/image_view_demission" />
+
+    <ImageView
+        android:id="@+id/image_view_demission"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true" />
+
+</RelativeLayout>

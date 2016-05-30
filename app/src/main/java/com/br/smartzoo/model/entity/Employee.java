@@ -19,13 +19,15 @@ public abstract class Employee implements Observer{
     private Double salary;
     private String profession;
     private Double price;
+    private String status;
 
     public Employee() {
     }
 
     public Employee(int image, String name, Integer age, Date startDate, Date endDate
-            , Double salary, String profession) {
+            , Double salary, String profession, String status) {
         this.image = image;
+        this.status = status;
         this.profession = profession;
         this.name = name;
         this.startDate = startDate;
@@ -106,5 +108,13 @@ public abstract class Employee implements Observer{
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

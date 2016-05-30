@@ -25,8 +25,8 @@ public class Janitor extends Employee {
     }
 
     public Janitor(int image, String name, Integer age, Date startDate, Date endDate, Double salary
-            , String profession) {
-        super(image, name, age, startDate, endDate, salary, profession);
+            , String profession,String status) {
+        super(image, name, age, startDate, endDate, salary, profession, status);
     }
 
     public Janitor() {

@@ -10,8 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.entity.Veterinary;
-import com.br.smartzoo.model.interfaces.OnManageVeterinary;
+import com.br.smartzoo.model.interfaces.OnManageEmployee;
 import com.br.smartzoo.presenter.VeterinaryListPresenter;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
@@ -25,7 +26,7 @@ import java.util.List;
  * Created by adenilson on 26/05/16.
  */
 public class VeterinaryListFragment extends Fragment implements VeterinaryListView
-        , OnManageVeterinary {
+        , OnManageEmployee {
 
 
     private static final int VERTICAL_ITEM_SPACE = 30;
@@ -78,13 +79,13 @@ public class VeterinaryListFragment extends Fragment implements VeterinaryListVi
     }
 
     @Override
-    public void onDemit(Veterinary veterinary) {
+    public void onDemit(Employee veterinary) {
         mPresenter.demitVeterinary(veterinary);
 
     }
 
     @Override
-    public void onSalaryChange(Veterinary veterinary, Double value) {
+    public void onSalaryChange(Employee veterinary, Double value) {
         mPresenter.updateSalary(veterinary, value);
     }
 }

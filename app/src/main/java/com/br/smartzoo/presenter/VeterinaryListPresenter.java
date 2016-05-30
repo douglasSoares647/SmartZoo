@@ -7,6 +7,7 @@ import com.br.smartzoo.model.asynctask.DemitEmployeeAsyncTask;
 import com.br.smartzoo.model.asynctask.LoadVeterinariesAsyncTask;
 import com.br.smartzoo.model.asynctask.UpdateSalaryAsyncTask;
 import com.br.smartzoo.model.business.VeterinaryBusiness;
+import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.entity.Veterinary;
 import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.ui.activity.MainActivity;
@@ -61,7 +62,7 @@ public class VeterinaryListPresenter {
         }).execute();
     }
 
-    public void demitVeterinary(final Veterinary veterinary) {
+    public void demitVeterinary(final Employee veterinary) {
 
         new DemitEmployeeAsyncTask(mContext, new DemitEmployeeAsyncTask.OnDemit() {
             @Override
@@ -82,11 +83,11 @@ public class VeterinaryListPresenter {
 
     }
 
-    private void updateZooInfo(Veterinary veterinary) {
+    private void updateZooInfo(Employee veterinary) {
         ZooInfo.employees.remove(veterinary);
     }
 
-    public void updateSalary(final Veterinary veterinary, Double value) {
+    public void updateSalary(final Employee veterinary, Double value) {
         new UpdateSalaryAsyncTask(mContext, new UpdateSalaryAsyncTask.onSalaryChanged() {
             @Override
             public void onSalaryChangedSuccess() {

@@ -23,21 +23,21 @@ public class FeederContract {
     public static String ID = "id";
 
 
-    public static String[] columns={ID};
+    public static String[] columns = {ID};
 
 
-    public static String createTable(){
+    public static String createTable() {
         StringBuilder table = new StringBuilder();
 
         table.append(" create table " + TABLE + " ( ");
         table.append(ID + " integer primary key, ");
-        table.append("FOREIGN KEY ("+ID+") references " + EmployeeContract.TABLE + "("+EmployeeContract.ID+")");
+        table.append("FOREIGN KEY (" + ID + ") references " + EmployeeContract.TABLE + "(" + EmployeeContract.ID + ")");
         table.append(" ); ");
 
         return table.toString();
     }
 
-    public static String createTableFeederCages(){
+    public static String createTableFeederCages() {
         StringBuilder table = new StringBuilder();
 
         table.append(" create table " + CAGESTABLE + " ( ");
@@ -45,36 +45,34 @@ public class FeederContract {
         table.append(FEEDERID + " integer not null, ");
         table.append(CAGEID + " integer not null, ");
         table.append(DATE + " text not null,");
-        table.append("FOREIGN KEY ("+FEEDERID+") references " + EmployeeContract.TABLE + "("+EmployeeContract.ID+"),");
-        table.append("FOREIGN KEY ("+CAGEID+") references " + CageContract.TABLE + "("+CageContract.ID+")");
+        table.append("FOREIGN KEY (" + FEEDERID + ") references " + EmployeeContract.TABLE + "(" + EmployeeContract.ID + "),");
+        table.append("FOREIGN KEY (" + CAGEID + ") references " + CageContract.TABLE + "(" + CageContract.ID + ")");
         table.append(" ); ");
 
         return table.toString();
     }
 
 
-
-    public static ContentValues createContentValues(Feeder feeder){
+    public static ContentValues createContentValues(Feeder feeder) {
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(ID,feeder.getId());
+        contentValues.put(ID, feeder.getId());
 
         return contentValues;
     }
 
 
+    public static Feeder getFeeder(Cursor cursor) {
+        Feeder feeder = new Feeder();
 
-
-    public static Feeder getFeeder(Cursor cursor){
-        Feeder feeder =  new Feeder();
-
-        if(!cursor.isBeforeFirst() || cursor.moveToNext()){
+        if (!cursor.isBeforeFirst() || cursor.moveToNext()) {
             feeder.setId(cursor.getLong(cursor.getColumnIndex(ID)));
+            feeder.setImage(cursor.getInt(cursor.getColumnIndex(EmployeeContract.IMAGE)));
             feeder.setAge(cursor.getInt(cursor.getColumnIndex(EmployeeContract.AGE)));
             feeder.setName(cursor.getString(cursor.getColumnIndex(EmployeeContract.NAME)));
             feeder.setSalary(cursor.getDouble(cursor.getColumnIndex(EmployeeContract.SALARY)));
 
-            Date startDate  = DateUtil.stringToDate(cursor.getString(cursor.getColumnIndex(EmployeeContract.STARTDATE)));
+            Date startDate = DateUtil.stringToDate(cursor.getString(cursor.getColumnIndex(EmployeeContract.STARTDATE)));
             Date endDate = DateUtil.stringToDate(cursor.getString(cursor.getColumnIndex(EmployeeContract.ENDDATE)));
 
             feeder.setStartDate(startDate);
@@ -85,10 +83,10 @@ public class FeederContract {
         return feeder;
     }
 
-    public static List<Feeder> getFeeders(Cursor cursor){
+    public static List<Feeder> getFeeders(Cursor cursor) {
         List<Feeder> feeders = new ArrayList<>();
 
-        while(cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             feeders.add(getFeeder(cursor));
         }
 
@@ -96,10 +94,10 @@ public class FeederContract {
     }
 
 
-    public static HashMap<Integer,Integer> getCagesCount(Cursor cursor){
+    public static HashMap<Integer, Integer> getCagesCount(Cursor cursor) {
         HashMap<Integer, Integer> cagesCount = new HashMap<>();
 
-        while(cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             cagesCount.put(cursor.getInt(cursor.getColumnIndex("cageId")), cursor.getInt(cursor.getColumnIndex("count")));
         }
 

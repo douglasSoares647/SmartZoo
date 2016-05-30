@@ -104,6 +104,7 @@
     <string name="title_salary">Salary</string>
     <string name="title_veterinaries">Veterinaries</string>
     <string name="message_load_veterinaries">Loading veterinaries</string>
+    <string name="message_load_feeders">Loading feeders</string>
     <string name="message_load_list_veterinary_successful">Veterinary list updated!</string>
     <string name="message_load_veterinary_list_failed">Failed to load veterinary list</string>
     <string name="message_load_veterinary_list_empty">There aren\'t veterinary in the stock!</string>
@@ -111,4 +112,8 @@
     <string name="message_demit_failed">Demission failed</string>
     <string name="message_update_salary_failed">Update failed</string>
     <string name="message_update_salary_success">Update success</string>
+    <string name="title_feeders">Feeders</string>
+    <string name="messa_load_feeders_successful">Load feeder successful</string>
+    <string name="messa_load_feeders_empty">There aren\'t feeders</string>
+    <string name="messa_load_feeders_failed">Load failed</string>
 </resources>

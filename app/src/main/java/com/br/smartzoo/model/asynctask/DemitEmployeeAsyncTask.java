@@ -25,7 +25,6 @@ public class DemitEmployeeAsyncTask extends AsyncTask<Long, Integer, Integer> {
 
     @Override
     protected Integer doInBackground(Long... params) {
-
         return EmployeeBusiness.delete(params[0]);
     }
 

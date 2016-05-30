@@ -25,7 +25,7 @@ public class EmployeeContract {
     public static String SALARY = "salary";
 
 
-    public static String[] columns = {ID, NAME, AGE, CPF, STARTDATE, ENDDATE, SALARY};
+    public static String[] columns = {ID, IMAGE, NAME, AGE, CPF, STARTDATE, ENDDATE, SALARY};
 
 
     public static String createTable() {

@@ -108,7 +108,11 @@
     <string name="message_load_veterinary_list_empty">There aren\'t veterinary in the stock!</string>
     <string name="message_demit">Demitting veterinary</string>
     <string name="message_demit_failed">Demission failed</string>
+    <string name="message_load_feeders">Loading feeders</string>
     <string name="message_update_salary_failed">Update failed</string>
     <string name="message_update_salary_success">Update success</string>
+    <string name="messa_load_feeders_successful">Load feeder successful</string>
+    <string name="messa_load_feeders_empty">There aren\'t feeders</string>
+    <string name="messa_load_feeders_failed">Load failed</string>
 
 </resources>
