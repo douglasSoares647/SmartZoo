@@ -32,8 +32,8 @@ public class LoadFoodsAsyncTask extends AsyncTask<Void, Integer, List<Food>> {
         super.onPreExecute();
 
         mProgressDialog = ProgressDialogUtil
-                .makeProgressDialog(mContext,mContext.getString(R.string.message_load_foods),
-                mContext.getString(R.string.title_foods));
+                .makeProgressDialog(mContext, mContext.getString(R.string.message_load_foods),
+                        mContext.getString(R.string.title_foods));
         mProgressDialog.show();
     }
 

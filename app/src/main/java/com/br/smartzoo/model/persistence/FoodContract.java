@@ -33,7 +33,7 @@ public class FoodContract {
         table.append(" create table " + TABLE + " ( ");
         table.append(ID + " integer primary key, ");
         table.append(NAME + " text not null, ");
-        table.append(IMAGE + " text not null, ");
+        table.append(IMAGE + " integer not null, ");
         table.append(PRICE + " double, ");
         table.append(WEIGHT + " double not null, ");
         table.append(EXPIRATIONDATE + " text not null ");

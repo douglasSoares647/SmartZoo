@@ -266,6 +266,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
     @Override
     public void onSettingsClick() {
+        mPresenter.startTransaction(mIdFrameContainer, new StatusZooFragment());
 
     }
 
