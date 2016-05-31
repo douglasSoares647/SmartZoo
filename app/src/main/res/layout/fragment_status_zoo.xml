@@ -21,6 +21,9 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
+
+
+
     <SeekBar
         android:id="@+id/seek_bar_price"
         android:layout_width="match_parent"
@@ -38,5 +41,15 @@
         android:layout_below="@id/seek_bar_price"
         android:layout_centerHorizontal="true"
         android:text="00,00 $" />
+
+    <TextView
+        android:id="@+id/text_view_ideal_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/green_700"
+        android:layout_centerHorizontal="true"
+        android:textSize="15sp"
+        android:layout_below="@+id/text_view_price_zoo"
+        />
 
 </RelativeLayout>

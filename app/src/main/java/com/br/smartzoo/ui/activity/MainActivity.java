@@ -1,6 +1,5 @@
 package com.br.smartzoo.ui.activity;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -8,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -64,7 +64,9 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
         setContentView(R.layout.activity_main);
 
-        loadZooInfo();
+        if(savedInstanceState==null) {
+            loadZooInfo();
+        }
 
         bindmPresenter();
         bindToolbar();

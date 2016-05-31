@@ -13,24 +13,26 @@ import java.util.List;
  */
 public class CageRepository {
 
-    public static void save(Cage cage){
+    public static long save(Cage cage){
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
         ContentValues values = CageContract.getContentValues(cage);
 
+        long id;
         if(cage.getId()==null){
-            db.insert(CageContract.TABLE,null,values);
+            id = db.insert(CageContract.TABLE,null,values);
         }
         else{
             String where = " id = " + cage.getId();
 
-            db.update(CageContract.TABLE,values,where,null);
+            id = db.update(CageContract.TABLE,values,where,null);
         }
 
         db.close();
         databaseHelper.close();
 
+        return id;
     }
 
 

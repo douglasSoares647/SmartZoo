@@ -16,6 +16,7 @@ import com.br.smartzoo.R;
 import com.br.smartzoo.model.business.BusinessRules;
 import com.br.smartzoo.model.business.CageBusiness;
 import com.br.smartzoo.model.business.EmployeeBusiness;
+import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.environment.ZooInfo;
@@ -26,6 +27,7 @@ import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.HireEmployeeListAdapter;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.ui.view.BuyCageView;
+import com.br.smartzoo.util.AlertDialogUtil;
 
 import java.util.List;
 
@@ -91,25 +93,23 @@ public class BuyCageFragment extends Fragment implements BuyCageView, OnConstruc
 
 
     private void showConfirmationDialog(final Cage cage) {
-        AlertDialog dialog = new AlertDialog.Builder(getContext())
-                .setPositiveButton(getContext().getString(R.string.btn_yes), new DialogInterface.OnClickListener() {
+        AlertDialog.Builder dialog = AlertDialogUtil.makeConfirmationDialog(getActivity(), getActivity().getString(R.string.title_confirm), getActivity().getString(R.string.msg_construct_cage_confirm),
+                new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        CageBusiness.save(cage);
-                        ZooInfo.money -= cage.getPrice();
+                        Long insertedCageId =  CageBusiness.save(cage);
+                        cage.setId(insertedCageId);
                         ZooInfo.cages.add(cage);
+                        ZooInfoBusiness.takeMoney(cage.getPrice());
+
 
                         Toast.makeText(getContext(), getString(R.string.msg_cage_sucessfully_built), Toast.LENGTH_SHORT).show();
-                    }})
-                .setNegativeButton(getContext().getString(R.string.btn_no), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
                     }
-                })
-                .setMessage(getActivity().getString(R.string.msg_construct_cage_confirm)).create();
+                });
 
         dialog.show();
+
+
 
     }
 }

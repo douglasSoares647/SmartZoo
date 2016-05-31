@@ -19,6 +19,7 @@ import com.br.smartzoo.R;
 import com.br.smartzoo.model.business.AnimalBusiness;
 import com.br.smartzoo.model.business.BusinessRules;
 import com.br.smartzoo.model.business.EmployeeBusiness;
+import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Employee;
@@ -31,6 +32,8 @@ import com.br.smartzoo.ui.adapter.HireEmployeeListAdapter;
 import com.br.smartzoo.ui.adapter.ListCageAdapter;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.ui.view.BuyAnimalView;
+import com.br.smartzoo.util.AlertDialogUtil;
+import com.br.smartzoo.util.DialogUtil;
 import com.br.smartzoo.util.RecyclerItemClickListener;
 
 import java.util.List;
@@ -124,12 +127,14 @@ public class BuyAnimalFragment extends Fragment implements BuyAnimalView, OnBuyA
                 if (cage.checkCapacity()) {
                     selectCageDialog.dismiss();
                     animal.setCage(cage);
+                    AnimalBusiness.save(animal);
+                    ZooInfoBusiness.takeMoney(animal.getPrice());
+
+
                     Toast.makeText(getContext(), R.string.msg_animal_succesfully_bought, Toast.LENGTH_SHORT).show();
                     ((BuyAnimalListAdapter) mRecyclerViewAnimals.getAdapter()).getAnimalList().remove(animal);
                     mRecyclerViewAnimals.getAdapter().notifyDataSetChanged();
-                    AnimalBusiness.save(animal);
 
-                    ZooInfo.money -= animal.getPrice();
                 }
                 else{
                     Toast.makeText(getContext(), R.string.msg_cage_full,Toast.LENGTH_SHORT).show();
@@ -151,21 +156,17 @@ public class BuyAnimalFragment extends Fragment implements BuyAnimalView, OnBuyA
 
 
     private void showConfirmationDialog(final Animal animal) {
-        AlertDialog dialog = new AlertDialog.Builder(getContext())
-                .setPositiveButton(getContext().getString(R.string.btn_yes), new DialogInterface.OnClickListener() {
+        AlertDialog.Builder dialog = AlertDialogUtil.makeConfirmationDialog(getActivity(), getActivity().getString(R.string.title_confirm), getActivity().getString(R.string.msg_buy_animal_confirm),
+                new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         showSelectCageDialog(animal);
-                    }})
-                .setNegativeButton(getContext().getString(R.string.btn_no), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
                     }
-                })
-                .setMessage(getActivity().getString(R.string.msg_buy_animal_confirm)).create();
+                });
 
         dialog.show();
+
+
 
     }
 

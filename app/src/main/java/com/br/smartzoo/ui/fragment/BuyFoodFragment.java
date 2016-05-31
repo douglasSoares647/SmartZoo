@@ -1,9 +1,10 @@
 package com.br.smartzoo.ui.fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,10 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.business.FoodBusiness;
+import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Food;
 import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnChangeBuyListener;
@@ -26,6 +27,7 @@ import com.br.smartzoo.ui.adapter.BuyFoodListAdapter;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.ui.view.BuyFoodView;
+import com.br.smartzoo.util.AlertDialogUtil;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
@@ -100,14 +102,22 @@ public class BuyFoodFragment extends Fragment implements BuyFoodView, OnChangeBu
         if(ZooInfo.money>mTotalPrice){
             buttonBuy.setVisibility(View.VISIBLE);
         }
+
         buttonBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HashMap<String,List<Food>> foodMap = Supplier.buyFoods(totalFoods);
-                Stock.getInstance().putFoods(foodMap);
-                FoodBusiness.saveAll(foodMap);
-                showSnackBar(getActivity().getString(R.string.msg_food_successfully_bought));
-
+                AlertDialog.Builder alert = AlertDialogUtil.makeConfirmationDialog(getActivity(), getActivity().getString(R.string.title_confirm), getActivity().getString(R.string.msg_confirmation_buy_food),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                HashMap<String, List<Food>> foodMap = Supplier.buyFoods(totalFoods);
+                                Stock.getInstance().putFoods(foodMap);
+                                FoodBusiness.saveAll(foodMap);
+                                ZooInfoBusiness.takeMoney(mTotalPrice);
+                                showSnackBar(getActivity().getString(R.string.msg_food_successfully_bought));
+                            }
+                        });
+                alert.show();
             }
         });
     }
@@ -119,6 +129,7 @@ public class BuyFoodFragment extends Fragment implements BuyFoodView, OnChangeBu
     private void bindPresenter() {
         mPresenter = new BuyFoodPresenter(getActivity());
         mPresenter.attachView(this);
+
     }
 
 

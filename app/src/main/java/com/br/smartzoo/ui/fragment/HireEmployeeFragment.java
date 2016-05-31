@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.business.BusinessRules;
 import com.br.smartzoo.model.business.EmployeeBusiness;
+import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnHireListener;
@@ -23,6 +24,7 @@ import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.HireEmployeeListAdapter;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.ui.view.HireEmployeeView;
+import com.br.smartzoo.util.AlertDialogUtil;
 
 import java.util.List;
 
@@ -85,29 +87,21 @@ public class HireEmployeeFragment extends Fragment  implements OnHireListener, H
 
 
     private void showConfirmationDialog(final Employee employee) {
-        AlertDialog dialog = new AlertDialog.Builder(getContext())
-                .setPositiveButton(getContext().getString(R.string.btn_yes), new DialogInterface.OnClickListener() {
+        AlertDialog.Builder dialog = AlertDialogUtil.makeConfirmationDialog(getActivity(), getContext().getString(R.string.title_confirm), getContext().getString(R.string.msg_hire_employee_confirm),
+                new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ZooInfo.employees.add(employee);
-
                         EmployeeBusiness.save(employee);
-
-
-                       HireEmployeeListAdapter hireEmployeeListAdapter =
-                               ((HireEmployeeListAdapter)mRecyclerViewEmployee.getAdapter());
+                        ZooInfoBusiness.takeMoney(employee.getPrice());
+                        HireEmployeeListAdapter hireEmployeeListAdapter =
+                                ((HireEmployeeListAdapter)mRecyclerViewEmployee.getAdapter());
                         hireEmployeeListAdapter.getEmployeeList().remove(employee);
 
                         hireEmployeeListAdapter.notifyDataSetChanged();
                         Toast.makeText(getContext(), R.string.msg_employee_hired,Toast.LENGTH_SHORT).show();
-                    }})
-                .setNegativeButton(getContext().getString(R.string.btn_no), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
                     }
-                })
-                .setMessage(getContext().getString(R.string.msg_hire_employee_confirm)).create();
+                });
 
         dialog.show();
 

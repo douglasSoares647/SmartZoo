@@ -17,7 +17,6 @@ import java.util.Timer;
 public class BusinessRules {
 
 
-    public static Timer timer = new Timer();
     private static Double idealPrice;
 
     public static void generateVisitor(){
@@ -93,7 +92,7 @@ public class BusinessRules {
     }
 
 
-    public static void calculateIdealPrice(){
+    public static Double calculateIdealPrice(){
         //Calcular com base na reputação do Zoo + quantidade de animais e seus respectivos foodToBeSatisfied
         // + média de preço dos foods (ainda necessita ser feito)
         // + salário dos empregados
@@ -113,9 +112,11 @@ public class BusinessRules {
         price +=ZooInfo.reputation*0.05;
         price = price*1.1;
 
-       // price = price;//30 dias contando que 100 pessoas visitem o zoo
+        price = price/50;//30 dias contando que 100 pessoas visitem o zoo
 
         idealPrice = price;
+
+        return idealPrice;
 
     }
 
@@ -136,7 +137,6 @@ public class BusinessRules {
             return false;
         }
     }
-
 
 
     public static Boolean haveMoneyToBuyEmployee(Employee employee){
