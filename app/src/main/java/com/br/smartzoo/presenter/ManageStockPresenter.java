@@ -6,6 +6,7 @@ import android.app.Activity;
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.asynctask.LoadFoodsAsyncTask;
 import com.br.smartzoo.model.business.FoodBusiness;
+import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Food;
 import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.ui.view.ManageStockView;
@@ -60,7 +61,7 @@ public class ManageStockPresenter {
 
     public void sellFood(Food food) {
         FoodBusiness.deleteFood(food);
-        ZooInfo.money += food.getPrice();
+        ZooInfoBusiness.addMoney(food.getPrice());
         mManageStockView.showSnackBar(mContext.getString(R.string.message_food_sold));       
     }
 }

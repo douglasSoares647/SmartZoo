@@ -134,7 +134,7 @@ public class Cage {
 
 
     public boolean checkCapacity() {
-        return animals.size() <= capacity;
+        return animals.size() < capacity;
     }
 
 

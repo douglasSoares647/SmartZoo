@@ -8,7 +8,4 @@ import com.br.smartzoo.model.entity.Food;
 public interface OnManageFood {
 
     void onSell(Food food);
-
-    void onPrepare(Food food);
-
 }

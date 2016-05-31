@@ -57,8 +57,7 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.View
             @Override
             public void onClick(View v) {
                 mOnManageFood.onSell(food);
-                mFoodList.remove(food);
-                notifyDataSetChanged();
+
             }
         });
 
@@ -93,5 +92,10 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.View
         }
     }
 
+
+    public void removeFood(Food food){
+        mFoodList.remove(food);
+        notifyDataSetChanged();
+    }
 
 }

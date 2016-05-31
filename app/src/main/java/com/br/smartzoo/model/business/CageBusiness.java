@@ -11,9 +11,9 @@ import java.util.List;
  */
 public class CageBusiness {
 
-    public static void save(Cage cage){
+    public static long save(Cage cage){
 
-        CageRepository.save(cage);
+        return CageRepository.save(cage);
 
     }
 

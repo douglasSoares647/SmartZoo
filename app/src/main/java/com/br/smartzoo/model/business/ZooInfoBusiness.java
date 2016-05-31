@@ -35,8 +35,8 @@ public class ZooInfoBusiness {
 
         List<Animal> animals = AnimalBusiness.getAllAnimals();
 
-        for(Cage cage : ZooInfo.cages){
-            for(Animal animal : animals){
+        for(Animal animal : animals){
+            for(Cage cage : ZooInfo.cages){
                 if(animal.getCage().getId() == cage.getId()){
                     animal.setCage(cage);
                     break;
@@ -74,6 +74,18 @@ public class ZooInfoBusiness {
         catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+
+
+    public static void addMoney(Double money){
+        ZooInfo.money+= money;
+        saveToPreferences();
+    }
+
+    public static void takeMoney(Double money){
+        ZooInfo.money-=money;
+        saveToPreferences();
     }
 
 }

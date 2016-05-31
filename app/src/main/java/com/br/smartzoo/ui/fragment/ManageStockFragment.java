@@ -84,11 +84,8 @@ public class ManageStockFragment extends Fragment implements ManageStockView, On
     @Override
     public void onSell(Food food) {
         mPresenter.sellFood(food);
+        mAdapter.removeFood(food);
 
     }
 
-    @Override
-    public void onPrepare(Food food) {
-
-    }
 }
