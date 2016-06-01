@@ -1,10 +1,6 @@
 package com.br.smartzoo.model.interfaces;
 
-import com.br.smartzoo.model.entity.Food;
 import com.br.smartzoo.model.entity.Cage;
-
-import java.util.List;
-
 
 
 /**

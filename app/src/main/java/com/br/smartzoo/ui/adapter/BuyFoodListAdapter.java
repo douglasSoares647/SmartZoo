@@ -17,9 +17,7 @@ import com.bumptech.glide.Glide;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by adenilson on 15/05/16.

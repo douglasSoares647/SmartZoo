@@ -1,10 +1,6 @@
 package com.br.smartzoo.ui.adapter;
 
 import android.app.Activity;
-import android.content.DialogInterface;
-import android.media.Image;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.view.ActionMode;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,7 +12,6 @@ import android.widget.TextView;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.entity.Employee;
-import com.br.smartzoo.model.interfaces.OnChangeBuyListener;
 import com.br.smartzoo.model.interfaces.OnHireListener;
 import com.bumptech.glide.Glide;
 

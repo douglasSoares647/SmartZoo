@@ -117,5 +117,8 @@
     <string name="msg_food_successfully_bought">Foods successfully bought!</string>
     <string name="title_confirm">Confirm</string>
     <string name="msg_confirmation_buy_food">Are you sure you want to buy these foods?</string>
+    <string name="text_filter">Filter:</string>
+    <string name="sell">title_sell</string>
+    <string name="message_sell">Are you sure?</string>
 
 </resources>

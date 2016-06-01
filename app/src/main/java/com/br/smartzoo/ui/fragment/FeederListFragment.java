@@ -17,7 +17,6 @@ import com.br.smartzoo.presenter.FeederListPresenter;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.FeederListAdapter;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
-import com.br.smartzoo.ui.adapter.VeterinaryListAdapter;
 import com.br.smartzoo.ui.view.FeederListView;
 
 import java.util.ArrayList;

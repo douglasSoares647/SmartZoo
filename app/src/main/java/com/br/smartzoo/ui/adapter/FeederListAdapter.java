@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.entity.Feeder;
-import com.br.smartzoo.model.entity.Veterinary;
 import com.br.smartzoo.model.interfaces.OnManageEmployee;
 import com.br.smartzoo.util.AlertDialogUtil;
 import com.br.smartzoo.util.DialogUtil;

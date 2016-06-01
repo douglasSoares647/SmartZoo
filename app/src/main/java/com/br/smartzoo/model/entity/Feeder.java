@@ -1,10 +1,8 @@
 package com.br.smartzoo.model.entity;
 
 import com.br.smartzoo.model.interfaces.Manageable;
-import com.br.smartzoo.model.interfaces.Observer;
 import com.br.smartzoo.model.singleton.Stock;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;

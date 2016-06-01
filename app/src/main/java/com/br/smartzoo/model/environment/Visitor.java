@@ -3,7 +3,6 @@ package com.br.smartzoo.model.environment;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.interfaces.Observer;
-import com.br.smartzoo.model.interfaces.OnClockTickListener;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -11,11 +10,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
 
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by douglas on 03/05/16.

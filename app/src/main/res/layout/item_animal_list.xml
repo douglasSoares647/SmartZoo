@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp">
+
+
+    <ImageView
+        android:id="@+id/image_view_animal"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_animal_lion" />
+
+    <TextView
+        android:id="@+id/text_view_name_animal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@+id/image_view_animal"
+        android:text="Name" />
+
+
+    <TextView
+        android:id="@+id/text_view_satisfaction_animal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/image_view_animal"
+        android:layout_marginLeft="58dp"
+        android:layout_toRightOf="@id/text_view_status_animal"
+        android:text="Satisfied"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/text_view_status_animal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/image_view_animal"
+        android:layout_alignLeft="@id/text_view_name_animal"
+        android:text="Status"
+        android:textSize="18sp" />
+
+
+    <ImageView
+        android:id="@+id/image_view_sell_animal"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true" />
+
+    <ImageView
+        android:id="@+id/image_view_treat_animal"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@+id/image_view_sell_animal" />
+
+    <TextView
+        android:id="@+id/text_view_price_animal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/image_view_animal"
+        android:layout_alignParentRight="true"
+        android:text="1000,00 $" />
+</RelativeLayout>

@@ -1,7 +1,6 @@
 package com.br.smartzoo.ui.adapter;
 
 import android.app.Activity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,11 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
-import com.br.smartzoo.model.business.BusinessRules;
 import com.br.smartzoo.model.entity.Cage;
-import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnConstructListener;
-import com.br.smartzoo.presenter.BuyCagePresenter;
 import com.bumptech.glide.Glide;
 
 import java.util.List;

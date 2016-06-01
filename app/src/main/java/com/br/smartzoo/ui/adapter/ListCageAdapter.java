@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.entity.Cage;
-import com.br.smartzoo.model.interfaces.OnConstructListener;
-import com.br.smartzoo.model.interfaces.OnSelectCageListener;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
