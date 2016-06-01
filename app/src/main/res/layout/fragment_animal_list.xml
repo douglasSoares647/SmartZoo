@@ -14,8 +14,8 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_animals"
-        android:layout_below="@id/text_view_label"
-        android:layout_above="@id/text_view_label_filter"
+        android:layout_below="@+id/text_view_label"
+        android:layout_above="@+id/text_view_label_filter"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 

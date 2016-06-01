@@ -96,7 +96,8 @@ public class BuyCageFragment extends Fragment implements BuyCageView, OnConstruc
                     public void onClick(DialogInterface dialog, int which) {
                         Long insertedCageId =  CageBusiness.save(cage);
                         cage.setId(insertedCageId);
-                        ZooInfo.cages.add(cage);
+
+                        ZooInfoBusiness.addCage(cage);
                         ZooInfoBusiness.takeMoney(cage.getPrice());
 
 

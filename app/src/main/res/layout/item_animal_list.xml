@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/image_view_animal"
         android:layout_marginLeft="58dp"
-        android:layout_toRightOf="@id/text_view_status_animal"
+        android:layout_toRightOf="@+id/text_view_status_animal"
         android:text="Satisfied"
         android:textSize="18sp" />
 

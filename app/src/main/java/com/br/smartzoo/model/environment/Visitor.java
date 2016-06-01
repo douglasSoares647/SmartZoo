@@ -70,9 +70,6 @@ public class Visitor implements Observer{
         }
 
         status = "Visitante " + name + " indo embora do zoo!";
-        ZooInfo.visitors.remove(Visitor.this);
-        ZooInfo.reputation += reputationGenerated;
-
 
     }
 
@@ -93,10 +90,15 @@ public class Visitor implements Observer{
         this.name = name;
     }
 
+    public Double getReputationGenerated() {
+        return reputationGenerated;
+    }
+
 
     @Override
     public void onTick() {
         timeInZoo++;
-
     }
+
+
 }

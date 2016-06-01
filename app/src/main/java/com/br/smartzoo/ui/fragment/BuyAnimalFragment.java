@@ -124,8 +124,8 @@ public class BuyAnimalFragment extends Fragment implements BuyAnimalView, OnBuyA
                     selectCageDialog.dismiss();
                     animal.setCage(cage);
                     AnimalBusiness.save(animal);
-                    ZooInfoBusiness.takeMoney(animal.getPrice());
 
+                    ZooInfoBusiness.takeMoney(animal.getPrice());
 
                     Toast.makeText(getContext(), R.string.msg_animal_succesfully_bought, Toast.LENGTH_SHORT).show();
                     ((BuyAnimalListAdapter) mRecyclerViewAnimals.getAdapter()).getAnimalList().remove(animal);
