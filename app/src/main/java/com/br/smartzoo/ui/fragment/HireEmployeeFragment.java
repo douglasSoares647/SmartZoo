@@ -91,9 +91,11 @@ public class HireEmployeeFragment extends Fragment  implements OnHireListener, H
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ZooInfo.employees.add(employee);
                         EmployeeBusiness.save(employee);
+
+                        ZooInfoBusiness.addEmployee(employee);
                         ZooInfoBusiness.takeMoney(employee.getPrice());
+
                         HireEmployeeListAdapter hireEmployeeListAdapter =
                                 ((HireEmployeeListAdapter)mRecyclerViewEmployee.getAdapter());
                         hireEmployeeListAdapter.getEmployeeList().remove(employee);

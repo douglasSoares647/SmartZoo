@@ -48,10 +48,12 @@ public class StatusZooFragment extends Fragment implements StatusZooView {
 
     private void bindTextViewPrice(View view) {
         mTextViewPrice = (TextView) view.findViewById(R.id.text_view_price_zoo);
+        mTextViewPrice.setText(String.valueOf(ZooInfo.price));
     }
 
     private void bindSeekBarPrice(View view) {
         mSeekBar = (SeekBar) view.findViewById(R.id.seek_bar_price);
+        mSeekBar.setProgress(ZooInfo.price.intValue());
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

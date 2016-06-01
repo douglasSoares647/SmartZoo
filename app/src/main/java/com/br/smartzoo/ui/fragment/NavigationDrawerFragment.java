@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Employee;
@@ -26,13 +27,14 @@ import com.br.smartzoo.model.entity.Feeder;
 import com.br.smartzoo.model.entity.Janitor;
 import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnDrawerOptionClick;
+import com.br.smartzoo.model.interfaces.OnUpdateInformationListener;
 
 import org.w3c.dom.Text;
 
 /**
  * Created by adenilson on 05/05/16.
  */
-public class NavigationDrawerFragment extends Fragment {
+public class NavigationDrawerFragment extends Fragment implements OnUpdateInformationListener {
 
     public static final String PREF_FILE_NAME = "testpref";
 
@@ -46,6 +48,15 @@ public class NavigationDrawerFragment extends Fragment {
     private RelativeLayout mRelativeSelected;
     private LinearLayout mLinearSubOption;
     private boolean subOptionVisible = false;
+
+    private TextView textViewCash;
+    private TextView textViewVisitors;
+    private TextView textViewPopularity;
+    private TextView textViewNumberVeterinaries;
+    private TextView textViewNumberFeeders;
+    private TextView textViewNumberJanitor;
+    private TextView textViewNumberAnimals;
+    private TextView textViewNumberCages;
 
     public NavigationDrawerFragment() {
     }
@@ -78,8 +89,14 @@ public class NavigationDrawerFragment extends Fragment {
         bindOptionBuy(view);
         bindOptionSettings(view);
 
+        addNavigationDrawerContextToBusiness();
 
         return view;
+    }
+
+    private void addNavigationDrawerContextToBusiness() {
+        ZooInfoBusiness.onUpdateHeader = this;
+        onUpdate();
     }
 
     private void bindRelativeHeader(View view) {
@@ -94,71 +111,27 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     private void bindHeader(View view) {
-        final TextView textViewNumberCages = (TextView) view.findViewById(R.id.text_view_number_cages_value);
-        final TextView textViewNumberAnimals = (TextView) view.findViewById(R.id.text_view_number_animals_value);
-        final TextView textViewNumberJanitor = (TextView) view.findViewById(R.id.text_view_number_janitor_value);
-        final TextView textViewNumberFeeders = (TextView) view.findViewById(R.id.text_view_number_feeders_value);
-        final TextView textViewNumberVeterinaries = (TextView) view.findViewById(R.id.text_view_number_veterinaries_value);
-        final TextView textViewPopularity = (TextView) view.findViewById(R.id.text_view_popularity_value);
-        final TextView textViewCash = (TextView) view.findViewById(R.id.text_view_cash_value);
-        final TextView textViewVisitors = (TextView) view.findViewById(R.id.text_view_number_visitors_value);
 
-        final Handler accessUIHandler = new Handler();
-        Thread updateInfosThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    accessUIHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            textViewNumberCages.setText(String.valueOf(ZooInfo.cages.size()));
+        textViewNumberCages = (TextView) view.findViewById(R.id.text_view_number_cages_value);
 
-                            int numberAnimals = 0;
-                            for (Cage cage : ZooInfo.cages) {
-                                numberAnimals += cage.getAnimals().size();
-                            }
+        textViewNumberAnimals = (TextView) view.findViewById(R.id.text_view_number_animals_value);
 
-                            textViewNumberAnimals.setText(String.valueOf(numberAnimals));
+        textViewNumberJanitor = (TextView) view.findViewById(R.id.text_view_number_janitor_value);
 
-                            textViewNumberCages.setText(String.valueOf(ZooInfo.cages.size()));
+        textViewNumberFeeders = (TextView) view.findViewById(R.id.text_view_number_feeders_value);
 
-                            int numberJanitors = 0;
-                            int numberFeeders = 0;
-                            int numberVets = 0;
+        textViewNumberVeterinaries = (TextView) view.findViewById(R.id.text_view_number_veterinaries_value);
 
-                            for (Employee employee : ZooInfo.employees) {
-                                if (employee instanceof Janitor)
-                                    numberJanitors++;
-                                else if (employee instanceof Feeder)
-                                    numberFeeders++;
-                                else
-                                    numberVets++;
-                            }
+        textViewPopularity = (TextView) view.findViewById(R.id.text_view_popularity_value);
 
-                            textViewNumberFeeders.setText(String.valueOf(numberFeeders));
-                            textViewNumberVeterinaries.setText(String.valueOf(numberVets));
-                            textViewNumberJanitor.setText(String.valueOf(numberJanitors));
+        textViewCash = (TextView) view.findViewById(R.id.text_view_cash_value);
 
-
-                            textViewPopularity.setText(String.format("%.2f",ZooInfo.reputation));
-                            textViewCash.setText(String.format("%.2f",ZooInfo.money));
-
-                            textViewVisitors.setText(String.valueOf(ZooInfo.visitors.size()));
-                        }
-                    });
-
-                    try {
-                        Thread.sleep(5000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-
-        updateInfosThread.start();
-
+        textViewVisitors = (TextView) view.findViewById(R.id.text_view_number_visitors_value);
     }
+
+
+
+
 
     private void bindOptionStock(View view) {
         final RelativeLayout relativeOptionStock =
@@ -395,5 +368,42 @@ public class NavigationDrawerFragment extends Fragment {
 
     public void attachView(OnDrawerOptionClick onDrawerOptionClick) {
         this.mOnDrawerOptionClick = onDrawerOptionClick;
+    }
+
+    @Override
+    public void onUpdate() {
+        textViewNumberCages.setText(String.valueOf(ZooInfo.cages.size()));
+
+        int numberAnimals = 0;
+        for (Cage cage : ZooInfo.cages) {
+            numberAnimals += cage.getAnimals().size();
+        }
+
+        textViewNumberAnimals.setText(String.valueOf(numberAnimals));
+
+        textViewNumberCages.setText(String.valueOf(ZooInfo.cages.size()));
+
+        int numberJanitors = 0;
+        int numberFeeders = 0;
+        int numberVets = 0;
+
+        for (Employee employee : ZooInfo.employees) {
+            if (employee instanceof Janitor)
+                numberJanitors++;
+            else if (employee instanceof Feeder)
+                numberFeeders++;
+            else
+                numberVets++;
+        }
+
+        textViewNumberFeeders.setText(String.valueOf(numberFeeders));
+        textViewNumberVeterinaries.setText(String.valueOf(numberVets));
+        textViewNumberJanitor.setText(String.valueOf(numberJanitors));
+
+
+        textViewPopularity.setText(String.format("%.2f",ZooInfo.reputation));
+        textViewCash.setText(String.format("%.2f",ZooInfo.money));
+
+        textViewVisitors.setText(String.valueOf(ZooInfo.visitors.size()));
     }
 }
