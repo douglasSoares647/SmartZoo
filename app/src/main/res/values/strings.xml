@@ -120,7 +120,7 @@
     <string name="title_confirm">Confirm</string>
     <string name="msg_confirmation_buy_food">Are you sure you want to buy these foods?</string>
     <string name="text_filter">Filter:</string>
-    <string name="sell">title_sell</string>
+    <string name="sell">Sell</string>
     <string name="message_sell">Are you sure?</string>
     <string name="message_load_animals">Loading animals</string>
     <string name="title_animals">Animals</string>

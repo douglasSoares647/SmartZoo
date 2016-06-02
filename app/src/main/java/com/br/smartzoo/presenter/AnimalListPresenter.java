@@ -20,6 +20,8 @@ import java.util.List;
  */
 public class AnimalListPresenter {
 
+    private static Long sActualSelect;
+
     private Activity mContext;
     private AnimalListView mAnimalListView;
 
@@ -32,6 +34,7 @@ public class AnimalListPresenter {
     }
 
     public void loadAnimalList(final Long select) {
+        sActualSelect = select;
 
         new LoadAnimalAsyncTask(mContext, new LoadAnimalAsyncTask.OnLoadAnimalList() {
             @Override
@@ -64,6 +67,7 @@ public class AnimalListPresenter {
             public void onSellAnimalSuccess() {
                 ((MainActivity) mContext).showSnackBar(mContext.getString(R.string.message_sell_success));
                 updateZooInfo(animal);
+                loadAnimalList(sActualSelect);
             }
 
             @Override
@@ -78,21 +82,21 @@ public class AnimalListPresenter {
     }
 
     public void loadAnimalList(String select) {
-        if(select.equals(mContext.getString(R.string.select_name))){
+        if (select.equals(mContext.getString(R.string.select_name))) {
 
-        }else if(select.equals(mContext.getString(R.string.select_age))){
+        } else if (select.equals(mContext.getString(R.string.select_age))) {
 
-        }else if(select.equals(mContext.getString(R.string.select_popularity))){
+        } else if (select.equals(mContext.getString(R.string.select_popularity))) {
 
-        }else if(select.equals(mContext.getString(R.string.select_weight))){
+        } else if (select.equals(mContext.getString(R.string.select_weight))) {
 
-        }else if(select.equals(mContext.getString(R.string.select_satisfaction))){
+        } else if (select.equals(mContext.getString(R.string.select_satisfaction))) {
 
-        }else if(select.equals(mContext.getString(R.string.select_sex))){
+        } else if (select.equals(mContext.getString(R.string.select_sex))) {
 
-        }else if(select.equals(mContext.getString(R.string.select_status))){
+        } else if (select.equals(mContext.getString(R.string.select_status))) {
 
-        }else if(select.equals(mContext.getString(R.string.select_resistance))){
+        } else if (select.equals(mContext.getString(R.string.select_resistance))) {
 
         }
     }

@@ -64,7 +64,7 @@ public class AnimalListAdapter extends RecyclerView.Adapter<AnimalListAdapter.Vi
                     public void onClick(DialogInterface dialog, int which) {
                         mOnManageAnimal.onSell(animal);
                     }
-                });
+                }).show();
             }
         });
 
