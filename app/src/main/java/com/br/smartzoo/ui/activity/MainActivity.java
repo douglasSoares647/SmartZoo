@@ -22,6 +22,7 @@ import com.br.smartzoo.model.interfaces.OnClockTickListener;
 import com.br.smartzoo.model.interfaces.OnDrawerOptionClick;
 import com.br.smartzoo.model.service.ClockService;
 import com.br.smartzoo.presenter.MainActivityPresenter;
+import com.br.smartzoo.ui.fragment.AnimalListFragment;
 import com.br.smartzoo.ui.fragment.BuyAnimalFragment;
 import com.br.smartzoo.ui.fragment.BuyCageFragment;
 import com.br.smartzoo.ui.fragment.BuyFoodFragment;
@@ -252,6 +253,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
     @Override
     public void onAnimalsClick() {
+    mPresenter.startTransaction(mIdFrameContainer, new AnimalListFragment());
     }
 
     @Override

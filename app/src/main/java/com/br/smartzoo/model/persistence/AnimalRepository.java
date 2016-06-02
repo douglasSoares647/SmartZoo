@@ -52,4 +52,17 @@ public class AnimalRepository {
 
         return animals;
     }
+
+    public static int delete(Long animalId) {
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
+        SQLiteDatabase db = databaseHelper.getReadableDatabase();
+
+        String where = "id = " + animalId;
+        int delete = db.delete(AnimalContract.TABLE, where, null);
+
+        db.close();
+        databaseHelper.close();
+
+        return delete;
+    }
 }

@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
 import com.br.smartzoo.ui.activity.MainActivity;
+import com.br.smartzoo.ui.fragment.AnimalListFragment;
 import com.br.smartzoo.ui.fragment.BuyAnimalFragment;
 import com.br.smartzoo.ui.fragment.BuyCageFragment;
 import com.br.smartzoo.ui.fragment.BuyFoodFragment;
@@ -77,6 +78,10 @@ public class MainActivityPresenter {
         }else if(fragment instanceof StatusZooFragment){
             StatusZooFragment statusZooFragment = (StatusZooFragment) fragment;
             transaction.replace(container, statusZooFragment);
+            transaction.commit();
+        }else if(fragment instanceof AnimalListFragment){
+            AnimalListFragment animalListFragment = (AnimalListFragment) fragment;
+            transaction.replace(container, animalListFragment);
             transaction.commit();
         }
 

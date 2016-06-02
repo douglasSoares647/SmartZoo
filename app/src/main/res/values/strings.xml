@@ -122,4 +122,20 @@
     <string name="text_filter">Filter:</string>
     <string name="sell">title_sell</string>
     <string name="message_sell">Are you sure?</string>
+    <string name="message_load_animals">Loading animals</string>
+    <string name="title_animals">Animals</string>
+    <string name="message_load_animal_list_successful">Animal list updated!</string>
+    <string name="message_load_animal_list_empty">There aren\'t animals in this zoo!</string>
+    <string name="message_load_animal_list_failed">It wasn\'t possible update the animals!</string>
+    <string name="title_sell">Sell</string>
+    <string name="message_sell_success">Animal sold!</string>
+    <string name="message_sell_failed">It\'s not possible to sell the animal</string>
+    <string name="select_name">Name</string>
+    <string name="select_status">Status</string>
+    <string name="select_age">Age</string>
+    <string name="select_resistance">Resistance</string>
+    <string name="select_satisfaction">Satisfaction</string>
+    <string name="select_weight">Weight</string>
+    <string name="select_sex">Sex</string>
+    <string name="select_popularity">Popularity</string>
 </resources>

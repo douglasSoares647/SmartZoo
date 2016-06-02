@@ -20,9 +20,11 @@ public class AnimalBusiness {
     public static List<Animal> getAllAnimals(){
         List<Animal> animals = AnimalRepository.getAllAnimals();
 
-
-
         return animals;
 
+    }
+
+    public static int sell(Long animalId) {
+        return AnimalRepository.delete(animalId);
     }
 }
