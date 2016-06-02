@@ -1,5 +1,8 @@
 package com.br.smartzoo.model.environment;
 
+import android.os.Handler;
+
+import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.interfaces.Observer;
@@ -12,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import java.util.Random;
+import java.util.TreeMap;
 
 /**
  * Created by douglas on 03/05/16.
@@ -26,11 +30,12 @@ public class Visitor implements Observer{
     private Double reputationGenerated = 0.0;
     private Cage currentCage;
 
-    private HashMap<Cage,Integer> timeToVisitEachCage;
+    private TreeMap<Cage,Integer> timeToVisitEachCage;
+    private Boolean timeCalculated = false;
 
     public Visitor() {
         arrivalDate = Calendar.getInstance().getTime();
-        timeToVisitEachCage = new HashMap<>();
+        timeToVisitEachCage = new TreeMap<>();
     }
 
     public void visit(){
@@ -38,8 +43,6 @@ public class Visitor implements Observer{
 
     //    Double reputationGeneratedByPrice = 10/ZooInfo.price;
         //reputationGenerated += reputationGeneratedByPrice;
-        status = "Visitando";
-
         for(Cage cage : cagesToVisit){
             Integer timeToVisitCage = 0;
             for(Animal animal : cage.getAnimals()){
@@ -58,18 +61,8 @@ public class Visitor implements Observer{
             }
         }
 
-        for(Map.Entry<Cage,Integer> entry :timeToVisitEachCage.entrySet()) {
-            final Cage cage = entry.getKey();
-            Integer timeToVisitCage = entry.getValue();
+        timeCalculated = true;
 
-            timeInZoo = 0;
-            while (timeInZoo<timeToVisitCage){
-                status = "Visitando jaula " + cage.getName();
-                currentCage = cage;
-            }
-        }
-
-        status = "Visitante " + name + " indo embora do zoo!";
 
     }
 
@@ -98,7 +91,34 @@ public class Visitor implements Observer{
     @Override
     public void onTick() {
         timeInZoo++;
+        calculateTimeToVisit();
     }
 
+    private void calculateTimeToVisit() {
+
+            if(timeToVisitEachCage.isEmpty()){
+               Handler handler = new Handler();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(timeCalculated) {
+                            ZooInfoBusiness.removeVisitor(Visitor.this);
+                            ZooInfoBusiness.addReputation(reputationGenerated);
+                        }
+                    }
+                });
+            }
+            else {
+                final Cage cage = timeToVisitEachCage.firstKey();
+                Integer timeToVisitCage = timeToVisitEachCage.get(timeToVisitEachCage.firstKey());
+                status = "Visitando jaula " + cage.getName();
+                currentCage = cage;
+                if (timeInZoo > timeToVisitCage) {
+                    timeInZoo = 0;
+                    timeToVisitEachCage.remove(timeToVisitEachCage.firstKey());
+                }
+            }
+
+    }
 
 }

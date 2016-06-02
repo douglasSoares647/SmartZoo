@@ -22,6 +22,8 @@ public class BusinessRules {
 
     private static Double idealPrice;
 
+    private static Thread threadForVisitor;
+
     public static void generateVisitor(){
 
         Random random = new Random();
@@ -76,25 +78,24 @@ public class BusinessRules {
     private static void createVisitor(){
         final Visitor visitor = new Visitor();
 
-
-        Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(new Runnable() {
-                         @Override
-                         public void run() {
-                             ZooInfoBusiness.addVisitor(visitor);
-                             ZooInfoBusiness.addMoney(ZooInfo.price);
-                         }
-                     });
-
-        visitor.visit();
-
-        handler.post(new Runnable() {
+        threadForVisitor = new Thread(new Runnable() {
             @Override
             public void run() {
-                ZooInfoBusiness.removeVisitor(visitor);
-                ZooInfoBusiness.addReputation(visitor.getReputationGenerated());
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        ZooInfoBusiness.addVisitor(visitor);
+                        ZooInfoBusiness.addMoney(ZooInfo.price);
+                    }
+                });
+
+                visitor.visit();
+                threadForVisitor.interrupt();
             }
         });
+
+        threadForVisitor.start();
 
     }
 

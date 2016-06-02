@@ -128,14 +128,9 @@ public class Clock {
 
     //Called every 5 ingame seconds to create visitors
     private static void fiveSecondsTick() {
+
         BusinessRules.calculateIdealPrice();
-        Thread visitorThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                BusinessRules.generateVisitor();
-            }
-        });
-        visitorThread.start();
+        BusinessRules.generateVisitor();
 
     }
 
