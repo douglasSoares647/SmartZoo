@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by adenilson on 18/04/16.
  */
-public class Cage {
+public class Cage implements Comparable<Cage>{
 
     private int dirtyFactor;
 
@@ -144,5 +144,13 @@ public class Cage {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    @Override
+    public int compareTo(Cage another) {
+        if(this.getId()>another.getId())return 1;
+        else if(this.getId()<another.getId()) return -1;
+        return 0;
+
     }
 }
