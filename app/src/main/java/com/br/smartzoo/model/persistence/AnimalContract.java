@@ -19,6 +19,7 @@ public class AnimalContract {
     public static String TABLE = "animal";
     public static String ID = "id";
     public static String NAME = "name";
+    public static String TYPE = "type";
     public static String STATUS = "status";
     public static String IMAGE = "image";
     public static String AGE = "age";
@@ -30,7 +31,7 @@ public class AnimalContract {
     public static String RESISTENCE = "resistence";
     public static String POPULARITY = "popularity";
 
-    public static String[] COLUMNS = {ID, IMAGE, NAME, PRICE, AGE, WEIGHT, SEX, STATUS, CAGEID, ISHEALTHY
+    public static String[] COLUMNS = {ID, IMAGE, NAME,TYPE, PRICE, AGE, WEIGHT, SEX, STATUS, CAGEID, ISHEALTHY
             , RESISTENCE, POPULARITY};
 
 
@@ -40,6 +41,7 @@ public class AnimalContract {
         table.append(" create table " + TABLE + " ( ");
         table.append(ID + " integer primary key, ");
         table.append(NAME + " text not null, ");
+        table.append(TYPE + " text not null, ");
         table.append(STATUS + " text not null, ");
         table.append(IMAGE + " integer, ");
         table.append(PRICE + " double, ");
@@ -63,6 +65,7 @@ public class AnimalContract {
         contentValues.put(ID, animal.getId());
         contentValues.put(NAME, animal.getName());
         contentValues.put(IMAGE, animal.getImage());
+        contentValues.put(TYPE, animal.getType());
         contentValues.put(PRICE, animal.getPrice());
         contentValues.put(AGE, animal.getAge());
         contentValues.put(WEIGHT, animal.getWeight());
@@ -85,6 +88,7 @@ public class AnimalContract {
             animal.setId(cursor.getLong(cursor.getColumnIndex(ID)));
             animal.setImage(cursor.getInt(cursor.getColumnIndex(IMAGE)));
             animal.setStatus(cursor.getString(cursor.getColumnIndex(STATUS)));
+            animal.setType(cursor.getString(cursor.getColumnIndex(TYPE)));
             animal.setName(cursor.getString(cursor.getColumnIndex(NAME)));
             animal.setAge(cursor.getInt(cursor.getColumnIndex(AGE)));
             animal.setWeight(cursor.getDouble(cursor.getColumnIndex(WEIGHT)));

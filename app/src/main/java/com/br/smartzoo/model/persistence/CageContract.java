@@ -15,13 +15,14 @@ public class CageContract {
 
     public static String TABLE = "cage";
     public static String ID = "id";
+    public static String ANIMALTYPE = "animalType";
     public static String NAME = "name";
     public static String CAPACITY = "capacity";
     public static String ISCLEAN = "isClean";
     public static String ISSUPPLIED = "isSupplied";
 
 
-    public static String[] columns = {ID,NAME,CAPACITY,ISCLEAN,ISSUPPLIED};
+    public static String[] columns = {ID,NAME,ANIMALTYPE,CAPACITY,ISCLEAN,ISSUPPLIED};
 
 
 
@@ -31,6 +32,7 @@ public class CageContract {
         table.append(" create table "+ TABLE + " ( ");
         table.append(ID + " integer primary key, ");
         table.append(NAME + " text , ");
+        table.append(ANIMALTYPE + " text not null, ");
         table.append(CAPACITY + " integer not null, ");
         table.append(ISCLEAN + " integer not null, ");
         table.append(ISSUPPLIED + " integer not null ");
@@ -46,6 +48,7 @@ public class CageContract {
 
         contentValues.put(ID, cage.getId());
         contentValues.put(NAME, cage.getName());
+        contentValues.put(ANIMALTYPE, cage.getAnimalType());
         contentValues.put(CAPACITY, cage.getCapacity());
         contentValues.put(ISCLEAN, cage.isClean()==true? 1 : 0);
         contentValues.put(ISSUPPLIED, cage.isSupplied()==true? 1 : 0);
@@ -62,6 +65,7 @@ public class CageContract {
 
             cage.setId(cursor.getLong(cursor.getColumnIndex(ID)));
             cage.setName(cursor.getString(cursor.getColumnIndex(NAME)));
+            cage.setAnimalType(cursor.getString(cursor.getColumnIndex(ANIMALTYPE)));
             cage.setCapacity(cursor.getInt(cursor.getColumnIndex(CAPACITY)));
             cage.setIsClean((cursor.getInt(cursor.getColumnIndex(ISCLEAN)))==1?true :false);
             cage.setIsSupplied((cursor.getInt(cursor.getColumnIndex(ISSUPPLIED)))==1?true:false);

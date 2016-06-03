@@ -47,14 +47,17 @@ public class BuyCagePresenter {
                 , false, CageEnum.Cage4.getCapacity()));
         cages.add(new Cage(CageEnum.Cage5.getName(), new ArrayList<Animal>(),  new ArrayList<Food>(), CageEnum.Cage5.getPrice(), true
                 , false, CageEnum.Cage5.getCapacity()));
-        cages.add(new Cage(CageEnum.Cage1.getName(), new ArrayList<Animal>(),  new ArrayList<Food>(), CageEnum.Cage1.getPrice(), true
-                , false, CageEnum.Cage1.getCapacity()));
-        cages.add(new Cage(CageEnum.Cage1.getName(), new ArrayList<Animal>(),  new ArrayList<Food>(), CageEnum.Cage1.getPrice(), true
-                , false, CageEnum.Cage1.getCapacity()));
-        cages.add(new Cage(CageEnum.Cage1.getName(), new ArrayList<Animal>(),  new ArrayList<Food>(), CageEnum.Cage1.getPrice(), true
-                , false, CageEnum.Cage1.getCapacity()));
-        cages.add(new Cage(CageEnum.Cage1.getName(), new ArrayList<Animal>(),  new ArrayList<Food>(), CageEnum.Cage1.getPrice(), true
-                , false, CageEnum.Cage1.getCapacity()));
+        cages.add(new Cage(CageEnum.Cage6.getName(), new ArrayList<Animal>(),  new ArrayList<Food>(), CageEnum.Cage6.getPrice(), true
+                , false, CageEnum.Cage6.getCapacity()));
+        cages.add(new Cage(CageEnum.Cage7.getName(), new ArrayList<Animal>(),  new ArrayList<Food>(), CageEnum.Cage7.getPrice(), true
+                , false, CageEnum.Cage7.getCapacity()));
+        cages.add(new Cage(CageEnum.Cage8.getName(), new ArrayList<Animal>(),  new ArrayList<Food>(), CageEnum.Cage8.getPrice(), true
+                , false, CageEnum.Cage8.getCapacity()));
+        cages.add(new Cage(CageEnum.Cage9.getName(), new ArrayList<Animal>(),  new ArrayList<Food>(), CageEnum.Cage9.getPrice(), true
+                , false, CageEnum.Cage9.getCapacity()));
+        cages.add(new Cage(CageEnum.Cage10.getName(), new ArrayList<Animal>(),  new ArrayList<Food>(), CageEnum.Cage10.getPrice(), true
+                , false, CageEnum.Cage10.getCapacity()));
+
 
         return cages;
     }

@@ -156,5 +156,13 @@ public class ZooInfoBusiness {
     }
 
 
+    public static void removeAnimal(Animal animal){
+        animal.getCage().getAnimals().remove(animal);
+        saveToPreferences();
+        if(onUpdateHeader!=null){
+            onUpdateHeader.onUpdate();
+        }
+    }
+
 
 }
