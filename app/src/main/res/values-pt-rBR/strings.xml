@@ -142,5 +142,8 @@
     <string name="title_set_name_to_animal">"Coloque um nome para o "</string>
     <string name="title_no_cages">Nenhuma jaula</string>
     <string name="msg_buy_new_cage_for_animal_type">Não existem jaulas para este tipo de animal, deseja comprar uma nova?</string>
+    <string name="lbl_price">Price</string>
+    <string name="lbl_status">Status</string>
+    <string name="hint_set_name">Set name</string>
 
 </resources>

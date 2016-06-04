@@ -165,4 +165,7 @@ public class ZooInfoBusiness {
     }
 
 
+    public static int calculatePossibleQuantityOfFoods(Double foodPrice) {
+        return (int) (ZooInfo.money/foodPrice);
+    }
 }

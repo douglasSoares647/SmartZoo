@@ -16,10 +16,11 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Set name"
+        android:hint="@string/hint_set_name"
         android:id="@+id/edit_text_set_animal_name"
         android:layout_below="@id/text_view_set_animal_name"
-        android:inputType="textPersonName"/>
+        android:inputType="textPersonName|textCapWords"
+        android:maxLength="15"/>
 
     <Button
         android:layout_width="wrap_content"

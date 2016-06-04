@@ -20,7 +20,7 @@
         android:layout_marginLeft="8dp"
         android:layout_toRightOf="@+id/image_view_animal"
         android:text="Name"
-        android:textSize="25sp"/>
+        android:textSize="25sp" />
 
 
     <TextView
@@ -30,8 +30,16 @@
         android:layout_alignBottom="@id/image_view_animal"
         android:layout_marginLeft="58dp"
         android:layout_toRightOf="@+id/text_view_status_animal"
-        android:text="Satisfied"
-        android:textSize="18sp" />
+        android:text="@string/lbl_satisfied" />
+
+    <TextView
+        android:id="@+id/text_view_label_satisfaction_animal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/text_view_satisfaction_animal"
+        android:layout_alignLeft="@id/text_view_satisfaction_animal"
+        android:text="@string/lbl_satisfied"
+        android:textColor="@color/green_500" />
 
     <TextView
         android:id="@+id/text_view_status_animal"
@@ -39,9 +47,16 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/image_view_animal"
         android:layout_alignLeft="@id/text_view_name_animal"
-        android:text="Status"
-        android:textSize="18sp" />
+        android:text="@string/lbl_status" />
 
+    <TextView
+        android:id="@+id/text_view_label_status_animal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/text_view_status_animal"
+        android:layout_alignLeft="@+id/text_view_status_animal"
+        android:text="@string/lbl_status"
+        android:textColor="@color/green_500" />
 
     <ImageView
         android:id="@+id/image_view_sell_animal"
@@ -63,4 +78,13 @@
         android:layout_alignBottom="@id/image_view_animal"
         android:layout_alignParentRight="true"
         android:text="1000,00 $" />
+
+    <TextView
+        android:id="@+id/text_view_label_price_animal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/text_view_price_animal"
+        android:layout_alignLeft="@id/text_view_price_animal"
+        android:text="@string/lbl_price"
+        android:textColor="@color/green_500" />
 </RelativeLayout>

@@ -141,8 +141,6 @@ public class BuyFoodFragment extends Fragment implements BuyFoodView, OnChangeBu
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerViewFoods.setLayoutManager(layoutManager);
         mRecyclerViewFoods.addItemDecoration(new VerticalSpaceItemDecoration(VERTICAL_ITEM_SPACE));
-        mRecyclerViewFoods.addItemDecoration(
-                new DividerItemDecoration(getActivity(), R.drawable.divider_recycler_view));
         mRecyclerViewFoods.setItemViewCacheSize(mFoods.size());
         mRecyclerViewFoods.setAdapter(buyFoodListAdapter);
 
