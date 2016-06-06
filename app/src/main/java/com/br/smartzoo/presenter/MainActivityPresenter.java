@@ -12,6 +12,7 @@ import com.br.smartzoo.ui.fragment.ChooseEmployeeFragment;
 import com.br.smartzoo.ui.fragment.FeederListFragment;
 import com.br.smartzoo.ui.fragment.HireEmployeeFragment;
 import com.br.smartzoo.ui.fragment.ManageStockFragment;
+import com.br.smartzoo.ui.fragment.NewsFragment;
 import com.br.smartzoo.ui.fragment.StatusZooFragment;
 import com.br.smartzoo.ui.fragment.VeterinaryListFragment;
 import com.br.smartzoo.ui.view.MainActivityView;
@@ -82,6 +83,10 @@ public class MainActivityPresenter {
         }else if(fragment instanceof AnimalListFragment){
             AnimalListFragment animalListFragment = (AnimalListFragment) fragment;
             transaction.replace(container, animalListFragment);
+            transaction.commit();
+        }else if(fragment instanceof NewsFragment){
+            NewsFragment newListFragment = (NewsFragment) fragment;
+            transaction.replace(container, newListFragment);
             transaction.commit();
         }
 

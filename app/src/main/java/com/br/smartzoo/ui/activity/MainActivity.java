@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.menu.MenuPresenter;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -30,6 +31,7 @@ import com.br.smartzoo.ui.fragment.ChooseEmployeeFragment;
 import com.br.smartzoo.ui.fragment.HireEmployeeFragment;
 import com.br.smartzoo.ui.fragment.ManageStockFragment;
 import com.br.smartzoo.ui.fragment.NavigationDrawerFragment;
+import com.br.smartzoo.ui.fragment.NewsFragment;
 import com.br.smartzoo.ui.fragment.StatusZooFragment;
 import com.br.smartzoo.ui.view.MainActivityView;
 import com.br.smartzoo.util.AlertDialogUtil;
@@ -247,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
     @Override
     public void onNewsClick() {
-
+        mPresenter.startTransaction(mIdFrameContainer, new NewsFragment());
 
     }
 
