@@ -98,18 +98,16 @@ public class New {
         this.tag = tag;
     }
 
-    private enum TypeNew {
-        VISITOR("Visitor"),
-        ANIMAL("Animal"),
-        VETERINARY("Veterinary"),
-        JANITOR("Janitor"),
-        FEEDER("Feeder"),
-        STOCK("Stock"),
-        FOOD("Food");
+    public enum TagEnum {
+        VISITOR_ARRIVING("VisitorArriving"),
+        VISITOR_LEAVING("VisitorLeaving"),
+        ANIMAL_SICK("AnimalSick"),
+        STOCK_RAN_OUT_OF_FOOD("StockRanOutOfFood"),
+        FOOD_ROTTEN("FoodRotten");
 
         private String tag;
 
-        TypeNew(String tag) {
+        TagEnum(String tag) {
             this.tag = tag;
         }
 
