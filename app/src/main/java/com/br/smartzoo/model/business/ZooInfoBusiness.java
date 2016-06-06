@@ -156,5 +156,16 @@ public class ZooInfoBusiness {
     }
 
 
+    public static void removeAnimal(Animal animal){
+        animal.getCage().getAnimals().remove(animal);
+        saveToPreferences();
+        if(onUpdateHeader!=null){
+            onUpdateHeader.onUpdate();
+        }
+    }
 
+
+    public static int calculatePossibleQuantityOfFoods(Double foodPrice) {
+        return (int) (ZooInfo.money/foodPrice);
+    }
 }

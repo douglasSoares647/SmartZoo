@@ -3,6 +3,8 @@ package com.br.smartzoo.presenter;
 import android.app.Activity;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.model.business.AnimalBusiness;
+import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.enums.AnimalEnum;
@@ -42,7 +44,7 @@ public class BuyAnimalPresenter {
         for (AnimalEnum animalEnum : AnimalEnum.values()) {
             for (int i = 0; i < 4; i++) {
                 Animal animal = new Animal();
-                animal.setName(mActivity.getString(animalEnum.getName()));
+                animal.setType(mActivity.getString(animalEnum.getType()));
 
                 Random random = new Random();
 
@@ -62,25 +64,14 @@ public class BuyAnimalPresenter {
 
         }
 
-
-        /* Animal lion = new Animal(R.drawable.ic_animal_lion, 0L, "Lion", 14, 10000D, 150.00D
-                , new Cage(), 8, true);
-        Animal goose = new Animal(R.drawable.ic_animal_goose, 1L, "Goose", 12, 2000D, 17.00D
-                , new Cage(), 8, true);
-        Animal turtle = new Animal(R.drawable.ic_turtle, 2L, "Turtle", 12, 2200D, 20.00D
-                , new Cage(), 8, true);
-        Animal giraffe = new Animal(R.drawable.ic_giraffe, 3L, "Giraffe", 17, 12000D, 200.00D
-                , new Cage(), 8, true);
-        Animal bear = new Animal(R.drawable.ic_animal_bear, 4L, "Bear", 8, 8000D, 150.00D
-                , new Cage(), 8, true);
-        Animal tiger = new Animal(R.drawable.ic_animal_tiger, 5L, "Tiger", 5, 7800D, 150.00D
-                , new Cage(), 8, true);
-        Animal monkey = new Animal(R.drawable.ic_animal_monkey, 6L, "Monkey", 12, 4000D, 150.00D
-                , new Cage(), 8, true);
-        Animal elephant = new Animal(R.drawable.ic_animal_elephant, 7L, "Elephant", 25, 18000D, 150.00D
-                , new Cage(), 8, true);
-*/
-
         return animals;
+    }
+
+
+    public void finishAnimalCreation(Cage cage,Animal animal){
+        animal.setCage(cage);
+        AnimalBusiness.save(animal);
+
+        ZooInfoBusiness.takeMoney(animal.getPrice());
     }
 }

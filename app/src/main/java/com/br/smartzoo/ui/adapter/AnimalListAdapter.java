@@ -51,8 +51,8 @@ public class AnimalListAdapter extends RecyclerView.Adapter<AnimalListAdapter.Vi
         Glide.with(mContext).load(R.drawable.ic_treatments).into(holder.mImageViewTreat);
         holder.mTextViewName.setText(animal.getName());
         holder.mTextViewStatus.setText(animal.getStatus());
-        holder.mTextViewPrice.setText(String.valueOf(animal.getPrice()));
-        holder.mTextViewSatisfaction.setText(String.valueOf(animal.getFoodToBeSatisfied()));
+        holder.mTextViewPrice.setText(String.format("%.2f",animal.getPrice()));
+        holder.mTextViewSatisfaction.setText(String.format("%.2f",animal.getFoodToBeSatisfied()));
 
         holder.mImageViewSell.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -15,6 +15,7 @@ public class Cage implements Comparable<Cage>{
 
     private Long id;
     private String name;
+    private String animalType;
     private Double price;
     private List<Animal> animals;
     private List<Food> foods;
@@ -68,14 +69,6 @@ public class Cage implements Comparable<Cage>{
         isSupplied = supplied;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public List<Animal> getAnimals() {
         return animals;
     }
@@ -112,24 +105,27 @@ public class Cage implements Comparable<Cage>{
         return dirtyFactor;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAnimalType() {
+        return animalType;
+    }
+
+    public void setAnimalType(String animalType) {
+        this.animalType = animalType;
+    }
+
     public void setDirtyFactor(int dirtyFactor) {
         this.dirtyFactor = dirtyFactor;
         if (dirtyFactor > animals.size() * 2 / 3) {
             isClean = false;
         }
-    }
-
-    public String toString() {
-        StringBuilder info = new StringBuilder();
-
-        info.append("Nome da Jaula:" + name);
-        info.append("\nAnimais na jaula:");
-        for (Animal animal : animals) {
-            info.append("\n" + animal.getName());
-        }
-        info.append("\nJaula está limpa?: " + isClean);
-        info.append("Jaula possui comida?:" + isSupplied);
-        return info.toString();
     }
 
 

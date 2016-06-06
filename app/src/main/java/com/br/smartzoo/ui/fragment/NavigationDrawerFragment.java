@@ -1,6 +1,7 @@
 package com.br.smartzoo.ui.fragment;
 
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Size;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +30,8 @@ import com.br.smartzoo.model.entity.Janitor;
 import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnDrawerOptionClick;
 import com.br.smartzoo.model.interfaces.OnUpdateInformationListener;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.Target;
 
 import org.w3c.dom.Text;
 
@@ -51,12 +55,14 @@ public class NavigationDrawerFragment extends Fragment implements OnUpdateInform
 
     private TextView textViewCash;
     private TextView textViewVisitors;
-    private TextView textViewPopularity;
+    private TextView textViewReputation;
     private TextView textViewNumberVeterinaries;
     private TextView textViewNumberFeeders;
     private TextView textViewNumberJanitor;
     private TextView textViewNumberAnimals;
     private TextView textViewNumberCages;
+    private ImageView imageViewReputation;
+    private ImageView imageViewCash;
 
     public NavigationDrawerFragment() {
     }
@@ -122,11 +128,19 @@ public class NavigationDrawerFragment extends Fragment implements OnUpdateInform
 
         textViewNumberVeterinaries = (TextView) view.findViewById(R.id.text_view_number_veterinaries_value);
 
-        textViewPopularity = (TextView) view.findViewById(R.id.text_view_popularity_value);
+        textViewReputation = (TextView) view.findViewById(R.id.text_view_reputation_value);
 
         textViewCash = (TextView) view.findViewById(R.id.text_view_cash_value);
 
         textViewVisitors = (TextView) view.findViewById(R.id.text_view_number_visitors_value);
+
+
+        imageViewCash = (ImageView) view.findViewById(R.id.image_view_cash);
+        Glide.with(getActivity()).load(R.drawable.ic_money).centerCrop().fitCenter().into(imageViewCash);
+
+        imageViewReputation = (ImageView) view.findViewById(R.id.image_view_reputation);
+        Glide.with(getActivity()).load(R.drawable.ic_reputation).fitCenter().into(imageViewReputation);
+
     }
 
 
@@ -401,7 +415,7 @@ public class NavigationDrawerFragment extends Fragment implements OnUpdateInform
         textViewNumberJanitor.setText(String.valueOf(numberJanitors));
 
 
-        textViewPopularity.setText(String.format("%.2f",ZooInfo.reputation));
+        textViewReputation.setText(String.format("%.2f",ZooInfo.reputation));
         textViewCash.setText(String.format("%.2f",ZooInfo.money));
 
         textViewVisitors.setText(String.valueOf(ZooInfo.visitors.size()));

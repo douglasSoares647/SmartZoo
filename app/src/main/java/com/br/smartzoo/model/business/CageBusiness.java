@@ -1,6 +1,8 @@
 package com.br.smartzoo.model.business;
 
+import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
+import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.persistence.CageRepository;
 
 import java.util.ArrayList;
@@ -32,5 +34,16 @@ public class CageBusiness {
         cage = CageRepository.getCageById(id);
 
         return cage;
+    }
+
+    public static List<Cage> getCagesByAnimalType(Animal animal) {
+        List<Cage> cagesByAnimalType = new ArrayList<>();
+
+        for(Cage cage : ZooInfo.cages){
+            if(cage.getAnimalType().equals(animal.getType()))
+                cagesByAnimalType.add(cage);
+        }
+
+        return cagesByAnimalType;
     }
 }

@@ -21,9 +21,9 @@ public enum AnimalEnum {
     //Toucan(R.string.animal_toucan, 200.0, 2, 100),
     Bear(R.drawable.ic_animal_bear, R.string.animal_bear, 400.0, 4, 200, "Fine");
 
-    AnimalEnum(int image, int name, Double price, int popularity, int reputationToUnlock
+    AnimalEnum(int image, int type, Double price, int popularity, int reputationToUnlock
             , String status) {
-        this.name = name;
+        this.type = type;
         this.image = image;
         this.price = price;
         this.popularity = popularity;
@@ -33,7 +33,7 @@ public enum AnimalEnum {
 
     private String status;
     private int image;
-    private int name;
+    private int type;
     private Double price;
     private int popularity;
     private int reputationToUnlock;
@@ -46,8 +46,8 @@ public enum AnimalEnum {
         return popularity;
     }
 
-    public int getName() {
-        return this.name;
+    public int getType() {
+        return this.type;
     }
 
     public int getImage() {

@@ -48,7 +48,7 @@ public class BuyAnimalListAdapter extends RecyclerView.Adapter<BuyAnimalListAdap
     public void onBindViewHolder(BuyAnimalListAdapter.ViewHolder holder, int position) {
         final Animal animal = mAnimalList.get(position);
         Glide.with(mContext).load(animal.getImage()).into(holder.mImageViewAnimal);
-        holder.mTextViewNameAnimal.setText(animal.getName());
+        holder.mTextViewNameAnimal.setText(animal.getType());
         holder.mTextViewAgeAnimal.setText(String.valueOf(animal.getAge() + " "
                 + mContext.getString(R.string.text_age)));
         boolean healthy = animal.isHealthy();

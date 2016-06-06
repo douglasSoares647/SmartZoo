@@ -66,7 +66,8 @@ public class AnimalListPresenter {
             @Override
             public void onSellAnimalSuccess() {
                 ((MainActivity) mContext).showSnackBar(mContext.getString(R.string.message_sell_success));
-                updateZooInfo(animal);
+                ZooInfoBusiness.addMoney(animal.getPrice());
+                ZooInfoBusiness.removeAnimal(animal);
                 loadAnimalList(sActualSelect);
             }
 
@@ -77,9 +78,6 @@ public class AnimalListPresenter {
         }).execute(animal.getId());
     }
 
-    private void updateZooInfo(Animal animal) {
-        ZooInfo.money += animal.getPrice();
-    }
 
     public void loadAnimalList(String select) {
         if (select.equals(mContext.getString(R.string.select_name))) {

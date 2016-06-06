@@ -1,5 +1,6 @@
 package com.br.smartzoo.ui.fragment;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,21 +11,29 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.model.business.AnimalBusiness;
 import com.br.smartzoo.model.business.BusinessRules;
 import com.br.smartzoo.model.business.CageBusiness;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Cage;
+import com.br.smartzoo.model.enums.AnimalEnum;
 import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnConstructListener;
 import com.br.smartzoo.presenter.BuyCagePresenter;
+import com.br.smartzoo.ui.adapter.AnimalTypeListAdapter;
+import com.br.smartzoo.ui.adapter.BuyAnimalListAdapter;
 import com.br.smartzoo.ui.adapter.BuyCageAdapter;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
+import com.br.smartzoo.ui.adapter.ListCageAdapter;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.ui.view.BuyCageView;
 import com.br.smartzoo.util.AlertDialogUtil;
+import com.br.smartzoo.util.RecyclerItemClickListener;
 
 import java.util.List;
 
@@ -36,6 +45,7 @@ public class BuyCageFragment extends Fragment implements BuyCageView, OnConstruc
     private RecyclerView mRecyclerViewCages;
     private BuyCagePresenter mPresenter;
     private List<Cage> mCagesList;
+    private Dialog dialogSelectAnimalType;
 
     @Nullable
     @Override
@@ -94,19 +104,68 @@ public class BuyCageFragment extends Fragment implements BuyCageView, OnConstruc
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Long insertedCageId =  CageBusiness.save(cage);
-                        cage.setId(insertedCageId);
-
-                        ZooInfoBusiness.addCage(cage);
-                        ZooInfoBusiness.takeMoney(cage.getPrice());
-
-
-                        Toast.makeText(getContext(), getString(R.string.msg_cage_sucessfully_built), Toast.LENGTH_SHORT).show();
+                        showSelectAnimalTypeDialog(cage);
                     }
+
+
                 });
 
         dialog.show();
 
+
+
+    }
+
+    private void showSelectAnimalTypeDialog(final Cage cage) {
+
+        dialogSelectAnimalType = new Dialog(getContext());
+        dialogSelectAnimalType.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogSelectAnimalType.setContentView(R.layout.dialog_select_animal_type);
+
+
+        final RecyclerView recyclerViewAnimalType = (RecyclerView) dialogSelectAnimalType.findViewById(R.id.recycler_view_cage_animal_type);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerViewAnimalType.setLayoutManager(layoutManager);
+        recyclerViewAnimalType.addItemDecoration(new VerticalSpaceItemDecoration(VERTICAL_SPACE));
+        recyclerViewAnimalType.addItemDecoration(
+                new DividerItemDecoration(getActivity(), R.drawable.divider_recycler_view));
+        recyclerViewAnimalType.setItemViewCacheSize(AnimalEnum.values().length);
+
+        AnimalTypeListAdapter  animalTypeListAdapter = new AnimalTypeListAdapter(getActivity(), AnimalEnum.values());
+        recyclerViewAnimalType.setAdapter(animalTypeListAdapter);
+
+
+        recyclerViewAnimalType.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+                String animalType = ((AnimalTypeListAdapter) recyclerViewAnimalType.getAdapter()).getAnimalType(position);
+                cage.setAnimalType(animalType);
+
+                Long insertedCageId =  CageBusiness.save(cage);
+                cage.setId(insertedCageId);
+
+                ZooInfoBusiness.addCage(cage);
+                ZooInfoBusiness.takeMoney(cage.getPrice());
+
+
+                Toast.makeText(getContext(), getString(R.string.msg_cage_sucessfully_built), Toast.LENGTH_SHORT).show();
+
+                dialogSelectAnimalType.dismiss();
+            }
+        }));
+
+        Button buttonCancel = (Button) dialogSelectAnimalType.findViewById(R.id.button_cancel_dialog);
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogSelectAnimalType.dismiss();
+            }
+        });
+
+        dialogSelectAnimalType.show();
 
 
     }

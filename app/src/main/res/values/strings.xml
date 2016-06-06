@@ -138,4 +138,14 @@
     <string name="select_weight">Weight</string>
     <string name="select_sex">Sex</string>
     <string name="select_popularity">Popularity</string>
+    <string name="title_select_cage_animal_type">Select an animal type to the cage</string>
+    <string name="title_select_animal_cage">Select cage</string>
+    <string name="btn_continue">Continue</string>
+    <string name="title_set_name_to_animal">"Set a name to the "</string>
+    <string name="title_no_cages">No Cages</string>
+    <string name="msg_buy_new_cage_for_animal_type">There are no cages for this animal type, do you want to buy a new one?</string>
+    <string name="lbl_price">Price</string>
+    <string name="lbl_satisfied">Satisfied</string>
+    <string name="lbl_status">Status</string>
+    <string name="hint_set_name">Set name</string>
 </resources>

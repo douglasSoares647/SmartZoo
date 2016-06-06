@@ -13,16 +13,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.business.AnimalBusiness;
 import com.br.smartzoo.model.business.BusinessRules;
+import com.br.smartzoo.model.business.CageBusiness;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnBuyAnimalListener;
+import com.br.smartzoo.model.interfaces.OnSetAnimalNameListener;
 import com.br.smartzoo.presenter.BuyAnimalPresenter;
 import com.br.smartzoo.ui.adapter.BuyAnimalListAdapter;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
@@ -30,14 +33,16 @@ import com.br.smartzoo.ui.adapter.ListCageAdapter;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.ui.view.BuyAnimalView;
 import com.br.smartzoo.util.AlertDialogUtil;
+import com.br.smartzoo.util.DialogUtil;
 import com.br.smartzoo.util.RecyclerItemClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by adenilson on 12/05/16.
  */
-public class BuyAnimalFragment extends Fragment implements BuyAnimalView, OnBuyAnimalListener{
+public class BuyAnimalFragment extends Fragment implements BuyAnimalView, OnBuyAnimalListener, OnSetAnimalNameListener{
 
     private static final int VERTICAL_ITEM_SPACE = 30;
     private BuyAnimalPresenter mPresenter;
@@ -95,7 +100,7 @@ public class BuyAnimalFragment extends Fragment implements BuyAnimalView, OnBuyA
         }
     }
 
-    private void showSelectCageDialog(final Animal animal) {
+    private void showSelectCageDialog(List<Cage> cagesByAnimalType, final Animal animal) {
         selectCageDialog = new Dialog(getContext());
         selectCageDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         selectCageDialog.setContentView(R.layout.dialog_animal_cage);
@@ -111,42 +116,42 @@ public class BuyAnimalFragment extends Fragment implements BuyAnimalView, OnBuyA
                 new DividerItemDecoration(getActivity(), R.drawable.divider_recycler_view));
         recyclerViewCages.setItemViewCacheSize(ZooInfo.cages.size());
 
-        ListCageAdapter listCageAdapter = new ListCageAdapter(ZooInfo.cages, getActivity());
+
+
+        ListCageAdapter listCageAdapter = new ListCageAdapter(cagesByAnimalType, getActivity());
         recyclerViewCages.setAdapter(listCageAdapter);
 
 
         recyclerViewCages.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Cage cage = ((ListCageAdapter) recyclerViewCages.getAdapter()).getCage(position);
+                @Override
+                public void onItemClick(View view, int position) {
+                    Cage cage = ((ListCageAdapter) recyclerViewCages.getAdapter()).getCage(position);
 
-                if (cage.checkCapacity()) {
+                    if (cage.checkCapacity()) {
+                        selectCageDialog.dismiss();
+
+                        mPresenter.finishAnimalCreation(cage,animal);
+
+                        Toast.makeText(getContext(), R.string.msg_animal_succesfully_bought, Toast.LENGTH_SHORT).show();
+                        ((BuyAnimalListAdapter) mRecyclerViewAnimals.getAdapter()).getAnimalList().remove(animal);
+                        mRecyclerViewAnimals.getAdapter().notifyDataSetChanged();
+
+                    } else {
+                        Toast.makeText(getContext(), R.string.msg_cage_full, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }));
+
+            Button buttonCancel = (Button) selectCageDialog.findViewById(R.id.button_cancel_dialog);
+            buttonCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     selectCageDialog.dismiss();
-                    animal.setCage(cage);
-                    AnimalBusiness.save(animal);
-
-                    ZooInfoBusiness.takeMoney(animal.getPrice());
-
-                    Toast.makeText(getContext(), R.string.msg_animal_succesfully_bought, Toast.LENGTH_SHORT).show();
-                    ((BuyAnimalListAdapter) mRecyclerViewAnimals.getAdapter()).getAnimalList().remove(animal);
-                    mRecyclerViewAnimals.getAdapter().notifyDataSetChanged();
-
                 }
-                else{
-                    Toast.makeText(getContext(), R.string.msg_cage_full,Toast.LENGTH_SHORT).show();
-                }
-            }
-        }));
+            });
 
-        Button buttonCancel = (Button) selectCageDialog.findViewById(R.id.button_cancel_dialog);
-        buttonCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectCageDialog.dismiss();
-            }
-        });
+            selectCageDialog.show();
 
-        selectCageDialog.show();
     }
 
 
@@ -156,7 +161,7 @@ public class BuyAnimalFragment extends Fragment implements BuyAnimalView, OnBuyA
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        showSelectCageDialog(animal);
+                        showDialogSetName(animal);
                     }
                 });
 
@@ -166,4 +171,33 @@ public class BuyAnimalFragment extends Fragment implements BuyAnimalView, OnBuyA
 
     }
 
+    private void showDialogSetName(Animal animal) {
+        Dialog dialog = DialogUtil.makeDialogSetAnimalName(getActivity(), this, animal);
+        dialog.show();
+
+    }
+
+
+    @Override
+    public void afterSetAnimalName(Animal animal) {
+        List<Cage> cagesByAnimalType = CageBusiness.getCagesByAnimalType(animal);
+        if(cagesByAnimalType.isEmpty()) {
+            showBuyNewCageDialog();
+        }
+        else {
+            showSelectCageDialog(cagesByAnimalType, animal);
+        }
+    }
+
+    private void showBuyNewCageDialog() {
+        AlertDialog.Builder dialog = AlertDialogUtil.makeConfirmationDialog(getActivity(), getActivity().getString(R.string.title_no_cages), getActivity().getString(R.string.msg_buy_new_cage_for_animal_type),
+                new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
 }

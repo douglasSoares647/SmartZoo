@@ -22,6 +22,7 @@ public class Animal implements Observer {
     private String status;
     private Long id;
     private String name;
+    private String type;
     private Integer age;
     private Double weight;
     private String sex;
@@ -34,9 +35,9 @@ public class Animal implements Observer {
 
 
 
-    public Animal(int image, String name, Integer age,Double price, Double weight
+    public Animal(int image, String type, Integer age,Double price, Double weight
             , Cage cage, Integer resistance,  boolean isHealthy) {
-        this.name = name;
+        this.type = type;
         this.image= image;
         this.age = age;
         this.weight = weight;
@@ -142,6 +143,14 @@ public class Animal implements Observer {
 
     public Double getPrice() {
         return price;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public void setPrice(Double price) {
@@ -252,17 +261,10 @@ public class Animal implements Observer {
 
     }
 
-    @Override
-    public String toString(){
-    	
-		return "Animal: " + name + "\nIdade: " + age + "\nPeso: "+ weight +"\n Esta saudavel? : "+ isHealthy;
-    	
-    }
 
     @Override
     public void onTick() {
         tick++;
-
     }
 
     public int getImage() {
