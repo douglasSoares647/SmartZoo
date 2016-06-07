@@ -1,10 +1,13 @@
 package com.br.smartzoo.model.business;
 
+import com.br.smartzoo.model.asynctask.SaveNewsAsyncTask;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Food;
 import com.br.smartzoo.model.entity.New;
 import com.br.smartzoo.model.environment.Visitor;
+import com.br.smartzoo.model.interfaces.OnNewFeedUpdate;
 import com.br.smartzoo.model.persistence.NewsRepository;
+import com.br.smartzoo.ui.fragment.NewsFragment;
 import com.br.smartzoo.util.NewsUtil;
 
 import java.util.ArrayList;
@@ -16,7 +19,8 @@ import java.util.List;
  */
 public class NewsFeedBusiness {
 
-    public static List<New> news = new ArrayList<>();
+    private static List<New> news = new ArrayList<>();
+    public static OnNewFeedUpdate mOnNewFeedUpdate;
 
     public static void save(New news){
         NewsRepository.save(news);
@@ -31,30 +35,36 @@ public class NewsFeedBusiness {
 
         New newFeed = new New();
 
-        if(tag.equals(New.TagEnum.VISITOR_ARRIVING)){
+        if(tag.equals(New.TagEnum.VISITOR_ARRIVING.getTag())){
             newFeed = NewsUtil.createVisitorArrivingNews((Visitor)object);
         }
-        else if(tag.equals(New.TagEnum.VISITOR_LEAVING)){
+        else if(tag.equals(New.TagEnum.VISITOR_LEAVING.getTag())){
             newFeed = NewsUtil.createVisitorLeavingNews((Visitor)object);
         }
-        else if(tag.equals(New.TagEnum.ANIMAL_SICK)){
+        else if(tag.equals(New.TagEnum.ANIMAL_SICK.getTag())){
             newFeed =  NewsUtil.createAnimalSickNews((Animal)object);
         }
-        else if(tag.equals(New.TagEnum.STOCK_RAN_OUT_OF_FOOD)){
+        else if(tag.equals(New.TagEnum.STOCK_RAN_OUT_OF_FOOD.getTag())){
             newFeed = NewsUtil.createStockOutOfFoodNews();
         }
-        else if(tag.equals(New.TagEnum.FOOD_ROTTEN)){
+        else if(tag.equals(New.TagEnum.FOOD_ROTTEN.getTag())){
             newFeed = NewsUtil.createRottenFoodNews((Food)object);
         }
 
-
-        //CRIAR UMA ASYNC PRO SAVE e chamar aqui
-
-        if(news.size()==50){
-            news.remove(news.size()-1);
-        }
         news.add(newFeed);
+        if(news.size()==10){
+            SaveNewsAsyncTask asyncTask = new SaveNewsAsyncTask();
+            List<New> newsToSave = new ArrayList<>();
+            newsToSave.addAll(news);
+            asyncTask.execute(newsToSave);
+            news.clear();
+        }
+
+        if(mOnNewFeedUpdate!=null)
+        mOnNewFeedUpdate.update(newFeed);
     }
+
+
 
 
 }

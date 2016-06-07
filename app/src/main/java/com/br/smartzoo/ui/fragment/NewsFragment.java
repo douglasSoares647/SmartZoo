@@ -10,10 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.model.business.NewsFeedBusiness;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.New;
 import com.br.smartzoo.model.interfaces.OnNewClick;
+import com.br.smartzoo.model.interfaces.OnNewFeedUpdate;
 import com.br.smartzoo.presenter.NewsPresenter;
+import com.br.smartzoo.ui.activity.MainActivity;
 import com.br.smartzoo.ui.adapter.AnimalListAdapter;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.NewListAdapter;
@@ -26,7 +29,7 @@ import java.util.List;
 /**
  * Created by adenilson on 05/06/16.
  */
-public class NewsFragment extends Fragment implements NewsView, OnNewClick {
+public class NewsFragment extends Fragment implements NewsView, OnNewClick, OnNewFeedUpdate {
     private static final int VERTICAL_SPACE = 30;
     private NewsPresenter mPresenter;
     private RecyclerView mRecyclerViewNews;
@@ -37,12 +40,17 @@ public class NewsFragment extends Fragment implements NewsView, OnNewClick {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_news, container, false);
 
+        bindFragmentToBusiness();
         bindPresenter();
         bindRecyclerViewNews(view);
         loadNews();
 
 
         return view;
+    }
+
+    private void bindFragmentToBusiness() {
+        NewsFeedBusiness.mOnNewFeedUpdate = this;
     }
 
     private void loadNews() {
@@ -76,4 +84,18 @@ public class NewsFragment extends Fragment implements NewsView, OnNewClick {
     public void onLoadNews(List<New> news) {
         mAdapter.setNewList(news);
     }
+
+    @Override
+    public void showSnackBar(String message) {
+        ((MainActivity) getActivity()).showSnackBar(message);
+    }
+
+    @Override
+    public void update(New news) {
+        NewListAdapter adapter = (NewListAdapter) mRecyclerViewNews.getAdapter();
+        adapter.addNewToList(news);
+        adapter.notifyDataSetChanged();
+    }
+
+
 }

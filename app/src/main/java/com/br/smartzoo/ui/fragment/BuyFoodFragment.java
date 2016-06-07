@@ -110,10 +110,7 @@ public class BuyFoodFragment extends Fragment implements BuyFoodView, OnChangeBu
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                HashMap<String, List<Food>> foodMap = Supplier.buyFoods(totalFoods);
-                                Stock.getInstance().putFoods(foodMap);
-                                FoodBusiness.saveAll(foodMap);
-                                ZooInfoBusiness.takeMoney(mTotalPrice);
+                                mPresenter.saveFoods(totalFoods,mTotalPrice);
                                 showSnackBar(getActivity().getString(R.string.msg_food_successfully_bought));
                             }
                         });

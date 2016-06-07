@@ -2,12 +2,19 @@ package com.br.smartzoo.presenter;
 
 import android.app.Activity;
 
+import com.br.smartzoo.R;
+import com.br.smartzoo.model.asynctask.SaveFoodAsyncTask;
+import com.br.smartzoo.model.business.FoodBusiness;
+import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Food;
 import com.br.smartzoo.model.enums.FoodEnum;
+import com.br.smartzoo.model.singleton.Stock;
+import com.br.smartzoo.model.singleton.Supplier;
 import com.br.smartzoo.ui.view.BuyFoodView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -69,6 +76,14 @@ public class BuyFoodPresenter {
 
 
         return foods;
+    }
+
+    public void saveFoods(HashMap<Food, Integer> totalFoods, Double totalPrice) {
+        HashMap<String, List<Food>> foodMap = Supplier.buyFoods(totalFoods);
+        Stock.getInstance().putFoods(foodMap);
+        new SaveFoodAsyncTask().execute(foodMap);
+        ZooInfoBusiness.takeMoney(totalPrice);
+
     }
 
 }

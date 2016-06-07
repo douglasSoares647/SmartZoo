@@ -86,7 +86,7 @@ public class NewsContract {
         List<New> news = new ArrayList<>();
 
         while(cursor.moveToNext()){
-            news.add(getNew(cursor));
+            news.add(0,getNew(cursor));
         }
 
         return news;

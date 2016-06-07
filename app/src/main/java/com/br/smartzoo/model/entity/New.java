@@ -8,8 +8,8 @@ import java.util.Date;
 public class New {
 
     private Long id;
-    private int imageType;
-    private int imageSecondary;
+    private Integer imageType;
+    private Integer imageSecondary;
     private String title;
     private String message;
     private String imageDescription;
@@ -17,7 +17,7 @@ public class New {
     private String tag;
 
 
-    public New(Long id, int imageType,String imageDescription, int imageSecondary, String title, String message, Date date, String tag) {
+    public New(Long id, Integer imageType,String imageDescription, Integer imageSecondary, String title, String message, Date date, String tag) {
         this.id = id;
         this.imageType = imageType;
         this.imageSecondary = imageSecondary;
@@ -34,15 +34,15 @@ public class New {
     }
 
 
-    public int getImageType() {
+    public Integer getImageType() {
         return imageType;
     }
 
-    public void setImageType(int imageType) {
+    public void setImageType(Integer imageType) {
         this.imageType = imageType;
     }
 
-    public int getImageSecondary() {
+    public Integer getImageSecondary() {
         return imageSecondary;
     }
 
@@ -54,7 +54,7 @@ public class New {
         this.imageDescription = imageDescription;
     }
 
-    public void setImageSecondary(int imageSecondary) {
+    public void setImageSecondary(Integer imageSecondary) {
         this.imageSecondary = imageSecondary;
     }
 

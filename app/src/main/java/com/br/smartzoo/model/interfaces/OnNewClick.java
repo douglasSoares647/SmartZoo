@@ -6,4 +6,5 @@ package com.br.smartzoo.model.interfaces;
 public interface OnNewClick {
 
     void newClicked(String fragment);
+
 }

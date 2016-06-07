@@ -2,6 +2,7 @@ package com.br.smartzoo.ui.view;
 
 import com.br.smartzoo.model.entity.Food;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  */
 public interface ManageStockView {
 
-   void  onFoodListLoaded(List<Food> foodList);
+   void  onFoodListLoaded();
 
     void showSnackBar(String message);
 }

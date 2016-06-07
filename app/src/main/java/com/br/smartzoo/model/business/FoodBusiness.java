@@ -1,8 +1,11 @@
 package com.br.smartzoo.model.business;
 
 import com.br.smartzoo.model.entity.Food;
+import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.persistence.FoodRepository;
+import com.br.smartzoo.model.singleton.Stock;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,13 +33,27 @@ public class FoodBusiness {
         }
     }
 
-    public static List<Food> getAllFoods() {
+    public static HashMap<String,List<Food>>  getAllFoods() {
         List<Food> foods = FoodRepository.getAllFoods();
 
-        return foods;
+        HashMap<String,List<Food>> stockFoods = new HashMap<>();
+
+        for(Food food : foods){
+            if(stockFoods.get(food.getName())==null) {
+                stockFoods.put(food.getName(), new ArrayList<Food>());
+            }
+            stockFoods.get(food.getName()).add(food);
+        }
+
+        Stock.getInstance().putFoods(stockFoods);
+
+        return stockFoods;
     }
 
     public static void deleteFood(Food food){
         FoodRepository.delete(food.getId());
     }
+
+
+
 }

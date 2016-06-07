@@ -2,9 +2,11 @@ package com.br.smartzoo.model.environment;
 
 import android.os.Handler;
 
+import com.br.smartzoo.model.business.NewsFeedBusiness;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
+import com.br.smartzoo.model.entity.New;
 import com.br.smartzoo.model.interfaces.Observer;
 
 import java.util.Calendar;
@@ -42,7 +44,9 @@ public class Visitor implements Observer{
         List<Cage> cagesToVisit = ZooInfo.cages;
 
     //    Double reputationGeneratedByPrice = 10/ZooInfo.price;
-        //reputationGenerated += reputationGeneratedByPrice;
+        // reputationGenerated += reputationGeneratedByPrice;
+
+
         for(Cage cage : cagesToVisit){
             Integer timeToVisitCage = 0;
             for(Animal animal : cage.getAnimals()){
@@ -104,9 +108,12 @@ public class Visitor implements Observer{
                         if(timeCalculated) {
                             ZooInfoBusiness.removeVisitor(Visitor.this);
                             ZooInfoBusiness.addReputation(reputationGenerated);
+                            NewsFeedBusiness.addNew(New.TagEnum.VISITOR_LEAVING.getTag(),Visitor.this);
                         }
                     }
                 });
+
+
             }
             else {
                 final Cage cage = timeToVisitEachCage.firstKey();

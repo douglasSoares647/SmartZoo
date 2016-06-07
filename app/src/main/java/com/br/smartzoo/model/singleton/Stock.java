@@ -50,9 +50,12 @@ public class Stock {
 			String foodName = entry.getKey();
 			List<Food> foodsToAdd = entry.getValue();
 
-			if(this.foods.get(foodName)!=null){
-				this.foods.get(foodName).addAll(foodsToAdd);
+			if(this.foods.get(foodName)==null){
+				this.foods.put(foodName,new ArrayList<Food>());
 			}
+
+            this.foods.get(foodName).addAll(foodsToAdd);
+
 		}
 	}
     
@@ -104,5 +107,29 @@ public class Stock {
     
 
     	return stock.toString();
+    }
+
+
+	public Boolean isStockEmpty(){
+        for(Map.Entry<String,List<Food>> entry : foods.entrySet()){
+            String key = entry.getKey();
+            List<Food> foods = entry.getValue();
+            if(!foods.isEmpty()){
+                return false;
+            }
+        }
+
+        return true;
+	}
+
+
+    public List<Food> getFoods() {
+        List<Food> allFoods = new ArrayList<>();
+
+        for(Map.Entry<String,List<Food>> entry : foods.entrySet()){
+            List<Food> foodsByName = entry.getValue();
+            allFoods.addAll(foodsByName);
+        }
+        return allFoods;
     }
 }
