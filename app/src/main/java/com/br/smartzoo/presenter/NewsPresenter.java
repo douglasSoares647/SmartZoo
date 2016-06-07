@@ -1,8 +1,12 @@
 package com.br.smartzoo.presenter;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 
+import com.br.smartzoo.R;
+import com.br.smartzoo.model.asynctask.LoadNewsAsyncTask;
+import com.br.smartzoo.model.business.NewsFeedBusiness;
 import com.br.smartzoo.model.entity.New;
 import com.br.smartzoo.ui.activity.MainActivity;
 import com.br.smartzoo.ui.view.NewsView;
@@ -27,8 +31,26 @@ public class NewsPresenter {
     }
 
     public void loadNews() {
-        //GORDINHO, PRECISAMOS DSICUTIR COMO SERAO SALVAS AS NEWS DO ZOO, ABRAX
-        mNewsView.onLoadNews(new ArrayList<New>());
+
+        new LoadNewsAsyncTask(new LoadNewsAsyncTask.OnLoadNewsList() {
+            @Override
+            public void onLoadListSuccess(List<New> news) {
+                mNewsView.onLoadNews(news);
+                mNewsView.showSnackBar(mContext.getString(R.string.msg_news_succesfully_loaded));
+            }
+
+            @Override
+            public void onLoadListFailed() {
+                mNewsView.showSnackBar(mContext.getString(R.string.msg_news_failed_to_load));
+            }
+
+            @Override
+            public void onLoadListEmpty() {
+                mNewsView.showSnackBar(mContext.getString(R.string.msg_no_news_to_load));
+            }
+        }, mContext).execute();
+
+
     }
 
     public void startTransaction(String fragment) {

@@ -15,7 +15,8 @@
         <ImageView
             android:id="@+id/image_view_type_new"
             android:layout_width="75dp"
-            android:layout_height="75dp" />
+            android:layout_height="75dp"
+            android:layout_centerVertical="true"/>
 
         <TextView
             android:id="@+id/text_view_title_new"
@@ -23,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_toRightOf="@id/image_view_type_new"
+            android:textStyle="bold"
             android:text="Title" />
 
         <TextView

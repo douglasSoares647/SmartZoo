@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.entity.Food;
 import com.br.smartzoo.model.interfaces.OnManageFood;
+import com.br.smartzoo.model.singleton.Stock;
 import com.br.smartzoo.presenter.ManageStockPresenter;
 import com.br.smartzoo.ui.activity.MainActivity;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
@@ -68,10 +69,11 @@ public class ManageStockFragment extends Fragment implements ManageStockView, On
     }
 
     @Override
-    public void onFoodListLoaded(List<Food> foodList) {
+    public void onFoodListLoaded() {
         if(mAdapter != null){
-            mAdapter.setFoodList(foodList);
-            mRecyclerViewFoods.setItemViewCacheSize(foodList.size());
+            List<Food> foods = Stock._INSTANCE.getFoods();
+            mAdapter.setFoodList(foods);
+            mRecyclerViewFoods.setItemViewCacheSize(Stock._INSTANCE.getFoods().size());
         }
 
     }

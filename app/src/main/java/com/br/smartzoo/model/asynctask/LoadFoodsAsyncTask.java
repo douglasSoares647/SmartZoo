@@ -10,12 +10,13 @@ import com.br.smartzoo.model.business.FoodBusiness;
 import com.br.smartzoo.model.entity.Food;
 import com.br.smartzoo.util.ProgressDialogUtil;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by adenilson on 24/05/16.
  */
-public class LoadFoodsAsyncTask extends AsyncTask<Void, Integer, List<Food>> {
+public class LoadFoodsAsyncTask extends AsyncTask<Void, Integer, HashMap<String,List<Food>>> {
 
     private OnLoadFoodList mCallBack;
     private Activity mContext;
@@ -44,19 +45,19 @@ public class LoadFoodsAsyncTask extends AsyncTask<Void, Integer, List<Food>> {
     }
 
     @Override
-    protected List<Food> doInBackground(Void... params) {
-
-        return FoodBusiness.getAllFoods();
+    protected HashMap<String,List<Food>> doInBackground(Void... params) {
+        HashMap<String, List<Food>> allFoods = FoodBusiness.getAllFoods();
+        return allFoods;
     }
 
     @Override
-    protected void onPostExecute(List<Food> foodList) {
+    protected void onPostExecute(HashMap<String,List<Food>> foodList) {
         if (foodList == null) {
             mCallBack.onLoadFoodListFail();
         } else if (foodList.isEmpty()) {
             mCallBack.onLoadFoodListEmpty();
         } else {
-            mCallBack.onLoadFoodListSuccess(foodList);
+            mCallBack.onLoadFoodListSuccess();
         }
 
         mProgressDialog.dismiss();
@@ -66,7 +67,7 @@ public class LoadFoodsAsyncTask extends AsyncTask<Void, Integer, List<Food>> {
 
     public interface OnLoadFoodList {
 
-        void onLoadFoodListSuccess(List<Food> foodList);
+        void onLoadFoodListSuccess();
 
         void onLoadFoodListFail();
 

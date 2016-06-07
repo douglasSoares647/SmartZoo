@@ -6,6 +6,7 @@ import android.os.Looper;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.entity.Cage;
+import com.br.smartzoo.model.entity.New;
 import com.br.smartzoo.model.enums.FoodEnum;
 import com.br.smartzoo.model.environment.Player;
 import com.br.smartzoo.model.environment.Visitor;
@@ -78,6 +79,12 @@ public class BusinessRules {
     private static void createVisitor(){
         final Visitor visitor = new Visitor();
 
+        Random random = new Random();
+
+        visitor.setName(String.valueOf(random.nextInt(40000)));
+
+
+
         threadForVisitor = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -87,6 +94,7 @@ public class BusinessRules {
                     public void run() {
                         ZooInfoBusiness.addVisitor(visitor);
                         ZooInfoBusiness.addMoney(ZooInfo.price);
+                        NewsFeedBusiness.addNew(New.TagEnum.VISITOR_ARRIVING.getTag(),visitor);
                     }
                 });
 

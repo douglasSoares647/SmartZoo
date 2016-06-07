@@ -44,10 +44,23 @@ public class NewListAdapter extends RecyclerView.Adapter<NewListAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, int position) {
         final New aNew = mNewList.get(position);
         Glide.with(mContext).load(aNew.getImageType()).into(holder.mImageViewType);
+
+        if(aNew.getImageSecondary()!=null)
         Glide.with(mContext).load(aNew.getImageSecondary()).into(holder.mImageViewSecondary);
+        else{
+            holder.mImageViewSecondary.setVisibility(View.GONE);
+        }
+
         holder.mTextViewTitle.setText(aNew.getTitle());
         holder.mTextViewMessage.setText(aNew.getMessage());
+
+        if(aNew.getImageDescription()!=null)
         holder.mTextViewDescription.setText(aNew.getImageDescription());
+        else{
+            holder.mTextViewDescription.setVisibility(View.GONE);
+        }
+
+
         holder.mCardViewNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,7 +104,10 @@ public class NewListAdapter extends RecyclerView.Adapter<NewListAdapter.ViewHold
 
     public void addNewToList(New aNew){
         if(mNewList != null){
-            mNewList.add(aNew);
+            if(mNewList.size()==50){
+                mNewList.remove(mNewList.size()-1);
+            }
+            mNewList.add(0,aNew);
         }
         notifyDataSetChanged();
     }

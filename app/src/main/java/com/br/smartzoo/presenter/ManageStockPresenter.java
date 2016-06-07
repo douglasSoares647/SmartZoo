@@ -11,6 +11,7 @@ import com.br.smartzoo.model.entity.Food;
 import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.ui.view.ManageStockView;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -38,8 +39,8 @@ public class ManageStockPresenter {
 
         new LoadFoodsAsyncTask(mContext, new LoadFoodsAsyncTask.OnLoadFoodList() {
             @Override
-            public void onLoadFoodListSuccess(List<Food> foodList) {
-                mManageStockView.onFoodListLoaded(foodList);
+            public void onLoadFoodListSuccess() {
+                mManageStockView.onFoodListLoaded();
                 mManageStockView.showSnackBar(mContext
                         .getString(R.string.message_load_list_food_successful));
             }

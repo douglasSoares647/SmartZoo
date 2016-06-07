@@ -148,4 +148,24 @@
     <string name="lbl_satisfied">Satisfied</string>
     <string name="lbl_status">Status</string>
     <string name="hint_set_name">Set name</string>
+    <string name="title_new_visitor_arrived">A new visitor has arrived</string>
+    <string name="msg_visitor_arriving_part1">"The visitor named as "</string>
+    <string name="msg_visitor_arriving_part2">" has arrived in the zoo!"</string>
+    <string name="title_visitor_leaving">A visitor is leaving</string>
+    <string name="msg_visitor_leaving_part1">"The visitor named as "</string>
+    <string name="msg_visitor_leaving_part2">" is leaving the zoo!"</string>
+    <string name="msg_news_reputation">" reputation"</string>
+    <string name="title_animal_sick">An animal got sick</string>
+    <string name="msg_animal_sick_part1">"The animal "</string>
+    <string name="msg_animal_sick_part2">" got sick, you should treat him!"</string>
+    <string name="title_stock_out_of_food">Your stock ran out of food</string>
+    <string name="msg_stock_out_of_food">Your stock has no food right now, you should buy some to feed your animals!</string>
+    <string name="title_food_rotten">A food is rotten</string>
+    <string name="msg_food_rotten_part1">"The food "</string>
+    <string name="msg_food_rotten_part2">" is rotten, you should get rid of it!"</string>
+    <string name="msg_loading_news_feed">Loading News feed</string>
+    <string name="title_loading_news">News</string>
+    <string name="msg_news_succesfully_loaded">News Feed successfully loaded!</string>
+    <string name="msg_news_failed_to_load">Failed to load News Feed!</string>
+    <string name="msg_no_news_to_load">There are no News to load!</string>
 </resources>

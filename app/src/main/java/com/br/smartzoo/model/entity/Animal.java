@@ -2,6 +2,7 @@ package com.br.smartzoo.model.entity;
 
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.model.business.NewsFeedBusiness;
 import com.br.smartzoo.model.interfaces.Observer;
 import com.br.smartzoo.util.ApplicationUtil;
 import com.br.smartzoo.model.environment.Clock;
@@ -212,6 +213,7 @@ public class Animal implements Observer {
                         if (this.isHealthy) {
                             if (i > resistance) {
                                 isHealthy = false;
+                                NewsFeedBusiness.addNew(New.TagEnum.ANIMAL_SICK.getTag(),this);
                             }
                         }
                     }

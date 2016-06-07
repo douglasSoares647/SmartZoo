@@ -142,8 +142,28 @@
     <string name="title_set_name_to_animal">"Coloque um nome para o "</string>
     <string name="title_no_cages">Nenhuma jaula</string>
     <string name="msg_buy_new_cage_for_animal_type">Não existem jaulas para este tipo de animal, deseja comprar uma nova?</string>
-    <string name="lbl_price">Price</string>
+    <string name="lbl_price">Preço</string>
     <string name="lbl_status">Status</string>
-    <string name="hint_set_name">Set name</string>
+    <string name="hint_set_name">Coloque um nome</string>
+    <string name="title_new_visitor_arrived">Um novo visitante chegou</string>
+    <string name="msg_visitor_arriving_part1">"O visitante com nome "</string>
+    <string name="msg_visitor_arriving_part2">" chegou no Zoo"</string>
+    <string name="title_visitor_leaving">Um visitante está indo embora</string>
+    <string name="msg_visitor_leaving_part1">"O visitante com nome "</string>
+    <string name="msg_visitor_leaving_part2">" está saindo do Zoo!"</string>
+    <string name="msg_news_reputation">" reputação"</string>
+    <string name="title_animal_sick">Um animal ficou doente</string>
+    <string name="msg_animal_sick_part1">"O animal "</string>
+    <string name="msg_animal_sick_part2">" ficou doente, você deveria tratá-lo"</string>
+    <string name="title_stock_out_of_food">O seu estoque está sem comida</string>
+    <string name="msg_stock_out_of_food">O seu estoque está sem comida no momento, você deveria comprar mais comidas para alimentar seus animais!</string>
+    <string name="title_food_rotten">Uma comida está estragada</string>
+    <string name="msg_food_rotten_part1">"A comida "</string>
+    <string name="msg_food_rotten_part2">" está estragada, você deveria se livrar dela!"</string>
+    <string name="msg_loading_news_feed">Carregando feed de noticias!</string>
+    <string name="title_loading_news">Novidades</string>
+    <string name="msg_news_succesfully_loaded">Feed de noticias carregado com sucesso!</string>
+    <string name="msg_news_failed_to_load">Falha ao carregar o feed de noticias</string>
+    <string name="msg_no_news_to_load">Não existem noticias para carregar!</string>
 
 </resources>

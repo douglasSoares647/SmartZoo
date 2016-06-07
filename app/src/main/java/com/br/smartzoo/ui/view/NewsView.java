@@ -10,4 +10,6 @@ import java.util.List;
 public interface NewsView {
 
     void onLoadNews(List<New> news);
+
+    void showSnackBar(String message);
 }

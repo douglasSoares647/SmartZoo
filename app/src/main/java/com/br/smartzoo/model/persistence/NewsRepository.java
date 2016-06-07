@@ -40,6 +40,10 @@ public class NewsRepository {
 
         List<New> news = NewsContract.getNews(cursor);
 
+        readableDatabase.close();
+        databaseHelper.close();
         return news;
+
+
     }
 }

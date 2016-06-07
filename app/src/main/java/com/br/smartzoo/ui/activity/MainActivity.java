@@ -76,12 +76,15 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
         bindDrawerLayout();
         bindNavigationDrawer();
         bindContainerFragment();
+        bindInitialFragment();
 
 
         setContextToService();
 
 
     }
+
+
 
     private void setContextToService() {
         ClockService.context = this;
@@ -186,6 +189,9 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
     }
 
 
+    private void bindInitialFragment() {
+        mPresenter.startTransaction(mIdFrameContainer, new NewsFragment());
+    }
 
     private void bindmPresenter() {
         mPresenter = new MainActivityPresenter(this);
