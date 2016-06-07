@@ -31,7 +31,7 @@ public class ListCageAdapter extends RecyclerView.Adapter<ListCageAdapter.ViewHo
     public ListCageAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater
-                .from(parent.getContext()).inflate(R.layout.item_list_cage, parent, false);
+                .from(parent.getContext()).inflate(R.layout.item_cage_list, parent, false);
 
         return new ViewHolder(view);
     }

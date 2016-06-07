@@ -145,5 +145,6 @@
     <string name="lbl_price">Price</string>
     <string name="lbl_status">Status</string>
     <string name="hint_set_name">Set name</string>
+    <string name="message_load_janitor_list">Janitor list loaded!</string>
 
 </resources>

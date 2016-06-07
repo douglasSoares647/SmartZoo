@@ -3,6 +3,7 @@ package com.br.smartzoo.model.persistence;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.entity.Janitor;
 import com.br.smartzoo.util.DateUtil;
 
@@ -69,11 +70,14 @@ public class JanitorContract {
         if(!cursor.isBeforeFirst() || cursor.moveToNext()){
             janitor.setId(cursor.getLong(cursor.getColumnIndex(ID)));
             janitor.setAge(cursor.getInt(cursor.getColumnIndex(EmployeeContract.AGE)));
+            janitor.setImage(cursor.getInt(cursor.getColumnIndex(EmployeeContract.IMAGE)));
             janitor.setName(cursor.getString(cursor.getColumnIndex(EmployeeContract.NAME)));
             janitor.setSalary(cursor.getDouble(cursor.getColumnIndex(EmployeeContract.SALARY)));
-
-            Date startDate  = DateUtil.stringToDate(cursor.getString(cursor.getColumnIndex(EmployeeContract.STARTDATE)));
-            Date endDate = DateUtil.stringToDate(cursor.getString(cursor.getColumnIndex(EmployeeContract.ENDDATE)));
+            janitor.setStatus(cursor.getString(cursor.getColumnIndex(EmployeeContract.STATUS)));
+            Date endDate = DateUtil.stringToDate(cursor.getString(cursor
+                    .getColumnIndex(EmployeeContract.ENDDATE)));
+            Date startDate  = DateUtil.stringToDate(cursor.getString(cursor
+                    .getColumnIndex(EmployeeContract.STARTDATE)));
 
             janitor.setStartDate(startDate);
             janitor.setEndDate(endDate);
