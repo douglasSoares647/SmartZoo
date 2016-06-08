@@ -25,9 +25,7 @@ public class NewsUtil {
         singleNew.setMessage(message);
         singleNew.setImageType(imageType);
 
-        if(imageSecondary!=null)
         singleNew.setImageSecondary(imageSecondary);
-        if(imageDescription!=null)
         singleNew.setImageDescription(imageDescription);
 
         singleNew.setDate(date);

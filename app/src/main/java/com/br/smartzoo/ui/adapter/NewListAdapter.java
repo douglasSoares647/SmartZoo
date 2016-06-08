@@ -45,8 +45,10 @@ public class NewListAdapter extends RecyclerView.Adapter<NewListAdapter.ViewHold
         final New aNew = mNewList.get(position);
         Glide.with(mContext).load(aNew.getImageType()).into(holder.mImageViewType);
 
-        if(aNew.getImageSecondary()!=null)
-        Glide.with(mContext).load(aNew.getImageSecondary()).into(holder.mImageViewSecondary);
+        if(aNew.getImageSecondary()!=null && aNew.getImageSecondary()!=0) {
+            Glide.with(mContext).load(aNew.getImageSecondary()).into(holder.mImageViewSecondary);
+            holder.mImageViewSecondary.setVisibility(View.VISIBLE);
+        }
         else{
             holder.mImageViewSecondary.setVisibility(View.GONE);
         }
@@ -54,8 +56,10 @@ public class NewListAdapter extends RecyclerView.Adapter<NewListAdapter.ViewHold
         holder.mTextViewTitle.setText(aNew.getTitle());
         holder.mTextViewMessage.setText(aNew.getMessage());
 
-        if(aNew.getImageDescription()!=null)
-        holder.mTextViewDescription.setText(aNew.getImageDescription());
+        if(aNew.getImageDescription()!=null) {
+            holder.mTextViewDescription.setText(aNew.getImageDescription());
+            holder.mTextViewDescription.setVisibility(View.VISIBLE);
+        }
         else{
             holder.mTextViewDescription.setVisibility(View.GONE);
         }

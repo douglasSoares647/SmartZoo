@@ -3,13 +3,13 @@
     <string name="text_load_game">Carregar Jogo</string>
     <string name="text_new_game">Novo Jogo</string>
     <string name="available_animals">Animais disponíveis: </string>
-    <string name="cages">Jaulas: </string>
-    <string name="animals">Animais: </string>
-    <string name="janitors">Limpadores: </string>
-    <string name="feeders">Alimentadores: </string>
-    <string name="veterinaries">Veterinários: </string>
-    <string name="popularity">Popularidade: </string>
-    <string name="cash">Dinheiro: </string>
+    <string name="cages">Jaulas:</string>
+    <string name="animals">Animais:</string>
+    <string name="janitors">Limpadores:</string>
+    <string name="feeders">Alimentadores:</string>
+    <string name="veterinaries">Veterinários:</string>
+    <string name="popularity">Popularidade:</string>
+    <string name="cash">Dinheiro:</string>
     <string name="option_news">Notícias</string>
     <string name="option_animals">Animais</string>
     <string name="option_cages">Jaulas</string>
@@ -164,7 +164,8 @@
     <string name="msg_news_succesfully_loaded">Feed de noticias carregado com sucesso!</string>
     <string name="msg_news_failed_to_load">Falha ao carregar o feed de noticias</string>
     <string name="msg_no_news_to_load">Não existem noticias para carregar!</string>
-    <string name="hint_set_name">Set name</string>
-    <string name="message_load_janitor_list">Janitor list loaded!</string>
+    <string name="hint_set_name">Insira um nome</string>
+    <string name="message_load_janitor_list">Lista de limpadores carregada!</string>
+    <string name="title_general">Geral</string>
 
 </resources>

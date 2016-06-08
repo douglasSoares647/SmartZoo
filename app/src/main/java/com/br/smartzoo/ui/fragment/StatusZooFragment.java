@@ -41,35 +41,32 @@ public class StatusZooFragment extends Fragment implements StatusZooView {
 
     private void bindTextViewIdealPrice(View view) {
         mTextIdealPrice = (TextView) view.findViewById(R.id.text_view_ideal_price);
-        BusinessRules.calculateIdealPrice();
 
         mTextIdealPrice.setText("Ideal price : " + String.format("%.2f",BusinessRules.calculateIdealPrice()));
     }
 
     private void bindTextViewPrice(View view) {
         mTextViewPrice = (TextView) view.findViewById(R.id.text_view_price_zoo);
-        mTextViewPrice.setText(String.valueOf(ZooInfo.price));
+
+        BusinessRules.calculateIdealPrice();
+        String statusPrice = BusinessRules.calculatePriceIndicator(ZooInfo.price);
+        setPriceIndicator(statusPrice);
+
+        mTextViewPrice.setText(ZooInfo.price + ",00 $ - " + statusPrice);
     }
 
     private void bindSeekBarPrice(View view) {
         mSeekBar = (SeekBar) view.findViewById(R.id.seek_bar_price);
+        mSeekBar.setMax(BusinessRules.calculateIdealPrice().intValue()*2);
         mSeekBar.setProgress(ZooInfo.price.intValue());
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
                 ZooInfo.price = ((Integer)progress).doubleValue();
-
-                String statusPrice = BusinessRules.calculatePriceIndicator(((Integer)progress).doubleValue());
-
-                if(statusPrice.equals("Good")){
-                    mTextViewPrice.setTextColor(ContextCompat.getColor(getActivity(),R.color.green_500));
-                }
-                else{
-                    mTextViewPrice.setTextColor(ContextCompat.getColor(getActivity(),R.color.red_500));
-                }
-
+                String statusPrice = BusinessRules.calculatePriceIndicator(ZooInfo.price);
                 mTextViewPrice.setText(progress+ ",00 $ - " + statusPrice);
+                setPriceIndicator(statusPrice);
             }
 
             @Override
@@ -82,6 +79,19 @@ public class StatusZooFragment extends Fragment implements StatusZooView {
 
             }
         });
+    }
+
+    private void setPriceIndicator(String statusPrice) {
+
+
+        if(statusPrice.equals("Good")){
+            mTextViewPrice.setTextColor(ContextCompat.getColor(getActivity(), R.color.green_500));
+        }
+        else{
+            mTextViewPrice.setTextColor(ContextCompat.getColor(getActivity(),R.color.red_500));
+        }
+
+
     }
 
     private void bindPresenter() {
