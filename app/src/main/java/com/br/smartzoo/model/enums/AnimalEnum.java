@@ -1,6 +1,10 @@
 package com.br.smartzoo.model.enums;
 
+import android.app.Application;
+import android.content.Context;
+
 import com.br.smartzoo.R;
+import com.br.smartzoo.util.ApplicationUtil;
 
 public enum AnimalEnum {
 
@@ -61,4 +65,5 @@ public enum AnimalEnum {
     public String getStatus() {
         return status;
     }
+
 }

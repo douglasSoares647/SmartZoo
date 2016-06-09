@@ -51,7 +51,7 @@ public class EmployeeRepository {
 
     public static Integer updateSalary(Long id, Double salary) {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
-        SQLiteDatabase db = databaseHelper.getReadableDatabase();
+        SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
         String where = "id = " + id;
         ContentValues values = EmployeeContract.createUpdateSalary(salary);
@@ -81,5 +81,20 @@ public class EmployeeRepository {
         databaseHelper.close();
 
         return exists;
+    }
+
+    public static int decreaseStamina(Long idJanitor) {
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
+        SQLiteDatabase db = databaseHelper.getWritableDatabase();
+
+        String where = "id = " + idJanitor;
+        ContentValues values = EmployeeContract.createUpdateStamina();
+        int update = db.update(EmployeeContract.TABLE, values, where, null);
+
+
+        db.close();
+        databaseHelper.close();
+
+        return update;
     }
 }

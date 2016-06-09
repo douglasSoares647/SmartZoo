@@ -169,4 +169,16 @@
     <string name="msg_news_failed_to_load">Failed to load News Feed!</string>
     <string name="msg_no_news_to_load">There are no News to load!</string>
     <string name="message_load_janitor_list">Janitor list loaded!</string>
+    <string name="title_cage">Cages</string>
+    <string name="message_load_cages">Loading cages</string>
+    <string name="messa_load_cages_successful">Cage List updated</string>
+    <string name="messa_destroy_cage">Destroying cage</string>
+    <string name="message_destroy_success">Cage destroyed</string>
+    <string name="text_clean">Clean</string>
+    <string name="text_dirt">text_dirt</string>
+    <string name="title_janitors">Janitors</string>
+    <string name="message_there_arent_rested">There aren\'t janitors rested</string>
+    <string name="message_error_rested">Error on load rested janitors</string>
+    <string name="message_cleaned_successful">The Cage has been cleaned successful</string>
+    <string name="message_cleaned_failed">Cage can\'t be cleaned</string>
 </resources>

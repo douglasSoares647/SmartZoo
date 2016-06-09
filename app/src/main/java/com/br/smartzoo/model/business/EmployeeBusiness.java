@@ -37,4 +37,8 @@ public class EmployeeBusiness {
     public static boolean existsEmployee(Employee employee) {
         return EmployeeRepository.existsEmployee(employee);
     }
+
+    public static int decreaseStamina(Long idJanitor) {
+        return EmployeeRepository.decreaseStamina(idJanitor);
+    }
 }

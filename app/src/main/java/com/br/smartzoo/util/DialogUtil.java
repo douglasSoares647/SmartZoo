@@ -3,6 +3,8 @@ package com.br.smartzoo.util;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -11,19 +13,31 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.model.asynctask.LoadJanitorsRestedAsyncTask;
 import com.br.smartzoo.model.entity.Animal;
+import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Employee;
+import com.br.smartzoo.model.entity.Janitor;
+import com.br.smartzoo.model.interfaces.OnJanitorsRestedSelected;
+import com.br.smartzoo.model.interfaces.OnManageCage;
 import com.br.smartzoo.model.interfaces.OnManageEmployee;
 import com.br.smartzoo.model.interfaces.OnSetAnimalNameListener;
+import com.br.smartzoo.ui.adapter.DividerItemDecoration;
+import com.br.smartzoo.ui.adapter.JanitorsRestedAdapter;
+import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 
 import org.w3c.dom.Text;
+
+import java.util.List;
 
 /**
  * Created by adenilson on 26/05/16.
  */
 public class DialogUtil{
 
+    private static final int VERTICAL_ITEM_SPACE = 30;
     public static OnManageEmployee mOnManageVeterinary;
+    public static OnManageCage mOnManageCage;
 
 
     public static Dialog makeDialogSalary(Activity context, OnManageEmployee dialogSalary
@@ -34,6 +48,7 @@ public class DialogUtil{
         dialog.setContentView(R.layout.dialog_salary_change);
         final SeekBar seekBarSalary = (SeekBar) dialog.findViewById(R.id.seek_bar_salary);
         seekBarSalary.setMax(10000);
+        seekBarSalary.setProgress(employee.getSalary().intValue());
         final TextView textViewSalary = (TextView) dialog.findViewById(R.id.text_view_salary);
         Button buttonOK = (Button) dialog.findViewById(R.id.button_ok);
         Button buttonCancel = (Button) dialog.findViewById(R.id.button_cancel);
@@ -104,6 +119,28 @@ public class DialogUtil{
                 dialog.dismiss();
             }
         });
+
+        return dialog;
+    }
+
+    public static Dialog makeDialogRestedJanitors(Activity context, List<Janitor> janitors,
+                                                OnJanitorsRestedSelected onJanitorsRestedSelected,
+                                                Cage cage) {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_janitors_rested);
+
+        RecyclerView recyclerView
+                = (RecyclerView) dialog.findViewById(R.id.recycler_view_janitors_rested);
+        JanitorsRestedAdapter janitorsRestedAdapter = new JanitorsRestedAdapter(context, janitors,cage);
+        janitorsRestedAdapter.addOnJanitorRestedSelected(onJanitorsRestedSelected);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(VERTICAL_ITEM_SPACE));
+        recyclerView.addItemDecoration(
+                new DividerItemDecoration(context, R.drawable.divider_recycler_view));
+        recyclerView.setItemViewCacheSize(janitors.size());
 
         return dialog;
     }

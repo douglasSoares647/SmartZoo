@@ -13,15 +13,15 @@ import java.util.List;
  */
 public class CageBusiness {
 
-    public static long save(Cage cage){
+    public static long save(Cage cage) {
 
         return CageRepository.save(cage);
 
     }
 
 
-    public static List<Cage> getAllCages(){
-        List<Cage> cages = new ArrayList<>();
+    public static List<Cage> getAllCages() {
+        List<Cage> cages;
 
         cages = CageRepository.getAllCages();
 
@@ -29,8 +29,8 @@ public class CageBusiness {
     }
 
 
-    public static Cage getCageById(Long id){
-        Cage cage = new Cage();
+    public static Cage getCageById(Long id) {
+        Cage cage;
         cage = CageRepository.getCageById(id);
 
         return cage;
@@ -39,11 +39,20 @@ public class CageBusiness {
     public static List<Cage> getCagesByAnimalType(Animal animal) {
         List<Cage> cagesByAnimalType = new ArrayList<>();
 
-        for(Cage cage : ZooInfo.cages){
-            if(cage.getAnimalType().equals(animal.getType()))
+        for (Cage cage : ZooInfo.cages) {
+            if (cage.getAnimalType().equals(animal.getType()))
                 cagesByAnimalType.add(cage);
         }
 
         return cagesByAnimalType;
+    }
+
+    public static int destroyCage(Long idCage) {
+        return CageRepository.delete(idCage);
+
+    }
+
+    public static int clearCage(Long idCage) {
+        return CageRepository.clearCage(idCage);
     }
 }

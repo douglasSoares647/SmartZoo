@@ -73,4 +73,10 @@ public class EmployeeContract {
 
     }
 
+    public static ContentValues createUpdateStamina() {
+        ContentValues values = new ContentValues();
+        values.put(STATUS, "tired");
+
+        return values;
+    }
 }

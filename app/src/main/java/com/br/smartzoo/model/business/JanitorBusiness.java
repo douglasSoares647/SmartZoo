@@ -35,4 +35,8 @@ public class JanitorBusiness {
     public static List<Janitor> getJanitors(){
        return JanitorRepository.getJanitors();
     }
+
+    public static List<Janitor> getJanitorsRested() {
+        return JanitorRepository.getJanitorsRested();
+    }
 }

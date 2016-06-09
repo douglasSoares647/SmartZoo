@@ -50,7 +50,7 @@ public class CageContract {
         contentValues.put(NAME, cage.getName());
         contentValues.put(ANIMALTYPE, cage.getAnimalType());
         contentValues.put(CAPACITY, cage.getCapacity());
-        contentValues.put(ISCLEAN, cage.isClean()==true? 1 : 0);
+        contentValues.put(ISCLEAN, cage.isClean() ? 1 : 0);
         contentValues.put(ISSUPPLIED, cage.isSupplied()==true? 1 : 0);
 
         return contentValues;
@@ -67,8 +67,8 @@ public class CageContract {
             cage.setName(cursor.getString(cursor.getColumnIndex(NAME)));
             cage.setAnimalType(cursor.getString(cursor.getColumnIndex(ANIMALTYPE)));
             cage.setCapacity(cursor.getInt(cursor.getColumnIndex(CAPACITY)));
-            cage.setIsClean((cursor.getInt(cursor.getColumnIndex(ISCLEAN)))==1?true :false);
-            cage.setIsSupplied((cursor.getInt(cursor.getColumnIndex(ISSUPPLIED)))==1?true:false);
+            cage.setIsClean((cursor.getInt(cursor.getColumnIndex(ISCLEAN))) == 1);
+            cage.setIsSupplied((cursor.getInt(cursor.getColumnIndex(ISSUPPLIED))) == 1);
         }
         return cage;
     }
@@ -82,5 +82,11 @@ public class CageContract {
         }
 
         return cages;
+    }
+
+    public static ContentValues createUpdateClean() {
+        ContentValues values = new ContentValues();
+        values.put(ISCLEAN, 1);
+        return values ;
     }
 }

@@ -103,7 +103,22 @@ public class JanitorRepository {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
 
-        String sql = " Select j.id, e.image, e.status, e.name, e.age, e.cpf, e.startDate, e.endDate, e.salary from " + EmployeeContract.TABLE + " e join " + JanitorContract.TABLE + " j on j.id = e.id;";
+        String sql = " Select j.id, e.image, e.status, e.name, e.age, e.cpf, e.startDate," +
+                " e.endDate, e.salary from " + EmployeeContract.TABLE + " e join "
+                + JanitorContract.TABLE + " j on j.id = e.id;";
+
+        Cursor cursor = db.rawQuery(sql, null);
+
+        return JanitorContract.getJanitors(cursor);
+    }
+
+    public static List<Janitor> getJanitorsRested() {
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
+        SQLiteDatabase db = databaseHelper.getReadableDatabase();
+
+        String sql = " Select j.id, e.image, e.status, e.name, e.age, e.cpf, e.startDate, " +
+                "e.endDate, e.salary from " + EmployeeContract.TABLE + " e join "
+                + JanitorContract.TABLE + " j on j.id = e.id where e.status = 'rested';";
 
         Cursor cursor = db.rawQuery(sql, null);
 

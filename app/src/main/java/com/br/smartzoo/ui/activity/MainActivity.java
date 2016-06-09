@@ -27,6 +27,7 @@ import com.br.smartzoo.ui.fragment.AnimalListFragment;
 import com.br.smartzoo.ui.fragment.BuyAnimalFragment;
 import com.br.smartzoo.ui.fragment.BuyCageFragment;
 import com.br.smartzoo.ui.fragment.BuyFoodFragment;
+import com.br.smartzoo.ui.fragment.CageListFragment;
 import com.br.smartzoo.ui.fragment.ChooseEmployeeFragment;
 import com.br.smartzoo.ui.fragment.HireEmployeeFragment;
 import com.br.smartzoo.ui.fragment.ManageStockFragment;
@@ -272,7 +273,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
     @Override
     public void onCagesClick() {
-
+        mPresenter.startTransaction(mIdFrameContainer, new CageListFragment());
     }
 
     @Override
