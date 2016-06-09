@@ -170,4 +170,5 @@
     <string name="msg_no_news_to_load">There are no News to load!</string>
     <string name="message_load_janitor_list">Janitor list loaded!</string>
     <string name="title_general">General</string>
+    <string name="menu_sort">Sort by...</string>
 </resources>

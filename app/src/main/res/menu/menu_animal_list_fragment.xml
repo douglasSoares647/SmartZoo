@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/menu_filter"
+        android:title="@string/menu_sort">
+
+            <menu>
+                <group
+                    android:checkableBehavior="single">
+                    <item android:id="@+id/menu_sort_name"
+                        android:title="@string/select_name"></item>
+                    <item android:id="@+id/menu_sort_age"
+                        android:title="@string/select_age"></item>
+                    <item android:id="@+id/menu_sort_status"
+                        android:title="@string/select_status"></item>
+                    <item android:id="@+id/menu_sort_resistance"
+                        android:title="@string/select_resistance"></item>
+                    <item android:id="@+id/menu_sort_satisfaction"
+                        android:title="@string/select_satisfaction"></item>
+                    <item android:id="@+id/menu_sort_weight"
+                        android:title="@string/select_weight"></item>
+                    <item android:id="@+id/menu_sort_sex"
+                        android:title="@string/select_sex"></item>
+                    <item android:id="@+id/menu_sort_popularity"
+                        android:title="@string/select_popularity"></item>
+                </group>
+            </menu>
+    </item>
+
+</menu>
