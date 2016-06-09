@@ -118,21 +118,21 @@ public class NavigationDrawerFragment extends Fragment implements OnUpdateInform
 
     private void bindHeader(View view) {
 
-        textViewNumberCages = (TextView) view.findViewById(R.id.text_view_number_cages_value);
+        textViewNumberCages = (TextView) view.findViewById(R.id.text_view_number_cages);
 
-        textViewNumberAnimals = (TextView) view.findViewById(R.id.text_view_number_animals_value);
+        textViewNumberAnimals = (TextView) view.findViewById(R.id.text_view_number_animals);
 
-        textViewNumberJanitor = (TextView) view.findViewById(R.id.text_view_number_janitor_value);
+        textViewNumberJanitor = (TextView) view.findViewById(R.id.text_view_number_janitor);
 
-        textViewNumberFeeders = (TextView) view.findViewById(R.id.text_view_number_feeders_value);
+        textViewNumberFeeders = (TextView) view.findViewById(R.id.text_view_number_feeders);
 
-        textViewNumberVeterinaries = (TextView) view.findViewById(R.id.text_view_number_veterinaries_value);
+        textViewNumberVeterinaries = (TextView) view.findViewById(R.id.text_view_number_veterinaries);
 
         textViewReputation = (TextView) view.findViewById(R.id.text_view_reputation_value);
 
         textViewCash = (TextView) view.findViewById(R.id.text_view_cash_value);
 
-        textViewVisitors = (TextView) view.findViewById(R.id.text_view_number_visitors_value);
+        textViewVisitors = (TextView) view.findViewById(R.id.text_view_number_visitors);
 
 
         imageViewCash = (ImageView) view.findViewById(R.id.image_view_cash);
@@ -386,16 +386,15 @@ public class NavigationDrawerFragment extends Fragment implements OnUpdateInform
 
     @Override
     public void onUpdate() {
-        textViewNumberCages.setText(String.valueOf(ZooInfo.cages.size()));
+        textViewNumberCages.setText(getString(R.string.cages)+String.valueOf(ZooInfo.cages.size()));
 
         int numberAnimals = 0;
         for (Cage cage : ZooInfo.cages) {
             numberAnimals += cage.getAnimals().size();
         }
 
-        textViewNumberAnimals.setText(String.valueOf(numberAnimals));
+        textViewNumberAnimals.setText(getString(R.string.animals)+String.valueOf(numberAnimals));
 
-        textViewNumberCages.setText(String.valueOf(ZooInfo.cages.size()));
 
         int numberJanitors = 0;
         int numberFeeders = 0;
@@ -410,14 +409,14 @@ public class NavigationDrawerFragment extends Fragment implements OnUpdateInform
                 numberVets++;
         }
 
-        textViewNumberFeeders.setText(String.valueOf(numberFeeders));
-        textViewNumberVeterinaries.setText(String.valueOf(numberVets));
-        textViewNumberJanitor.setText(String.valueOf(numberJanitors));
+        textViewNumberFeeders.setText(getString(R.string.feeders)+String.valueOf(numberFeeders));
+        textViewNumberVeterinaries.setText(getString(R.string.veterinaries)+String.valueOf(numberVets));
+        textViewNumberJanitor.setText(getString(R.string.janitors)+String.valueOf(numberJanitors));
 
 
         textViewReputation.setText(String.format("%.2f",ZooInfo.reputation));
         textViewCash.setText(String.format("%.2f",ZooInfo.money));
 
-        textViewVisitors.setText(String.valueOf(ZooInfo.visitors.size()));
+        textViewVisitors.setText(getString(R.string.visitors)+String.valueOf(ZooInfo.visitors.size()));
     }
 }

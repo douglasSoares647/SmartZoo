@@ -20,7 +20,6 @@ import java.util.List;
  */
 public class AnimalListPresenter {
 
-    private static Long sActualSelect;
 
     private Activity mContext;
     private AnimalListView mAnimalListView;
@@ -33,16 +32,14 @@ public class AnimalListPresenter {
         this.mAnimalListView = animalListView;
     }
 
-    public void loadAnimalList(final Long select) {
-        sActualSelect = select;
+    public void loadAnimalList() {
 
         new LoadAnimalAsyncTask(mContext, new LoadAnimalAsyncTask.OnLoadAnimalList() {
             @Override
             public void onLoadAnimalsListSuccess(List<Animal> animals) {
                 ((MainActivity) mContext).showSnackBar(mContext
                         .getString(R.string.message_load_animal_list_successful));
-                List<Animal> sortedAnimals = SortArrayUtil.sortAnimalList(select, animals);
-                mAnimalListView.onAnimalListLoad(sortedAnimals);
+                mAnimalListView.onAnimalListLoad(animals);
 
             }
 
@@ -68,7 +65,7 @@ public class AnimalListPresenter {
                 ((MainActivity) mContext).showSnackBar(mContext.getString(R.string.message_sell_success));
                 ZooInfoBusiness.addMoney(animal.getPrice());
                 ZooInfoBusiness.removeAnimal(animal);
-                loadAnimalList(sActualSelect);
+                mAnimalListView.updateList();
             }
 
             @Override
@@ -79,22 +76,11 @@ public class AnimalListPresenter {
     }
 
 
-    public void loadAnimalList(String select) {
-        if (select.equals(mContext.getString(R.string.select_name))) {
+    public void sortAnimalList(String attribute,List<Animal> animals) {
+        if (animals != null) {
 
-        } else if (select.equals(mContext.getString(R.string.select_age))) {
-
-        } else if (select.equals(mContext.getString(R.string.select_popularity))) {
-
-        } else if (select.equals(mContext.getString(R.string.select_weight))) {
-
-        } else if (select.equals(mContext.getString(R.string.select_satisfaction))) {
-
-        } else if (select.equals(mContext.getString(R.string.select_sex))) {
-
-        } else if (select.equals(mContext.getString(R.string.select_status))) {
-
-        } else if (select.equals(mContext.getString(R.string.select_resistance))) {
+            List<Animal> sortedAnimals = SortArrayUtil.sortAnimalList(attribute,animals, mContext);
+            mAnimalListView.onAnimalListLoad(sortedAnimals);
 
         }
     }

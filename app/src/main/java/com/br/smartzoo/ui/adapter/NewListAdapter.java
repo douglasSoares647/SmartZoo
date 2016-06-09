@@ -6,6 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +27,8 @@ public class NewListAdapter extends RecyclerView.Adapter<NewListAdapter.ViewHold
     private Activity mContext;
     private List<New> mNewList;
     private OnNewClick mOnNewClick;
+    private final static int FADE_DURATION = 500;
+
 
     public NewListAdapter(Activity context, List<New> news) {
         this.mContext = context;
@@ -45,8 +51,10 @@ public class NewListAdapter extends RecyclerView.Adapter<NewListAdapter.ViewHold
         final New aNew = mNewList.get(position);
         Glide.with(mContext).load(aNew.getImageType()).into(holder.mImageViewType);
 
-        if(aNew.getImageSecondary()!=null)
-        Glide.with(mContext).load(aNew.getImageSecondary()).into(holder.mImageViewSecondary);
+        if(aNew.getImageSecondary()!=null && aNew.getImageSecondary()!=0) {
+            Glide.with(mContext).load(aNew.getImageSecondary()).into(holder.mImageViewSecondary);
+            holder.mImageViewSecondary.setVisibility(View.VISIBLE);
+        }
         else{
             holder.mImageViewSecondary.setVisibility(View.GONE);
         }
@@ -54,8 +62,10 @@ public class NewListAdapter extends RecyclerView.Adapter<NewListAdapter.ViewHold
         holder.mTextViewTitle.setText(aNew.getTitle());
         holder.mTextViewMessage.setText(aNew.getMessage());
 
-        if(aNew.getImageDescription()!=null)
-        holder.mTextViewDescription.setText(aNew.getImageDescription());
+        if(aNew.getImageDescription()!=null) {
+            holder.mTextViewDescription.setText(aNew.getImageDescription());
+            holder.mTextViewDescription.setVisibility(View.VISIBLE);
+        }
         else{
             holder.mTextViewDescription.setVisibility(View.GONE);
         }
@@ -68,6 +78,8 @@ public class NewListAdapter extends RecyclerView.Adapter<NewListAdapter.ViewHold
                 mOnNewClick.newClicked(tag);
             }
         });
+
+        setFadeAnimation(holder.mCardViewNew);
 
 
     }
@@ -87,6 +99,7 @@ public class NewListAdapter extends RecyclerView.Adapter<NewListAdapter.ViewHold
 
         public ViewHolder(View itemView) {
             super(itemView);
+
             mImageViewType = (ImageView) itemView.findViewById(R.id.image_view_type_new);
             mTextViewTitle = (TextView) itemView.findViewById(R.id.text_view_title_new);
             mTextViewMessage = (TextView) itemView.findViewById(R.id.text_view_message_new);
@@ -94,6 +107,11 @@ public class NewListAdapter extends RecyclerView.Adapter<NewListAdapter.ViewHold
             mTextViewDescription
                     = (TextView) itemView.findViewById(R.id.text_view_secondary_description);
             mCardViewNew = (CardView) itemView.findViewById(R.id.card_view_new);
+        }
+
+        public void clearAnimation()
+        {
+            mCardViewNew.clearAnimation();
         }
     }
 
@@ -111,4 +129,20 @@ public class NewListAdapter extends RecyclerView.Adapter<NewListAdapter.ViewHold
         }
         notifyDataSetChanged();
     }
+
+
+    private void setFadeAnimation(View view) {
+        ScaleAnimation anim = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        anim.setDuration(FADE_DURATION);
+        view.startAnimation(anim);
+    }
+
+    @Override
+    public void onViewDetachedFromWindow(ViewHolder holder) {
+        holder.clearAnimation();
+        super.onViewDetachedFromWindow(holder);
+    }
+
+
+
 }

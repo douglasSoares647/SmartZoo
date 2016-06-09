@@ -2,9 +2,9 @@
     <string name="app_name">Smart Zoo</string>
     <string name="text_load_game">Load Game</string>
     <string name="text_new_game">New game</string>
-    <string name="available_animals">Available animals: </string>
-    <string name="cages">Cages: </string>
-    <string name="animals">Animals: </string>
+    <string name="available_animals">Available animals:</string>
+    <string name="cages">Cages:</string>
+    <string name="animals">Animals:</string>
     <string name="janitors">Janitors:</string>
     <string name="feeders">Feeders:</string>
     <string name="veterinaries">Veterinaries:</string>
@@ -147,7 +147,7 @@
     <string name="lbl_price">Price</string>
     <string name="lbl_satisfied">Satisfied</string>
     <string name="lbl_status">Status</string>
-    <string name="hint_set_name">Set name</string>
+    <string name="hint_set_name">Insert a name</string>
     <string name="title_new_visitor_arrived">A new visitor has arrived</string>
     <string name="msg_visitor_arriving_part1">"The visitor named as "</string>
     <string name="msg_visitor_arriving_part2">" has arrived in the zoo!"</string>
@@ -169,6 +169,8 @@
     <string name="msg_news_failed_to_load">Failed to load News Feed!</string>
     <string name="msg_no_news_to_load">There are no News to load!</string>
     <string name="message_load_janitor_list">Janitor list loaded!</string>
+    <string name="title_general">General</string>
+    <string name="menu_sort">Sort by...</string>
     <string name="title_cage">Cages</string>
     <string name="message_load_cages">Loading cages</string>
     <string name="messa_load_cages_successful">Cage List updated</string>
