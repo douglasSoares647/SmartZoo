@@ -8,11 +8,7 @@ import com.br.smartzoo.model.asynctask.LoadFoodsAsyncTask;
 import com.br.smartzoo.model.business.FoodBusiness;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Food;
-import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.ui.view.ManageStockView;
-
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by adenilson on 24/05/16.

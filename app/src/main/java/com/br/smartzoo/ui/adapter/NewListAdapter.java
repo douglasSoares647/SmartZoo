@@ -86,7 +86,7 @@ public class NewListAdapter extends RecyclerView.Adapter<NewListAdapter.ViewHold
             }
         });
 
-        setFadeAnimation(holder.mCardViewNew);
+      //  setFadeAnimation(holder.mCardViewNew);
 
 
     }
@@ -131,10 +131,13 @@ public class NewListAdapter extends RecyclerView.Adapter<NewListAdapter.ViewHold
         if(mNewList != null){
             if(mNewList.size()==50){
                 mNewList.remove(mNewList.size()-1);
+
             }
             mNewList.add(0,aNew);
+            notifyItemInserted(0);
+
         }
-        notifyDataSetChanged();
+
     }
 
 

@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_toRightOf="@id/image_view_employee"
+        android:textStyle="bold"
         android:text="Name" />
 
     <TextView

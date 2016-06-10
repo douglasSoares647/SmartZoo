@@ -6,7 +6,6 @@ import android.content.res.Resources;
 import com.br.smartzoo.model.asynctask.SaveFoodAsyncTask;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Food;
-import com.br.smartzoo.model.enums.FoodEnum;
 import com.br.smartzoo.model.singleton.Stock;
 import com.br.smartzoo.model.singleton.Supplier;
 import com.br.smartzoo.ui.view.BuyFoodView;
@@ -40,27 +39,27 @@ public class BuyFoodPresenter {
     public List<Food> createListFood() {
         List<Food> foods = new ArrayList<>();
         Resources resources = mContext.getResources();
-        FoodEnum.Fruit apple = FoodEnum.Fruit.Apple;
+        Food.FoodEnum.Fruit apple = Food.FoodEnum.Fruit.Apple;
         Food apple1 = new Food(resources.getResourceEntryName(apple.getImage()), mContext.getString(apple.getName()), apple.getPrice()
                 , apple.getWeight(), Calendar.getInstance().getTime());
 
-        FoodEnum.Fruit banana = FoodEnum.Fruit.Banana;
+        Food.FoodEnum.Fruit banana = Food.FoodEnum.Fruit.Banana;
         Food banana1 = new Food(resources.getResourceEntryName(banana.getImage()), mContext.getString(banana.getName())
                 , banana.getPrice(), banana.getWeight(), Calendar.getInstance().getTime());
 
-        FoodEnum.Fruit grape = FoodEnum.Fruit.Grape;
+        Food.FoodEnum.Fruit grape = Food.FoodEnum.Fruit.Grape;
         Food grape1 = new Food(resources.getResourceEntryName(grape.getImage()), mContext.getString(grape.getName())
                 , grape.getPrice(), grape.getWeight(), Calendar.getInstance().getTime());
 
-        FoodEnum.Meat beef = FoodEnum.Meat.Beef;
+        Food.FoodEnum.Meat beef = Food.FoodEnum.Meat.Beef;
         Food beef1 = new Food(resources.getResourceEntryName(beef.getImage()), mContext.getString(beef.getName())
                 , beef.getPrice(), beef.getWeight(), Calendar.getInstance().getTime());
 
-        FoodEnum.Meat chicken = FoodEnum.Meat.Chicken;
+        Food.FoodEnum.Meat chicken = Food.FoodEnum.Meat.Chicken;
         Food chicken1 = new Food(resources.getResourceEntryName(chicken.getImage()), mContext.getString(chicken.getName())
                 , chicken.getPrice(), chicken.getWeight(), Calendar.getInstance().getTime());
 
-        FoodEnum.Meat pork = FoodEnum.Meat.Pork;
+        Food.FoodEnum.Meat pork = Food.FoodEnum.Meat.Pork;
         Food pork1 = new Food(resources.getResourceEntryName(pork.getImage()), mContext.getString(pork.getName())
                 , pork.getPrice(), pork.getWeight(), Calendar.getInstance().getTime());
 

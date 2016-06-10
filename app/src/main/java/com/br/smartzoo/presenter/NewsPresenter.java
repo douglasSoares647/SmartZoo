@@ -1,17 +1,14 @@
 package com.br.smartzoo.presenter;
 
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.asynctask.LoadNewsAsyncTask;
-import com.br.smartzoo.model.business.NewsFeedBusiness;
 import com.br.smartzoo.model.entity.New;
 import com.br.smartzoo.ui.activity.MainActivity;
 import com.br.smartzoo.ui.view.NewsView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

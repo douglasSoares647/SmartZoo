@@ -116,11 +116,11 @@ public class CageListAdapter extends RecyclerView.Adapter<CageListAdapter.ViewHo
             super(itemView);
 
             mTextViewStatus = (TextView) itemView.findViewById(R.id.text_view_status_cage);
-            mImageViewCage = (ImageView) itemView.findViewById(R.id.image_view_cage);
+            mImageViewCage = (ImageView) itemView.findViewById(R.id.image_view_list_cage);
             mImageViewDestroy = (ImageView) itemView.findViewById(R.id.image_view_destroy);
             mImageViewClean = (ImageView) itemView.findViewById(R.id.image_view_clean);
-            mTextViewName = (TextView) itemView.findViewById(R.id.text_view_name_cage);
-            mTextViewCapacity = (TextView) itemView.findViewById(R.id.text_view_capacity_cage);
+            mTextViewName = (TextView) itemView.findViewById(R.id.text_view_name_list_cage);
+            mTextViewCapacity = (TextView) itemView.findViewById(R.id.text_view_capacity_list_cage);
             mImageViewTypeAnimal = (ImageView) itemView.findViewById(R.id.image_view_type_animal);
         }
     }

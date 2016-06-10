@@ -28,8 +28,8 @@ public class Clock {
     public static int starvingTime = 600; // 10 minutes
 
     //Janitor
-    public static int timeToRest = 1800;//30 minutes
     public static int timeToCleanEachDirty = 30; //30 seconds
+    public static int timeToRest = 300; //5 minutes
 
     //Veterinary
     public static int timeToTreat = 1800;
@@ -49,6 +49,7 @@ public class Clock {
 
 
     public static int speedFactor = 1;
+
 
     public static void startClock() {
         final Handler accessUIHandler = new Handler();

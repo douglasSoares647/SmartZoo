@@ -77,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
         bindDrawerLayout();
         bindNavigationDrawer();
         bindContainerFragment();
+
+        if(savedInstanceState==null)
         bindInitialFragment();
 
 
@@ -258,49 +260,42 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
     @Override
     public void onNewsClick() {
         mPresenter.startTransaction(mIdFrameContainer, new NewsFragment());
-        changeToolBarText(getString(R.string.option_news));
-
     }
 
 
     @Override
     public void onAnimalsClick() {
     mPresenter.startTransaction(mIdFrameContainer, new AnimalListFragment());
-        changeToolBarText(getString(R.string.option_animals));
     }
 
     @Override
     public void onEmployeeClick() {
         mPresenter.startTransaction(mIdFrameContainer, new ChooseEmployeeFragment());
-        changeToolBarText(getString(R.string.option_employees));
 
     }
 
     @Override
     public void onCagesClick() {
+        mPresenter.startTransaction(mIdFrameContainer, new CageListFragment());
 
-        changeToolBarText(getString(R.string.option_cages));
     }
 
     @Override
     public void onSettingsClick() {
         mPresenter.startTransaction(mIdFrameContainer, new StatusZooFragment());
 
-        changeToolBarText(getString(R.string.option_settings));
     }
 
     @Override
     public void onBuyFoodClick() {
         mPresenter.startTransaction(mIdFrameContainer, new BuyFoodFragment());
 
-        changeToolBarText(getString(R.string.option_buy_foods));
     }
 
     @Override
     public void onHireEmployeeClick() {
         mPresenter.startTransaction(mIdFrameContainer, new HireEmployeeFragment());
 
-        changeToolBarText(getString(R.string.option_contract_employee));
 
     }
 
@@ -308,26 +303,22 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
     public void onBuyAnimalClick() {
         mPresenter.startTransaction(mIdFrameContainer, new BuyAnimalFragment());
 
-        changeToolBarText(getString(R.string.option_buy_animals));
     }
 
     @Override
     public void onBuildCageClick() {
         mPresenter.startTransaction(mIdFrameContainer, new BuyCageFragment());
 
-        changeToolBarText(getString(R.string.option_build_cages));
     }
 
     @Override
     public void onStockClick() {
         mPresenter.startTransaction(mIdFrameContainer, new ManageStockFragment());
-        changeToolBarText(getString(R.string.option_stock));
     }
 
     @Override
     public void onHeaderClick() {
         mPresenter.startTransaction(mIdFrameContainer, new StatusZooFragment());
-        changeToolBarText(getString(R.string.title_general));
     }
 
     @Override
@@ -366,7 +357,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
     }
 
 
-    private void changeToolBarText(String text) {
+    public void changeToolBarText(String text) {
         TextView textView = (TextView) mToolbar.findViewById(R.id.text_view_toolbar_title);
 
         textView.setText(text);

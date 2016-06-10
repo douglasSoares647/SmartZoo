@@ -13,6 +13,7 @@ import com.br.smartzoo.R;
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.interfaces.OnManageCage;
 import com.br.smartzoo.presenter.CageListPresenter;
+import com.br.smartzoo.ui.activity.MainActivity;
 import com.br.smartzoo.ui.adapter.CageListAdapter;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
@@ -42,9 +43,14 @@ public class CageListFragment extends Fragment implements CageListView, OnManage
 
         bindPresenter();
         bindRecyclerViewCage(view);
+        bindToolbarName();
         loadCageList();
 
         return view;
+    }
+
+    private void bindToolbarName() {
+        ((MainActivity)getActivity()).changeToolBarText(getString(R.string.option_cages));
     }
 
     private void loadCageList() {

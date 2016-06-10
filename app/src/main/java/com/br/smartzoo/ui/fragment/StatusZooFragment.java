@@ -14,6 +14,7 @@ import com.br.smartzoo.R;
 import com.br.smartzoo.model.business.BusinessRules;
 import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.presenter.StatusZooPresenter;
+import com.br.smartzoo.ui.activity.MainActivity;
 import com.br.smartzoo.ui.view.StatusZooView;
 
 /**
@@ -35,8 +36,13 @@ public class StatusZooFragment extends Fragment implements StatusZooView {
         bindTextViewPrice(view);
         bindSeekBarPrice(view);
         bindTextViewIdealPrice(view);
+        bindToolbarName();
 
         return view;
+    }
+
+    private void bindToolbarName() {
+        ((MainActivity)getActivity()).changeToolBarText(getString(R.string.option_settings));
     }
 
     private void bindTextViewIdealPrice(View view) {

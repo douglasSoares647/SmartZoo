@@ -8,7 +8,6 @@ import com.br.smartzoo.model.business.AnimalBusiness;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
-import com.br.smartzoo.model.enums.AnimalEnum;
 import com.br.smartzoo.ui.view.BuyAnimalView;
 
 import java.util.ArrayList;
@@ -43,7 +42,7 @@ public class BuyAnimalPresenter {
         List<Animal> animals = new ArrayList<>();
         Resources resources = mContext.getResources();
 
-        for (AnimalEnum animalEnum : AnimalEnum.values()) {
+        for (Animal.AnimalEnum animalEnum : Animal.AnimalEnum.values()) {
             for (int i = 0; i < 4; i++) {
                 Animal animal = new Animal();
                 animal.setType(mContext.getString(animalEnum.getType()));

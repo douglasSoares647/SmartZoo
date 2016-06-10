@@ -20,6 +20,7 @@ import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnHireListener;
 import com.br.smartzoo.presenter.HireEmployeePresenter;
+import com.br.smartzoo.ui.activity.MainActivity;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.HireEmployeeListAdapter;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
@@ -46,8 +47,13 @@ public class HireEmployeeFragment extends Fragment  implements OnHireListener, H
 
         bindPresenter();
         bindRecyclerView(view);
+        bindToolbarName();
 
         return view;
+    }
+
+    private void bindToolbarName() {
+        ((MainActivity)getActivity()).changeToolBarText(getString(R.string.option_contract_employee));
     }
 
     private void bindRecyclerView(View view) {

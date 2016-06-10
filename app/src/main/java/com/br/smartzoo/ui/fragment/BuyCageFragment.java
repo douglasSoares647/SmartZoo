@@ -16,20 +16,17 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.br.smartzoo.R;
-import com.br.smartzoo.model.business.AnimalBusiness;
 import com.br.smartzoo.model.business.BusinessRules;
 import com.br.smartzoo.model.business.CageBusiness;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
+import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
-import com.br.smartzoo.model.enums.AnimalEnum;
-import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnConstructListener;
 import com.br.smartzoo.presenter.BuyCagePresenter;
+import com.br.smartzoo.ui.activity.MainActivity;
 import com.br.smartzoo.ui.adapter.AnimalTypeListAdapter;
-import com.br.smartzoo.ui.adapter.BuyAnimalListAdapter;
 import com.br.smartzoo.ui.adapter.BuyCageAdapter;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
-import com.br.smartzoo.ui.adapter.ListCageAdapter;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.ui.view.BuyCageView;
 import com.br.smartzoo.util.AlertDialogUtil;
@@ -56,8 +53,13 @@ public class BuyCageFragment extends Fragment implements BuyCageView, OnConstruc
         bindPresenter();
         populateCagesList();
         bindRecyclerViewCages(view);
+        bindToolbarName();
 
         return view;
+    }
+
+    private void bindToolbarName() {
+        ((MainActivity)getActivity()).changeToolBarText(getString(R.string.option_build_cages));
     }
 
     private void populateCagesList() {
@@ -131,9 +133,9 @@ public class BuyCageFragment extends Fragment implements BuyCageView, OnConstruc
         recyclerViewAnimalType.addItemDecoration(new VerticalSpaceItemDecoration(VERTICAL_SPACE));
         recyclerViewAnimalType.addItemDecoration(
                 new DividerItemDecoration(getActivity(), R.drawable.divider_recycler_view));
-        recyclerViewAnimalType.setItemViewCacheSize(AnimalEnum.values().length);
+        recyclerViewAnimalType.setItemViewCacheSize(Animal.AnimalEnum.values().length);
 
-        AnimalTypeListAdapter  animalTypeListAdapter = new AnimalTypeListAdapter(getActivity(), AnimalEnum.values());
+        AnimalTypeListAdapter  animalTypeListAdapter = new AnimalTypeListAdapter(getActivity(), Animal.AnimalEnum.values());
         recyclerViewAnimalType.setAdapter(animalTypeListAdapter);
 
 

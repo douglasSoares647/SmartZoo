@@ -4,16 +4,15 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.br.smartzoo.model.entity.Animal;
-import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.entity.Cage;
+import com.br.smartzoo.model.entity.Employee;
+import com.br.smartzoo.model.entity.Food;
 import com.br.smartzoo.model.entity.New;
-import com.br.smartzoo.model.enums.FoodEnum;
 import com.br.smartzoo.model.environment.Player;
 import com.br.smartzoo.model.environment.Visitor;
 import com.br.smartzoo.model.environment.ZooInfo;
 
 import java.util.Random;
-import java.util.Timer;
 
 /**
  * Created by douglas on 03/05/16.
@@ -131,7 +130,7 @@ public class BusinessRules {
 
         for(Cage cage : ZooInfo.cages){
             for(Animal animal : cage.getAnimals()){
-                price += animal.getFoodToBeSatisfied() * 120 * FoodEnum.Meat.Beef.getPrice();
+                price += animal.getFoodToBeSatisfied() * 120 * Food.FoodEnum.Meat.Beef.getPrice();
             }
         }
 

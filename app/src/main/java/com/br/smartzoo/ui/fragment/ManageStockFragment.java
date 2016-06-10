@@ -41,8 +41,13 @@ public class ManageStockFragment extends Fragment implements ManageStockView, On
         bindPresenter();
         bindRecyclerViewFoodList(view);
         populateFoodList();
+        bindToolbarName();
 
         return view;
+    }
+
+    private void bindToolbarName() {
+        ((MainActivity)getActivity()).changeToolBarText(getString(R.string.option_stock));
     }
 
     private void bindRecyclerViewFoodList(View view) {

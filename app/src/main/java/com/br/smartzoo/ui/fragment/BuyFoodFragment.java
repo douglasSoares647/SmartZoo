@@ -66,8 +66,13 @@ public class BuyFoodFragment extends Fragment implements BuyFoodView, OnChangeBu
         bindPriceAndQuantity(view);
         bindButtonBuy(view);
         bindButtonInsufficient(view);
+        bindToolbarName();
 
         return view;
+    }
+
+    private void bindToolbarName() {
+        ((MainActivity)getActivity()).changeToolBarText(getString(R.string.option_buy_foods));
     }
 
     private void bindPriceAndQuantity(View view) {

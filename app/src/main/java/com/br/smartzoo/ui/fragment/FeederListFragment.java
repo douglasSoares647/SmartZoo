@@ -14,6 +14,7 @@ import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.entity.Feeder;
 import com.br.smartzoo.model.interfaces.OnManageEmployee;
 import com.br.smartzoo.presenter.FeederListPresenter;
+import com.br.smartzoo.ui.activity.MainActivity;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.FeederListAdapter;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
@@ -43,9 +44,14 @@ public class FeederListFragment extends Fragment implements FeederListView, OnMa
         loadFeederList();
         bindRecyclerViewFeeder(view);
 
+        bindToolbarName();
 
 
         return view;
+    }
+
+    private void bindToolbarName() {
+        ((MainActivity)getActivity()).changeToolBarText(getString(R.string.title_feeders));
     }
 
     private void bindRecyclerViewFeeder(View view) {
