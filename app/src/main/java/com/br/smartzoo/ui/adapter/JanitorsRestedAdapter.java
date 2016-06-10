@@ -1,6 +1,7 @@
 package com.br.smartzoo.ui.adapter;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.SmartZooApplication;
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Janitor;
 import com.br.smartzoo.model.interfaces.OnJanitorsRestedSelected;
@@ -45,7 +47,10 @@ public class JanitorsRestedAdapter extends RecyclerView.Adapter<JanitorsRestedAd
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Janitor janitor = mJanitorList.get(position);
-        Glide.with(mContext).load(janitor.getImage()).into(holder.mImageViewJanitor);
+        Resources resources = mContext.getResources();
+
+        Glide.with(mContext).load(resources.getIdentifier(janitor.getImage(), "drawable",
+                SmartZooApplication.NAME_PACKAGE)).into(holder.mImageViewJanitor);
         holder.mTextViewName.setText(janitor.getName());
         holder.mRelativeJanitor.setOnClickListener(new View.OnClickListener() {
             @Override

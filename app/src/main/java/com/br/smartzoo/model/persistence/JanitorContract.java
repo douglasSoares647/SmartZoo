@@ -70,7 +70,7 @@ public class JanitorContract {
         if(!cursor.isBeforeFirst() || cursor.moveToNext()){
             janitor.setId(cursor.getLong(cursor.getColumnIndex(ID)));
             janitor.setAge(cursor.getInt(cursor.getColumnIndex(EmployeeContract.AGE)));
-            janitor.setImage(cursor.getInt(cursor.getColumnIndex(EmployeeContract.IMAGE)));
+            janitor.setImage(cursor.getString(cursor.getColumnIndex(EmployeeContract.IMAGE)));
             janitor.setName(cursor.getString(cursor.getColumnIndex(EmployeeContract.NAME)));
             janitor.setSalary(cursor.getDouble(cursor.getColumnIndex(EmployeeContract.SALARY)));
             janitor.setStatus(cursor.getString(cursor.getColumnIndex(EmployeeContract.STATUS)));

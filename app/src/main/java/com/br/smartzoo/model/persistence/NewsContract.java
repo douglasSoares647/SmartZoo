@@ -16,27 +16,28 @@ import java.util.List;
  */
 public class NewsContract {
 
-   public static String TABLE = "newsFeed";
-   public static String ID = "id";
-   public static String IMAGETYPE = "imageType";
-   public static String IMAGESECONDARY = "imageSecondary";
-   public static String TITLE = "title";
-   public static String MESSAGE = "message";
-   public static String IMAGEDESRIPTION = "imageDescription";
-   public static String DATE = "date";
-   public static String TAG = "tage";
+    public static String TABLE = "newsFeed";
+    public static String ID = "id";
+    public static String IMAGETYPE = "imageType";
+    public static String IMAGESECONDARY = "imageSecondary";
+    public static String TITLE = "title";
+    public static String MESSAGE = "message";
+    public static String IMAGEDESRIPTION = "imageDescription";
+    public static String DATE = "date";
+    public static String TAG = "tag";
 
 
-    public static String[] columns ={ID,IMAGETYPE,IMAGESECONDARY,TITLE,MESSAGE,IMAGEDESRIPTION,DATE,TAG};
+    public static String[] COLUMNS = {ID, IMAGETYPE, IMAGESECONDARY, TITLE, MESSAGE
+            , IMAGEDESRIPTION, DATE, TAG};
 
 
-    public static String createTable(){
+    public static String createTable() {
         StringBuilder table = new StringBuilder();
 
         table.append("create table " + TABLE + " ( ");
         table.append(ID + " integer primary key, ");
-        table.append(IMAGETYPE + " integer, ");
-        table.append(IMAGESECONDARY + " integer, ");
+        table.append(IMAGETYPE + " text, ");
+        table.append(IMAGESECONDARY + " text, ");
         table.append(TITLE + " text not null, ");
         table.append(MESSAGE + " text not null, ");
         table.append(IMAGEDESRIPTION + " text , ");
@@ -47,29 +48,29 @@ public class NewsContract {
         return table.toString();
     }
 
-    public static ContentValues createContentValues(New news){
+    public static ContentValues createContentValues(New news) {
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(IMAGETYPE, news.getImageType());
         contentValues.put(IMAGESECONDARY, news.getImageSecondary());
         contentValues.put(TITLE, news.getTitle());
-        contentValues.put(MESSAGE,news.getMessage());
+        contentValues.put(MESSAGE, news.getMessage());
         contentValues.put(IMAGEDESRIPTION, news.getImageDescription());
-        contentValues.put(DATE , DateUtil.dateToString(news.getDate()));
+        contentValues.put(DATE, DateUtil.dateToString(news.getDate()));
         contentValues.put(TAG, news.getTag());
 
         return contentValues;
     }
 
 
-    public static New getNew(Cursor cursor){
+    public static New getNew(Cursor cursor) {
 
         New news = new New();
 
-        if(!cursor.isBeforeFirst() || cursor.moveToNext()){
+        if (!cursor.isBeforeFirst() || cursor.moveToNext()) {
             news.setId(cursor.getLong(cursor.getColumnIndex(ID)));
-            news.setImageType(cursor.getInt(cursor.getColumnIndex(IMAGETYPE)));
-            news.setImageSecondary(cursor.getInt(cursor.getColumnIndex(IMAGESECONDARY)));
+            news.setImageType(cursor.getString(cursor.getColumnIndex(IMAGETYPE)));
+            news.setImageSecondary(cursor.getString(cursor.getColumnIndex(IMAGESECONDARY)));
             news.setTitle(cursor.getString(cursor.getColumnIndex(TITLE)));
             news.setMessage(cursor.getString(cursor.getColumnIndex(MESSAGE)));
             news.setImageDescription(cursor.getString(cursor.getColumnIndex(IMAGEDESRIPTION)));
@@ -82,11 +83,11 @@ public class NewsContract {
     }
 
 
-    public static List<New> getNews(Cursor cursor){
+    public static List<New> getNews(Cursor cursor) {
         List<New> news = new ArrayList<>();
 
-        while(cursor.moveToNext()){
-            news.add(0,getNew(cursor));
+        while (cursor.moveToNext()) {
+            news.add(0, getNew(cursor));
         }
 
         return news;

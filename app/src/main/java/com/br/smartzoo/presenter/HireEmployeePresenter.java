@@ -1,6 +1,7 @@
 package com.br.smartzoo.presenter;
 
 import android.app.Activity;
+import android.content.res.Resources;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.entity.Employee;
@@ -34,12 +35,14 @@ public class HireEmployeePresenter {
     }
 
     public List<Employee> createEmployees() {
+
+        Resources resources = mContext.getResources();
         List<Employee> employees = new ArrayList<>();
 
         for(int i=0; i<10; i++){
-            employees.add(generateEmployee(EmployeeEnum.Veterinary));
-            employees.add(generateEmployee(EmployeeEnum.Janitor));
-            employees.add(generateEmployee(EmployeeEnum.Feeder));
+            employees.add(generateEmployee(EmployeeEnum.Veterinary, resources));
+            employees.add(generateEmployee(EmployeeEnum.Janitor, resources));
+            employees.add(generateEmployee(EmployeeEnum.Feeder, resources));
 
         }
 
@@ -50,25 +53,27 @@ public class HireEmployeePresenter {
 
 
 
-    private Employee generateEmployee(EmployeeEnum type) {
+    private Employee generateEmployee(EmployeeEnum type, Resources resources) {
         Random random = new Random();
         Employee employee;
+
+
         if (type.equals(EmployeeEnum.Veterinary)) {
             employee = new Veterinary();
             employee.setSalary(EmployeeEnum.Veterinary.getPrice());
-            employee.setImage(EmployeeEnum.Veterinary.getImage());
+            employee.setImage(resources.getResourceEntryName(EmployeeEnum.Veterinary.getImage()));
             employee.setProfession(mContext.getString(EmployeeEnum.Veterinary.getProfession()));
             employee.setPrice(EmployeeEnum.Veterinary.getPrice());
         } else if (type.equals(EmployeeEnum.Janitor)) {
             employee = new Janitor();
             employee.setSalary(EmployeeEnum.Janitor.getPrice());
-            employee.setImage(EmployeeEnum.Janitor.getImage());
+            employee.setImage(resources.getResourceEntryName(EmployeeEnum.Janitor.getImage()));
             employee.setProfession(mContext.getString(EmployeeEnum.Janitor.getProfession()));
             employee.setPrice(EmployeeEnum.Janitor.getPrice());
         } else {
             employee = new Feeder();
             employee.setSalary(EmployeeEnum.Feeder.getPrice());
-            employee.setImage(EmployeeEnum.Feeder.getImage());
+            employee.setImage(resources.getResourceEntryName(EmployeeEnum.Feeder.getImage()));
             employee.setProfession(mContext.getString(EmployeeEnum.Feeder.getProfession()));
             employee.setPrice(EmployeeEnum.Feeder.getPrice());
         }

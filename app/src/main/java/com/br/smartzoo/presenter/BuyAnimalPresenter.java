@@ -1,6 +1,7 @@
 package com.br.smartzoo.presenter;
 
 import android.app.Activity;
+import android.content.res.Resources;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.business.AnimalBusiness;
@@ -20,11 +21,11 @@ import java.util.Random;
 public class BuyAnimalPresenter {
 
 
-    private Activity mActivity;
+    private Activity mContext;
     private BuyAnimalView mBuyAnimalView;
 
     public BuyAnimalPresenter(Activity activity) {
-        this.mActivity = activity;
+        this.mContext = activity;
     }
 
     public void attachView(BuyAnimalView buyAnimalView) {
@@ -40,11 +41,12 @@ public class BuyAnimalPresenter {
     public List<Animal> createAnimalList() {
 
         List<Animal> animals = new ArrayList<>();
+        Resources resources = mContext.getResources();
 
         for (AnimalEnum animalEnum : AnimalEnum.values()) {
             for (int i = 0; i < 4; i++) {
                 Animal animal = new Animal();
-                animal.setType(mActivity.getString(animalEnum.getType()));
+                animal.setType(mContext.getString(animalEnum.getType()));
 
                 Random random = new Random();
 
@@ -52,11 +54,11 @@ public class BuyAnimalPresenter {
                 animal.setAge(random.nextInt(10));
                 animal.setStatus(animalEnum.getStatus());
                 animal.setIsHealthy(random.nextBoolean());
-                animal.setImage(animalEnum.getImage());
+                animal.setImage(resources.getResourceEntryName(animalEnum.getImage()));
                 animal.setPopularity(animalEnum.getPopularity());
                 animal.setPrice(animalEnum.getPrice());
                 animal.setResistance(random.nextInt(7));
-                animal.setSex(!random.nextBoolean() ? mActivity.getString(R.string.male) : mActivity.getString(R.string.female));
+                animal.setSex(!random.nextBoolean() ? mContext.getString(R.string.male) : mContext.getString(R.string.female));
 
                 animals.add(animal);
 

@@ -26,7 +26,7 @@ public class Veterinary extends Employee {
         status = ApplicationUtil.applicationContext.getString(R.string.veterinary_idle);
     }
 
-    public Veterinary(int image, String name, Integer age, Date startDate, Date endDate
+    public Veterinary(String image, String name, Integer age, Date startDate, Date endDate
             , Double salary, String profession, String status) {
         super(image, name, age, startDate, endDate, salary, profession, status);
         status = ApplicationUtil.applicationContext.getString(R.string.veterinary_idle);

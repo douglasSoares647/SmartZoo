@@ -24,7 +24,7 @@ public class Janitor extends Employee {
     public Janitor(List<Cage> cages, int expedient) {
     }
 
-    public Janitor(int image, String name, Integer age, Date startDate, Date endDate, Double salary
+    public Janitor(String image, String name, Integer age, Date startDate, Date endDate, Double salary
             , String profession,String status) {
         super(image, name, age, startDate, endDate, salary, profession, status);
     }

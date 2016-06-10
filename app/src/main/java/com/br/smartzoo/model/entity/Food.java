@@ -8,7 +8,7 @@ import java.util.Date;
 public class Food {
 
     private Long id;
-    private int image;
+    private String image;
     private Double price;
     private String name;
     private Double weight;
@@ -17,7 +17,7 @@ public class Food {
     public Food() {
     }
 
-    public Food(int image, String name, Double price, Double weight, Date expirationDate) {
+    public Food(String image, String name, Double price, Double weight, Date expirationDate) {
         this.image = image;
         this.name = name;
         this.price = price;
@@ -49,11 +49,11 @@ public class Food {
         this.weight = weight;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

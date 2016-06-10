@@ -2,6 +2,7 @@ package com.br.smartzoo.ui.adapter;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.SmartZooApplication;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.interfaces.OnManageAnimal;
 import com.br.smartzoo.util.AlertDialogUtil;
@@ -46,7 +48,9 @@ public class AnimalListAdapter extends RecyclerView.Adapter<AnimalListAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Animal animal = mAnimalList.get(position);
 
-        Glide.with(mContext).load(animal.getImage()).into(holder.mImageViewAnimal);
+        Resources resources = mContext.getResources();
+        Glide.with(mContext).load(resources.getIdentifier(animal.getImage(), "drawable",
+                SmartZooApplication.NAME_PACKAGE)).into(holder.mImageViewAnimal);
         Glide.with(mContext).load(R.drawable.ic_sell).into(holder.mImageViewSell);
         Glide.with(mContext).load(R.drawable.ic_treatments).into(holder.mImageViewTreat);
         holder.mTextViewName.setText(animal.getName());

@@ -11,12 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
-import com.br.smartzoo.model.AnimalHelper;
+import com.br.smartzoo.model.helper.AnimalHelper;
 import com.br.smartzoo.model.entity.Cage;
-import com.br.smartzoo.model.enums.AnimalEnum;
 import com.br.smartzoo.model.interfaces.OnManageCage;
 import com.br.smartzoo.util.AlertDialogUtil;
-import com.br.smartzoo.util.DialogUtil;
 import com.bumptech.glide.Glide;
 
 import java.util.List;

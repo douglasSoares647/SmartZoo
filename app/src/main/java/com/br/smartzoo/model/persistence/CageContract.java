@@ -15,14 +15,14 @@ public class CageContract {
 
     public static String TABLE = "cage";
     public static String ID = "id";
-    public static String ANIMALTYPE = "animalType";
+    public static String ANIMAL_TYPE = "animalType";
     public static String NAME = "name";
     public static String CAPACITY = "capacity";
-    public static String ISCLEAN = "isClean";
-    public static String ISSUPPLIED = "isSupplied";
+    public static String IS_CLEAN = "isClean";
+    public static String IS_SUPPLIED = "isSupplied";
 
 
-    public static String[] columns = {ID,NAME,ANIMALTYPE,CAPACITY,ISCLEAN,ISSUPPLIED};
+    public static String[] columns = {ID,NAME, ANIMAL_TYPE,CAPACITY, IS_CLEAN, IS_SUPPLIED};
 
 
 
@@ -32,10 +32,10 @@ public class CageContract {
         table.append(" create table "+ TABLE + " ( ");
         table.append(ID + " integer primary key, ");
         table.append(NAME + " text , ");
-        table.append(ANIMALTYPE + " text not null, ");
+        table.append(ANIMAL_TYPE + " text not null, ");
         table.append(CAPACITY + " integer not null, ");
-        table.append(ISCLEAN + " integer not null, ");
-        table.append(ISSUPPLIED + " integer not null ");
+        table.append(IS_CLEAN + " integer not null, ");
+        table.append(IS_SUPPLIED + " integer not null ");
         table.append(" ); ");
 
         return table.toString();
@@ -48,10 +48,10 @@ public class CageContract {
 
         contentValues.put(ID, cage.getId());
         contentValues.put(NAME, cage.getName());
-        contentValues.put(ANIMALTYPE, cage.getAnimalType());
+        contentValues.put(ANIMAL_TYPE, cage.getAnimalType());
         contentValues.put(CAPACITY, cage.getCapacity());
-        contentValues.put(ISCLEAN, cage.isClean() ? 1 : 0);
-        contentValues.put(ISSUPPLIED, cage.isSupplied()==true? 1 : 0);
+        contentValues.put(IS_CLEAN, cage.isClean() ? 1 : 0);
+        contentValues.put(IS_SUPPLIED, cage.isSupplied()==true? 1 : 0);
 
         return contentValues;
     }
@@ -65,10 +65,10 @@ public class CageContract {
 
             cage.setId(cursor.getLong(cursor.getColumnIndex(ID)));
             cage.setName(cursor.getString(cursor.getColumnIndex(NAME)));
-            cage.setAnimalType(cursor.getString(cursor.getColumnIndex(ANIMALTYPE)));
+            cage.setAnimalType(cursor.getString(cursor.getColumnIndex(ANIMAL_TYPE)));
             cage.setCapacity(cursor.getInt(cursor.getColumnIndex(CAPACITY)));
-            cage.setIsClean((cursor.getInt(cursor.getColumnIndex(ISCLEAN))) == 1);
-            cage.setIsSupplied((cursor.getInt(cursor.getColumnIndex(ISSUPPLIED))) == 1);
+            cage.setIsClean((cursor.getInt(cursor.getColumnIndex(IS_CLEAN))) == 1);
+            cage.setIsSupplied((cursor.getInt(cursor.getColumnIndex(IS_SUPPLIED))) == 1);
         }
         return cage;
     }
@@ -86,7 +86,7 @@ public class CageContract {
 
     public static ContentValues createUpdateClean() {
         ContentValues values = new ContentValues();
-        values.put(ISCLEAN, 1);
+        values.put(IS_CLEAN, 1);
         return values ;
     }
 }

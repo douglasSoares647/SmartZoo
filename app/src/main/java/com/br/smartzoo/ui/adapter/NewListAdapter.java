@@ -1,6 +1,7 @@
 package com.br.smartzoo.ui.adapter;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.SmartZooApplication;
 import com.br.smartzoo.model.entity.New;
 import com.br.smartzoo.model.interfaces.OnNewClick;
 import com.bumptech.glide.Glide;
@@ -49,10 +51,15 @@ public class NewListAdapter extends RecyclerView.Adapter<NewListAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final New aNew = mNewList.get(position);
-        Glide.with(mContext).load(aNew.getImageType()).into(holder.mImageViewType);
 
-        if(aNew.getImageSecondary()!=null && aNew.getImageSecondary()!=0) {
-            Glide.with(mContext).load(aNew.getImageSecondary()).into(holder.mImageViewSecondary);
+        Resources resources = mContext.getResources();
+
+        Glide.with(mContext).load(resources.getIdentifier(aNew.getImageType(), "drawable",
+                SmartZooApplication.NAME_PACKAGE)).into(holder.mImageViewType);
+
+        if(aNew.getImageSecondary()!=null && !aNew.getImageSecondary().equals("")) {
+            Glide.with(mContext).load(resources.getIdentifier(aNew.getImageSecondary(), "drawable",
+                    SmartZooApplication.NAME_PACKAGE)).into(holder.mImageViewSecondary);
             holder.mImageViewSecondary.setVisibility(View.VISIBLE);
         }
         else{

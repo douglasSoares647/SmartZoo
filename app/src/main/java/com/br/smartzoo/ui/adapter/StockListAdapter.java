@@ -1,6 +1,7 @@
 package com.br.smartzoo.ui.adapter;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.SmartZooApplication;
 import com.br.smartzoo.model.entity.Food;
 import com.br.smartzoo.model.interfaces.OnManageFood;
 import com.br.smartzoo.util.DateUtil;
@@ -48,7 +50,9 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.View
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Food food = mFoodList.get(position);
 
-        Glide.with(mContext).load(food.getImage()).into(holder.mImageView);
+        Resources resources = mContext.getResources();
+        Glide.with(mContext).load(resources.getIdentifier(food.getImage(), "drawable",
+                SmartZooApplication.NAME_PACKAGE)).into(holder.mImageView);
         holder.mTextViewName.setText(food.getName());
         holder.mTextViewExpiryDate.setText(DateUtil.dateToString(food.getExpirationDate()));
 

@@ -10,7 +10,7 @@ import java.util.Date;
  */
 public abstract class Employee implements Observer{
 
-    private int image;
+    private String image;
     private Long id;
     private String name;
     private Integer age;
@@ -24,7 +24,7 @@ public abstract class Employee implements Observer{
     public Employee() {
     }
 
-    public Employee(int image, String name, Integer age, Date startDate, Date endDate
+    public Employee(String image, String name, Integer age, Date startDate, Date endDate
             , Double salary, String profession, String status) {
         this.image = image;
         this.status = status;
@@ -86,11 +86,11 @@ public abstract class Employee implements Observer{
 
     public abstract Double calculateSalary();
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

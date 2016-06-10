@@ -34,7 +34,7 @@ public class EmployeeContract {
 
         table.append("create table " + TABLE + " ( ");
         table.append(ID + " integer primary key, ");
-        table.append(IMAGE + " integer, ");
+        table.append(IMAGE + " text, ");
         table.append(NAME + " text not null, ");
         table.append(AGE + " integer not null, ");
         table.append(CPF + " text unique, ");

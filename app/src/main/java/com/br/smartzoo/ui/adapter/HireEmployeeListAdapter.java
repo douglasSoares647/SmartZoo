@@ -1,6 +1,7 @@
 package com.br.smartzoo.ui.adapter;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.SmartZooApplication;
 import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.interfaces.OnHireListener;
 import com.bumptech.glide.Glide;
@@ -52,7 +54,11 @@ public class HireEmployeeListAdapter extends
 
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Employee employee = mEmployeeList.get(position);
-        Glide.with(mContext).load(employee.getImage()).into(holder.mImageViewIcon);
+
+        Resources resources = mContext.getResources();
+
+        Glide.with(mContext).load(resources.getIdentifier(employee.getImage(), "drawable",
+                SmartZooApplication.NAME_PACKAGE)).into(holder.mImageViewIcon);
         holder.mTextViewName.setText(employee.getName());
         holder.mTextViewProfession.setText(employee.getProfession());
         holder.mTextViewPrice.setText(String.valueOf(employee.getSalary()));

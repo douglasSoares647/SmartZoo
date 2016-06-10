@@ -19,7 +19,7 @@ public class AnimUtil {
     public static void collapseControlTime(RelativeLayout footerBar, ImageView imageViewPanel
            ) {
         footerBar.animate().translationY(180).alpha(0).setDuration(500);
-        imageViewPanel.animate().rotation(0).alpha(1f).translationY(0).setDuration(500);
+        imageViewPanel.animate().rotation(0).alpha(0.3f).translationY(0).setDuration(500);
 
     }
 

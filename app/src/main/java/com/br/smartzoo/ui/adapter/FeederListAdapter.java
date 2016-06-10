@@ -3,6 +3,7 @@ package com.br.smartzoo.ui.adapter;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.SmartZooApplication;
 import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.entity.Feeder;
 import com.br.smartzoo.model.interfaces.OnManageEmployee;
@@ -56,7 +58,10 @@ public class FeederListAdapter extends RecyclerView.Adapter<FeederListAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, int position) {
         Feeder feeder = mFeederList.get(position);
 
-        Glide.with(mContext).load(feeder.getImage()).into(holder.mImageViewFeeder);
+        Resources resources = mContext.getResources();
+
+        Glide.with(mContext).load(resources.getIdentifier(feeder.getImage(), "drawable",
+                SmartZooApplication.NAME_PACKAGE)).into(holder.mImageViewFeeder);
         holder.mTextViewName.setText(feeder.getName());
         holder.mTextViewAge.setText(String.valueOf(feeder.getAge()));
         holder.mTextViewStatus.setText(feeder.getStatus());

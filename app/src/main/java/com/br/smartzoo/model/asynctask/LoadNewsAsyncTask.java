@@ -40,7 +40,7 @@ public class LoadNewsAsyncTask extends AsyncTask<Void,Integer,List<New>> {
                 LoadNewsAsyncTask.this.cancel(true);
             }
         });
-        mProgressDialog.show();
+       // mProgressDialog.show();
     }
 
     @Override

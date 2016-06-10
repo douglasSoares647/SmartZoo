@@ -43,7 +43,7 @@ public class AnimalContract {
         table.append(NAME + " text not null, ");
         table.append(TYPE + " text not null, ");
         table.append(STATUS + " text not null, ");
-        table.append(IMAGE + " integer, ");
+        table.append(IMAGE + " text, ");
         table.append(PRICE + " double, ");
         table.append(AGE + " integer, ");
         table.append(WEIGHT + " double not null, ");
@@ -86,7 +86,7 @@ public class AnimalContract {
 
         if (!cursor.isBeforeFirst() || cursor.moveToNext()) {
             animal.setId(cursor.getLong(cursor.getColumnIndex(ID)));
-            animal.setImage(cursor.getInt(cursor.getColumnIndex(IMAGE)));
+            animal.setImage(cursor.getString(cursor.getColumnIndex(IMAGE)));
             animal.setStatus(cursor.getString(cursor.getColumnIndex(STATUS)));
             animal.setType(cursor.getString(cursor.getColumnIndex(TYPE)));
             animal.setName(cursor.getString(cursor.getColumnIndex(NAME)));

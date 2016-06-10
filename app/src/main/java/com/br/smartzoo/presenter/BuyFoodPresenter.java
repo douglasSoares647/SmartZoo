@@ -1,10 +1,9 @@
 package com.br.smartzoo.presenter;
 
 import android.app.Activity;
+import android.content.res.Resources;
 
-import com.br.smartzoo.R;
 import com.br.smartzoo.model.asynctask.SaveFoodAsyncTask;
-import com.br.smartzoo.model.business.FoodBusiness;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Food;
 import com.br.smartzoo.model.enums.FoodEnum;
@@ -22,11 +21,11 @@ import java.util.List;
  */
 public class BuyFoodPresenter {
 
-    private Activity mActivity;
+    private Activity mContext;
     private BuyFoodView mBuyFragmentView;
 
     public BuyFoodPresenter(Activity activity) {
-        this.mActivity = activity;
+        this.mContext = activity;
     }
 
     public void attachView(BuyFoodView buyFoodFragmentView) {
@@ -40,29 +39,29 @@ public class BuyFoodPresenter {
 
     public List<Food> createListFood() {
         List<Food> foods = new ArrayList<>();
-
+        Resources resources = mContext.getResources();
         FoodEnum.Fruit apple = FoodEnum.Fruit.Apple;
-        Food apple1 = new Food(apple.getImage(), mActivity.getString(apple.getName()), apple.getPrice()
+        Food apple1 = new Food(resources.getResourceEntryName(apple.getImage()), mContext.getString(apple.getName()), apple.getPrice()
                 , apple.getWeight(), Calendar.getInstance().getTime());
 
         FoodEnum.Fruit banana = FoodEnum.Fruit.Banana;
-        Food banana1 = new Food(banana.getImage(), mActivity.getString(banana.getName())
+        Food banana1 = new Food(resources.getResourceEntryName(banana.getImage()), mContext.getString(banana.getName())
                 , banana.getPrice(), banana.getWeight(), Calendar.getInstance().getTime());
 
         FoodEnum.Fruit grape = FoodEnum.Fruit.Grape;
-        Food grape1 = new Food(grape.getImage(), mActivity.getString(grape.getName())
+        Food grape1 = new Food(resources.getResourceEntryName(grape.getImage()), mContext.getString(grape.getName())
                 , grape.getPrice(), grape.getWeight(), Calendar.getInstance().getTime());
 
         FoodEnum.Meat beef = FoodEnum.Meat.Beef;
-        Food beef1 = new Food(beef.getImage(), mActivity.getString(beef.getName())
+        Food beef1 = new Food(resources.getResourceEntryName(beef.getImage()), mContext.getString(beef.getName())
                 , beef.getPrice(), beef.getWeight(), Calendar.getInstance().getTime());
 
         FoodEnum.Meat chicken = FoodEnum.Meat.Chicken;
-        Food chicken1 = new Food(chicken.getImage(), mActivity.getString(chicken.getName())
+        Food chicken1 = new Food(resources.getResourceEntryName(chicken.getImage()), mContext.getString(chicken.getName())
                 , chicken.getPrice(), chicken.getWeight(), Calendar.getInstance().getTime());
 
         FoodEnum.Meat pork = FoodEnum.Meat.Pork;
-        Food pork1 = new Food(pork.getImage(), mActivity.getString(pork.getName())
+        Food pork1 = new Food(resources.getResourceEntryName(pork.getImage()), mContext.getString(pork.getName())
                 , pork.getPrice(), pork.getWeight(), Calendar.getInstance().getTime());
 
 

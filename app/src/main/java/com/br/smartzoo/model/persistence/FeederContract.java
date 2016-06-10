@@ -67,7 +67,7 @@ public class FeederContract {
 
         if (!cursor.isBeforeFirst() || cursor.moveToNext()) {
             feeder.setId(cursor.getLong(cursor.getColumnIndex(ID)));
-            feeder.setImage(cursor.getInt(cursor.getColumnIndex(EmployeeContract.IMAGE)));
+            feeder.setImage(cursor.getString(cursor.getColumnIndex(EmployeeContract.IMAGE)));
             feeder.setAge(cursor.getInt(cursor.getColumnIndex(EmployeeContract.AGE)));
             feeder.setName(cursor.getString(cursor.getColumnIndex(EmployeeContract.NAME)));
             feeder.setSalary(cursor.getDouble(cursor.getColumnIndex(EmployeeContract.SALARY)));

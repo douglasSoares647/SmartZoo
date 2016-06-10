@@ -3,6 +3,7 @@ package com.br.smartzoo.ui.adapter;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.SmartZooApplication;
 import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.entity.Feeder;
 import com.br.smartzoo.model.entity.Janitor;
@@ -53,7 +55,10 @@ public class JanitorListAdapter extends RecyclerView.Adapter<JanitorListAdapter.
     public void onBindViewHolder(ViewHolder holder, int position) {
         Janitor janitor = mJanitorList.get(position);
 
-        Glide.with(mContext).load(janitor.getImage()).into(holder.mImageViewJanitor);
+        Resources resources = mContext.getResources();
+
+        Glide.with(mContext).load(resources.getIdentifier(janitor.getImage(), "drawable",
+                SmartZooApplication.NAME_PACKAGE)).into(holder.mImageViewJanitor);
         Glide.with(mContext).load(R.drawable.ic_demit).into(holder.mImageViewDemission);
         Glide.with(mContext).load(R.drawable.ic_salary).into(holder.mImageViewSalary);
         holder.mTextViewName.setText(janitor.getName());

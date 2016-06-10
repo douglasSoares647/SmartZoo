@@ -9,6 +9,8 @@ import com.br.smartzoo.util.ApplicationUtil;
  */
 public class SmartZooApplication extends Application{
 
+    public final static String NAME_PACKAGE= "com.br.smartzoo";
+
     @Override
     public void onCreate() {
         super.onCreate();

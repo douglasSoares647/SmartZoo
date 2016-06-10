@@ -19,7 +19,7 @@ public class Animal implements Observer {
 
     private int tick = 0;
 
-    private int image;
+    private String image;
     private String status;
     private Long id;
     private String name;
@@ -36,7 +36,7 @@ public class Animal implements Observer {
 
 
 
-    public Animal(int image, String type, Integer age,Double price, Double weight
+    public Animal(String image, String type, Integer age,Double price, Double weight
             , Cage cage, Integer resistance,  boolean isHealthy) {
         this.type = type;
         this.image= image;
@@ -269,11 +269,11 @@ public class Animal implements Observer {
         tick++;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

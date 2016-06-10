@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:src="@drawable/ic_animal_lion"
+        android:id="@+id/image_view_animal"
+        android:layout_width="120dp"
+        android:layout_height="120dp" />
+
+
+    <TextView
+        android:id="@+id/text_view_name_animal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_toRightOf="@id/image_view_animal"
+        android:text="Name of animal"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_View_specie_animal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/text_view_name_animal"
+        android:layout_below="@id/text_view_name_animal"
+        android:layout_marginTop="4dp"
+        android:text="Specie of animal"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/text_view_age_animal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/text_View_specie_animal"
+        android:layout_below="@id/text_View_specie_animal"
+        android:layout_marginTop="6dp"
+        android:text="22 years"
+        android:textSize="16sp" />
+
+
+    <TextView
+        android:id="@+id/text_view_health_animal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/image_view_animal"
+        android:layout_alignLeft="@id/text_view_name_animal"
+        android:text="Healthy"
+        android:textColor="@color/green_700"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_view_animal"
+        android:layout_marginTop="12dp">
+
+        <TableRow>
+
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="Weight"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="Sex"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="22.5kg"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Masc"
+                android:textColor="@color/blue_700"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+
+        <TableRow>
+
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="@string/popularity"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="@string/lbl_price"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+
+        <TableRow>
+
+            <TextView
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/yellow_700"
+                android:textSize="42sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="2000,00 $"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+
+        <TableRow>
+
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="Resitance"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="Favorite food"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+
+        <TableRow>
+
+            <TextView
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="8"
+                android:textColor="@color/green_700"
+                android:textSize="52sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:src="@drawable/ic_beef"
+                android:text="Favorite fruit" />
+
+        </TableRow>
+
+
+    </TableLayout>
+
+
+</RelativeLayout>

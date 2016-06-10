@@ -1,6 +1,7 @@
 package com.br.smartzoo.ui.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.SmartZooApplication;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Food;
 import com.br.smartzoo.model.interfaces.OnChangeBuyListener;
@@ -59,7 +61,10 @@ public class BuyFoodListAdapter extends RecyclerView.Adapter<BuyFoodListAdapter.
         Log.i("onBindViewHolder", "");
         final Food food = mFoodList.get(position);
 
-        Glide.with(mContext).load(food.getImage()).into(holder.mImageViewFruit);
+        Resources resources = mContext.getResources();
+
+        Glide.with(mContext).load(resources.getIdentifier(food.getImage(), "drawable",
+                SmartZooApplication.NAME_PACKAGE)).into(holder.mImageViewFruit);
         holder.mTextViewName.setText(food.getName());
         String weightFruit = food.getWeight() + "kg";
         holder.mTextViewWeight.setText(weightFruit);

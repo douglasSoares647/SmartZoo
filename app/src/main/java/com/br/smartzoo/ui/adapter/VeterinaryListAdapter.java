@@ -3,6 +3,7 @@ package com.br.smartzoo.ui.adapter;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.SmartZooApplication;
 import com.br.smartzoo.model.entity.Veterinary;
 import com.br.smartzoo.model.interfaces.OnManageEmployee;
 import com.br.smartzoo.util.AlertDialogUtil;
@@ -56,7 +58,10 @@ public class VeterinaryListAdapter extends RecyclerView.Adapter<VeterinaryListAd
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
          Veterinary veterinary = mVeterinaryList.get(position);
-        Glide.with(mContext).load(veterinary.getImage()).into(holder.mImageViewVeterinary);
+        Resources resources = mContext.getResources();
+
+        Glide.with(mContext).load(resources.getIdentifier(veterinary.getImage(), "drawable",
+                SmartZooApplication.NAME_PACKAGE)).into(holder.mImageViewVeterinary);
         Glide.with(mContext).load(R.drawable.ic_demit).into(holder.mImageViewDemission);
         Glide.with(mContext).load(R.drawable.ic_salary).into(holder.mImageViewSalary);
         Glide.with(mContext).load(R.drawable.ic_treatments).into(holder.mImageViewAnimalsTreatments);

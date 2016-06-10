@@ -1,6 +1,7 @@
 package com.br.smartzoo.ui.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.SmartZooApplication;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.interfaces.OnBuyAnimalListener;
 import com.bumptech.glide.Glide;
@@ -47,7 +49,10 @@ public class BuyAnimalListAdapter extends RecyclerView.Adapter<BuyAnimalListAdap
     @Override
     public void onBindViewHolder(BuyAnimalListAdapter.ViewHolder holder, int position) {
         final Animal animal = mAnimalList.get(position);
-        Glide.with(mContext).load(animal.getImage()).into(holder.mImageViewAnimal);
+
+        Resources resources = mContext.getResources();
+        Glide.with(mContext).load(resources.getIdentifier(animal.getImage(), "drawable",
+                SmartZooApplication.NAME_PACKAGE)).into(holder.mImageViewAnimal);
         holder.mTextViewNameAnimal.setText(animal.getType());
         holder.mTextViewAgeAnimal.setText(String.valueOf(animal.getAge() + " "
                 + mContext.getString(R.string.text_age)));

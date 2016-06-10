@@ -33,7 +33,7 @@ public class FoodContract {
         table.append(" create table " + TABLE + " ( ");
         table.append(ID + " integer primary key, ");
         table.append(NAME + " text not null, ");
-        table.append(IMAGE + " integer not null, ");
+        table.append(IMAGE + " text not null, ");
         table.append(PRICE + " double, ");
         table.append(WEIGHT + " double not null, ");
         table.append(EXPIRATIONDATE + " text not null ");
@@ -65,7 +65,7 @@ public class FoodContract {
         if (!cursor.isBeforeFirst() || cursor.moveToNext()) {
             food.setId(cursor.getLong(cursor.getColumnIndex(ID)));
             food.setName(cursor.getString(cursor.getColumnIndex(NAME)));
-            food.setImage(Integer.parseInt(cursor.getString(cursor.getColumnIndex(IMAGE))));
+            food.setImage(cursor.getString(cursor.getColumnIndex(IMAGE)));
             food.setPrice(cursor.getDouble(cursor.getColumnIndex(PRICE)));
             food.setWeight(cursor.getDouble(cursor.getColumnIndex(WEIGHT)));
             food.setExpirationDate(DateUtil
