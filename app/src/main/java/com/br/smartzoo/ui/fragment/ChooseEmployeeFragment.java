@@ -27,8 +27,13 @@ public class ChooseEmployeeFragment extends Fragment {
         bindCardViewFeeder(view);
         bindCardViewJanitor(view);
 
+        bindToolbarName();
 
         return view;
+    }
+
+    private void bindToolbarName() {
+        ((MainActivity)getActivity()).changeToolBarText(getString(R.string.option_employees));
     }
 
     private void bindCardViewJanitor(View view) {
@@ -37,6 +42,7 @@ public class ChooseEmployeeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ((MainActivity)getActivity()).startTransaction(new JanitorListFragment());
+
             }
         });
     }
@@ -47,6 +53,7 @@ public class ChooseEmployeeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ((MainActivity)getActivity()).startTransaction(new FeederListFragment());
+
             }
         });
     }
@@ -57,6 +64,7 @@ public class ChooseEmployeeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ((MainActivity)getActivity()).startTransaction(new VeterinaryListFragment());
+
             }
         });
     }

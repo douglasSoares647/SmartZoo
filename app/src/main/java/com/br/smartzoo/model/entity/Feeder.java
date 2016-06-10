@@ -1,5 +1,6 @@
 package com.br.smartzoo.model.entity;
 
+import com.br.smartzoo.model.environment.Clock;
 import com.br.smartzoo.model.interfaces.Manageable;
 import com.br.smartzoo.model.singleton.Stock;
 
@@ -13,6 +14,7 @@ import java.util.Map;
  * Created by adenilson on 18/04/16.
  */
 public class Feeder extends Employee implements Manageable{
+	private int maxStamina = 50;
 
     private HashMap<Integer,Integer> cagesFeededThisMonth;
     private Stock stock;
@@ -55,9 +57,25 @@ public class Feeder extends Employee implements Manageable{
    
     @Override
     public void feedCage(String foodName, Cage cage) {
-			List<Food> foodsFromStock = stock.takeFoods(foodName,cage);
-       		cage.getFoods().addAll(foodsFromStock);
-    		cage.setIsSupplied(true);
+		List<Food> foodsFromStock = stock.takeFoods(foodName,cage);
+
+		Double foodWeight = 0D;
+
+		for(Food food : foodsFromStock){
+			foodWeight+=food.getWeight();
+		}
+		int stamina = (int) (foodWeight/5);
+
+		if(getStamina()>stamina) {
+
+			cage.getFoods().addAll(foodsFromStock);
+			cage.setIsSupplied(true);
+		}
+		else{
+			stock.putFoods(foodsFromStock);
+		}
+
+
     }
 
     @Override
@@ -91,5 +109,11 @@ public class Feeder extends Employee implements Manageable{
 	@Override
 	public void onTick() {
 		clock++;
+
+		if(clock== Clock.timeToRest){
+			if(getStamina()<maxStamina)
+				setStamina(getStamina()+1);
+			clock = 0;
+		}
 	}
 }

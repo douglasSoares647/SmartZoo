@@ -43,10 +43,14 @@ public class NewsFragment extends Fragment implements NewsView, OnNewClick, OnNe
         bindFragmentToBusiness();
         bindPresenter();
         bindRecyclerViewNews(view);
+        bindToolbarName();
         loadNews();
 
-
         return view;
+    }
+
+    private void bindToolbarName() {
+        ((MainActivity)getActivity()).changeToolBarText(getString(R.string.option_news));
     }
 
     private void bindFragmentToBusiness() {
@@ -94,7 +98,7 @@ public class NewsFragment extends Fragment implements NewsView, OnNewClick, OnNe
     public void update(New news) {
         NewListAdapter adapter = (NewListAdapter) mRecyclerViewNews.getAdapter();
         adapter.addNewToList(news);
-        adapter.notifyDataSetChanged();
+        mRecyclerViewNews.scrollToPosition(0);
     }
 
 

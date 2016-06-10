@@ -18,6 +18,7 @@ import com.br.smartzoo.R;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.interfaces.OnManageAnimal;
 import com.br.smartzoo.presenter.AnimalListPresenter;
+import com.br.smartzoo.ui.activity.MainActivity;
 import com.br.smartzoo.ui.adapter.AnimalListAdapter;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
@@ -52,7 +53,13 @@ public class AnimalListFragment extends Fragment implements AnimalListView, OnMa
         setHasOptionsMenu(true);
 
 
+        bindToolbarName();
+
         return view;
+    }
+
+    private void bindToolbarName() {
+        ((MainActivity)getActivity()).changeToolBarText(getString(R.string.option_animals));
     }
 
     @Override

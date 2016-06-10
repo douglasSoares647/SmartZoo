@@ -2,14 +2,11 @@ package com.br.smartzoo.presenter;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.asynctask.CleanCageAsyncTask;
 import com.br.smartzoo.model.asynctask.DestroyCageAsyncTask;
 import com.br.smartzoo.model.asynctask.LoadCagesAsyncTask;
-import com.br.smartzoo.model.asynctask.LoadJanitorsAsyncTask;
 import com.br.smartzoo.model.asynctask.LoadJanitorsRestedAsyncTask;
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Janitor;

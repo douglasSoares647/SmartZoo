@@ -9,6 +9,7 @@ import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.New;
 import com.br.smartzoo.model.interfaces.Observer;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -41,7 +42,9 @@ public class Visitor implements Observer{
     }
 
     public void visit(){
-        List<Cage> cagesToVisit = ZooInfo.cages;
+        List<Cage> cagesToVisit = new ArrayList<>();
+        cagesToVisit.addAll(ZooInfo.cages);
+
 
     //    Double reputationGeneratedByPrice = 10/ZooInfo.price;
         // reputationGenerated += reputationGeneratedByPrice;
@@ -54,6 +57,9 @@ public class Visitor implements Observer{
                 int chance = random.nextInt(11)+1;
                 if( chance < animal.getPopularity()){
                     reputationGenerated +=  animal.getPopularity()*0.01;
+                    timeToVisitCage+= chance*60;
+                }
+                else{
                     timeToVisitCage+= chance*60;
                 }
             }

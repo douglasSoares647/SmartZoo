@@ -27,6 +27,7 @@ import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnBuyAnimalListener;
 import com.br.smartzoo.model.interfaces.OnSetAnimalNameListener;
 import com.br.smartzoo.presenter.BuyAnimalPresenter;
+import com.br.smartzoo.ui.activity.MainActivity;
 import com.br.smartzoo.ui.adapter.BuyAnimalListAdapter;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.ListCageAdapter;
@@ -59,7 +60,15 @@ public class BuyAnimalFragment extends Fragment implements BuyAnimalView, OnBuyA
 
         bindPresenter();
         populateAnimalList();
+        bindToolbar();
+        bindRecyclerViewAnimals(view);
 
+
+
+        return view;
+    }
+
+    private void bindRecyclerViewAnimals(View view) {
         mRecyclerViewAnimals =
                 (RecyclerView) view.findViewById(R.id.recycler_view_available_animals);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -73,10 +82,10 @@ public class BuyAnimalFragment extends Fragment implements BuyAnimalView, OnBuyA
                 new BuyAnimalListAdapter(getActivity(), mAnimalList);
         buyAnimalListAdapter.setOnBuyAnimalListener(this);
         mRecyclerViewAnimals.setAdapter(buyAnimalListAdapter);
+    }
 
-
-
-        return view;
+    private void bindToolbar() {
+        ((MainActivity)getActivity()).changeToolBarText(getString(R.string.option_buy_animals));
     }
 
     private void populateAnimalList() {

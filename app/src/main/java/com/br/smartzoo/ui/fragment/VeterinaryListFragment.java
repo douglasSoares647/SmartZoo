@@ -14,6 +14,7 @@ import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.entity.Veterinary;
 import com.br.smartzoo.model.interfaces.OnManageEmployee;
 import com.br.smartzoo.presenter.VeterinaryListPresenter;
+import com.br.smartzoo.ui.activity.MainActivity;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.ui.adapter.VeterinaryListAdapter;
@@ -44,8 +45,13 @@ public class VeterinaryListFragment extends Fragment implements VeterinaryListVi
         loadVeterinaries();
         bindRecyclerView(view);
 
+        bindToolbarName();
 
         return view;
+    }
+
+    private void bindToolbarName() {
+        ((MainActivity)getActivity()).changeToolBarText(getString(R.string.title_veterinaries));
     }
 
     private void bindRecyclerView(View view) {

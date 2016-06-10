@@ -6,7 +6,6 @@ import com.br.smartzoo.R;
 import com.br.smartzoo.model.asynctask.DemitEmployeeAsyncTask;
 import com.br.smartzoo.model.asynctask.LoadVeterinariesAsyncTask;
 import com.br.smartzoo.model.asynctask.UpdateSalaryAsyncTask;
-import com.br.smartzoo.model.business.VeterinaryBusiness;
 import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.entity.Veterinary;
 import com.br.smartzoo.model.environment.ZooInfo;

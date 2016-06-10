@@ -14,6 +14,7 @@ import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.entity.Janitor;
 import com.br.smartzoo.model.interfaces.OnManageEmployee;
 import com.br.smartzoo.presenter.JanitorListPresenter;
+import com.br.smartzoo.ui.activity.MainActivity;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.FeederListAdapter;
 import com.br.smartzoo.ui.adapter.JanitorListAdapter;
@@ -44,8 +45,13 @@ public class JanitorListFragment extends Fragment implements OnManageEmployee, J
         bindRecyclerViewJanitor(view);
         loadJanitors();
 
+        bindToolbarName();
 
         return view;
+    }
+
+    private void bindToolbarName() {
+        ((MainActivity)getActivity()).changeToolBarText(getString(R.string.title_janitors));
     }
 
     private void loadJanitors() {

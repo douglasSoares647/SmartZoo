@@ -2,8 +2,8 @@ package com.br.smartzoo.model.entity;
 
 
 import com.br.smartzoo.R;
-import com.br.smartzoo.util.ApplicationUtil;
 import com.br.smartzoo.model.environment.Clock;
+import com.br.smartzoo.util.ApplicationUtil;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -14,12 +14,18 @@ import java.util.Map;
  * Created by adenilson on 18/04/16.
  */
 public class Janitor extends Employee {
-
-    private String status;
+    private Integer maxStamina=50;
     private int clock = 0;
 
     private Long id;
+    private String status;
     private HashMap<Integer, Integer> cagesCleanedThisMonth;
+
+
+    private Integer currentDirtyCleaned = 0;
+    private Integer timeToCleanCage = 0;
+    private Boolean isCleaning = false;
+    private Cage currentCage;
 
     public Janitor(List<Cage> cages, int expedient) {
     }
@@ -61,27 +67,48 @@ public class Janitor extends Employee {
     }
 
     public void clear(final Cage cage) {
-        long timeToCleanCage = cage.getDirtyFactor() * Clock.timeToCleanEachDirty;
 
+        if(getStamina()>cage.getDirtyFactor()) {
+            clock = 0;
+            timeToCleanCage = cage.getDirtyFactor() * Clock.timeToCleanEachDirty;
 
-        int dirtyCleaned = 0;
-        status = ApplicationUtil.applicationContext.getString(R.string.cleaning_cage) + cage.getName();
-        while (clock < timeToCleanCage) {
-            if (clock % Clock.timeToCleanEachDirty == 0)
-                dirtyCleaned++;
+            status = ApplicationUtil.applicationContext.getString(R.string.cleaning_cage) + cage.getName();
+
+            currentCage = cage;
+
+            isCleaning = true;
         }
-        cage.setClean(true);
-        status = ApplicationUtil.applicationContext.getString(R.string.resting);
-
-        clock = 0;
-        while (clock < Clock.timeToRest)
-            status = ApplicationUtil.applicationContext.getString(R.string.ready);
 
     }
 
     @Override
     public void onTick() {
-
         clock++;
+
+
+        if(isCleaning) {
+            if (clock < timeToCleanCage) {
+                if (clock % Clock.timeToCleanEachDirty == 0) {
+                    currentDirtyCleaned++;
+                    setStamina(getStamina() - 1);
+                }
+            }
+            else {
+                currentCage.setClean(true);
+                clock = 0;
+                isCleaning = false;
+            }
+        }
+
+        else {
+            status = ApplicationUtil.applicationContext.getString(R.string.ready);
+        }
+
+        if(clock== Clock.timeToRest){
+            if(getStamina()<maxStamina)
+            setStamina(getStamina()+1);
+            clock =0;
+        }
+
     }
 }

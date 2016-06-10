@@ -1,8 +1,8 @@
 package com.br.smartzoo.model.entity;
 
 import com.br.smartzoo.R;
-import com.br.smartzoo.util.ApplicationUtil;
 import com.br.smartzoo.model.environment.Clock;
+import com.br.smartzoo.util.ApplicationUtil;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -13,10 +13,16 @@ import java.util.Map;
  * Created by adenilson on 18/04/16.
  */
 public class Veterinary extends Employee {
+    private Integer maxStamina = 20;
 
     public String status;
     private HashMap<Integer,Integer> animalsTreatedThisMonth;
     private int clock = 0;
+
+
+    private Animal currentAnimal;
+    private Integer timeToTreatAnimal;
+    private Boolean isTreating = false;
 
     public Veterinary(){
 
@@ -34,33 +40,17 @@ public class Veterinary extends Employee {
 
 
     public void treat(final Animal animal) {
-        status = ApplicationUtil.applicationContext.getString(R.string.treating_animal) + animal.getName();
-        clock = 0;
 
-        while (clock <= Clock.timeToTreat) {
-            if (clock == Clock.timeToTreat) {
-                animal.setIsHealthy(true);
-                status = ApplicationUtil.applicationContext.getString(R.string.animal_treatment) + animal.getName() + ApplicationUtil.applicationContext.getString(R.string.done);
-            }
-
-        }
-    }
-
-    public void treat(List<Animal> animals) {
-        status = ApplicationUtil.applicationContext.getString(R.string.treating_animals);
-        for (final Animal animal : animals) {
-
+        if(getStamina()>animal.getStaminaToBeCured()) {
+            status = ApplicationUtil.applicationContext.getString(R.string.treating_animal) + animal.getName();
             clock = 0;
 
-            while (clock <= Clock.timeToTreat) {
-                if (clock == Clock.timeToTreat) {
-                    animal.setIsHealthy(true);
-                    status = ApplicationUtil.applicationContext.getString(R.string.animal_treatment) + animal.getName() + ApplicationUtil.applicationContext.getString(R.string.done);
-                }
-
-            }
+            currentAnimal = animal;
+            isTreating = true;
         }
+
     }
+
     
     @Override
     public Double calculateSalary() {
@@ -86,6 +76,24 @@ public class Veterinary extends Employee {
 
     @Override
     public void onTick() {
+        clock++;
+
+        if(isTreating) {
+            if (clock == Clock.timeToTreat) {
+                currentAnimal.setIsHealthy(true);
+                status = ApplicationUtil.applicationContext.getString(R.string.animal_treatment) + currentAnimal.getName() + ApplicationUtil.applicationContext.getString(R.string.done);
+                setStamina(getStamina()-currentAnimal.getStaminaToBeCured());
+            }
+        }
+        else {
+            status = ApplicationUtil.applicationContext.getString(R.string.ready);
+        }
+
+        if(clock== Clock.timeToRest){
+            if(getStamina()<maxStamina)
+                setStamina(getStamina()+1);
+            clock = 0;
+        }
 
     }
 
