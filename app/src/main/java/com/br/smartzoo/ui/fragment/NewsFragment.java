@@ -98,7 +98,12 @@ public class NewsFragment extends Fragment implements NewsView, OnNewClick, OnNe
     public void update(New news) {
         NewListAdapter adapter = (NewListAdapter) mRecyclerViewNews.getAdapter();
         adapter.addNewToList(news);
-        mRecyclerViewNews.scrollToPosition(0);
+
+        LinearLayoutManager linearLayoutManager = (LinearLayoutManager) mRecyclerViewNews.getLayoutManager();
+
+        if(linearLayoutManager.findFirstCompletelyVisibleItemPosition()==0){
+            mRecyclerViewNews.scrollToPosition(0);
+        }
     }
 
 

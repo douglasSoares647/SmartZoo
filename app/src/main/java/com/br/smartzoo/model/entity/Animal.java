@@ -17,28 +17,39 @@ import java.util.Random;
  */
 public class Animal implements Observer {
 
+    private Integer maxResistance = 8;
+
+
     private int tick = 0;
 
-    private String image;
-    private String status;
     private Long id;
+    private String image;
     private String name;
     private String type;
     private Integer age;
     private Double weight;
     private String sex;
     private Cage cage;
-    private boolean isHealthy;
-    private Double foodToBeSatisfied;
     private Integer resistance;
     private Integer popularity;
     private Double price;
+    private boolean isHealthy;
+    private boolean isHungry;
+    private String status;
     private Integer staminaToBeCured;
 
 
 
+    //Variaveis de controle
+    private boolean isDigesting = false;
+    private Double foodEaten = 0.0;
+    private Double foodToBeSatisfied;
+
+
+
+
     public Animal(String image, String type, Integer age,Double price, Double weight
-            , Cage cage, Integer resistance,  boolean isHealthy) {
+            , Cage cage, Integer resistance,  boolean isHealthy, Integer popularity) {
         this.type = type;
         this.image= image;
         this.age = age;
@@ -48,6 +59,7 @@ public class Animal implements Observer {
         this.cage.getAnimals().add(this);
         this.isHealthy = isHealthy;
         this.resistance = resistance;
+        this.popularity = popularity;
         foodToBeSatisfied = weight*0.15;
     }
 
@@ -170,29 +182,11 @@ public class Animal implements Observer {
     }
 
     public void  eat() {
-        Double foodEaten = 0.0;
         final List<Food> cageFoods = cage.getFoods();
         List<Food> foodsToRemove = new ArrayList<>();
 
-
         if(cageFoods.isEmpty()){
             status = ApplicationUtil.applicationContext.getString(R.string.starving);
-            Thread starving = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        while (cageFoods.isEmpty()) {
-                            try {
-                                Thread.sleep(Clock.starvingTime);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            setWeight(weight*0.99);
-                            status = ApplicationUtil.applicationContext.getString(R.string.losing_weight);
-                        }
-                        eat();
-                    }
-                });
-                 starving.start();
         }
         else {
             status = ApplicationUtil.applicationContext.getString(R.string.eating);
@@ -208,59 +202,29 @@ public class Animal implements Observer {
                     expirationDate.setTime(food.getExpirationDate());
                     Calendar currentDate = Calendar.getInstance();
                     currentDate.set(Calendar.MONTH, currentDate.get(Calendar.MONTH) + 1);
+
                     if (currentDate.after(expirationDate)) {
                         Random random = new Random();
-                        int i = random.nextInt(8) + 1;
+                        int chanceToGetSick = random.nextInt(maxResistance) + 1; // 1 a 8
                         if (this.isHealthy) {
-                            if (i > resistance) {
+                            if (chanceToGetSick > resistance) {
                                 isHealthy = false;
-                                NewsFeedBusiness.addNew(New.TagEnum.ANIMAL_SICK.getTag(),this);
+                                NewsFeedBusiness.addNew(New.TagEnum.ANIMAL_SICK.getTag(), this);
                             }
                         }
                     }
-
                 } else {
                     break;
                 }
             }
-
-
             cageFoods.removeAll(foodsToRemove);
 
-
-            weight = weight + foodEaten;;
-
-
+            tick = 0;
+            weight = weight + foodEaten;
             status = ApplicationUtil.applicationContext.getString(R.string.digesting);
 
-            //Digerindo
-            tick = 0;
-            while(tick< Clock.timeToDigest){
-                    if(tick% Clock.digestingInterval==0)
-                    weight = weight - foodEaten / 30;
-
-            }
-            setWeight(weight - foodEaten*0.95);
-            afterDigest();
-
-                }
-
-
-    }
-
-    private void afterDigest() {
-        cage.setDirtyFactor(cage.getDirtyFactor()+1);
-        status = ApplicationUtil.applicationContext.getString(R.string.digestion_finished);
-
-        //Tempo para sentir fome novamente
-        tick = 0;
-        while(tick< Clock.timeToFeelHungry){
-            status = ApplicationUtil.applicationContext.getString(R.string.not_hungry);
+            isDigesting = true;
         }
-
-        status = ApplicationUtil.applicationContext.getString(R.string.starving);
-
-
 
     }
 
@@ -276,6 +240,31 @@ public class Animal implements Observer {
     @Override
     public void onTick() {
         tick++;
+
+
+        if(isDigesting) {
+            digest();
+        }
+
+    }
+
+    private void digest() {
+        //Digerindo
+        if (tick % Clock.digestingInterval == 0) {
+            setWeight(weight - foodEaten * 0.95);
+            afterDigest();
+        } else
+            weight -= foodEaten / 30;
+    }
+
+    private void afterDigest() {
+        cage.setDirtyFactor(cage.getDirtyFactor()+1);
+        status = ApplicationUtil.applicationContext.getString(R.string.not_hungry);
+
+        isDigesting = false;
+        foodEaten = 0.0;
+
+
     }
 
     public String getImage() {
@@ -286,7 +275,16 @@ public class Animal implements Observer {
         this.image = image;
     }
 
+    public boolean isHungry() {
+        return isHungry;
+    }
 
+    public void setHungry(boolean hungry) {
+        isHungry = hungry;
+
+        if(hungry)
+        eat();
+    }
 
 
     public enum AnimalEnum {

@@ -60,7 +60,7 @@ public class Visitor implements Observer{
                     timeToVisitCage+= chance*60;
                 }
                 else{
-                    timeToVisitCage+= chance*60;
+                    timeToVisitCage+= 60;
                 }
             }
 

@@ -69,7 +69,7 @@ public class BuyFoodListAdapter extends RecyclerView.Adapter<BuyFoodListAdapter.
         String weightFruit = food.getWeight() + "kg";
         holder.mTextViewWeight.setText(weightFruit);
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
-        final String price = (String.valueOf(decimalFormat.format(food.getPrice()))) + "$";
+        final String price = ("$" + String.valueOf(decimalFormat.format(food.getPrice())));
         holder.mTextViewPrice.setText(price);
         holder.mSeekBarQuantity.setMax(99);
         holder.mSeekBarQuantity.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {

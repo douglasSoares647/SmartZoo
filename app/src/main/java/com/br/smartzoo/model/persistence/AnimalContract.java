@@ -30,9 +30,11 @@ public class AnimalContract {
     public static String ISHEALTHY = "isHealthy";
     public static String RESISTENCE = "resistence";
     public static String POPULARITY = "popularity";
+    public static String ISHUNGRY = "isHungry";
+
 
     public static String[] COLUMNS = {ID, IMAGE, NAME,TYPE, PRICE, AGE, WEIGHT, SEX, STATUS, CAGEID, ISHEALTHY
-            , RESISTENCE, POPULARITY};
+            , RESISTENCE, POPULARITY, ISHUNGRY};
 
 
     public static String createTable() {
@@ -51,7 +53,8 @@ public class AnimalContract {
         table.append(CAGEID + " integer not null, ");
         table.append(ISHEALTHY + " integer not null, ");
         table.append(RESISTENCE + " integer not null, ");
-        table.append(POPULARITY + " integer not null ");
+        table.append(POPULARITY + " integer not null, ");
+        table.append(ISHUNGRY + " integer ");
         table.append(" ); ");
 
         return table.toString();
@@ -75,6 +78,7 @@ public class AnimalContract {
         contentValues.put(ISHEALTHY, animal.isHealthy() ? 1 : 0);
         contentValues.put(RESISTENCE, animal.getResistance());
         contentValues.put(POPULARITY, animal.getPopularity());
+        contentValues.put(ISHUNGRY, animal.isHungry()? 1 : 0);
 
 
         return contentValues;
@@ -102,6 +106,11 @@ public class AnimalContract {
             animal.setIsHealthy((cursor.getInt(cursor.getColumnIndex(ISHEALTHY))) == 1);
             animal.setResistance(cursor.getInt(cursor.getColumnIndex(RESISTENCE)));
             animal.setPopularity(cursor.getInt(cursor.getColumnIndex(POPULARITY)));
+
+            Integer isHungry = cursor.getInt(cursor.getColumnIndex(ISHUNGRY));
+            if(isHungry == 1){
+            animal.setHungry(true);
+            }
         }
 
         return animal;

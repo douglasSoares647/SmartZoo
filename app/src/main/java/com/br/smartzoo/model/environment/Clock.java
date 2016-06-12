@@ -140,13 +140,7 @@ public class Clock {
     private static void threeHours() {
         for(Cage cage : ZooInfo.cages){
             for(final Animal animal : cage.getAnimals()){
-                Thread thread = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        animal.eat();
-                    }
-                });
-                thread.start();
+                animal.setHungry(true);
             }
         }
     }
