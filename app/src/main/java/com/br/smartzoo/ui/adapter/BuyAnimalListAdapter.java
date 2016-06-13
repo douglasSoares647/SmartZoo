@@ -53,7 +53,7 @@ public class BuyAnimalListAdapter extends RecyclerView.Adapter<BuyAnimalListAdap
         Resources resources = mContext.getResources();
         Glide.with(mContext).load(resources.getIdentifier(animal.getImage(), "drawable",
                 SmartZooApplication.NAME_PACKAGE)).into(holder.mImageViewAnimal);
-        holder.mTextViewNameAnimal.setText(animal.getType());
+        holder.mTextViewNameAnimal.setText(animal.getSpecie());
         holder.mTextViewAgeAnimal.setText(String.valueOf(animal.getAge() + " "
                 + mContext.getString(R.string.text_age)));
         boolean healthy = animal.isHealthy();

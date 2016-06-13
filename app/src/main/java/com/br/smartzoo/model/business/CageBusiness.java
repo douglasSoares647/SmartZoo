@@ -40,7 +40,7 @@ public class CageBusiness {
         List<Cage> cagesByAnimalType = new ArrayList<>();
 
         for (Cage cage : ZooInfo.cages) {
-            if (cage.getAnimalType().equals(animal.getType()))
+            if (cage.getAnimalType().equals(animal.getSpecie()))
                 cagesByAnimalType.add(cage);
         }
 

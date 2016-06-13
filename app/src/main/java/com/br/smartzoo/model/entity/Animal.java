@@ -1,6 +1,9 @@
 package com.br.smartzoo.model.entity;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.business.NewsFeedBusiness;
 import com.br.smartzoo.model.environment.Clock;
@@ -15,7 +18,7 @@ import java.util.Random;
 /**
  * Created by taibic on 12/04/16.
  */
-public class Animal implements Observer {
+public class Animal implements Observer, Parcelable{
 
     private int tick = 0;
 
@@ -34,12 +37,14 @@ public class Animal implements Observer {
     private Integer popularity;
     private Double price;
     private Integer staminaToBeCured;
+    private String favoriteFood;
 
 
 
     public Animal(String image, String type, Integer age,Double price, Double weight
-            , Cage cage, Integer resistance,  boolean isHealthy) {
+            , Cage cage, Integer resistance,  boolean isHealthy, String favoriteFood) {
         this.type = type;
+        this.favoriteFood = favoriteFood;
         this.image= image;
         this.age = age;
         this.weight = weight;
@@ -48,13 +53,36 @@ public class Animal implements Observer {
         this.cage.getAnimals().add(this);
         this.isHealthy = isHealthy;
         this.resistance = resistance;
-        foodToBeSatisfied = weight*0.15;
+        this.foodToBeSatisfied = weight*0.15;
     }
 
     public Animal(){
 
     }
 
+    public int getTick() {
+        return tick;
+    }
+
+    public void setTick(int tick) {
+        this.tick = tick;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setHealthy(boolean healthy) {
+        isHealthy = healthy;
+    }
+
+    public String getFavoriteFood() {
+        return favoriteFood;
+    }
+
+    public void setFavoriteFood(String favoriteFood) {
+        this.favoriteFood = favoriteFood;
+    }
 
     public Cage getCage() {
         return cage;
@@ -147,7 +175,7 @@ public class Animal implements Observer {
         return price;
     }
 
-    public String getType() {
+    public String getSpecie() {
         return type;
     }
 
@@ -289,6 +317,8 @@ public class Animal implements Observer {
 
 
 
+
+
     public enum AnimalEnum {
 
         Lion(R.drawable.ic_animal_lion, R.string.animal_lion, 300.0, 3, 150, "Fine"),
@@ -349,5 +379,64 @@ public class Animal implements Observer {
             return status;
         }
 
+
+
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.tick);
+        dest.writeString(this.image);
+        dest.writeString(this.status);
+        dest.writeValue(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.type);
+        dest.writeValue(this.age);
+        dest.writeValue(this.weight);
+        dest.writeString(this.sex);
+        dest.writeParcelable(this.cage, flags);
+        dest.writeByte(this.isHealthy ? (byte) 1 : (byte) 0);
+        dest.writeValue(this.foodToBeSatisfied);
+        dest.writeValue(this.resistance);
+        dest.writeValue(this.popularity);
+        dest.writeValue(this.price);
+        dest.writeValue(this.staminaToBeCured);
+    }
+
+    protected Animal(Parcel in) {
+        this.tick = in.readInt();
+        this.image = in.readString();
+        this.status = in.readString();
+        this.id = (Long) in.readValue(Long.class.getClassLoader());
+        this.name = in.readString();
+        this.type = in.readString();
+        this.age = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.weight = (Double) in.readValue(Double.class.getClassLoader());
+        this.sex = in.readString();
+        this.cage = in.readParcelable(Cage.class.getClassLoader());
+        this.isHealthy = in.readByte() != 0;
+        this.foodToBeSatisfied = (Double) in.readValue(Double.class.getClassLoader());
+        this.resistance = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.popularity = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.price = (Double) in.readValue(Double.class.getClassLoader());
+        this.staminaToBeCured = (Integer) in.readValue(Integer.class.getClassLoader());
+    }
+
+    public static final Creator<Animal> CREATOR = new Creator<Animal>() {
+        @Override
+        public Animal createFromParcel(Parcel source) {
+            return new Animal(source);
+        }
+
+        @Override
+        public Animal[] newArray(int size) {
+            return new Animal[size];
+        }
+    };
 }

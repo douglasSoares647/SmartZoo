@@ -1,5 +1,8 @@
 package com.br.smartzoo.model.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Food;
 
@@ -9,7 +12,7 @@ import java.util.List;
 /**
  * Created by adenilson on 18/04/16.
  */
-public class Cage implements Comparable<Cage>{
+public class Cage implements Comparable<Cage>, Parcelable{
 
     private int dirtyFactor;
 
@@ -191,4 +194,49 @@ public class Cage implements Comparable<Cage>{
             return capacity;
         }
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.dirtyFactor);
+        dest.writeValue(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.animalType);
+        dest.writeValue(this.price);
+        dest.writeTypedList(this.animals);
+        dest.writeList(this.foods);
+        dest.writeValue(this.capacity);
+        dest.writeByte(this.isClean ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.isSupplied ? (byte) 1 : (byte) 0);
+    }
+
+    protected Cage(Parcel in) {
+        this.dirtyFactor = in.readInt();
+        this.id = (Long) in.readValue(Long.class.getClassLoader());
+        this.name = in.readString();
+        this.animalType = in.readString();
+        this.price = (Double) in.readValue(Double.class.getClassLoader());
+        this.animals = in.createTypedArrayList(Animal.CREATOR);
+        this.foods = new ArrayList<Food>();
+        in.readList(this.foods, Food.class.getClassLoader());
+        this.capacity = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.isClean = in.readByte() != 0;
+        this.isSupplied = in.readByte() != 0;
+    }
+
+    public static final Creator<Cage> CREATOR = new Creator<Cage>() {
+        @Override
+        public Cage createFromParcel(Parcel source) {
+            return new Cage(source);
+        }
+
+        @Override
+        public Cage[] newArray(int size) {
+            return new Cage[size];
+        }
+    };
 }

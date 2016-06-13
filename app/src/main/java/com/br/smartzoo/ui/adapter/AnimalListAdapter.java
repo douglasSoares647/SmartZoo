@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
@@ -72,6 +73,13 @@ public class AnimalListAdapter extends RecyclerView.Adapter<AnimalListAdapter.Vi
             }
         });
 
+        holder.mRelativeAnimal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnManageAnimal.onClick(animal);
+            }
+        });
+
     }
 
     @Override
@@ -80,6 +88,7 @@ public class AnimalListAdapter extends RecyclerView.Adapter<AnimalListAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        private RelativeLayout mRelativeAnimal;
         private ImageView mImageViewAnimal;
         private TextView mTextViewName;
         private TextView mTextViewStatus;
@@ -91,6 +100,7 @@ public class AnimalListAdapter extends RecyclerView.Adapter<AnimalListAdapter.Vi
         public ViewHolder(View itemView) {
             super(itemView);
 
+            mRelativeAnimal = (RelativeLayout) itemView.findViewById(R.id.relative_animal);
             mImageViewAnimal = (ImageView) itemView.findViewById(R.id.image_view_animal);
             mTextViewName = (TextView) itemView.findViewById(R.id.text_view_name_animal);
             mTextViewStatus = (TextView) itemView.findViewById(R.id.text_view_status_animal);

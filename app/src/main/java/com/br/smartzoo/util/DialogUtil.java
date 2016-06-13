@@ -2,7 +2,6 @@ package com.br.smartzoo.util;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,7 +12,6 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
-import com.br.smartzoo.model.asynctask.LoadJanitorsRestedAsyncTask;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Employee;
@@ -25,8 +23,6 @@ import com.br.smartzoo.model.interfaces.OnSetAnimalNameListener;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.JanitorsRestedAdapter;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -102,7 +98,7 @@ public class DialogUtil{
         Button buttonContinue = (Button) dialog.findViewById(R.id.button_continue);
 
 
-        textViewTitle.setText(context.getString(R.string.title_set_name_to_animal)+ animal.getType());
+        textViewTitle.setText(context.getString(R.string.title_set_name_to_animal)+ animal.getSpecie());
 
 
         buttonContinue.setOnClickListener(new View.OnClickListener() {

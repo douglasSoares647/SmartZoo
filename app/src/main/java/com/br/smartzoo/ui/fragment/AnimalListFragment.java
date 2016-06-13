@@ -133,6 +133,11 @@ public class AnimalListFragment extends Fragment implements AnimalListView, OnMa
     }
 
     @Override
+    public void onClick(Animal animal) {
+        mPresenter.startTransaction(animal);
+    }
+
+    @Override
     public void onAnimalListLoad(List<Animal> animalList) {
         mRecyclerViewAnimals.setItemViewCacheSize(animalList.size());
         mAdapter.setAnimalList(animalList);

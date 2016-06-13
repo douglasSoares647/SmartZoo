@@ -8,4 +8,6 @@ import com.br.smartzoo.model.entity.Animal;
 public interface OnManageAnimal {
      void onSell(Animal animal);
 
+     void onClick(Animal animal);
+
 }

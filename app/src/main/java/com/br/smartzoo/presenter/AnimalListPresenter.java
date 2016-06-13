@@ -1,6 +1,7 @@
 package com.br.smartzoo.presenter;
 
 import android.app.Activity;
+import android.os.Bundle;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.asynctask.LoadAnimalAsyncTask;
@@ -9,6 +10,7 @@ import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.ui.activity.MainActivity;
+import com.br.smartzoo.ui.fragment.DetailsAnimalFragment;
 import com.br.smartzoo.ui.view.AnimalListView;
 import com.br.smartzoo.util.SortArrayUtil;
 
@@ -83,5 +85,13 @@ public class AnimalListPresenter {
             mAnimalListView.onAnimalListLoad(sortedAnimals);
 
         }
+    }
+
+    public void startTransaction(Animal animal) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(DetailsAnimalFragment.SELECTED_ANIMAL, animal);
+        DetailsAnimalFragment detailsAnimalFragment = new DetailsAnimalFragment();
+        detailsAnimalFragment.setArguments(bundle);
+        ((MainActivity)mContext).startTransaction(detailsAnimalFragment);
     }
 }

@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -79,20 +84,22 @@
         <TableRow>
 
             <TextView
+                android:id="@+id/text_view_weight_animal"
                 android:layout_height="80dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="22.5kg"
-                android:textSize="26sp"
+                android:textSize="32sp"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/text_view_sex_animal"
                 android:layout_height="80dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Masc"
+                android:text="Masculino"
                 android:textColor="@color/blue_700"
-                android:textSize="26sp"
+                android:textSize="32sp"
                 android:textStyle="bold" />
         </TableRow>
 
@@ -118,15 +125,17 @@
         <TableRow>
 
             <TextView
+                android:id="@+id/text_view_popularity_animal"
                 android:layout_height="80dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="1"
                 android:textColor="@color/yellow_700"
-                android:textSize="42sp"
+                android:textSize="52sp"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/text_view_price_animal"
                 android:layout_height="80dp"
                 android:layout_weight="1"
                 android:gravity="center"
@@ -157,6 +166,7 @@
         <TableRow>
 
             <TextView
+                android:id="@+id/text_view_resistance_animal"
                 android:layout_height="80dp"
                 android:layout_weight="1"
                 android:gravity="center"
@@ -170,12 +180,58 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:src="@drawable/ic_beef"
-                android:text="Favorite fruit" />
+                android:text="Favorite fruit"
+                android:id="@+id/image_view_food_favorite_animal"/>
 
         </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Cost to be cured"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Food to be satisfied"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/text_view_cost_cured_animal"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="8"
+                android:textColor="@color/deep_purple_700"
+                android:textSize="52sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_view_food_satisfied_animal"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="5.5kg"
+                android:textColor="@color/red_700"
+                android:textSize="36sp"
+                android:textStyle="bold" />
+
+        </TableRow>
+
 
 
     </TableLayout>
 
 
 </RelativeLayout>
+
+</ScrollView>

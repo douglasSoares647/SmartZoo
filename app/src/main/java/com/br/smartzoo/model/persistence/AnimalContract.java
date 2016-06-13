@@ -1,6 +1,5 @@
 package com.br.smartzoo.model.persistence;
 
-import android.content.ComponentName;
 import android.content.ContentValues;
 import android.database.Cursor;
 
@@ -65,7 +64,7 @@ public class AnimalContract {
         contentValues.put(ID, animal.getId());
         contentValues.put(NAME, animal.getName());
         contentValues.put(IMAGE, animal.getImage());
-        contentValues.put(TYPE, animal.getType());
+        contentValues.put(TYPE, animal.getSpecie());
         contentValues.put(PRICE, animal.getPrice());
         contentValues.put(AGE, animal.getAge());
         contentValues.put(WEIGHT, animal.getWeight());
