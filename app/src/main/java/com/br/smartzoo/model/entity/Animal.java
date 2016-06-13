@@ -18,34 +18,43 @@ import java.util.Random;
 /**
  * Created by taibic on 12/04/16.
  */
-public class Animal implements Observer, Parcelable{
+public class Animal implements Observer, Parcelable {
+
+    private Integer maxResistance = 8;
+
 
     private int tick = 0;
 
-    private String image;
-    private String status;
     private Long id;
+    private String image;
     private String name;
     private String type;
     private Integer age;
     private Double weight;
     private String sex;
     private Cage cage;
-    private boolean isHealthy;
-    private Double foodToBeSatisfied;
     private Integer resistance;
     private Integer popularity;
     private Double price;
+    private boolean isHealthy;
+    private boolean isHungry;
+    private String status;
     private Integer staminaToBeCured;
     private String favoriteFood;
 
 
+    //Variaveis de controle
+    private boolean isDigesting = false;
+    private Double foodEaten = 0.0;
+    private Double foodToBeSatisfied;
 
-    public Animal(String image, String type, Integer age,Double price, Double weight
-            , Cage cage, Integer resistance,  boolean isHealthy, String favoriteFood) {
+
+    public Animal(String image, String type, Integer age, Double price, Double weight
+            , Cage cage, Integer resistance, boolean isHealthy, String favoriteFood
+            , Integer popularity) {
         this.type = type;
         this.favoriteFood = favoriteFood;
-        this.image= image;
+        this.image = image;
         this.age = age;
         this.weight = weight;
         this.price = price;
@@ -53,10 +62,12 @@ public class Animal implements Observer, Parcelable{
         this.cage.getAnimals().add(this);
         this.isHealthy = isHealthy;
         this.resistance = resistance;
-        this.foodToBeSatisfied = weight*0.15;
+        this.foodToBeSatisfied = weight * 0.15;
+        this.popularity = popularity;
+        foodToBeSatisfied = weight * 0.15;
     }
 
-    public Animal(){
+    public Animal() {
 
     }
 
@@ -123,7 +134,7 @@ public class Animal implements Observer, Parcelable{
 
     public void setWeight(Double weight) {
         this.weight = weight;
-        foodToBeSatisfied = weight*0.15;
+        foodToBeSatisfied = weight * 0.15;
     }
 
     public String getSex() {
@@ -184,10 +195,11 @@ public class Animal implements Observer, Parcelable{
     }
 
     public void setPrice(Double price) {
-        //Calculate the price based on animal age and health status. If the animal is a newborn, the price is equal the default price offered by the enum
-        price -= (price*age*0.02);
-        if(!isHealthy){
-            price = price*0.5;
+        //Calculate the price based on animal age and health status. If the animal is a newborn,
+        // the price is equal the default price offered by the enum
+        price -= (price * age * 0.02);
+        if (!isHealthy) {
+            price = price * 0.5;
         }
 
         this.price = price;
@@ -197,98 +209,51 @@ public class Animal implements Observer, Parcelable{
         this.popularity = popularity;
     }
 
-    public void  eat() {
-        Double foodEaten = 0.0;
+    public void eat() {
         final List<Food> cageFoods = cage.getFoods();
         List<Food> foodsToRemove = new ArrayList<>();
 
-
-        if(cageFoods.isEmpty()){
+        if (cageFoods.isEmpty()) {
             status = ApplicationUtil.applicationContext.getString(R.string.starving);
-            Thread starving = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        while (cageFoods.isEmpty()) {
-                            try {
-                                Thread.sleep(Clock.starvingTime);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            setWeight(weight*0.99);
-                            status = ApplicationUtil.applicationContext.getString(R.string.losing_weight);
-                        }
-                        eat();
-                    }
-                });
-                 starving.start();
-        }
-        else {
+        } else {
             status = ApplicationUtil.applicationContext.getString(R.string.eating);
-            //SE O ANIMAL COMEÇAR A COMER O FOOD E FICAR SATISFEITO ENQUANTO ESTIVER COMENDO, ELE COME O FOOD ATÉ O FIM
+            //SE O ANIMAL COMEÇAR A COMER O FOOD E FICAR SATISFEITO ENQUANTO ESTIVER COMENDO, ELE
+            // COME O FOOD ATÉ O FIM
             for (Food food : cageFoods) {
                 if (foodEaten < foodToBeSatisfied) {
                     foodEaten += food.getWeight();
                     foodsToRemove.add(food);
 
 
-                    //Checa validade da comida e se estiver estragada o animal tem chance de ficar doente
+                    //Checa validade da comida e se estiver estragada o animal tem chance de
+                    // ficar doente
                     Calendar expirationDate = Calendar.getInstance();
                     expirationDate.setTime(food.getExpirationDate());
                     Calendar currentDate = Calendar.getInstance();
                     currentDate.set(Calendar.MONTH, currentDate.get(Calendar.MONTH) + 1);
+
                     if (currentDate.after(expirationDate)) {
                         Random random = new Random();
-                        int i = random.nextInt(8) + 1;
+                        int chanceToGetSick = random.nextInt(maxResistance) + 1; // 1 a 8
                         if (this.isHealthy) {
-                            if (i > resistance) {
+                            if (chanceToGetSick > resistance) {
                                 isHealthy = false;
-                                NewsFeedBusiness.addNew(New.TagEnum.ANIMAL_SICK.getTag(),this);
+                                NewsFeedBusiness.addNew(New.TagEnum.ANIMAL_SICK.getTag(), this);
                             }
                         }
                     }
-
                 } else {
                     break;
                 }
             }
-
-
             cageFoods.removeAll(foodsToRemove);
 
-
-            weight = weight + foodEaten;;
-
-
+            tick = 0;
+            weight = weight + foodEaten;
             status = ApplicationUtil.applicationContext.getString(R.string.digesting);
 
-            //Digerindo
-            tick = 0;
-            while(tick< Clock.timeToDigest){
-                    if(tick% Clock.digestingInterval==0)
-                    weight = weight - foodEaten / 30;
-
-            }
-            setWeight(weight - foodEaten*0.95);
-            afterDigest();
-
-                }
-
-
-    }
-
-    private void afterDigest() {
-        cage.setDirtyFactor(cage.getDirtyFactor()+1);
-        status = ApplicationUtil.applicationContext.getString(R.string.digestion_finished);
-
-        //Tempo para sentir fome novamente
-        tick = 0;
-        while(tick< Clock.timeToFeelHungry){
-            status = ApplicationUtil.applicationContext.getString(R.string.not_hungry);
+            isDigesting = true;
         }
-
-        status = ApplicationUtil.applicationContext.getString(R.string.starving);
-
-
 
     }
 
@@ -304,6 +269,31 @@ public class Animal implements Observer, Parcelable{
     @Override
     public void onTick() {
         tick++;
+
+
+        if (isDigesting) {
+            digest();
+        }
+
+    }
+
+    private void digest() {
+        //Digerindo
+        if (tick % Clock.digestingInterval == 0) {
+            setWeight(weight - foodEaten * 0.95);
+            afterDigest();
+        } else
+            weight -= foodEaten / 30;
+    }
+
+    private void afterDigest() {
+        cage.setDirtyFactor(cage.getDirtyFactor() + 1);
+        status = ApplicationUtil.applicationContext.getString(R.string.not_hungry);
+
+        isDigesting = false;
+        foodEaten = 0.0;
+
+
     }
 
     public String getImage() {
@@ -314,9 +304,16 @@ public class Animal implements Observer, Parcelable{
         this.image = image;
     }
 
+    public boolean isHungry() {
+        return isHungry;
+    }
 
+    public void setHungry(boolean hungry) {
+        isHungry = hungry;
 
-
+        if (hungry)
+            eat();
+    }
 
 
     public enum AnimalEnum {
@@ -378,7 +375,6 @@ public class Animal implements Observer, Parcelable{
         public String getStatus() {
             return status;
         }
-
 
 
     }

@@ -40,7 +40,7 @@ public class AnimalRepository {
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
 
 
-        List<Animal> animals = new ArrayList<>();
+        List<Animal> animals;
         Cursor cursor = db.query(AnimalContract.TABLE,
                 AnimalContract.COLUMNS, null, null, null, null, AnimalContract.NAME);
 

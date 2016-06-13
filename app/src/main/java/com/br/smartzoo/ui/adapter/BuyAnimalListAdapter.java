@@ -62,7 +62,7 @@ public class BuyAnimalListAdapter extends RecyclerView.Adapter<BuyAnimalListAdap
         else
             holder.mTextViewHealthAnimal.setText(R.string.text_sick);
 
-        holder.mTextViewCostAnimal.setText(String.valueOf(animal.getPrice()));
+        holder.mTextViewCostAnimal.setText("$" + String.valueOf(animal.getPrice()));
         holder.mButtonAnimal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

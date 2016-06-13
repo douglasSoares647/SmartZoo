@@ -58,6 +58,7 @@ public class BuyAnimalPresenter {
                 animal.setPrice(animalEnum.getPrice());
                 animal.setResistance(random.nextInt(7));
                 animal.setSex(!random.nextBoolean() ? mContext.getString(R.string.male) : mContext.getString(R.string.female));
+                animal.setHungry(false);
 
                 animals.add(animal);
 

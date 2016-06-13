@@ -46,6 +46,7 @@ public class DialogUtil{
         seekBarSalary.setMax(10000);
         seekBarSalary.setProgress(employee.getSalary().intValue());
         final TextView textViewSalary = (TextView) dialog.findViewById(R.id.text_view_salary);
+        textViewSalary.setText("$" + String.valueOf(employee.getSalary()));
         Button buttonOK = (Button) dialog.findViewById(R.id.button_ok);
         Button buttonCancel = (Button) dialog.findViewById(R.id.button_cancel);
         buttonCancel.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +70,7 @@ public class DialogUtil{
                 if(progress < 880){
                     progress = 880;
                 }
-                textViewSalary.setText(progress + ",00 $");
+                textViewSalary.setText(progress + " $");
             }
 
             @Override

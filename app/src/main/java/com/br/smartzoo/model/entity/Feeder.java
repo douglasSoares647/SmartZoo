@@ -67,12 +67,15 @@ public class Feeder extends Employee implements Manageable{
 		int stamina = (int) (foodWeight/5);
 
 		if(getStamina()>stamina) {
-
 			cage.getFoods().addAll(foodsFromStock);
 			cage.setIsSupplied(true);
 		}
 		else{
 			stock.putFoods(foodsFromStock);
+		}
+
+		for(Animal animal : cage.getAnimals()){
+			animal.eat();
 		}
 
 

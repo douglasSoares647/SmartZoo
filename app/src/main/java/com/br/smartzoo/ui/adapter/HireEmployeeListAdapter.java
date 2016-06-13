@@ -61,7 +61,7 @@ public class HireEmployeeListAdapter extends
                 SmartZooApplication.NAME_PACKAGE)).into(holder.mImageViewIcon);
         holder.mTextViewName.setText(employee.getName());
         holder.mTextViewProfession.setText(employee.getProfession());
-        holder.mTextViewPrice.setText(String.valueOf(employee.getSalary()));
+        holder.mTextViewPrice.setText("$" + String.valueOf(employee.getSalary()));
 
         holder.mButtonEmployee.setOnClickListener(new View.OnClickListener() {
             @Override

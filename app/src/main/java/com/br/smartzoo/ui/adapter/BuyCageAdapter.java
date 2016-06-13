@@ -51,7 +51,7 @@ public class BuyCageAdapter extends RecyclerView.Adapter<BuyCageAdapter.ViewHold
         Glide.with(mContext).load(R.drawable.ic_cage).into(holder.mImageViewCage);
         holder.mTextViewName.setText(cage.getName());
         holder.mTextViewCapacity.setText(String.valueOf(cage.getCapacity()));
-        holder.mTextViewPrice.setText(String.valueOf(cage.getPrice()));
+        holder.mTextViewPrice.setText("$" + String.valueOf(cage.getPrice()));
 
         holder.mButtonConstruct.setOnClickListener(new View.OnClickListener() {
             @Override
