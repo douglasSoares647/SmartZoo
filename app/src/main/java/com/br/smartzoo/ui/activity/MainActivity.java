@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
     private ImageView mNormal;
     private ImageView mStart;
     private ImageView mForward;
-    private TextView mTextViewSpeed;
     private FrameLayout mFrameContainer;
     private ImageView mFastForward;
     private boolean mCollapseControl;

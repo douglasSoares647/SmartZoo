@@ -32,6 +32,7 @@ public class DetailsAnimalFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_details_animal, container, false);
 
         initAnimalSelected();
+        bindImageViewAnimal(view);
         bindTextViewName(view);
         bindTextViewSpecie(view);
         bindTextViewAge(view);
@@ -48,17 +49,34 @@ public class DetailsAnimalFragment extends Fragment {
         return view;
     }
 
+    private void bindImageViewAnimal(View view) {
+        ImageView imageViewAnimal = (ImageView) view.findViewById(R.id.image_view_animal);
+        Glide.with(getActivity()).load(getResources().getIdentifier(selectedAnimal.getImage(),
+                "drawable", SmartZooApplication.NAME_PACKAGE))
+                .into(imageViewAnimal);
+    }
+
     private void bindTextViewFoodSatisfied(View view) {
         TextView textViewFoodSatisfied = (TextView) view.findViewById(R.id
                 .text_view_food_satisfied_animal);
-        textViewFoodSatisfied.setText(selectedAnimal.getFoodToBeSatisfied() != null ? String.valueOf
-                (selectedAnimal.getFoodToBeSatisfied()) : "Unknown");
+        if (selectedAnimal.getFoodToBeSatisfied() != null) {
+            textViewFoodSatisfied.setText(String.valueOf
+                    (selectedAnimal.getFoodToBeSatisfied() + "kg"));
+        } else {
+            textViewFoodSatisfied.setText("Unknown");
+            textViewFoodSatisfied.setTextSize(24);
+        }
     }
 
     private void bindTextViewCostStamina(View view) {
         TextView textViewCostCured = (TextView) view.findViewById(R.id.text_view_cost_cured_animal);
-        textViewCostCured.setText(selectedAnimal.getStaminaToBeCured() != null ? String.valueOf
-                (selectedAnimal.getStaminaToBeCured()) : "Unknown");
+        if (selectedAnimal.getStaminaToBeCured() != null) {
+            textViewCostCured.setText(String.valueOf
+                    (selectedAnimal.getStaminaToBeCured()));
+        } else {
+            textViewCostCured.setText("Unknown");
+            textViewCostCured.setTextSize(24);
+        }
     }
 
     private void bindImageViewFood(View view) {
@@ -77,44 +95,76 @@ public class DetailsAnimalFragment extends Fragment {
     private void bindTextViewResistance(View view) {
         TextView textViewResistance = (TextView) view.findViewById(R.id
                 .text_view_resistance_animal);
-        textViewResistance.setText(selectedAnimal.getResistance() != null ? String.valueOf
-                (selectedAnimal
-                        .getResistance()) : "Unknown");
+        if (selectedAnimal.getResistance() != null) {
+            textViewResistance.setText(String.valueOf
+                    (selectedAnimal
+                            .getResistance()));
+        } else {
+            textViewResistance.setText("Unknown");
+            textViewResistance.setTextSize(24);
+        }
     }
 
     private void bindTextViewPrice(View view) {
         TextView textViewPrice = (TextView) view.findViewById(R.id.text_view_price_animal);
-        textViewPrice.setText(selectedAnimal.getPrice() != null ? String.valueOf(selectedAnimal
-                .getPrice()) : "Unknown");
+        if (selectedAnimal.getPrice() != null) {
+            textViewPrice.setText(String.valueOf(selectedAnimal
+                    .getPrice() + " $"));
+        } else {
+            textViewPrice.setText("Unknown");
+            textViewPrice.setTextSize(24);
+        }
     }
 
     private void bindTextViewPopularity(View view) {
         TextView textViewPopularity = (TextView) view.findViewById(R.id
                 .text_view_popularity_animal);
-        textViewPopularity.setText(selectedAnimal.getPopularity() != null ? String.valueOf
-                (selectedAnimal.getPopularity()) : "Unknown");
+        if (selectedAnimal.getPopularity() != null) {
+            textViewPopularity.setText(String.valueOf
+                    (selectedAnimal.getPopularity()));
+        } else {
+            textViewPopularity.setText("Unknown");
+            textViewPopularity.setTextSize(24);
+        }
     }
 
     private void bindTextViewSex(View view) {
         TextView textViewSex = (TextView) view.findViewById(R.id.text_view_sex_animal);
-        textViewSex.setText(selectedAnimal.getSex() != null ? selectedAnimal.getSex() : "Unknown");
+        if (selectedAnimal.getSex() != null) {
+            textViewSex.setText(selectedAnimal.getSex());
+        } else {
+            textViewSex.setText("Unknown");
+            textViewSex.setTextSize(24);
+        }
+
     }
 
     private void bindTextViewWeight(View view) {
         TextView textViewWeight = (TextView) view.findViewById(R.id.text_view_weight_animal);
-        textViewWeight.setText(selectedAnimal.getWeight() != null ? String.valueOf(selectedAnimal
-                .getWeight()) : "Unknown");
+        if (selectedAnimal.getWeight() != null) {
+            textViewWeight.setText(String.valueOf(selectedAnimal
+                    .getWeight() + "kg"));
+        } else {
+            textViewWeight.setText("Unknown");
+            textViewWeight.setTextSize(24);
+        }
     }
 
     private void bindTextViewHealthy(View view) {
         TextView textViewHealth = (TextView) view.findViewById(R.id.text_view_health_animal);
-        textViewHealth.setText(selectedAnimal.isHealthy() ? "Healthy" : "Sick");
+        if (selectedAnimal.isHealthy()) {
+            textViewHealth.setText("Healthy");
+            textViewHealth.setTextColor(getActivity().getResources().getColor(R.color.green_700));
+        } else {
+            textViewHealth.setText("Sick");
+            textViewHealth.setTextColor(getActivity().getResources().getColor(R.color.red_700));
+        }
     }
 
     private void bindTextViewAge(View view) {
         TextView textViewAge = (TextView) view.findViewById(R.id.text_view_age_animal);
         textViewAge.setText(selectedAnimal.getAge() != null ? String.valueOf(selectedAnimal
-                .getAge()) : "Unknown");
+                .getAge() + " " + getResources().getString(R.string.text_age)) : "Unknown");
     }
 
     private void bindTextViewSpecie(View view) {
