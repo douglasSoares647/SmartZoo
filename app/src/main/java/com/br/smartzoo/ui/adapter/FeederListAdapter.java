@@ -63,7 +63,7 @@ public class FeederListAdapter extends RecyclerView.Adapter<FeederListAdapter.Vi
         Glide.with(mContext).load(resources.getIdentifier(feeder.getImage(), "drawable",
                 SmartZooApplication.NAME_PACKAGE)).into(holder.mImageViewFeeder);
         holder.mTextViewName.setText(feeder.getName());
-        holder.mTextViewAge.setText(String.valueOf(feeder.getAge()));
+        holder.mTextViewAge.setText(String.valueOf(feeder.getAge()) + mContext.getString(R.string.txt_years));
         holder.mTextViewStatus.setText(feeder.getStatus());
         holder.mTextViewSalary.setText(String.valueOf(feeder.getSalary()));
         Glide.with(mContext).load(R.drawable.ic_salary).into(holder.mImageViewSalary);
@@ -135,5 +135,10 @@ public class FeederListAdapter extends RecyclerView.Adapter<FeederListAdapter.Vi
             mImageViewDemission = (ImageView) itemView.findViewById(R.id.image_view_demission);
             mImageViewSalary = (ImageView) itemView.findViewById(R.id.image_view_salary);
         }
+    }
+
+    public void removeFeeder(Employee feeder){
+        this.mFeederList.remove(feeder);
+        notifyDataSetChanged();
     }
 }

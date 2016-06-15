@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.entity.Janitor;
+import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnManageEmployee;
 import com.br.smartzoo.presenter.JanitorListPresenter;
 import com.br.smartzoo.ui.activity.MainActivity;
@@ -81,11 +82,19 @@ public class JanitorListFragment extends Fragment implements OnManageEmployee, J
     @Override
     public void onDemit(Employee janitor) {
         mPresenter.demitJanitor(janitor);
+        ((JanitorListAdapter) mRecyclerViewJanitor.getAdapter()).removeJanitor(janitor);
     }
 
     @Override
     public void onSalaryChange(Employee janitor, Double value) {
+        for(Employee employee : ZooInfo.employees){
+            if(employee.equals(janitor)){
+                employee.setSalary(value);
+            }
+        }
         mPresenter.updateSalaryJanitor(janitor, value);
+
+
 
     }
 

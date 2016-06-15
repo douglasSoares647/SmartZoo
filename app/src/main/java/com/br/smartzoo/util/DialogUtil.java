@@ -70,7 +70,7 @@ public class DialogUtil{
                 if(progress < 880){
                     progress = 880;
                 }
-                textViewSalary.setText(progress + " $");
+                textViewSalary.setText("$"+ progress);
             }
 
             @Override

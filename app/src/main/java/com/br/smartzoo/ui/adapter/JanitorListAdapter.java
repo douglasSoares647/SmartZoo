@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.br.smartzoo.R;
 import com.br.smartzoo.SmartZooApplication;
 import com.br.smartzoo.model.entity.Employee;
-import com.br.smartzoo.model.entity.Feeder;
 import com.br.smartzoo.model.entity.Janitor;
 import com.br.smartzoo.model.interfaces.OnManageEmployee;
 import com.br.smartzoo.util.AlertDialogUtil;
@@ -62,7 +61,7 @@ public class JanitorListAdapter extends RecyclerView.Adapter<JanitorListAdapter.
         Glide.with(mContext).load(R.drawable.ic_demit).into(holder.mImageViewDemission);
         Glide.with(mContext).load(R.drawable.ic_salary).into(holder.mImageViewSalary);
         holder.mTextViewName.setText(janitor.getName());
-        String age = String.valueOf(janitor.getAge()) + mContext.getString(R.string.text_age);
+        String age = String.valueOf(janitor.getAge()) + mContext.getString(R.string.txt_years);
         holder.mTextViewAge.setText(age);
         holder.mTextViewStatus.setText(janitor.getStatus());
         holder.mTextViewSalary.setText(String.valueOf(janitor.getSalary()));
@@ -147,6 +146,11 @@ public class JanitorListAdapter extends RecyclerView.Adapter<JanitorListAdapter.
 
 
         }
+    }
+
+    public void removeJanitor(Employee janitor){
+        this.mJanitorList.remove(janitor);
+        notifyDataSetChanged();
     }
 
 }

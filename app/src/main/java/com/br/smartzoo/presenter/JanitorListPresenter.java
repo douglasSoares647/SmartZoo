@@ -6,8 +6,11 @@ import com.br.smartzoo.R;
 import com.br.smartzoo.model.asynctask.DemitEmployeeAsyncTask;
 import com.br.smartzoo.model.asynctask.LoadJanitorsAsyncTask;
 import com.br.smartzoo.model.asynctask.UpdateSalaryAsyncTask;
+import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Employee;
+import com.br.smartzoo.model.entity.Feeder;
 import com.br.smartzoo.model.entity.Janitor;
+import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.ui.activity.MainActivity;
 import com.br.smartzoo.ui.view.JanitorListView;
 
@@ -31,34 +34,21 @@ public class JanitorListPresenter {
     }
 
     public void loadJanitors(){
-        new LoadJanitorsAsyncTask(mContext, new LoadJanitorsAsyncTask.OnLoadJanitorsList() {
-            @Override
-            public void onLoadJanitorListSuccess(List<Janitor> janitors) {
-                ((MainActivity)mContext)
-                        .showSnackBar(mContext.getString(R.string.message_load_janitor_list));
-                mJanitorListView.onLoadJanitorList(janitors);
+        List<Janitor> janitors = new ArrayList<>();
+        for(Employee employee : ZooInfo.employees){
+            if(employee instanceof Janitor)
+                janitors.add((Janitor)employee);
+        }
 
-            }
-
-            @Override
-            public void onLoadJanitorsListEmpty() {
-                mJanitorListView.onLoadJanitorList(new ArrayList<Janitor>());
-            }
-
-            @Override
-            public void onLoadJanitorsListFail() {
-
-            }
-        }).execute();
-
+        mJanitorListView.onLoadJanitorList(janitors);
     }
 
-    public void demitJanitor(Employee janitor) {
+    public void demitJanitor(final Employee janitor) {
         new DemitEmployeeAsyncTask(mContext, new DemitEmployeeAsyncTask.OnDemit() {
             @Override
             public void onDemitSuccess() {
                 ((MainActivity) mContext).showSnackBar(mContext.getString(R.string.message_demit));
-                loadJanitors();
+                updateZooInfo(janitor);
             }
 
             @Override
@@ -67,6 +57,10 @@ public class JanitorListPresenter {
                         .showSnackBar(mContext.getString(R.string.message_demit_failed));
             }
         }).execute(janitor.getId());
+    }
+
+    private void updateZooInfo(Employee janitor) {
+        ZooInfoBusiness.removeEmployee(janitor);
     }
 
     public void updateSalaryJanitor(Employee janitor, Double value) {

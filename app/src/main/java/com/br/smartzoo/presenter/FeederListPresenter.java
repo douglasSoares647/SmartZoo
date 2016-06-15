@@ -6,8 +6,10 @@ import com.br.smartzoo.R;
 import com.br.smartzoo.model.asynctask.DemitEmployeeAsyncTask;
 import com.br.smartzoo.model.asynctask.LoadFeedersAsyncTask;
 import com.br.smartzoo.model.asynctask.UpdateSalaryAsyncTask;
+import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.entity.Feeder;
+import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.ui.activity.MainActivity;
 import com.br.smartzoo.ui.view.FeederListView;
 
@@ -35,35 +37,21 @@ public class FeederListPresenter {
     }
 
     public void loadFeederList() {
-        new LoadFeedersAsyncTask(mContext, new LoadFeedersAsyncTask.OnLoadFeedersList() {
-            @Override
-            public void onLoadFeederListSuccess(List<Feeder> feeders) {
-                mFeederListView.onLoadFeederSuccess(feeders);
-                ((MainActivity) mContext)
-                        .showSnackBar(mContext.getString(R.string.messa_load_feeders_successful));
-            }
+        List<Feeder> feeders = new ArrayList<>();
+        for(Employee employee : ZooInfo.employees){
+            if(employee instanceof Feeder)
+                feeders.add((Feeder)employee);
+        }
 
-            @Override
-            public void onLoadFeedersListEmpty() {
-                mFeederListView.onLoadFeederSuccess(new ArrayList<Feeder>());
-                ((MainActivity) mContext)
-                        .showSnackBar(mContext.getString(R.string.messa_load_feeders_empty));
-            }
-
-            @Override
-            public void onLoadFeedersListFail() {
-                ((MainActivity) mContext)
-                        .showSnackBar(mContext.getString(R.string.messa_load_feeders_failed));
-            }
-        }).execute();
+        mFeederListView.onLoadFeederSuccess(feeders);
     }
 
-    public void demitFeeder(Employee feeder) {
+    public void demitFeeder(final Employee feeder) {
         new DemitEmployeeAsyncTask(mContext, new DemitEmployeeAsyncTask.OnDemit() {
             @Override
             public void onDemitSuccess() {
                 ((MainActivity) mContext).showSnackBar(mContext.getString(R.string.message_demit));
-                loadFeederList();
+                ZooInfoBusiness.removeEmployee(feeder);
             }
 
             @Override

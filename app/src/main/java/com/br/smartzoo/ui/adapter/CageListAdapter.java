@@ -3,6 +3,7 @@ package com.br.smartzoo.ui.adapter;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,7 +55,13 @@ public class CageListAdapter extends RecyclerView.Adapter<CageListAdapter.ViewHo
         Glide.with(mContext).load(AnimalHelper.getImageByType(mContext, cage.getAnimalType()))
                 .into(holder.mImageViewTypeAnimal);
         holder.mTextViewName.setText(cage.getName());
-        holder.mTextViewCapacity.setText(String.valueOf(cage.getCapacity()));
+
+        if(cage.getAvaibleSpace()>0)
+            holder.mTextViewCapacity.setTextColor(ContextCompat.getColor(mContext,R.color.green_500));
+        else
+            holder.mTextViewCapacity.setTextColor(ContextCompat.getColor(mContext,R.color.red_500));
+
+        holder.mTextViewCapacity.setText(mContext.getString(R.string.label_avaible_space) + cage.getAvaibleSpace() + mContext.getString(R.string.label_avaible_space_animals));
 
         holder.mImageViewClean.setOnClickListener(new View.OnClickListener() {
             @Override

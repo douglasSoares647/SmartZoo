@@ -116,4 +116,9 @@ public class AnimalListAdapter extends RecyclerView.Adapter<AnimalListAdapter.Vi
         this.mAnimalList = animalList;
         notifyDataSetChanged();
     }
+
+    public void removeAnimal(Animal animal){
+        this.mAnimalList.remove(animal);
+        notifyDataSetChanged();
+    }
 }

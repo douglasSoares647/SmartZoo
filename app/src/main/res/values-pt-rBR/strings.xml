@@ -180,7 +180,10 @@
     <string name="message_error_rested">Erro ao buscar janitors descansados!</string>
     <string name="message_cleaned_successful">A jaula foi limpada com sucesso!</string>
     <string name="message_cleaned_failed">Falha ao limpar a jaula!</string>
-    <string name="init_date">Init date:</string>
-    <string name="salary">Salary:</string>
+    <string name="init_date">Data de inicio:</string>
+    <string name="salary">Salario:</string>
+    <string name="label_avaible_space">"Espaço disponível : "</string>
+    <string name="label_avaible_space_animals">" animais"</string>
+    <string name="txt_years">" anos"</string>
 
 </resources>

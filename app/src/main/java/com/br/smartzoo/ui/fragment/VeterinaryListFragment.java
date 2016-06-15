@@ -12,10 +12,12 @@ import android.view.ViewGroup;
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.entity.Veterinary;
+import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnManageEmployee;
 import com.br.smartzoo.presenter.VeterinaryListPresenter;
 import com.br.smartzoo.ui.activity.MainActivity;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
+import com.br.smartzoo.ui.adapter.JanitorListAdapter;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.ui.adapter.VeterinaryListAdapter;
 import com.br.smartzoo.ui.view.VeterinaryListView;
@@ -42,9 +44,8 @@ public class VeterinaryListFragment extends Fragment implements VeterinaryListVi
         View view = inflater.inflate(R.layout.fragment_veterinary_list, container, false);
 
         bindPresenter();
-        loadVeterinaries();
         bindRecyclerView(view);
-
+        loadVeterinaries();
         bindToolbarName();
 
         return view;
@@ -87,11 +88,17 @@ public class VeterinaryListFragment extends Fragment implements VeterinaryListVi
     @Override
     public void onDemit(Employee veterinary) {
         mPresenter.demitVeterinary(veterinary);
+        ((VeterinaryListAdapter) mRecyclerViewVeterinariesList.getAdapter()).removeVeterinary(veterinary);
 
     }
 
     @Override
     public void onSalaryChange(Employee veterinary, Double value) {
+        for(Employee zooInfoemployee : ZooInfo.employees){
+            if(zooInfoemployee.equals(veterinary)){
+                zooInfoemployee.setSalary(value);
+            }
+        }
         mPresenter.updateSalary(veterinary, value);
     }
 }

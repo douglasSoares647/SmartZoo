@@ -145,9 +145,9 @@ public class AnimalListFragment extends Fragment implements AnimalListView, OnMa
     }
 
     @Override
-    public void updateList() {
+    public void updateList(Animal animal) {
         if(mRecyclerViewAnimals!=null){
-            mRecyclerViewAnimals.getAdapter().notifyDataSetChanged();
+            ((AnimalListAdapter) mRecyclerViewAnimals.getAdapter()).removeAnimal(animal);
         }
     }
 }

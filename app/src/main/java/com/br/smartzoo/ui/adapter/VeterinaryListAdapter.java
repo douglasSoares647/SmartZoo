@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.SmartZooApplication;
+import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.entity.Veterinary;
 import com.br.smartzoo.model.interfaces.OnManageEmployee;
 import com.br.smartzoo.util.AlertDialogUtil;
@@ -66,7 +67,7 @@ public class VeterinaryListAdapter extends RecyclerView.Adapter<VeterinaryListAd
         Glide.with(mContext).load(R.drawable.ic_salary).into(holder.mImageViewSalary);
         Glide.with(mContext).load(R.drawable.ic_treatments).into(holder.mImageViewAnimalsTreatments);
         holder.mTextViewName.setText(veterinary.getName());
-        holder.mTextViewAge.setText(String.valueOf(veterinary.getAge()));
+        holder.mTextViewAge.setText(String.valueOf(veterinary.getAge()) + mContext.getString(R.string.txt_years));
         holder.mTextViewSalary.setText(String.valueOf(veterinary.getSalary()) + " $");
         holder.mTextViewStatus.setText(veterinary.getStatus());
         holder.mTextViewNumberTreatments.setText(String.valueOf(veterinary.getNumberAnimalTreated()));
@@ -146,5 +147,10 @@ public class VeterinaryListAdapter extends RecyclerView.Adapter<VeterinaryListAd
             mTextViewNumberTreatments = (TextView) itemView.findViewById(R.id.text_view_number_treatment);
             mImageViewAnimalsTreatments = (ImageView) itemView.findViewById(R.id.image_view_animals_treatments);
         }
+    }
+
+    public void removeVeterinary(Employee veterinary){
+        this.mVeterinaryList.remove(veterinary);
+        notifyDataSetChanged();
     }
 }

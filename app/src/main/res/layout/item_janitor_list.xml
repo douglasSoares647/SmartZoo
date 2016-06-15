@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/image_view_janitor"
         android:text="Name of janitor"
+        android:textStyle="bold"
         android:textSize="14sp" />
 
     <TextView

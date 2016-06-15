@@ -94,6 +94,6 @@ public class CageListFragment extends Fragment implements CageListView, OnManage
 
     @Override
     public void onCageDestroyed(Cage cage) {
-        mAdapter.removeCage(cage);
+        mAdapter.notifyDataSetChanged();
     }
 }

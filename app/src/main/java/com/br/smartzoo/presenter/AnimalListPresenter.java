@@ -8,6 +8,7 @@ import com.br.smartzoo.model.asynctask.LoadAnimalAsyncTask;
 import com.br.smartzoo.model.asynctask.SellAnimalAsynkTask;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Animal;
+import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.ui.activity.MainActivity;
 import com.br.smartzoo.ui.fragment.DetailsAnimalFragment;
@@ -35,29 +36,12 @@ public class AnimalListPresenter {
     }
 
     public void loadAnimalList() {
+        List<Animal> animals = new ArrayList<>();
 
-        new LoadAnimalAsyncTask(mContext, new LoadAnimalAsyncTask.OnLoadAnimalList() {
-            @Override
-            public void onLoadAnimalsListSuccess(List<Animal> animals) {
-                ((MainActivity) mContext).showSnackBar(mContext
-                        .getString(R.string.message_load_animal_list_successful));
-                mAnimalListView.onAnimalListLoad(animals);
-
-            }
-
-            @Override
-            public void onLoadAnimalsListEmpty() {
-                ((MainActivity) mContext).showSnackBar(mContext
-                        .getString(R.string.message_load_animal_list_empty));
-                mAnimalListView.onAnimalListLoad(new ArrayList<Animal>());
-            }
-
-            @Override
-            public void onLoadAnimalsListFail() {
-                ((MainActivity) mContext).showSnackBar(mContext
-                        .getString(R.string.message_load_animal_list_failed));
-            }
-        }).execute();
+        for(Cage cage : ZooInfo.cages){
+            animals.addAll(cage.getAnimals());
+        }
+        mAnimalListView.onAnimalListLoad(animals);
     }
 
     public void sellAnimal(final Animal animal) {
@@ -67,7 +51,7 @@ public class AnimalListPresenter {
                 ((MainActivity) mContext).showSnackBar(mContext.getString(R.string.message_sell_success));
                 ZooInfoBusiness.addMoney(animal.getPrice());
                 ZooInfoBusiness.removeAnimal(animal);
-                mAnimalListView.updateList();
+                mAnimalListView.updateList(animal);
             }
 
             @Override

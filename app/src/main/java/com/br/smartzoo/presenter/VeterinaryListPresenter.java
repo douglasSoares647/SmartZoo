@@ -6,7 +6,9 @@ import com.br.smartzoo.R;
 import com.br.smartzoo.model.asynctask.DemitEmployeeAsyncTask;
 import com.br.smartzoo.model.asynctask.LoadVeterinariesAsyncTask;
 import com.br.smartzoo.model.asynctask.UpdateSalaryAsyncTask;
+import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Employee;
+import com.br.smartzoo.model.entity.Feeder;
 import com.br.smartzoo.model.entity.Veterinary;
 import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.ui.activity.MainActivity;
@@ -36,29 +38,13 @@ public class VeterinaryListPresenter {
     }
 
     public void loadVeterinaries() {
+        List<Veterinary> veterinaries = new ArrayList<>();
+        for(Employee employee : ZooInfo.employees){
+            if(employee instanceof Veterinary)
+                veterinaries.add((Veterinary)employee);
+        }
 
-        new LoadVeterinariesAsyncTask(mContext
-                , new LoadVeterinariesAsyncTask.OnLoadVeterinariesList() {
-            @Override
-            public void onLoadVeterinariesListSuccess(List<Veterinary> veterinaries) {
-                ((MainActivity) mContext).showSnackBar(mContext
-                        .getString(R.string.message_load_list_veterinary_successful));
-                mVeterinaryListView.onLoadVeterinaryList(veterinaries);
-            }
-
-            @Override
-            public void onLoadVeterinariesListEmpty() {
-                ((MainActivity) mContext).showSnackBar(mContext
-                        .getString(R.string.message_load_veterinary_list_empty));
-                mVeterinaryListView.onLoadVeterinaryList(new ArrayList<Veterinary>());
-            }
-
-            @Override
-            public void onLoadVeterinariesListFail() {
-                ((MainActivity) mContext).showSnackBar(mContext
-                        .getString(R.string.message_load_veterinary_list_failed));
-            }
-        }).execute();
+        mVeterinaryListView.onLoadVeterinaryList(veterinaries);
     }
 
     public void demitVeterinary(final Employee veterinary) {
@@ -66,7 +52,6 @@ public class VeterinaryListPresenter {
         new DemitEmployeeAsyncTask(mContext, new DemitEmployeeAsyncTask.OnDemit() {
             @Override
             public void onDemitSuccess() {
-                loadVeterinaries();
                 updateZooInfo(veterinary);
             }
 
@@ -83,7 +68,7 @@ public class VeterinaryListPresenter {
     }
 
     private void updateZooInfo(Employee veterinary) {
-        ZooInfo.employees.remove(veterinary);
+        ZooInfoBusiness.removeEmployee(veterinary);
     }
 
     public void updateSalary(final Employee veterinary, Double value) {

@@ -8,8 +8,10 @@ import com.br.smartzoo.model.asynctask.CleanCageAsyncTask;
 import com.br.smartzoo.model.asynctask.DestroyCageAsyncTask;
 import com.br.smartzoo.model.asynctask.LoadCagesAsyncTask;
 import com.br.smartzoo.model.asynctask.LoadJanitorsRestedAsyncTask;
+import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Janitor;
+import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnJanitorsRestedSelected;
 import com.br.smartzoo.ui.activity.MainActivity;
 import com.br.smartzoo.ui.view.CageListView;
@@ -37,26 +39,7 @@ public class CageListPresenter implements OnJanitorsRestedSelected {
     }
 
     public void loadCageList() {
-        new LoadCagesAsyncTask(mContext, new LoadCagesAsyncTask.OnLoadCagesList() {
-            @Override
-            public void onLoadCagesListSuccess(List<Cage> cages) {
-                ((MainActivity) mContext).showSnackBar(
-                        mContext.getString(R.string.messa_load_cages_successful));
-                mCageListView.onLoadCageList(cages);
-            }
-
-            @Override
-            public void onLoadCagesListEmpty() {
-                ((MainActivity) mContext).showSnackBar(
-                        mContext.getString(R.string.messa_load_cages_successful));
-                mCageListView.onLoadCageList(new ArrayList<Cage>());
-            }
-
-            @Override
-            public void onLoadCagesListFail() {
-
-            }
-        }).execute();
+        mCageListView.onLoadCageList(ZooInfo.cages);
     }
 
     public void destroyCage(final Cage cage) {
@@ -65,7 +48,9 @@ public class CageListPresenter implements OnJanitorsRestedSelected {
             public void onDestroyCageSuccess() {
                 ((MainActivity) mContext)
                         .showSnackBar(mContext.getString(R.string.message_destroy_success));
+                ZooInfoBusiness.removeCage(cage);
                 mCageListView.onCageDestroyed(cage);
+
             }
 
             @Override

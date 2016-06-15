@@ -11,5 +11,5 @@ public interface AnimalListView {
 
     void onAnimalListLoad(List<Animal> animalList);
 
-    void updateList();
+    void updateList(Animal animal);
 }

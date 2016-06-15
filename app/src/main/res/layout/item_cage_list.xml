@@ -35,32 +35,35 @@
         android:id="@+id/text_view_capacity_list_cage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/image_view_list_cage"
         android:layout_marginBottom="6dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_toRightOf="@id/image_view_list_cage"
-        android:text="8 animals" />
+        android:text="8 animals"
+        android:layout_below="@+id/image_view_type_animal"/>
 
 
     <ImageView
         android:id="@+id/image_view_destroy"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_alignParentRight="true" />
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"/>
 
     <ImageView
         android:id="@+id/image_view_clean"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_marginRight="8dp"
-        android:layout_toLeftOf="@id/image_view_destroy" />
+        android:layout_toLeftOf="@id/image_view_destroy"
+        android:layout_centerVertical="true"/>
 
     <ImageView
         android:id="@+id/image_view_type_animal"
         android:layout_toLeftOf="@id/image_view_clean"
-        android:layout_width="55dp"
-        android:layout_height="55dp" />
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_centerVertical="true"/>
 
 
 </RelativeLayout>

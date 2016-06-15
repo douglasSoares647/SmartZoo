@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.entity.Feeder;
+import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnManageEmployee;
 import com.br.smartzoo.presenter.FeederListPresenter;
 import com.br.smartzoo.ui.activity.MainActivity;
@@ -41,9 +42,8 @@ public class FeederListFragment extends Fragment implements FeederListView, OnMa
         View view = inflater.inflate(R.layout.fragment_feeder_list, container, false);
 
         bindPresenter();
-        loadFeederList();
         bindRecyclerViewFeeder(view);
-
+        loadFeederList();
         bindToolbarName();
 
 
@@ -86,10 +86,16 @@ public class FeederListFragment extends Fragment implements FeederListView, OnMa
     @Override
     public void onDemit(Employee feeder) {
         mPresenter.demitFeeder(feeder);
+        ((FeederListAdapter) mRecyclerViewFeeder.getAdapter()).removeFeeder(feeder);
     }
 
     @Override
     public void onSalaryChange(Employee employee, Double value) {
+        for(Employee zooInfoemployee : ZooInfo.employees){
+            if(zooInfoemployee.equals(employee)){
+                zooInfoemployee.setSalary(value);
+            }
+        }
         mPresenter.updateSalaryFeeder(employee, value);
     }
 }
