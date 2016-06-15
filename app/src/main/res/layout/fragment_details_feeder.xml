@@ -6,81 +6,81 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/image_view_veterinary"
+            android:id="@+id/image_view_feeder"
             android:layout_width="125dp"
             android:layout_height="125dp"
             android:background="@drawable/circle_background"
-            android:src="@drawable/ic_veterinary"/>
+            android:src="@drawable/ic_feeder"/>
 
         <TextView
-            android:id="@+id/text_view_name_veterinary"
+            android:id="@+id/text_view_name_feeder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_toRightOf="@id/image_view_veterinary"
+            android:layout_toRightOf="@id/image_view_feeder"
             android:maxLength="20"
-            android:text="Name of veterinary"
+            android:text="Name of feeder"
             android:textSize="24sp"
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/label_init_veterinary"
+            android:id="@+id/label_init_feeder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/text_view_name_veterinary"
-            android:layout_below="@id/text_view_name_veterinary"
+            android:layout_alignLeft="@id/text_view_name_feeder"
+            android:layout_below="@id/text_view_name_feeder"
             android:layout_marginTop="8dp"
             android:text="@string/init_date"/>
 
         <TextView
-            android:id="@+id/text_view_init_veterinary"
+            android:id="@+id/text_view_init_feeder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/label_init_veterinary"
-            android:layout_below="@id/label_init_veterinary"
+            android:layout_alignLeft="@id/label_init_feeder"
+            android:layout_below="@id/label_init_feeder"
             android:text="24/12/2015"
             android:textColor="@color/green_700"
             android:textSize="18sp"
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/label_salary_veterinary"
+            android:id="@+id/label_salary_feeder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/text_view_init_veterinary"
-            android:layout_below="@id/text_view_init_veterinary"
+            android:layout_alignLeft="@id/text_view_init_feeder"
+            android:layout_below="@id/text_view_init_feeder"
             android:layout_marginTop="4dp"
             android:text="@string/salary"/>
 
         <TextView
-            android:id="@+id/text_view_salary_veterinary"
+            android:id="@+id/text_view_salary_feeder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/label_salary_veterinary"
-            android:layout_below="@id/label_salary_veterinary"
+            android:layout_alignLeft="@id/label_salary_feeder"
+            android:layout_below="@id/label_salary_feeder"
             android:text="1200,57 $"
             android:textColor="@color/yellow_800"
             android:textSize="18sp"
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/label_status_veterinary"
+            android:id="@+id/label_status_feeder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/image_view_veterinary"
+            android:layout_below="@id/image_view_feeder"
             android:layout_marginTop="16dp"
             android:text="Status:"
             android:textSize="22dp"
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/text_view_status_veterinary"
+            android:id="@+id/text_view_status_feeder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/label_status_veterinary"
+            android:layout_below="@id/label_status_feeder"
             android:layout_marginTop="4dp"
             android:paddingLeft="48dp"
             android:paddingRight="48dp"
@@ -89,51 +89,52 @@
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/label_treat_animal_veterinary"
+            android:id="@+id/label_aliment_feeder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/image_view_animal_veterinary"
+            android:layout_alignBottom="@+id/image_view_food_feeder"
             android:layout_marginTop="8dp"
-            android:text="Tratando animal:"
+            android:text="Alimentando animal:"
             android:textSize="22sp"
             android:textStyle="bold"/>
 
         <ImageView
-            android:id="@+id/image_view_animal_veterinary"
+            android:id="@+id/image_view_food_feeder"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_below="@id/text_view_status_veterinary"
+            android:layout_below="@id/text_view_status_feeder"
             android:layout_marginTop="8dp"
-            android:layout_toRightOf="@id/label_treat_animal_veterinary"
-            android:src="@drawable/ic_animal_lion"/>
+            android:layout_toRightOf="@id/label_aliment_feeder"
+            android:src="@drawable/ic_feeder"/>
 
         <TextView
+            android:id="@+id/text_view_name_cage_janitor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/image_view_animal_veterinary"
+            android:layout_alignBottom="@id/image_view_food_feeder"
             android:layout_marginLeft="4dp"
-            android:layout_toRightOf="@+id/image_view_animal_veterinary"
+            android:layout_toRightOf="@+id/image_view_food_feeder"
             android:maxLength="14"
-            android:text="Name of animal"
+            android:text="Name of cage"
             android:textSize="18sp"/>
 
 
         <TextView
-            android:id="@+id/label_task_progress_veterinary"
+            android:id="@+id/label_task_progress_feeder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/label_treat_animal_veterinary"
+            android:layout_below="@id/label_aliment_feeder"
             android:layout_marginTop="16dp"
             android:text="Tarefa"
             android:textSize="22sp"
             android:textStyle="bold"/>
 
         <ProgressBar
-            android:id="@+id/progress_bar_task_veterinary"
-            style="@style/ProgressTaskVeterinary"
+            android:id="@+id/progress_bar_task_feeder"
+            style="@style/ProgressTaskFeeder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/label_task_progress_veterinary"
+            android:layout_below="@+id/label_task_progress_feeder"
             android:layout_marginTop="4dp"
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
@@ -141,21 +142,21 @@
 
 
         <TextView
-            android:id="@+id/label_stamina_veterinary"
+            android:id="@+id/label_stamina_feeder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/progress_bar_task_veterinary"
+            android:layout_below="@id/progress_bar_task_feeder"
             android:layout_marginTop="16dp"
             android:text="Stamina"
             android:textSize="22sp"
             android:textStyle="bold"/>
 
         <ProgressBar
-            android:id="@+id/progress_bar_stamina_veterinary"
+            android:id="@+id/progress_bar_stamina_feeder"
             style="@style/ProgressStamina"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/label_stamina_veterinary"
+            android:layout_below="@+id/label_stamina_feeder"
             android:layout_marginTop="4dp"
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
@@ -163,22 +164,22 @@
 
 
         <TextView
-            android:id="@+id/label_animals_treated_veterinary"
+            android:id="@+id/label_animals_alimented"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/progress_bar_stamina_veterinary"
+            android:layout_below="@id/progress_bar_stamina_feeder"
             android:layout_marginTop="8dp"
-            android:text="Lista de animais já tratados"
+            android:text="Jaulas ja limpadas:"
             android:textSize="22sp"
             android:textStyle="bold"/>
 
 
         <!--Aqui pode ser somente linear layout add no java, ou lista crescente, porem sem necessidade acho eu hehe-->
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view_animals_treated"
+            android:id="@+id/recycler_view_cages_cleaned"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_below="@id/label_animals_treated_veterinary"/>
+            android:layout_below="@id/label_animals_alimented"/>
 
 
     </RelativeLayout>
