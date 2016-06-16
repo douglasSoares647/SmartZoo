@@ -46,13 +46,13 @@ public class AnimalsToTreatAdapter extends RecyclerView.Adapter<AnimalsToTreatAd
                 SmartZooApplication.NAME_PACKAGE)).into(holder.mImageAnimal);
 
         holder.mTextViewNameAnimal.setText(animal.getName());
-        holder.mTextViewAgeAnimal.setText(animal.getAge());
+        holder.mTextViewAgeAnimal.setText(String.valueOf(animal.getAge()));
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return  mAnimalList.size();
     }
 
     public Animal getAnimal(int position){

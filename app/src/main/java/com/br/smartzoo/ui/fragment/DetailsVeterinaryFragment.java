@@ -19,15 +19,12 @@ import com.br.smartzoo.R;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
-import com.br.smartzoo.model.entity.Janitor;
 import com.br.smartzoo.model.entity.Veterinary;
 import com.br.smartzoo.model.environment.Clock;
 import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnTreatAnimalListener;
-import com.br.smartzoo.ui.adapter.AnimalListAdapter;
 import com.br.smartzoo.ui.adapter.AnimalsToTreatAdapter;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
-import com.br.smartzoo.ui.adapter.ListCageAdapter;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.util.DateUtil;
 import com.br.smartzoo.util.RecyclerItemClickListener;
@@ -71,9 +68,9 @@ public class DetailsVeterinaryFragment extends Fragment {
     }
 
     private void bindButtonTreatVeterinary(View view) {
-        Button buttonCleanCage = (Button) view.findViewById(R.id.button_clean);
+        Button buttonTreat = (Button) view.findViewById(R.id.button_treat);
 
-        buttonCleanCage.setOnClickListener(new View.OnClickListener() {
+        buttonTreat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openSelectCageDialog();
@@ -85,31 +82,31 @@ public class DetailsVeterinaryFragment extends Fragment {
 
         selectAnimalDialog = new Dialog(getContext());
         selectAnimalDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        selectAnimalDialog.setContentView(R.layout.item_animal_to_treat);
+        selectAnimalDialog.setContentView(R.layout.dialog_select_animal_treat);
 
 
-        final RecyclerView recyclerViewCages = (RecyclerView) selectAnimalDialog.findViewById(R.id.recycler_view_animals_to_treat);
+        final RecyclerView recyclerViewAnimals = (RecyclerView) selectAnimalDialog.findViewById(R.id.recycler_view_animals_to_treat);
 
         List<Animal> animalsToTreat = getAnimalsToTreat();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerViewCages.setLayoutManager(layoutManager);
-        recyclerViewCages.addItemDecoration(new VerticalSpaceItemDecoration(VERTICAL_ITEM_SPACE));
-        recyclerViewCages.addItemDecoration(
+        recyclerViewAnimals.setLayoutManager(layoutManager);
+        recyclerViewAnimals.addItemDecoration(new VerticalSpaceItemDecoration(VERTICAL_ITEM_SPACE));
+        recyclerViewAnimals.addItemDecoration(
                 new DividerItemDecoration(getActivity(), R.drawable.divider_recycler_view));
-        recyclerViewCages.setItemViewCacheSize(animalsToTreat.size());
+        recyclerViewAnimals.setItemViewCacheSize(animalsToTreat.size());
 
 
 
         AnimalsToTreatAdapter animalsToTreatAdapter = new AnimalsToTreatAdapter(getActivity(),animalsToTreat);
-        recyclerViewCages.setAdapter(animalsToTreatAdapter);
+        recyclerViewAnimals.setAdapter(animalsToTreatAdapter);
 
 
-        recyclerViewCages.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), new RecyclerItemClickListener.OnItemClickListener() {
+        recyclerViewAnimals.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                final Animal animal = ((AnimalsToTreatAdapter) recyclerViewCages.getAdapter()).getAnimal(position);
+                final Animal animal = ((AnimalsToTreatAdapter) recyclerViewAnimals.getAdapter()).getAnimal(position);
                 selectAnimalDialog.dismiss();
 
 

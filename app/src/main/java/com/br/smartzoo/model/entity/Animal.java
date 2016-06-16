@@ -259,7 +259,7 @@ public class Animal implements Observer, Parcelable {
 
 
     public Integer getStaminaToBeCured() {
-        return staminaToBeCured;
+        return staminaToBeCured == null? 0 : staminaToBeCured;
     }
 
     public void setStaminaToBeCured(Integer staminaToBeCured) {
