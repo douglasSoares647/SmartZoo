@@ -27,9 +27,30 @@ import com.br.smartzoo.ui.view.MainActivityView;
  */
 public class MainActivityPresenter {
 
+    public static final String NEWS_FRAGMENT = "NEWS_FRAGMENT";
+    public static final String ANIMAL_LIST_FRAGMENT = "ANIMAL_LIST_FRAGMENT";
+    public static final String BUY_ANIMAL_FRAGMENT = "BUY_ANIMAL_FRAGMENT";
+    public static final String BUY_CAGE_FRAGMENT = "BUY_CAGE_FRAGMENT";
+    public static final String BUY_FOOD_FRAGMENT = "BUY_FOOD_FRAGMENT";
+    public static final String CAGE_LIST_FRAGMENT = "CAGE_LIST_FRAGMENT";
+    public static final String CHOOSE_EMPLOYEE_FRAGMENT = "CHOOSE_EMPLOYEE_FRAGMENT";
+    public static final String DETAILS_ANIMAL_FRAGMENT = "DETAILS_ANIMAL_FRAGMENT";
+    public static final String DETAILS_JANITOR_FRAGMENT = "DETAILS_JANITOR_FRAGMENT";
+    public static final String DETAILS_VETERINARY_FRAGMENT = "DETAILS_VETERINARY_FRAGMENT";
+    public static final String FEEDER_LIST_FRAGMENT = "FEEDER_LIST_FRAGMENT";
+    public static final String HIRE_EMPLOYEE_FRAGMENT = "HIRE_EMPLOYEE_FRAGMENT";
+    public static final String JANITOR_LIST_FRAGMENT = "JANITOR_LIST_FRAGMENT";
+    public static final String MANAGE_STOCK_FRAGMENT = "MANAGE_STOCK_FRAGMENT";
+    public static final String STATUS_ZOO_FRAGMENT = "STATUS_ZOO_FRAGMENT";
+    public static final String VETERINARY_LIST_FRAGMENT = "VETERINARY_LIST_FRAGMENT";
 
     private MainActivity mActivity;
     private MainActivityView mMainActivityView;
+    private static String actualFragment;
+
+    public String getActualFragment() {
+        return actualFragment;
+    }
 
     public MainActivityPresenter(MainActivity mainActivity) {
         this.mActivity = mainActivity;
@@ -51,72 +72,70 @@ public class MainActivityPresenter {
 
         if (fragment instanceof BuyAnimalFragment) {
             BuyAnimalFragment buyAnimalFragment = (BuyAnimalFragment) fragment;
-            transaction.replace(container, buyAnimalFragment);
+            transaction.replace(container, buyAnimalFragment, BUY_ANIMAL_FRAGMENT);
             transaction.commit();
-        }else if(fragment instanceof BuyFoodFragment){
+        } else if (fragment instanceof BuyFoodFragment) {
             BuyFoodFragment buyFruitFragment = (BuyFoodFragment) fragment;
-            transaction.replace(container, buyFruitFragment);
+            transaction.replace(container, buyFruitFragment, BUY_FOOD_FRAGMENT);
             transaction.commit();
-        }else if(fragment instanceof BuyCageFragment){
+        } else if (fragment instanceof BuyCageFragment) {
             BuyCageFragment buyFruitFragment = (BuyCageFragment) fragment;
-            transaction.replace(container, buyFruitFragment);
+            transaction.replace(container, buyFruitFragment, BUY_CAGE_FRAGMENT);
             transaction.commit();
-        }else if(fragment instanceof HireEmployeeFragment){
+        } else if (fragment instanceof HireEmployeeFragment) {
             HireEmployeeFragment hireEmployeeFragment = (HireEmployeeFragment) fragment;
-            transaction.replace(container, hireEmployeeFragment);
+            transaction.replace(container, hireEmployeeFragment, HIRE_EMPLOYEE_FRAGMENT);
             transaction.commit();
-        }else if(fragment instanceof ManageStockFragment){
+        } else if (fragment instanceof ManageStockFragment) {
             ManageStockFragment mangeStockFragment = (ManageStockFragment) fragment;
-            transaction.replace(container, mangeStockFragment);
+            transaction.replace(container, mangeStockFragment, MANAGE_STOCK_FRAGMENT);
             transaction.commit();
-        }else if(fragment instanceof ChooseEmployeeFragment){
+        } else if (fragment instanceof ChooseEmployeeFragment) {
             ChooseEmployeeFragment chooseEmployeeFragment = (ChooseEmployeeFragment) fragment;
-            transaction.replace(container, chooseEmployeeFragment);
+            transaction.replace(container, chooseEmployeeFragment, CHOOSE_EMPLOYEE_FRAGMENT);
             transaction.commit();
-        }else if(fragment instanceof VeterinaryListFragment){
+        } else if (fragment instanceof VeterinaryListFragment) {
             VeterinaryListFragment veterinaryListFragment = (VeterinaryListFragment) fragment;
-            transaction.replace(container, veterinaryListFragment);
+            transaction.replace(container, veterinaryListFragment, VETERINARY_LIST_FRAGMENT);
             transaction.commit();
-        }else if(fragment instanceof FeederListFragment){
+        } else if (fragment instanceof FeederListFragment) {
             FeederListFragment feederListFragment = (FeederListFragment) fragment;
-            transaction.replace(container, feederListFragment);
+            transaction.replace(container, feederListFragment, FEEDER_LIST_FRAGMENT);
             transaction.commit();
-        }else if(fragment instanceof StatusZooFragment){
+        } else if (fragment instanceof StatusZooFragment) {
             StatusZooFragment statusZooFragment = (StatusZooFragment) fragment;
-            transaction.replace(container, statusZooFragment);
+            transaction.replace(container, statusZooFragment, STATUS_ZOO_FRAGMENT);
             transaction.commit();
-        }else if(fragment instanceof AnimalListFragment){
+        } else if (fragment instanceof AnimalListFragment) {
             AnimalListFragment animalListFragment = (AnimalListFragment) fragment;
-            transaction.replace(container, animalListFragment);
+            transaction.replace(container, animalListFragment, ANIMAL_LIST_FRAGMENT);
             transaction.commit();
-        }else if(fragment instanceof NewsFragment){
+        } else if (fragment instanceof NewsFragment) {
             NewsFragment newListFragment = (NewsFragment) fragment;
-            transaction.replace(container, newListFragment);
+            transaction.replace(container, newListFragment, NEWS_FRAGMENT);
             transaction.commit();
-        }else if(fragment instanceof JanitorListFragment){
+        } else if (fragment instanceof JanitorListFragment) {
             JanitorListFragment janitorListFragment = (JanitorListFragment) fragment;
-            transaction.replace(container, janitorListFragment);
+            transaction.replace(container, janitorListFragment, JANITOR_LIST_FRAGMENT);
             transaction.commit();
-        }else if(fragment instanceof CageListFragment){
+        } else if (fragment instanceof CageListFragment) {
             CageListFragment cageListFragment = (CageListFragment) fragment;
-            transaction.replace(container, cageListFragment);
+            transaction.replace(container, cageListFragment, CAGE_LIST_FRAGMENT);
             transaction.commit();
-        }else if(fragment instanceof DetailsAnimalFragment){
+        } else if (fragment instanceof DetailsAnimalFragment) {
             DetailsAnimalFragment detailsAnimalFragment = (DetailsAnimalFragment) fragment;
-            transaction.replace(container, detailsAnimalFragment);
+            transaction.replace(container, detailsAnimalFragment, DETAILS_ANIMAL_FRAGMENT);
             transaction.commit();
-        }
-        else if(fragment instanceof DetailsJanitorFragment){
+        } else if (fragment instanceof DetailsJanitorFragment){
             DetailsJanitorFragment detailsJanitorFragment = (DetailsJanitorFragment) fragment;
-            transaction.replace(container,detailsJanitorFragment);
+            transaction.replace(container, detailsJanitorFragment, DETAILS_JANITOR_FRAGMENT);
+            transaction.commit();
+        }else if (fragment instanceof DetailsVeterinaryFragment) {
+            DetailsVeterinaryFragment detailsVeterinaryFragment = (DetailsVeterinaryFragment)
+                    fragment;
+            transaction.replace(container, detailsVeterinaryFragment, DETAILS_VETERINARY_FRAGMENT);
             transaction.commit();
         }
-        else if(fragment instanceof DetailsVeterinaryFragment){
-            DetailsVeterinaryFragment detailsVeterinaryFragment = (DetailsVeterinaryFragment) fragment;
-            transaction.replace(container,detailsVeterinaryFragment);
-            transaction.commit();
-        }
-
 
 
     }

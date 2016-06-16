@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
         setContentView(R.layout.activity_main);
 
-        if(savedInstanceState==null) {
+        if (savedInstanceState == null) {
             loadZooInfo();
         }
 
@@ -77,15 +77,12 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
         bindNavigationDrawer();
         bindContainerFragment();
 
-        if(savedInstanceState==null)
-        bindInitialFragment();
-
+        if (savedInstanceState == null) {
+            bindInitialFragment();
+        }
 
         setContextToService();
-
-
     }
-
 
 
     private void setContextToService() {
@@ -176,7 +173,8 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
                     mNormal.setColorFilter(Color.parseColor("#757575"));
                     mForward.clearColorFilter();
                     mFastForward.clearColorFilter();
-                    //            mTextViewSpeed.setText(getString(R.string.speed) + Clock.speedFactor);
+                    //            mTextViewSpeed.setText(getString(R.string.speed) + Clock
+                    // .speedFactor);
                 }
             }
         });
@@ -218,14 +216,9 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
     private void bindToolbar() {
         mToolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(mToolbar);
-
-
         mTextViewClock = (TextView) mToolbar.findViewById(R.id.text_view_clock);
         mTextViewDate = (TextView) mToolbar.findViewById(R.id.text_view_date);
-
-
         Clock.getFromPreferences();
-
         mTextViewClock.setText(Clock.getTimeString());
         mTextViewDate.setText(Clock.getDateString());
 
@@ -233,7 +226,6 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
     @Override
     public void onBackPressed() {
-
         DialogInterface.OnClickListener clickYesListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -245,9 +237,6 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
                 , getString(R.string.title_exit), getString(R.string.message_exit_game)
                 , clickYesListener);
         alert.show();
-
-
-
 
 
     }
@@ -264,7 +253,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
     @Override
     public void onAnimalsClick() {
-    mPresenter.startTransaction(mIdFrameContainer, new AnimalListFragment());
+        mPresenter.startTransaction(mIdFrameContainer, new AnimalListFragment());
     }
 
     @Override
@@ -340,7 +329,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
         snack.show();
     }
 
-    public void startTransaction(Fragment fragment){
+    public void startTransaction(Fragment fragment) {
         mPresenter.startTransaction(mIdFrameContainer, fragment);
     }
 
@@ -349,7 +338,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
         ZooInfoBusiness.getFromPreferences();
 
 
-        if(!ZooInfoBusiness.isLoaded) {
+        if (!ZooInfoBusiness.isLoaded) {
             ZooInfoBusiness.load();
             ZooInfoBusiness.isLoaded = true;
         }
