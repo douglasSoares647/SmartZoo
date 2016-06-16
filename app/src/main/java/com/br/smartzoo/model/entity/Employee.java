@@ -1,7 +1,11 @@
 package com.br.smartzoo.model.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.interfaces.Observer;
+import com.br.smartzoo.util.DateUtil;
 
 import java.util.Date;
 
@@ -9,7 +13,7 @@ import java.util.Date;
 /**
  * Created by taibic on 14/04/16.
  */
-public abstract class Employee implements Observer{
+public abstract class Employee implements Observer, Parcelable{
 
     private String image;
     private Long id;
@@ -35,6 +39,38 @@ public abstract class Employee implements Observer{
         this.startDate = startDate;
         this.endDate = endDate;
         this.salary = salary;
+    }
+
+    protected Employee(Parcel in) {
+        image = in.readString();
+        name = in.readString();
+        age = in.readInt();
+        startDate = DateUtil.stringToDate(in.readString());
+        endDate = DateUtil.stringToDate(in.readString());
+        salary = in.readDouble();
+        profession = in.readString();
+        price = in.readDouble();
+        status = in.readString();
+        stamina = in.readInt();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(image);
+        dest.writeString(name);
+        dest.writeInt(age);
+        dest.writeString(DateUtil.dateToString(startDate));
+        dest.writeString(DateUtil.dateToString(endDate));
+        dest.writeDouble(salary);
+        dest.writeString(profession);
+        dest.writeDouble(price);
+        dest.writeString(status);
+        dest.writeInt(stamina);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public Long getId() {

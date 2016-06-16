@@ -24,9 +24,10 @@ public class EmployeeContract {
     public static String STARTDATE = "startDate";
     public static String ENDDATE = "endDate";
     public static String SALARY = "salary";
+    public static String STAMINA = "stamina";
 
 
-    public static String[] columns = {ID, IMAGE, NAME, AGE, CPF, STATUS, STARTDATE, ENDDATE, SALARY};
+    public static String[] columns = {ID, IMAGE, NAME, AGE, CPF, STATUS, STARTDATE, ENDDATE, SALARY, STAMINA};
 
 
     public static String createTable() {
@@ -41,7 +42,8 @@ public class EmployeeContract {
         table.append(STARTDATE + " text not null, ");
         table.append(ENDDATE + " text, ");
         table.append(STATUS + " text, ");
-        table.append(SALARY + " real not null ");
+        table.append(SALARY + " real not null, ");
+        table.append(STAMINA + " int not null ");
         table.append(" ) ;");
 
         return table.toString();
@@ -59,6 +61,7 @@ public class EmployeeContract {
         values.put(STARTDATE, DateUtil.dateToString(employee.getStartDate()));
         values.put(ENDDATE, DateUtil.dateToString(employee.getEndDate()));
         values.put(SALARY, employee.getSalary());
+        values.put(STAMINA,employee.getStamina());
 
         return values;
     }

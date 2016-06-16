@@ -98,4 +98,9 @@ public class FeederListFragment extends Fragment implements FeederListView, OnMa
         }
         mPresenter.updateSalaryFeeder(employee, value);
     }
+
+    @Override
+    public void onClick(Employee employee) {
+
+    }
 }

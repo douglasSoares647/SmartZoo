@@ -101,4 +101,11 @@ public class VeterinaryListFragment extends Fragment implements VeterinaryListVi
         }
         mPresenter.updateSalary(veterinary, value);
     }
+
+    @Override
+    public void onClick(Employee employee) {
+
+        mPresenter.openVeterinaryDetails(employee);
+
+    }
 }

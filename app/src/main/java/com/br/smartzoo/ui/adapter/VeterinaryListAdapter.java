@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
@@ -74,6 +75,18 @@ public class VeterinaryListAdapter extends RecyclerView.Adapter<VeterinaryListAd
 
         addListenerToDemission(holder, veterinary);
         addListenerToSalary(holder, veterinary);
+        addListenerToClick(holder,veterinary);
+
+    }
+
+    private void addListenerToClick(ViewHolder holder, final Veterinary veterinary) {
+
+        holder.mRelativeVeterinary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnManageVeterinary.onClick(veterinary);
+            }
+        });
 
     }
 
@@ -124,6 +137,7 @@ public class VeterinaryListAdapter extends RecyclerView.Adapter<VeterinaryListAd
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        private RelativeLayout mRelativeVeterinary;
         private ImageView mImageViewVeterinary;
         private TextView mTextViewName;
         private TextView mTextViewAge;
@@ -137,6 +151,7 @@ public class VeterinaryListAdapter extends RecyclerView.Adapter<VeterinaryListAd
 
         public ViewHolder(View itemView) {
             super(itemView);
+            mRelativeVeterinary = (RelativeLayout) itemView.findViewById(R.id.container_relative_veterinary);
             mImageViewVeterinary = (ImageView) itemView.findViewById(R.id.image_view_veterinary);
             mTextViewName = (TextView) itemView.findViewById(R.id.text_view_name_veterinary);
             mTextViewAge = (TextView) itemView.findViewById(R.id.text_view_age_veterinary);

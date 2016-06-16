@@ -110,7 +110,7 @@ public class VeterinaryRepository {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
 
-        String sql = " Select v.id, e.image, e.name, e.age, e.cpf, e.startDate, e.endDate, e.salary from "
+        String sql = " Select v.id, e.image, e.name, e.age, e.cpf, e.startDate, e.endDate, e.salary, e.stamina from "
                 + EmployeeContract.TABLE + " e join " + VeterinaryContract.TABLE + " v on v.id = e.id;";
 
         Cursor cursor = db.rawQuery(sql,null);

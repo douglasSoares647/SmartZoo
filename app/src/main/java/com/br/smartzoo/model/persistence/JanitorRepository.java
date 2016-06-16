@@ -104,7 +104,7 @@ public class JanitorRepository {
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
 
         String sql = " Select j.id, e.image, e.status, e.name, e.age, e.cpf, e.startDate," +
-                " e.endDate, e.salary from " + EmployeeContract.TABLE + " e join "
+                " e.endDate, e.salary, e.stamina from " + EmployeeContract.TABLE + " e join "
                 + JanitorContract.TABLE + " j on j.id = e.id;";
 
         Cursor cursor = db.rawQuery(sql, null);
@@ -117,7 +117,7 @@ public class JanitorRepository {
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
 
         String sql = " Select j.id, e.image, e.status, e.name, e.age, e.cpf, e.startDate, " +
-                "e.endDate, e.salary from " + EmployeeContract.TABLE + " e join "
+                "e.endDate, e.salary, e.stamina from " + EmployeeContract.TABLE + " e join "
                 + JanitorContract.TABLE + " j on j.id = e.id where e.status = 'rested';";
 
         Cursor cursor = db.rawQuery(sql, null);

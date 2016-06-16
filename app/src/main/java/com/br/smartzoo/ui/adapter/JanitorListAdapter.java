@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
@@ -68,7 +69,17 @@ public class JanitorListAdapter extends RecyclerView.Adapter<JanitorListAdapter.
 
         addListenerToDemission(holder, janitor);
         addListenerToSalary(holder, janitor);
+        addListenerToClick(holder,janitor);
 
+    }
+
+    private void addListenerToClick(ViewHolder holder, final Janitor janitor) {
+        holder.relativeJanitor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnManageEmployee.onClick(janitor);
+            }
+        });
     }
 
 
@@ -110,6 +121,7 @@ public class JanitorListAdapter extends RecyclerView.Adapter<JanitorListAdapter.
         });
 
 
+
     }
 
 
@@ -125,6 +137,7 @@ public class JanitorListAdapter extends RecyclerView.Adapter<JanitorListAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        private RelativeLayout relativeJanitor;
         private ImageView mImageViewJanitor;
         private TextView mTextViewName;
         private TextView mTextViewAge;
@@ -136,6 +149,7 @@ public class JanitorListAdapter extends RecyclerView.Adapter<JanitorListAdapter.
         public ViewHolder(View itemView) {
             super(itemView);
 
+            relativeJanitor = (RelativeLayout) itemView.findViewById(R.id.item_janitor_container);
             mImageViewJanitor = (ImageView) itemView.findViewById(R.id.image_view_janitor);
             mTextViewName = (TextView) itemView.findViewById(R.id.text_view_name_janitor);
             mTextViewAge = (TextView) itemView.findViewById(R.id.text_view_age_janitor);

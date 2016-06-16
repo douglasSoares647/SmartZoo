@@ -28,7 +28,7 @@ public class Clock {
     public static int starvingTime = 600; // 10 minutes
 
     //Janitor
-    public static int timeToCleanEachDirty = 30; //30 seconds
+    public static int timeToCleanEachDirty = 5; //30 seconds
     public static int timeToRest = 300; //5 minutes
 
     //Veterinary
@@ -75,7 +75,6 @@ public class Clock {
                             minute = 0;
                             hour++;
                             if (hour % 3 == 0) {
-                                threeHours();
                             }
                             if (hour == 24) {
                                 hour = 0;
@@ -135,15 +134,6 @@ public class Clock {
 
     }
 
-
-    //Called every 3 ingame hours to call the animal eat method
-    private static void threeHours() {
-        for(Cage cage : ZooInfo.cages){
-            for(final Animal animal : cage.getAnimals()){
-                animal.setHungry(true);
-            }
-        }
-    }
 
 
     public static void saveToPreferences(){

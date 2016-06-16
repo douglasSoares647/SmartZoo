@@ -1,17 +1,22 @@
 package com.br.smartzoo.presenter;
 
 import android.app.Activity;
+import android.os.Bundle;
+import android.os.Parcelable;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.asynctask.DemitEmployeeAsyncTask;
 import com.br.smartzoo.model.asynctask.LoadJanitorsAsyncTask;
 import com.br.smartzoo.model.asynctask.UpdateSalaryAsyncTask;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
+import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.entity.Feeder;
 import com.br.smartzoo.model.entity.Janitor;
 import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.ui.activity.MainActivity;
+import com.br.smartzoo.ui.fragment.DetailsAnimalFragment;
+import com.br.smartzoo.ui.fragment.DetailsJanitorFragment;
 import com.br.smartzoo.ui.view.JanitorListView;
 
 import java.util.ArrayList;
@@ -82,4 +87,17 @@ public class JanitorListPresenter {
     }
 
 
+    public void openJanitorDetails(Employee employee) {
+        startTransaction(employee);
+    }
+
+
+
+    public void startTransaction(Employee employee) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(DetailsJanitorFragment.SELECTED_JANITOR, employee);
+        DetailsJanitorFragment detailsJanitorFragment = new DetailsJanitorFragment();
+        detailsJanitorFragment.setArguments(bundle);
+        ((MainActivity)mContext).startTransaction(detailsJanitorFragment);
+    }
 }

@@ -75,6 +75,7 @@ public class FeederContract {
             Date startDate = DateUtil.stringToDate(cursor.getString(cursor.getColumnIndex(EmployeeContract.STARTDATE)));
             Date endDate = DateUtil.stringToDate(cursor.getString(cursor.getColumnIndex(EmployeeContract.ENDDATE)));
 
+            feeder.setStamina(cursor.getInt(cursor.getColumnIndex(EmployeeContract.STAMINA)));
             feeder.setStartDate(startDate);
             feeder.setEndDate(endDate);
 

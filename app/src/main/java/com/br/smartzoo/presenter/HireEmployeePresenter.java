@@ -87,6 +87,7 @@ public class HireEmployeePresenter {
 
         employee.setName(name1 + " " + name2);
         employee.setAge(random.nextInt(50));
+        employee.setStamina(100);
 
         employee.setStartDate(DateUtil.stringToDateWithBrazilianFormat(Clock.getDateString()));
 

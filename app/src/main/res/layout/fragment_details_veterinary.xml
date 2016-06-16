@@ -66,6 +66,16 @@
             android:textSize="18sp"
             android:textStyle="bold"/>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_treat"
+            android:text="@string/button_treat"
+            android:background="@color/green_500"
+            android:layout_below="@+id/text_view_status_veterinary"
+            android:layout_alignLeft="@+id/text_view_salary_veterinary"
+            android:layout_alignStart="@+id/text_view_salary_veterinary" />
+
         <TextView
             android:id="@+id/label_status_veterinary"
             android:layout_width="wrap_content"
@@ -93,16 +103,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/image_view_animal_veterinary"
-            android:layout_marginTop="8dp"
             android:text="Tratando animal:"
             android:textSize="22sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:layout_alignTop="@+id/textView" />
 
         <ImageView
             android:id="@+id/image_view_animal_veterinary"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_below="@id/text_view_status_veterinary"
+
+            android:layout_below="@id/button_treat"
             android:layout_marginTop="8dp"
             android:layout_toRightOf="@id/label_treat_animal_veterinary"
             android:src="@drawable/ic_animal_lion"/>
@@ -114,8 +125,10 @@
             android:layout_marginLeft="4dp"
             android:layout_toRightOf="@+id/image_view_animal_veterinary"
             android:maxLength="14"
+
             android:text="Name of animal"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:id="@+id/text_view_animal_veterinary" />
 
 
         <TextView
@@ -139,6 +152,17 @@
             android:paddingRight="12dp"
             android:progress="50"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_view_progress_bar_task_veterinary"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:layout_alignBottom="@+id/progress_bar_task_veterinary"
+            android:layout_alignTop="@+id/progress_bar_task_veterinary"
+            android:background="@android:color/transparent"/>
+
+
 
         <TextView
             android:id="@+id/label_stamina_veterinary"
@@ -160,6 +184,17 @@
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
             android:progress="50"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_view_progress_bar_stamina_veterinary"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:layout_alignBottom="@+id/progress_bar_stamina_veterinary"
+            android:layout_alignTop="@+id/progress_bar_stamina_veterinary"
+            android:background="@android:color/transparent"/>
+
 
 
         <TextView

@@ -1,8 +1,12 @@
 package com.br.smartzoo.model.entity;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.environment.Clock;
+import com.br.smartzoo.model.interfaces.OnCleanCageListener;
 import com.br.smartzoo.util.ApplicationUtil;
 
 import java.util.Date;
@@ -13,7 +17,7 @@ import java.util.Map;
 /**
  * Created by adenilson on 18/04/16.
  */
-public class Janitor extends Employee {
+public class Janitor extends Employee implements Parcelable {
     private Integer maxStamina=50;
     private int clock = 0;
 
@@ -26,6 +30,7 @@ public class Janitor extends Employee {
     private Integer timeToCleanCage = 0;
     private Boolean isCleaning = false;
     private Cage currentCage;
+    private OnCleanCageListener mOnCleanCageListener;
 
     public Janitor(List<Cage> cages, int expedient) {
     }
@@ -37,6 +42,8 @@ public class Janitor extends Employee {
 
     public Janitor() {
     }
+
+
 
 
     @Override
@@ -73,6 +80,7 @@ public class Janitor extends Employee {
             timeToCleanCage = cage.getDirtyFactor() * Clock.timeToCleanEachDirty;
 
             status = ApplicationUtil.applicationContext.getString(R.string.cleaning_cage) + cage.getName();
+            mOnCleanCageListener.onStatusChange();
 
             currentCage = cage;
 
@@ -87,21 +95,28 @@ public class Janitor extends Employee {
 
 
         if(isCleaning) {
-            if (clock < timeToCleanCage) {
+            if (clock <= timeToCleanCage) {
                 if (clock % Clock.timeToCleanEachDirty == 0) {
                     currentDirtyCleaned++;
+                    mOnCleanCageListener.onCleanDirty(currentDirtyCleaned);
                     setStamina(getStamina() - 1);
                 }
             }
             else {
                 currentCage.setClean(true);
+                currentCage.setDirtyFactor(0);
                 clock = 0;
                 isCleaning = false;
+                currentDirtyCleaned = 0;
+                mOnCleanCageListener.onCleanFinish();
             }
         }
 
         else {
             status = ApplicationUtil.applicationContext.getString(R.string.ready);
+
+            if(mOnCleanCageListener!=null)
+            mOnCleanCageListener.onStatusChange();
         }
 
         if(clock== Clock.timeToRest){
@@ -111,4 +126,39 @@ public class Janitor extends Employee {
         }
 
     }
+
+
+    public void addOnCleanCageListener(OnCleanCageListener onCleanCageListener){
+        this.mOnCleanCageListener = onCleanCageListener;
+    }
+
+
+
+    protected Janitor(Parcel in) {
+        id = in.readLong();
+        status = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
+        dest.writeString(status);
+    }
+
+    public static final Creator<Janitor> CREATOR = new Creator<Janitor>() {
+        @Override
+        public Janitor createFromParcel(Parcel in) {
+            return new Janitor(in);
+        }
+
+        @Override
+        public Janitor[] newArray(int size) {
+            return new Janitor[size];
+        }
+    };
 }

@@ -10,4 +10,6 @@ public interface OnManageEmployee {
     void onDemit(Employee veterinary);
 
     void onSalaryChange(Employee employee, Double value);
+
+    void onClick(Employee employee);
 }

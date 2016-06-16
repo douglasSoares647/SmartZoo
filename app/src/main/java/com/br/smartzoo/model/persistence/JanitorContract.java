@@ -79,6 +79,7 @@ public class JanitorContract {
             Date startDate  = DateUtil.stringToDate(cursor.getString(cursor
                     .getColumnIndex(EmployeeContract.STARTDATE)));
 
+            janitor.setStamina(cursor.getInt(cursor.getColumnIndex(EmployeeContract.STAMINA)));
             janitor.setStartDate(startDate);
             janitor.setEndDate(endDate);
         }

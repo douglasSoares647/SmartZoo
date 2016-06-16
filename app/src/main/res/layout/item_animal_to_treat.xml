@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="8dp"
+    android:paddingRight="8dp"
+    android:paddingBottom="8dp">
+
+    <ImageView
+        android:id="@+id/image_view_animal"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_centerVertical="true"
+        android:padding="4dp"
+        android:src="@drawable/ic_buy_animal" />
+
+
+    <TextView
+        android:id="@+id/text_view_name_animal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name of Animal"
+        android:layout_centerHorizontal="true"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/text_view_age_animal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_view_name_animal"
+        android:layout_marginTop="4dp"
+        android:text="Age"
+        android:layout_centerHorizontal="true"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/text_view_health_animal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_view_age_animal"
+        android:layout_marginTop="8dp"
+        android:text="Sick"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/red_500"
+        android:textSize="14sp" />
+
+
+</RelativeLayout>

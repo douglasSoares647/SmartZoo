@@ -188,6 +188,10 @@
     <string name="label_avaible_space">"Avaible space : "</string>
     <string name="label_avaible_space_animals">" animals"</string>
     <string name="txt_years">" years"</string>
+    <string name="button_clean">Clean</string>
+    <string name="title_select_dirty_cage">Select any dirty cage</string>
+    <string name="button_treat">Treat</string>
+    <string name="title_select_animal_treat">Select an animal to treat</string>
 
 
 </resources>

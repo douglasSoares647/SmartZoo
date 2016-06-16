@@ -23,7 +23,7 @@ public class Animal implements Observer, Parcelable {
     private Integer maxResistance = 8;
 
 
-    private int tick = 0;
+    private int biologicalClock = 0;
 
     private Long id;
     private String image;
@@ -71,12 +71,12 @@ public class Animal implements Observer, Parcelable {
 
     }
 
-    public int getTick() {
-        return tick;
+    public int getBiologicalClock() {
+        return biologicalClock;
     }
 
-    public void setTick(int tick) {
-        this.tick = tick;
+    public void setBiologicalClock(int biologicalClock) {
+        this.biologicalClock = biologicalClock;
     }
 
     public String getType() {
@@ -248,7 +248,7 @@ public class Animal implements Observer, Parcelable {
             }
             cageFoods.removeAll(foodsToRemove);
 
-            tick = 0;
+            biologicalClock = 0;
             weight = weight + foodEaten;
             status = ApplicationUtil.applicationContext.getString(R.string.digesting);
 
@@ -268,18 +268,21 @@ public class Animal implements Observer, Parcelable {
 
     @Override
     public void onTick() {
-        tick++;
+        biologicalClock++;
 
 
         if (isDigesting) {
             digest();
+        }
+        else if(biologicalClock==Clock.timeToFeelHungry){
+            setHungry(true);
         }
 
     }
 
     private void digest() {
         //Digerindo
-        if (tick % Clock.digestingInterval == 0) {
+        if (biologicalClock % Clock.digestingInterval == 0) {
             setWeight(weight - foodEaten * 0.95);
             afterDigest();
         } else
@@ -387,7 +390,7 @@ public class Animal implements Observer, Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.tick);
+        dest.writeInt(this.biologicalClock);
         dest.writeString(this.image);
         dest.writeString(this.status);
         dest.writeValue(this.id);
@@ -406,7 +409,7 @@ public class Animal implements Observer, Parcelable {
     }
 
     protected Animal(Parcel in) {
-        this.tick = in.readInt();
+        this.biologicalClock = in.readInt();
         this.image = in.readString();
         this.status = in.readString();
         this.id = (Long) in.readValue(Long.class.getClassLoader());

@@ -1,6 +1,7 @@
 package com.br.smartzoo.presenter;
 
 import android.app.Activity;
+import android.os.Bundle;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.asynctask.DemitEmployeeAsyncTask;
@@ -12,6 +13,8 @@ import com.br.smartzoo.model.entity.Feeder;
 import com.br.smartzoo.model.entity.Veterinary;
 import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.ui.activity.MainActivity;
+import com.br.smartzoo.ui.fragment.DetailsJanitorFragment;
+import com.br.smartzoo.ui.fragment.DetailsVeterinaryFragment;
 import com.br.smartzoo.ui.view.VeterinaryListView;
 
 import java.util.ArrayList;
@@ -86,5 +89,19 @@ public class VeterinaryListPresenter {
                         .getString(R.string.message_update_salary_failed));
             }
         }).execute(veterinary, value);
+    }
+
+    public void openVeterinaryDetails(Employee employee) {
+
+        startTransaction(employee);
+    }
+
+
+    public void startTransaction(Employee employee) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(DetailsVeterinaryFragment.SELECTED_VETERINARY, employee);
+        DetailsVeterinaryFragment detailsVeterinaryFragment = new DetailsVeterinaryFragment();
+        detailsVeterinaryFragment.setArguments(bundle);
+        ((MainActivity)mContext).startTransaction(detailsVeterinaryFragment);
     }
 }

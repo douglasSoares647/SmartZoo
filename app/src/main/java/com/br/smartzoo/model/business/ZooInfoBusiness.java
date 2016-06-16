@@ -172,4 +172,26 @@ public class ZooInfoBusiness {
     }
 
 
+    public static void updateAnimalAfterTreat(Animal animal) {
+        for(Cage cage : ZooInfo.cages){
+            for(Animal originalAnimal : cage.getAnimals()){
+                if(originalAnimal.equals(animal)){
+                    originalAnimal.setIsHealthy(animal.isHealthy());
+                    break;
+                }
+
+            }
+        }
+    }
+
+
+    public static void updateCageAfterClean(Cage cage){
+        for(Cage originalCage: ZooInfo.cages){
+            if(originalCage.equals(cage)) {
+                originalCage.setDirtyFactor(cage.getDirtyFactor());
+                originalCage.setIsClean(cage.isClean());
+                break;
+            }
+        }
+    }
 }

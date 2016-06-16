@@ -94,8 +94,12 @@ public class JanitorListFragment extends Fragment implements OnManageEmployee, J
         }
         mPresenter.updateSalaryJanitor(janitor, value);
 
+    }
 
+    @Override
+    public void onClick(Employee employee) {
 
+        mPresenter.openJanitorDetails(employee);
     }
 
     @Override

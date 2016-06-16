@@ -20,6 +20,7 @@
         android:id="@+id/edit_text_set_animal_name"
         android:layout_below="@id/text_view_set_animal_name"
         android:inputType="textPersonName|textCapWords"
+        android:textColor="@color/black"
         android:maxLength="15"/>
 
     <Button

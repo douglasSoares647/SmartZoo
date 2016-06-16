@@ -76,6 +76,7 @@ public class VeterinaryContract {
             Date endDate = DateUtil.stringToDate(cursor.getString(cursor.getColumnIndex(EmployeeContract.ENDDATE)));
             veterinary.setStartDate(startDate);
             veterinary.setEndDate(endDate);
+            veterinary.setStamina(cursor.getInt(cursor.getColumnIndex(EmployeeContract.STAMINA)));
         }
 
         return veterinary;
