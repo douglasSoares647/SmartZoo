@@ -209,4 +209,6 @@ public class BuyAnimalFragment extends Fragment implements BuyAnimalView, OnBuyA
         });
         dialog.show();
     }
+
+
 }

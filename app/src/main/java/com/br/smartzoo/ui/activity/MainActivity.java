@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.game.GameState;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.interfaces.OnClockTickListener;
 import com.br.smartzoo.model.interfaces.OnDrawerOptionClick;
@@ -226,18 +228,27 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
     @Override
     public void onBackPressed() {
-        DialogInterface.OnClickListener clickYesListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                MainActivity.super.onBackPressed();
-            }
-        };
 
-        AlertDialog.Builder alert = AlertDialogUtil.makeAlertDialogExit(this
-                , getString(R.string.title_exit), getString(R.string.message_exit_game)
-                , clickYesListener);
-        alert.show();
+        Fragment previousState = GameState.previousState(this);
+        if (previousState != null) {
+            getSupportFragmentManager().popBackStack();
+        } else {
 
+            DialogInterface.OnClickListener clickYesListener = new DialogInterface
+                    .OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            };
+
+            AlertDialog.Builder alert = AlertDialogUtil.makeAlertDialogExit(this
+                    , getString(R.string.title_exit), getString(R.string.message_exit_game)
+                    , clickYesListener);
+            alert.show();
+
+        }
 
     }
 
@@ -351,5 +362,6 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
         textView.setText(text);
 
     }
+
 
 }

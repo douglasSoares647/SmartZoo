@@ -18,6 +18,7 @@ public class AnimUtil {
 
     public static void collapseControlTime(RelativeLayout footerBar, ImageView imageViewPanel
            ) {
+        footerBar.setVisibility(View.VISIBLE);
         footerBar.animate().translationY(180).alpha(0).setDuration(500);
         imageViewPanel.animate().rotation(0).alpha(0.3f).translationY(0).setDuration(500);
 
@@ -25,6 +26,7 @@ public class AnimUtil {
 
     public static void collapseWithoutAnim(RelativeLayout footerBar, ImageView imageViewPanel
     ) {
+        footerBar.setVisibility(View.VISIBLE);
         footerBar.animate().translationY(180).setDuration(0);
     }
 
