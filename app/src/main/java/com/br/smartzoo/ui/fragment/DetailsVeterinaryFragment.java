@@ -1,6 +1,7 @@
 package com.br.smartzoo.ui.fragment;
 
 import android.app.Dialog;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
@@ -12,10 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.SmartZooApplication;
+import com.br.smartzoo.model.business.AnimalBusiness;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
@@ -26,8 +30,10 @@ import com.br.smartzoo.model.interfaces.OnTreatAnimalListener;
 import com.br.smartzoo.ui.adapter.AnimalsToTreatAdapter;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
+import com.br.smartzoo.util.ApplicationUtil;
 import com.br.smartzoo.util.DateUtil;
 import com.br.smartzoo.util.RecyclerItemClickListener;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +53,9 @@ public class DetailsVeterinaryFragment extends Fragment {
     private Dialog selectAnimalDialog;
     private TextView textViewStatusVeterinary;
     private TextView textViewProgressBarTask;
-
+    private Button buttonTreat;
+    private ImageView imageViewAnimalVeterinary;
+    private TextView textViewVeterinaryStamina;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,16 +67,27 @@ public class DetailsVeterinaryFragment extends Fragment {
         bindTextViewInitVeterinary(view);
         bindTextViewSalaryVeterinary(view);
         bindTextViewStatusVeterinary(view);
-        bindTextViewCageVeterinary(view);
+        bindTextViewAnimalVeterinary(view);
         bindProgressBarTreatingAnimal(view);
         bindProgressBarStaminaVeterinary(view);
         bindButtonTreatVeterinary(view);
+        bindImageViewAnimalVeterinary(view);
+
+        setCurrentState();
 
         return view;
     }
 
+    private void bindImageViewAnimalVeterinary(View view) {
+        imageViewAnimalVeterinary = (ImageView) view.findViewById(R.id.image_view_animal_veterinary);
+
+
+    }
+
+
     private void bindButtonTreatVeterinary(View view) {
-        Button buttonTreat = (Button) view.findViewById(R.id.button_treat);
+
+        buttonTreat = (Button) view.findViewById(R.id.button_treat);
 
         buttonTreat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +95,7 @@ public class DetailsVeterinaryFragment extends Fragment {
                 openSelectCageDialog();
             }
         });
+
     }
 
     private void openSelectCageDialog() {
@@ -87,7 +107,7 @@ public class DetailsVeterinaryFragment extends Fragment {
 
         final RecyclerView recyclerViewAnimals = (RecyclerView) selectAnimalDialog.findViewById(R.id.recycler_view_animals_to_treat);
 
-        List<Animal> animalsToTreat = getAnimalsToTreat();
+        List<Animal> animalsToTreat = AnimalBusiness.getAnimalsToTreat();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -110,31 +130,10 @@ public class DetailsVeterinaryFragment extends Fragment {
                 selectAnimalDialog.dismiss();
 
 
-                progressBarTreatingAnimal.setMax(Clock.timeToTreat);
-                selected_veterinary.addOnTreatAnimalListener(new OnTreatAnimalListener() {
-                    @Override
-                    public void onTreatProgress(Integer progress) {
-                        progressBarTreatingAnimal.setProgress(progress);
-                        textViewProgressBarTask.setText(progress + "/" +Clock.timeToTreat);
-                    }
-
-                    @Override
-                    public void onTreatFinish() {
-                        progressBarTreatingAnimal.setProgress(0);
-                        textViewProgressBarTask.setText("");
-
-                        updateZooInfo(animal);
-                    }
-
-                    @Override
-                    public void onStatusChange() {
-                        textViewStatusVeterinary.setText(selected_veterinary.getStatus());
-                    }
-                });
-
+                setTaskProgressAttributes(animal);
 
                 selected_veterinary.treat(animal);
-
+                setCurrentState();
 
             }
         }));
@@ -151,6 +150,40 @@ public class DetailsVeterinaryFragment extends Fragment {
 
     }
 
+    private void setTaskProgressAttributes(final Animal animal) {
+        progressBarTreatingAnimal.setMax(Clock.timeToTreat);
+
+        selected_veterinary.addOnTreatAnimalListener(new OnTreatAnimalListener() {
+            @Override
+            public void onTreatProgress(Integer progress) {
+                progressBarTreatingAnimal.setProgress(progress);
+                textViewProgressBarTask.setText(progress + "/" +Clock.timeToTreat);
+
+                textViewVeterinaryStamina.setText(selected_veterinary.getStamina()+ "/" + Veterinary.maxStamina);
+            }
+
+            @Override
+            public void onTreatFinish() {
+                progressBarTreatingAnimal.setProgress(0);
+                textViewProgressBarTask.setText("");
+
+                buttonTreat.setAlpha(1f);
+                buttonTreat.setEnabled(true);
+                buttonTreat.setText(getString(R.string.button_treat));
+
+
+                updateZooInfo(animal);
+            }
+
+            @Override
+            public void onStatusChange() {
+                textViewStatusVeterinary.setText(selected_veterinary.getStatus());
+            }
+        });
+
+
+    }
+
     private void updateZooInfo(Animal animal) {
         ZooInfoBusiness.updateAnimalAfterTreat(animal);
     }
@@ -158,15 +191,20 @@ public class DetailsVeterinaryFragment extends Fragment {
     private void bindProgressBarStaminaVeterinary(View view) {
 
         progressBarStamina = (ProgressBar) view.findViewById(R.id.progress_bar_stamina_veterinary);
+        progressBarStamina.setMax(Veterinary.maxStamina);
+        progressBarStamina.setProgress(selected_veterinary.getStamina());
+
+        textViewVeterinaryStamina = (TextView) view.findViewById(R.id.text_view_progress_bar_stamina_veterinary);
+        textViewVeterinaryStamina.setText(selected_veterinary.getStamina()+ "/" + Veterinary.maxStamina);
     }
 
     private void bindProgressBarTreatingAnimal(View view) {
         progressBarTreatingAnimal = (ProgressBar) view.findViewById(R.id.progress_bar_task_veterinary);
-
         textViewProgressBarTask = (TextView) view.findViewById(R.id.text_view_progress_bar_task_veterinary);
+
     }
 
-    private void bindTextViewCageVeterinary(View view) {
+    private void bindTextViewAnimalVeterinary(View view) {
 
         textViewAnimalVeterinary = (TextView) view.findViewById(R.id.text_view_animal_veterinary);
 
@@ -202,17 +240,25 @@ public class DetailsVeterinaryFragment extends Fragment {
         selected_veterinary = parcelable != null ? (Veterinary) parcelable : new Veterinary();
     }
 
-    public List<Animal> getAnimalsToTreat() {
+    private void setCurrentState() {
+        if(selected_veterinary.getTreating()) {
 
-        List<Animal> animalsToTreat = new ArrayList<>();
+            setTaskProgressAttributes(selected_veterinary.getCurrentAnimal());
+            textViewAnimalVeterinary.setText(selected_veterinary.getCurrentAnimal().getName());
 
-        for(Cage cage:ZooInfo.cages){
-            for(Animal animal : cage.getAnimals()){
-                if(!animal.isHealthy()){
-                    animalsToTreat.add(animal);
-                }
-            }
+            Resources resources = getResources();
+            int image = resources.getIdentifier(selected_veterinary.getCurrentAnimal().getImage(),"drawable", SmartZooApplication.NAME_PACKAGE);
+            Glide.with(getContext()).load(image).into(imageViewAnimalVeterinary);
+
+            buttonTreat.setAlpha(0.5f);
+            buttonTreat.setEnabled(false);
+            buttonTreat.setText("Already treating an animal");
         }
-        return animalsToTreat;
+        else{
+            imageViewAnimalVeterinary.setVisibility(View.INVISIBLE);
+            textViewAnimalVeterinary.setText("");
+
+        }
+
     }
 }

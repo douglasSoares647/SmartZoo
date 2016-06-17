@@ -18,7 +18,7 @@ import java.util.Map;
  * Created by adenilson on 18/04/16.
  */
 public class Veterinary extends Employee implements Parcelable{
-    private Integer maxStamina = 20;
+    public static final Integer maxStamina = 20;
 
     private OnTreatAnimalListener mOnTreatAnimalListener;
 
@@ -50,12 +50,14 @@ public class Veterinary extends Employee implements Parcelable{
     protected Veterinary(Parcel in) {
         super(in);
         status = in.readString();
+        clock = in.readInt();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeString(status);
+        dest.writeInt(clock);
     }
 
     @Override
@@ -138,12 +140,12 @@ public class Veterinary extends Employee implements Parcelable{
             if(mOnTreatAnimalListener!=null)
                 mOnTreatAnimalListener.onStatusChange();
 
-        }
+            if(clock== Clock.timeToRest){
+                if(getStamina()<maxStamina)
+                    setStamina(getStamina()+1);
+                clock = 0;
+            }
 
-        if(clock== Clock.timeToRest){
-            if(getStamina()<maxStamina)
-                setStamina(getStamina()+1);
-            clock = 0;
         }
 
     }
@@ -155,4 +157,13 @@ public class Veterinary extends Employee implements Parcelable{
     public void addOnTreatAnimalListener(OnTreatAnimalListener onTreatAnimalListener) {
         this.mOnTreatAnimalListener = onTreatAnimalListener;
     }
+
+    public Boolean getTreating() {
+        return isTreating;
+    }
+
+    public Animal getCurrentAnimal() {
+        return currentAnimal;
+    }
+
 }

@@ -1,8 +1,11 @@
 package com.br.smartzoo.model.business;
 
 import com.br.smartzoo.model.entity.Animal;
+import com.br.smartzoo.model.entity.Cage;
+import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.persistence.AnimalRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,5 +29,20 @@ public class AnimalBusiness {
 
     public static int sell(Long animalId) {
         return AnimalRepository.delete(animalId);
+    }
+
+
+    public static List<Animal> getAnimalsToTreat() {
+
+        List<Animal> animalsToTreat = new ArrayList<>();
+
+        for(Cage cage: ZooInfo.cages){
+            for(Animal animal : cage.getAnimals()){
+                if(!animal.isHealthy()){
+                    animalsToTreat.add(animal);
+                }
+            }
+        }
+        return animalsToTreat;
     }
 }

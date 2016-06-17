@@ -1,6 +1,7 @@
 package com.br.smartzoo.ui.fragment;
 
 import android.app.Dialog;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
@@ -12,10 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.SmartZooApplication;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Janitor;
@@ -26,6 +29,7 @@ import com.br.smartzoo.ui.adapter.ListCageAdapter;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.util.DateUtil;
 import com.br.smartzoo.util.RecyclerItemClickListener;
+import com.bumptech.glide.Glide;
 
 /**
  * Created by Taibic on 6/15/2016.
@@ -42,6 +46,9 @@ public class DetailsJanitorFragment extends Fragment {
     private Dialog selectCageDialog;
     private TextView textViewStatusJanitor;
     private TextView textViewProgressBarTask;
+    private Button buttonCleanCage;
+    private ImageView imageViewCageJanitor;
+    private TextView textViewJanitorStamina;
 
     @Nullable
     @Override
@@ -58,12 +65,20 @@ public class DetailsJanitorFragment extends Fragment {
         bindProgressBarCleaningCageJanitor(view);
         bindProgressBarStaminaJanitor(view);
         bindButtonCleanCageJanitor(view);
+        bindImageViewCageVeterinary(view);
+
+        setCurrentState();
 
         return view;
     }
 
+    private void bindImageViewCageVeterinary(View view) {
+        imageViewCageJanitor = (ImageView) view.findViewById(R.id.image_view_cage_janitor);
+    }
+
     private void bindButtonCleanCageJanitor(View view) {
-        Button buttonCleanCage = (Button) view.findViewById(R.id.button_clean);
+
+        buttonCleanCage = (Button) view.findViewById(R.id.button_clean);
 
         buttonCleanCage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,29 +119,10 @@ public class DetailsJanitorFragment extends Fragment {
 
                 cage.setDirtyFactor(10);
 
-                progressBarCleaningCage.setMax(cage.getDirtyFactor());
-                selected_janitor.addOnCleanCageListener(new OnCleanCageListener() {
-                    @Override
-                    public void onCleanDirty(Integer currentDirtyCleaned) {
-                        progressBarCleaningCage.setProgress(currentDirtyCleaned);
-                        textViewProgressBarTask.setText(currentDirtyCleaned + "/" + cage.getDirtyFactor());
-                    }
-
-                    @Override
-                    public void onCleanFinish() {
-                        progressBarCleaningCage.setProgress(0);
-                        textViewProgressBarTask.setText("");
-
-                        updateZooInfo(cage);
-                    }
-
-                    @Override
-                    public void onStatusChange() {
-                        textViewStatusJanitor.setText(selected_janitor.getStatus());
-                    }
-                });
+                setTaskProgressAttributes(cage);
 
                 selected_janitor.clear(cage);
+                setCurrentState();
 
 
             }
@@ -144,6 +140,44 @@ public class DetailsJanitorFragment extends Fragment {
 
     }
 
+    private void setTaskProgressAttributes(final Cage cage) {
+        progressBarCleaningCage.setMax(cage.getDirtyFactor());
+
+        if(selected_janitor.getCurrentDirtyCleaned()>0) {
+            progressBarCleaningCage.setProgress(selected_janitor.getCurrentDirtyCleaned());
+            textViewProgressBarTask.setText(selected_janitor.getCurrentDirtyCleaned() + "/" + selected_janitor.getCurrentCage().getDirtyFactor());
+        }
+
+        selected_janitor.addOnCleanCageListener(new OnCleanCageListener() {
+            @Override
+            public void onCleanDirty(Integer currentDirtyCleaned) {
+                progressBarCleaningCage.setProgress(currentDirtyCleaned);
+                progressBarStamina.setProgress(selected_janitor.getStamina());
+
+                textViewProgressBarTask.setText(currentDirtyCleaned + "/" + cage.getDirtyFactor());
+                textViewJanitorStamina.setText(selected_janitor.getStamina() + " / " + Janitor.maxStamina);
+
+            }
+
+            @Override
+            public void onCleanFinish() {
+                progressBarCleaningCage.setProgress(0);
+                textViewProgressBarTask.setText("");
+
+                buttonCleanCage.setAlpha(1f);
+                buttonCleanCage.setEnabled(true);
+                buttonCleanCage.setText(getString(R.string.button_clean));
+
+                updateZooInfo(cage);
+            }
+
+            @Override
+            public void onStatusChange() {
+                textViewStatusJanitor.setText(selected_janitor.getStatus());
+            }
+        });
+    }
+
     private void updateZooInfo(Cage cage) {
         ZooInfoBusiness.updateCageAfterClean(cage);
     }
@@ -151,6 +185,11 @@ public class DetailsJanitorFragment extends Fragment {
     private void bindProgressBarStaminaJanitor(View view) {
 
         progressBarStamina = (ProgressBar) view.findViewById(R.id.progress_bar_stamina_janitor);
+        progressBarStamina.setMax(Janitor.maxStamina);
+        progressBarStamina.setProgress(selected_janitor.getStamina());
+
+        textViewJanitorStamina = (TextView) view.findViewById(R.id.text_view_progress_bar_stamina_janitor);
+        textViewJanitorStamina.setText(selected_janitor.getStamina() + " / " + Janitor.maxStamina);
     }
 
     private void bindProgressBarCleaningCageJanitor(View view) {
@@ -193,6 +232,27 @@ public class DetailsJanitorFragment extends Fragment {
         Bundle values = getArguments();
         Parcelable parcelable = values.getParcelable(SELECTED_JANITOR);
         selected_janitor = parcelable !=null ? (Janitor) parcelable : new Janitor();
+    }
+
+
+    private void setCurrentState() {
+        if(selected_janitor.getCleaning()) {
+
+            setTaskProgressAttributes(selected_janitor.getCurrentCage());
+            textViewCageJanitor.setText(selected_janitor.getCurrentCage().getName());
+
+
+            buttonCleanCage.setAlpha(0.5f);
+            buttonCleanCage.setEnabled(false);
+            buttonCleanCage.setText("Already cleaning a cage");
+
+        }
+        else{
+            imageViewCageJanitor.setVisibility(View.INVISIBLE);
+            textViewCageJanitor.setText("");
+
+        }
+
     }
 
 }

@@ -146,7 +146,6 @@ public class NavigationDrawerFragment extends Fragment implements OnUpdateInform
 
 
 
-
     private void bindOptionStock(View view) {
         final RelativeLayout relativeOptionStock =
                 (RelativeLayout) view.findViewById(R.id.relative_option_stock);
@@ -419,4 +418,5 @@ public class NavigationDrawerFragment extends Fragment implements OnUpdateInform
 
         textViewVisitors.setText(getString(R.string.visitors)+String.valueOf(ZooInfo.visitors.size()));
     }
+
 }

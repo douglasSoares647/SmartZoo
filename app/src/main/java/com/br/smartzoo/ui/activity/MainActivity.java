@@ -175,8 +175,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
                     mNormal.setColorFilter(Color.parseColor("#757575"));
                     mForward.clearColorFilter();
                     mFastForward.clearColorFilter();
-                    //            mTextViewSpeed.setText(getString(R.string.speed) + Clock
-                    // .speedFactor);
+                    //            mTextViewSpeed.setText(getString(R.string.speed) + Clock.speedFactor);
                 }
             }
         });
@@ -239,7 +238,9 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
 
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+                    ZooInfoBusiness.onUpdateHeader = null;
                     finish();
+
                 }
             };
 

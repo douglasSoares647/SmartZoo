@@ -1,5 +1,8 @@
 package com.br.smartzoo.model.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.br.smartzoo.model.environment.Clock;
 import com.br.smartzoo.model.interfaces.Manageable;
 import com.br.smartzoo.model.singleton.Stock;
@@ -13,8 +16,8 @@ import java.util.Map;
 /**
  * Created by adenilson on 18/04/16.
  */
-public class Feeder extends Employee implements Manageable{
-	private int maxStamina = 50;
+public class Feeder extends Employee implements Manageable, Parcelable{
+    public static final int maxStamina = 50;
 
     private HashMap<Integer,Integer> cagesFeededThisMonth;
     private Stock stock;
@@ -34,8 +37,35 @@ public class Feeder extends Employee implements Manageable{
 	}
 
 
+    protected Feeder(Parcel in) {
+        super(in);
+        clock = in.readInt();
+    }
 
-	@Override
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeInt(clock);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Feeder> CREATOR = new Creator<Feeder>() {
+        @Override
+        public Feeder createFromParcel(Parcel in) {
+            return new Feeder(in);
+        }
+
+        @Override
+        public Feeder[] newArray(int size) {
+            return new Feeder[size];
+        }
+    };
+
+    @Override
     public Double calculateSalary() {
 		if(cagesFeededThisMonth.isEmpty()){
 			return super.getSalary();
@@ -119,4 +149,5 @@ public class Feeder extends Employee implements Manageable{
 			clock = 0;
 		}
 	}
+
 }

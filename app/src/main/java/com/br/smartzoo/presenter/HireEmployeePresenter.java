@@ -63,18 +63,21 @@ public class HireEmployeePresenter {
             employee.setImage(resources.getResourceEntryName(Employee.EmployeeEnum.Veterinary.getImage()));
             employee.setProfession(mContext.getString(Employee.EmployeeEnum.Veterinary.getProfession()));
             employee.setPrice(Employee.EmployeeEnum.Veterinary.getPrice());
+            employee.setStamina(Veterinary.maxStamina);
         } else if (type.equals(Employee.EmployeeEnum.Janitor)) {
             employee = new Janitor();
             employee.setSalary(Employee.EmployeeEnum.Janitor.getPrice());
             employee.setImage(resources.getResourceEntryName(Employee.EmployeeEnum.Janitor.getImage()));
             employee.setProfession(mContext.getString(Employee.EmployeeEnum.Janitor.getProfession()));
             employee.setPrice(Employee.EmployeeEnum.Janitor.getPrice());
+            employee.setStamina(Janitor.maxStamina);
         } else {
             employee = new Feeder();
             employee.setSalary(Employee.EmployeeEnum.Feeder.getPrice());
             employee.setImage(resources.getResourceEntryName(Employee.EmployeeEnum.Feeder.getImage()));
             employee.setProfession(mContext.getString(Employee.EmployeeEnum.Feeder.getProfession()));
             employee.setPrice(Employee.EmployeeEnum.Feeder.getPrice());
+            employee.setStamina(Feeder.maxStamina);
         }
 
         String[] names = mContext.getResources().getStringArray(R.array.names);
@@ -87,7 +90,6 @@ public class HireEmployeePresenter {
 
         employee.setName(name1 + " " + name2);
         employee.setAge(random.nextInt(50));
-        employee.setStamina(100);
 
         employee.setStartDate(DateUtil.stringToDateWithBrazilianFormat(Clock.getDateString()));
 
