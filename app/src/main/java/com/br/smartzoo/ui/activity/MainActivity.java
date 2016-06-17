@@ -238,6 +238,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 MainActivity.super.onBackPressed();
+                ZooInfoBusiness.onUpdateHeader = null;
             }
         };
 

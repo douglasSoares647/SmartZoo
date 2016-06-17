@@ -18,7 +18,7 @@ import java.util.Map;
  * Created by adenilson on 18/04/16.
  */
 public class Janitor extends Employee implements Parcelable {
-    private Integer maxStamina=50;
+    public static final Integer maxStamina=50;
     private int clock = 0;
 
     private Long id;
@@ -137,6 +137,7 @@ public class Janitor extends Employee implements Parcelable {
     protected Janitor(Parcel in) {
         id = in.readLong();
         status = in.readString();
+        clock = in.readInt();
     }
 
     @Override
@@ -148,6 +149,7 @@ public class Janitor extends Employee implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(id);
         dest.writeString(status);
+        dest.writeInt(clock);
     }
 
     public static final Creator<Janitor> CREATOR = new Creator<Janitor>() {
@@ -161,4 +163,21 @@ public class Janitor extends Employee implements Parcelable {
             return new Janitor[size];
         }
     };
+
+    public Cage getCurrentCage() {
+        return currentCage;
+    }
+
+    public Boolean getCleaning() {
+        return isCleaning;
+    }
+
+    public Integer getTimeToCleanCage() {
+        return timeToCleanCage;
+    }
+
+    public Integer getCurrentDirtyCleaned() {
+        return currentDirtyCleaned;
+    }
+
 }
