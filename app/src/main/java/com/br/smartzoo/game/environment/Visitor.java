@@ -1,4 +1,4 @@
-package com.br.smartzoo.model.environment;
+package com.br.smartzoo.game.environment;
 
 import android.os.Handler;
 
@@ -12,11 +12,7 @@ import com.br.smartzoo.model.interfaces.Observer;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import java.util.Random;
 import java.util.TreeMap;
 

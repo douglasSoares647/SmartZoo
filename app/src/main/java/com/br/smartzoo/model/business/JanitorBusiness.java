@@ -1,5 +1,6 @@
 package com.br.smartzoo.model.business;
 
+import com.br.smartzoo.game.environment.ZooInfo;
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Janitor;
 import com.br.smartzoo.model.persistence.JanitorRepository;
@@ -14,26 +15,37 @@ import java.util.List;
 public class JanitorBusiness {
 
 
-    public static void save(Janitor janitor){
-          JanitorRepository.save(janitor);
+    public static void save(Janitor janitor) {
+        JanitorRepository.save(janitor);
     }
 
 
-    public static void saveCageOnHistory(Janitor janitor , Cage cage){
-        JanitorRepository.saveCageOnHistory(janitor,cage);
+    public static void saveCageOnHistory(Janitor janitor, Cage cage) {
+        JanitorRepository.saveCageOnHistory(janitor, cage);
     }
 
 
-    public static HashMap<Integer,Integer> getCagesCleanedHistory(Janitor janitor){
+    public static HashMap<Integer, Integer> getCagesCleanedHistory(Janitor janitor) {
         return JanitorRepository.getCagesHistoryOfJanitor(janitor);
     }
 
-    public static HashMap<Integer,Integer> getCagesCleanedHistoryByDate(Janitor janitor, Date startDate, Date endDate){
-        return JanitorRepository.getCagesHistoryOfJanitor(janitor,startDate,endDate);
+    public static HashMap<Integer, Integer> getCagesCleanedHistoryByDate(Janitor janitor, Date startDate, Date endDate) {
+        return JanitorRepository.getCagesHistoryOfJanitor(janitor, startDate, endDate);
     }
 
-    public static List<Janitor> getJanitors(){
-       return JanitorRepository.getJanitors();
+    public static List<Janitor> getJanitors() {
+        List<Janitor> janitors = JanitorRepository.getJanitors();
+
+        for (Janitor janitor : janitors) {
+            for (Cage cage : ZooInfo.cages) {
+                if (janitor.getCurrentCage().getId().equals(cage.getId())) {
+                    janitor.setCurrentCage(cage);
+                    break;
+                }
+            }
+        }
+
+        return janitors;
     }
 
     public static List<Janitor> getJanitorsRested() {

@@ -3,16 +3,13 @@ package com.br.smartzoo.model.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.br.smartzoo.model.entity.Animal;
-import com.br.smartzoo.model.entity.Food;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by adenilson on 18/04/16.
  */
-public class Cage implements Comparable<Cage>, Parcelable{
+public class Cage implements Comparable<Cage>, Parcelable {
 
     private int dirtyFactor;
 
@@ -131,7 +128,7 @@ public class Cage implements Comparable<Cage>, Parcelable{
         }
     }
 
-    public int getAvaibleSpace(){
+    public int getAvaibleSpace() {
         return capacity - animals.size();
     }
 
@@ -150,27 +147,25 @@ public class Cage implements Comparable<Cage>, Parcelable{
 
     @Override
     public int compareTo(Cage another) {
-        if(this.getId()>another.getId())return 1;
-        else if(this.getId()<another.getId()) return -1;
+        if (this.getId() > another.getId()) return 1;
+        else if (this.getId() < another.getId()) return -1;
         return 0;
 
     }
 
 
-
     public enum CageEnum {
 
-        Cage1("Jaula para 1 animal",100.0,1 ),
-        Cage2("Jaula para 2 animais",200.0,2 ),
-        Cage3("Jaula para 3 animais",300.0,3 ),
-        Cage4("Jaula para 4 animais",400.0,4 ),
-        Cage5("Jaula para 5 animais",500.0,5 ),
-        Cage6("Jaula para 6 animais",600.0,6 ),
-        Cage7("Jaula para 7 animais",700.0,7 ),
-        Cage8("Jaula para 8 animais",800.0,8 ),
-        Cage9("Jaula para 9 animais", 900.0,9),
-        Cage10("Jaula para 10 animais",1000.0, 10 )
-        ;
+        Cage1("Jaula para 1 animal", 100.0, 1),
+        Cage2("Jaula para 2 animais", 200.0, 2),
+        Cage3("Jaula para 3 animais", 300.0, 3),
+        Cage4("Jaula para 4 animais", 400.0, 4),
+        Cage5("Jaula para 5 animais", 500.0, 5),
+        Cage6("Jaula para 6 animais", 600.0, 6),
+        Cage7("Jaula para 7 animais", 700.0, 7),
+        Cage8("Jaula para 8 animais", 800.0, 8),
+        Cage9("Jaula para 9 animais", 900.0, 9),
+        Cage10("Jaula para 10 animais", 1000.0, 10);
 
 
         private String name;

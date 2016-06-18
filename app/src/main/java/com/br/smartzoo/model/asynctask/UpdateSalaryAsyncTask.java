@@ -20,10 +20,11 @@ public class UpdateSalaryAsyncTask extends AsyncTask<Object, Integer, Integer> {
     private onSalaryChanged mOnSalaryChanged;
 
 
-    public UpdateSalaryAsyncTask(Activity context, onSalaryChanged onSalaryChanged){
+    public UpdateSalaryAsyncTask(Activity context, onSalaryChanged onSalaryChanged) {
         this.mContext = context;
         this.mOnSalaryChanged = onSalaryChanged;
     }
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -43,9 +44,9 @@ public class UpdateSalaryAsyncTask extends AsyncTask<Object, Integer, Integer> {
     @Override
     protected void onPostExecute(Integer result) {
 
-        if(result != 0){
+        if (result != 0) {
             mOnSalaryChanged.onSalaryChangedSuccess();
-        }else{
+        } else {
             mOnSalaryChanged.onSalaryChangedFailed();
         }
 

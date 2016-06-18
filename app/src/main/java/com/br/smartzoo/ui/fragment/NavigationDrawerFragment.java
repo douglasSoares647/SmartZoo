@@ -1,17 +1,13 @@
 package com.br.smartzoo.ui.fragment;
 
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Size;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,19 +17,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.game.environment.ZooInfo;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
-import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.entity.Feeder;
 import com.br.smartzoo.model.entity.Janitor;
-import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnDrawerOptionClick;
 import com.br.smartzoo.model.interfaces.OnUpdateInformationListener;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.Target;
-
-import org.w3c.dom.Text;
 
 /**
  * Created by adenilson on 05/05/16.

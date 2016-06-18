@@ -17,7 +17,6 @@ import com.br.smartzoo.model.business.BusinessRules;
 import com.br.smartzoo.model.business.EmployeeBusiness;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Employee;
-import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnHireListener;
 import com.br.smartzoo.presenter.HireEmployeePresenter;
 import com.br.smartzoo.ui.activity.MainActivity;

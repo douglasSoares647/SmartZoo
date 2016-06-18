@@ -4,10 +4,10 @@ import android.content.res.Resources;
 import android.support.annotation.Nullable;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.game.environment.Visitor;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Food;
 import com.br.smartzoo.model.entity.New;
-import com.br.smartzoo.model.environment.Visitor;
 import com.br.smartzoo.util.ApplicationUtil;
 
 import java.util.Date;

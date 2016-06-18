@@ -3,6 +3,7 @@ package com.br.smartzoo.model.persistence;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Veterinary;
 import com.br.smartzoo.util.DateUtil;
 
@@ -18,6 +19,10 @@ public class VeterinaryContract {
 
     public static String TABLE = "veterinary" ;
     public static String ID = "id" ;
+    public static String CURRENTANIMAL = "currentAnimal";
+    public static String ISTREATING = "isTreating";
+    public static String CLOCK = "clock";
+
     public static String ANIMALSTABLE = "animalsTreatedByVet" ;
     public static String ANIMALID = "animalId" ;
     public static String VETERINARYID = "veterinaryId" ;
@@ -31,7 +36,10 @@ public class VeterinaryContract {
         StringBuilder table = new StringBuilder();
 
         table.append(" create table " + TABLE + " ( ");
-        table.append(ID + " integer primary key ");
+        table.append(ID + " integer primary key, ");
+        table.append(CURRENTANIMAL + " integer, ");
+        table.append(ISTREATING + " integer, ");
+        table.append(CLOCK + " integer ");
         table.append(" ); ");
 
         return table.toString();
@@ -58,6 +66,9 @@ public class VeterinaryContract {
         ContentValues values = new ContentValues();
 
         values.put(ID, veterinary.getId());
+        values.put(CURRENTANIMAL, veterinary.getCurrentAnimal()==null?null : veterinary.getCurrentAnimal().getId());
+        values.put(CLOCK , veterinary.getClock());
+        values.put(ISTREATING, veterinary.getTreating()?1:0);
 
         return values;
     }
@@ -77,6 +88,13 @@ public class VeterinaryContract {
             veterinary.setStartDate(startDate);
             veterinary.setEndDate(endDate);
             veterinary.setStamina(cursor.getInt(cursor.getColumnIndex(EmployeeContract.STAMINA)));
+
+            Animal animal = new Animal();
+            animal.setId(cursor.getLong(cursor.getColumnIndex(CURRENTANIMAL)));
+            veterinary.setCurrentAnimal(animal);
+            veterinary.setClock(cursor.getInt(cursor.getColumnIndex(CLOCK)));
+            veterinary.setTreating(cursor.getInt(cursor.getColumnIndex(ISTREATING))==1?true:false);
+
         }
 
         return veterinary;

@@ -3,7 +3,7 @@ package com.br.smartzoo.model.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.br.smartzoo.model.environment.Clock;
+import com.br.smartzoo.game.environment.Clock;
 import com.br.smartzoo.model.interfaces.Manageable;
 import com.br.smartzoo.model.singleton.Stock;
 
@@ -16,25 +16,24 @@ import java.util.Map;
 /**
  * Created by adenilson on 18/04/16.
  */
-public class Feeder extends Employee implements Manageable, Parcelable{
+public class Feeder extends Employee implements Manageable, Parcelable {
     public static final int maxStamina = 50;
 
-    private HashMap<Integer,Integer> cagesFeededThisMonth;
+    private HashMap<Integer, Integer> cagesFeededThisMonth;
     private Stock stock;
-	private int clock=0;
-    
-    public Feeder(){
-		cagesFeededThisMonth = new HashMap<Integer,Integer>();
-    	stock = Stock.getInstance();
+    private int clock = 0;
+
+    public Feeder() {
+        cagesFeededThisMonth = new HashMap<Integer, Integer>();
+        stock = Stock.getInstance();
     }
-    
-    
+
 
     public Feeder(String image, String name, Integer age, Date startDate, Date endDate
-			, Double salary, String profession, String status) {
-		super(image, name, age, startDate, endDate, salary, profession, status);
-		stock = Stock.getInstance();
-	}
+            , Double salary, String profession, String status) {
+        super(image, name, age, startDate, endDate, salary, profession, status);
+        stock = Stock.getInstance();
+    }
 
 
     protected Feeder(Parcel in) {
@@ -67,87 +66,83 @@ public class Feeder extends Employee implements Manageable, Parcelable{
 
     @Override
     public Double calculateSalary() {
-		if(cagesFeededThisMonth.isEmpty()){
-			return super.getSalary();
-		}
-		else {
-			int sum = 0;
-			for(Map.Entry<Integer,Integer> entry : cagesFeededThisMonth.entrySet()){
-				Integer cageId = entry.getKey();
-				Integer quantity = entry.getValue();
-				sum += quantity;
-			}
+        if (cagesFeededThisMonth.isEmpty()) {
+            return super.getSalary();
+        } else {
+            int sum = 0;
+            for (Map.Entry<Integer, Integer> entry : cagesFeededThisMonth.entrySet()) {
+                Integer cageId = entry.getKey();
+                Integer quantity = entry.getValue();
+                sum += quantity;
+            }
 
-			return super.getSalary()* + 10*sum;
-		}
+            return super.getSalary() * +10 * sum;
+        }
 
     }
 
-  
-   
+
     @Override
     public void feedCage(String foodName, Cage cage) {
-		List<Food> foodsFromStock = stock.takeFoods(foodName,cage);
+        List<Food> foodsFromStock = stock.takeFoods(foodName, cage);
 
-		Double foodWeight = 0D;
+        Double foodWeight = 0D;
 
-		for(Food food : foodsFromStock){
-			foodWeight+=food.getWeight();
-		}
-		int stamina = (int) (foodWeight/5);
+        for (Food food : foodsFromStock) {
+            foodWeight += food.getWeight();
+        }
+        int stamina = (int) (foodWeight / 5);
 
-		if(getStamina()>stamina) {
-			cage.getFoods().addAll(foodsFromStock);
-			cage.setIsSupplied(true);
-		}
-		else{
-			stock.putFoods(foodsFromStock);
-		}
+        if (getStamina() > stamina) {
+            cage.getFoods().addAll(foodsFromStock);
+            cage.setIsSupplied(true);
+        } else {
+            stock.putFoods(foodsFromStock);
+        }
 
-		for(Animal animal : cage.getAnimals()){
-			animal.eat();
-		}
+        for (Animal animal : cage.getAnimals()) {
+            animal.eat();
+        }
 
 
     }
 
     @Override
     public void toRetain(Cage cage) {
-    	if(!cage.getFoods().isEmpty()){
-    		stock.putFoods(cage.getFoods());
-    		cage.getFoods().clear();
-    	}
+        if (!cage.getFoods().isEmpty()) {
+            stock.putFoods(cage.getFoods());
+            cage.getFoods().clear();
+        }
     }
 
 
-	public HashMap<Integer, Integer> getCagesFeededThisMonth() {
-		return cagesFeededThisMonth;
-	}
+    public HashMap<Integer, Integer> getCagesFeededThisMonth() {
+        return cagesFeededThisMonth;
+    }
 
-	public void setCagesFeededThisMonth(HashMap<Integer, Integer> cagesFeededThisMonth) {
-		this.cagesFeededThisMonth = cagesFeededThisMonth;
-	}
+    public void setCagesFeededThisMonth(HashMap<Integer, Integer> cagesFeededThisMonth) {
+        this.cagesFeededThisMonth = cagesFeededThisMonth;
+    }
 
-	public Stock getStock() {
-		return stock;
-	}
-
-
-
-	public void setStock(Stock stock) {
-		this.stock = stock;
-	}
+    public Stock getStock() {
+        return stock;
+    }
 
 
-	@Override
-	public void onTick() {
-		clock++;
+    public void setStock(Stock stock) {
+        this.stock = stock;
+    }
 
-		if(clock== Clock.timeToRest){
-			if(getStamina()<maxStamina)
-				setStamina(getStamina()+1);
-			clock = 0;
-		}
-	}
+
+    @Override
+    public void onTick() {
+        clock++;
+
+        if (clock == Clock.timeToRest) {
+            if (getStamina() < maxStamina)
+                setStamina(getStamina() + 1);
+            clock = 0;
+        }
+    }
 
 }

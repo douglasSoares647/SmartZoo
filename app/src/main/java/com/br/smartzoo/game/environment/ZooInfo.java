@@ -1,11 +1,7 @@
-package com.br.smartzoo.model.environment;
+package com.br.smartzoo.game.environment;
 
-import android.content.Context;
-import android.widget.Chronometer;
-
-import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.entity.Cage;
-import com.br.smartzoo.ui.activity.MainActivity;
+import com.br.smartzoo.model.entity.Employee;
 
 import java.util.ArrayList;
 import java.util.List;

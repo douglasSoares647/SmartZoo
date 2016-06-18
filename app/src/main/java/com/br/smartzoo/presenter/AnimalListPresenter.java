@@ -4,12 +4,11 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.br.smartzoo.R;
-import com.br.smartzoo.model.asynctask.LoadAnimalAsyncTask;
+import com.br.smartzoo.game.environment.ZooInfo;
 import com.br.smartzoo.model.asynctask.SellAnimalAsynkTask;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
-import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.ui.activity.MainActivity;
 import com.br.smartzoo.ui.fragment.DetailsAnimalFragment;
 import com.br.smartzoo.ui.view.AnimalListView;

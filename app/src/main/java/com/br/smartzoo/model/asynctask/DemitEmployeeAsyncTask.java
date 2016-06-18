@@ -17,7 +17,7 @@ public class DemitEmployeeAsyncTask extends AsyncTask<Long, Integer, Integer> {
     private OnDemit mOnDemit;
 
 
-    public DemitEmployeeAsyncTask(Activity context, OnDemit onDemit){
+    public DemitEmployeeAsyncTask(Activity context, OnDemit onDemit) {
         this.mContext = context;
         this.mOnDemit = onDemit;
     }
@@ -48,9 +48,9 @@ public class DemitEmployeeAsyncTask extends AsyncTask<Long, Integer, Integer> {
     @Override
     protected void onPostExecute(Integer result) {
 
-        if(result != 0){
+        if (result != 0) {
             mOnDemit.onDemitSuccess();
-        }else{
+        } else {
             mOnDemit.onDemitFailed();
         }
 

@@ -3,8 +3,6 @@ package com.br.smartzoo.util;
 import android.app.Activity;
 import android.app.ProgressDialog;
 
-import com.br.smartzoo.R;
-
 /**
  * Created by adenilson on 29/05/16.
  */

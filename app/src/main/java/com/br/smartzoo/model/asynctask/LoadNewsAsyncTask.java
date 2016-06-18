@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by Taibic on 6/6/2016.
  */
-public class LoadNewsAsyncTask extends AsyncTask<Void,Integer,List<New>> {
+public class LoadNewsAsyncTask extends AsyncTask<Void, Integer, List<New>> {
 
     private OnLoadNewsList mCallBack;
     private Activity mContext;
@@ -32,7 +32,7 @@ public class LoadNewsAsyncTask extends AsyncTask<Void,Integer,List<New>> {
         super.onPreExecute();
 
         mProgressDialog = ProgressDialogUtil
-                .makeProgressDialog(mContext,mContext.getString(R.string.msg_loading_news_feed),
+                .makeProgressDialog(mContext, mContext.getString(R.string.msg_loading_news_feed),
                         mContext.getString(R.string.title_loading_news));
         mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
@@ -40,7 +40,7 @@ public class LoadNewsAsyncTask extends AsyncTask<Void,Integer,List<New>> {
                 LoadNewsAsyncTask.this.cancel(true);
             }
         });
-       // mProgressDialog.show();
+        // mProgressDialog.show();
     }
 
     @Override
@@ -50,13 +50,11 @@ public class LoadNewsAsyncTask extends AsyncTask<Void,Integer,List<New>> {
 
     @Override
     protected void onPostExecute(List<New> news) {
-        if(news==null){
+        if (news == null) {
             mCallBack.onLoadListFailed();
-        }
-        else if(news.isEmpty()){
+        } else if (news.isEmpty()) {
             mCallBack.onLoadListEmpty();
-        }
-        else{
+        } else {
             mCallBack.onLoadListSuccess(news);
         }
 
@@ -64,10 +62,10 @@ public class LoadNewsAsyncTask extends AsyncTask<Void,Integer,List<New>> {
         super.onPostExecute(news);
     }
 
-    public interface OnLoadNewsList{
+    public interface OnLoadNewsList {
 
         void onLoadListSuccess(List<New> news);
-        
+
         void onLoadListFailed();
 
         void onLoadListEmpty();

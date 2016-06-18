@@ -43,6 +43,9 @@ public class CageRepository {
                 , CageContract.NAME);
         List<Cage> allCages = CageContract.getCages(cursor);
 
+        databaseHelper.close();
+        db.close();
+
         return allCages;
 
     }

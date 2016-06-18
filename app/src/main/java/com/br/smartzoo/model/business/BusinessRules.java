@@ -3,14 +3,14 @@ package com.br.smartzoo.model.business;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.br.smartzoo.game.environment.Player;
+import com.br.smartzoo.game.environment.Visitor;
+import com.br.smartzoo.game.environment.ZooInfo;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.entity.Food;
 import com.br.smartzoo.model.entity.New;
-import com.br.smartzoo.model.environment.Player;
-import com.br.smartzoo.model.environment.Visitor;
-import com.br.smartzoo.model.environment.ZooInfo;
 
 import java.util.Random;
 
@@ -24,64 +24,55 @@ public class BusinessRules {
 
     private static Thread threadForVisitor;
 
-    public static void generateVisitor(){
+    public static void generateVisitor() {
 
         Random random = new Random();
-        if(ZooInfo.price >=idealPrice*1.8){
-            if(random.nextInt(10)- Player.dificultity>8){
+        if (ZooInfo.price >= idealPrice * 1.8) {
+            if (random.nextInt(10) - Player.dificultity > 8) {
                 createVisitor();
             }
-        }
-        else if(ZooInfo.price >=idealPrice*1.7){
-            if(random.nextInt(10)- Player.dificultity>7){
+        } else if (ZooInfo.price >= idealPrice * 1.7) {
+            if (random.nextInt(10) - Player.dificultity > 7) {
                 createVisitor();
             }
-        }
-        else if(ZooInfo.price >=idealPrice*1.6){
-            if(random.nextInt(10)- Player.dificultity>6){
+        } else if (ZooInfo.price >= idealPrice * 1.6) {
+            if (random.nextInt(10) - Player.dificultity > 6) {
                 createVisitor();
             }
-        }
-        else if(ZooInfo.price >=idealPrice*1.5){
-            if(random.nextInt(10)- Player.dificultity>5){
+        } else if (ZooInfo.price >= idealPrice * 1.5) {
+            if (random.nextInt(10) - Player.dificultity > 5) {
                 createVisitor();
             }
-        }
-        else if(ZooInfo.price >=idealPrice*1.4){
-            if(random.nextInt(10)- Player.dificultity>4){
+        } else if (ZooInfo.price >= idealPrice * 1.4) {
+            if (random.nextInt(10) - Player.dificultity > 4) {
                 createVisitor();
             }
-        }
-        else if(ZooInfo.price >=idealPrice*1.3){
-            if(random.nextInt(10)- Player.dificultity>3){
+        } else if (ZooInfo.price >= idealPrice * 1.3) {
+            if (random.nextInt(10) - Player.dificultity > 3) {
                 createVisitor();
             }
-        }
-        else if(ZooInfo.price >=idealPrice*1.2){
-            if(random.nextInt(10)- Player.dificultity>2){
+        } else if (ZooInfo.price >= idealPrice * 1.2) {
+            if (random.nextInt(10) - Player.dificultity > 2) {
                 createVisitor();
             }
-        }
-        else if(ZooInfo.price >=idealPrice*1.1){
-            if(random.nextInt(10)- Player.dificultity>1){
+        } else if (ZooInfo.price >= idealPrice * 1.1) {
+            if (random.nextInt(10) - Player.dificultity > 1) {
                 createVisitor();
             }
-        }
-        else{
-            if(random.nextInt(10)- Player.dificultity>0) {
+        } else {
+            if (random.nextInt(10) - Player.dificultity > 0) {
                 createVisitor();
             }
         }
 
     }
 
-    private static void createVisitor(){
+    private static void createVisitor() {
         final Visitor visitor = new Visitor();
 
         Random random = new Random();
 
         visitor.setName(String.valueOf(random.nextInt(40000)));
-
 
 
         threadForVisitor = new Thread(new Runnable() {
@@ -93,7 +84,7 @@ public class BusinessRules {
                     public void run() {
                         ZooInfoBusiness.addVisitor(visitor);
                         ZooInfoBusiness.addMoney(ZooInfo.price);
-                        NewsFeedBusiness.addNew(New.TagEnum.VISITOR_ARRIVING.getTag(),visitor);
+                        NewsFeedBusiness.addNew(New.TagEnum.VISITOR_ARRIVING.getTag(), visitor);
                     }
                 });
 
@@ -107,41 +98,38 @@ public class BusinessRules {
     }
 
 
-
-    public static String calculatePriceIndicator(Double choosenPrice){
-        if(choosenPrice < (idealPrice*1.2) && choosenPrice >= idealPrice){
+    public static String calculatePriceIndicator(Double choosenPrice) {
+        if (choosenPrice < (idealPrice * 1.2) && choosenPrice >= idealPrice) {
             return "Good";
-        }
-        else if(choosenPrice>(idealPrice*1.2)){
+        } else if (choosenPrice > (idealPrice * 1.2)) {
             return "Expensive";
-        }
-        else {
+        } else {
             return "Low price";
         }
     }
 
 
-    public static Double calculateIdealPrice(){
+    public static Double calculateIdealPrice() {
         //Calcular com base na reputação do Zoo + quantidade de animais e seus respectivos foodToBeSatisfied
         // + média de preço dos foods (ainda necessita ser feito)
         // + salário dos empregados
         // + 10% de lucro;
         Double price = 0.0;
 
-        for(Cage cage : ZooInfo.cages){
-            for(Animal animal : cage.getAnimals()){
+        for (Cage cage : ZooInfo.cages) {
+            for (Animal animal : cage.getAnimals()) {
                 price += animal.getFoodToBeSatisfied() * 120 * Food.FoodEnum.Meat.Beef.getPrice();
             }
         }
 
-        for(Employee employee : ZooInfo.employees){
-            price+=employee.getSalary();
+        for (Employee employee : ZooInfo.employees) {
+            price += employee.getSalary();
         }
 
-        price +=ZooInfo.reputation*0.05;
-        price = price*1.1;
+        price += ZooInfo.reputation * 0.05;
+        price = price * 1.1;
 
-        price = price/50;//30 dias contando que 100 pessoas visitem o zoo
+        price = price / 50;//30 dias contando que 100 pessoas visitem o zoo
 
         idealPrice = price;
 
@@ -150,25 +138,24 @@ public class BusinessRules {
     }
 
 
-    public static boolean haveMoneyToBuyAnimal(Animal animal){
-        if(ZooInfo.money>animal.getPrice()) {
+    public static boolean haveMoneyToBuyAnimal(Animal animal) {
+        if (ZooInfo.money > animal.getPrice()) {
             return true;
         }
         return false;
     }
 
 
-    public static Boolean haveMoneyToBuyCage(Cage cage){
-        if(ZooInfo.money>cage.getPrice()) {
+    public static Boolean haveMoneyToBuyCage(Cage cage) {
+        if (ZooInfo.money > cage.getPrice()) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
 
 
-    public static Boolean haveMoneyToBuyEmployee(Employee employee){
+    public static Boolean haveMoneyToBuyEmployee(Employee employee) {
         return ZooInfo.money > employee.getPrice();
     }
 

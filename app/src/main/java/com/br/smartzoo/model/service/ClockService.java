@@ -8,9 +8,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.game.environment.Clock;
+import com.br.smartzoo.model.asynctask.SaveZooStateAsyncTask;
 import com.br.smartzoo.model.interfaces.OnClockTickListener;
 import com.br.smartzoo.ui.activity.MainActivity;
-import com.br.smartzoo.model.environment.Clock;
 
 /**
  * Created by Douglas on 5/16/2016.
@@ -39,14 +40,14 @@ public class ClockService extends Service {
         NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.ic_animal_lion)
-                        .setContentTitle("SmartZoo")
-                        .setContentText("Seu jogo está rodando, toque para acessá-lo");
+                        .setContentTitle(getString(R.string.title_smart_zoo))
+                        .setContentText(getString(R.string.msg_game_running));
         int NOTIFICATION_ID = 12345;
 
         Intent targetIntent = new Intent(this, MainActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, targetIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(contentIntent);
-        startForeground(NOTIFICATION_ID,builder.build());
+        startForeground(NOTIFICATION_ID, builder.build());
 
 
         return START_STICKY;
@@ -55,11 +56,12 @@ public class ClockService extends Service {
     @Override
     public void onDestroy() {
 
-        Clock.isRunning = false;
+        Clock.stopClock();
+
+        new SaveZooStateAsyncTask().execute();
 
         super.onDestroy();
     }
-
 
 
 }

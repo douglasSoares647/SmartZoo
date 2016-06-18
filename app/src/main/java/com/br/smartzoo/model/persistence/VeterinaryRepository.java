@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.br.smartzoo.model.business.BusinessRules;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Veterinary;
 import com.br.smartzoo.util.DateUtil;
@@ -18,16 +17,16 @@ import java.util.List;
  */
 public class VeterinaryRepository {
 
-    public static void save(Veterinary veterinary){
+    public static void save(Veterinary veterinary) {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
         ContentValues values = VeterinaryContract.createContentValues(veterinary);
 
-        if(VeterinaryRepository.existsVeterinary(veterinary)){
+        if (VeterinaryRepository.existsVeterinary(veterinary)) {
             String where = " id = " + veterinary.getId();
             db.update(VeterinaryContract.TABLE, values, where, null);
-        }else{
+        } else {
             db.insert(VeterinaryContract.TABLE, null, values);
         }
 
@@ -57,64 +56,71 @@ public class VeterinaryRepository {
     }
 
 
-    public static void saveAnimalHistory(Veterinary veterinary, Animal animal){
+    public static void saveAnimalHistory(Veterinary veterinary, Animal animal) {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
-        db.execSQL(" insert into " + VeterinaryContract.ANIMALSTABLE + " ( "+ VeterinaryContract.VETERINARYID + ", "+VeterinaryContract.ANIMALID + "), values (" + veterinary.getId() +", "+animal.getId());
+        db.execSQL(" insert into " + VeterinaryContract.ANIMALSTABLE + " ( " + VeterinaryContract.VETERINARYID + ", " + VeterinaryContract.ANIMALID + "), values (" + veterinary.getId() + ", " + animal.getId());
 
 
         db.close();
         databaseHelper.close();
     }
 
-    public static HashMap<Integer,Integer> getAnimalsOnHistory(Veterinary veterinary, Date startDate, Date endDate){
+    public static HashMap<Integer, Integer> getAnimalsOnHistory(Veterinary veterinary, Date startDate, Date endDate) {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
 
         String start = DateUtil.dateToString(startDate);
         String end = DateUtil.dateToString(endDate);
 
-        String sql = " select animalId, count(animalId) as 'count' from " + VeterinaryContract.ANIMALSTABLE+ " where veterinaryId like "+veterinary.getId() +
+        String sql = " select animalId, count(animalId) as 'count' from " + VeterinaryContract.ANIMALSTABLE + " where veterinaryId like " + veterinary.getId() +
                 " and date between " + start + " and  " + end + " group by animalId;";
 
-        Cursor cursor = db.rawQuery(sql,null);
+        Cursor cursor = db.rawQuery(sql, null);
 
+        HashMap<Integer, Integer> animalsCount = VeterinaryContract.getAnimalsCount(cursor);
         db.close();
         databaseHelper.close();
 
-        return VeterinaryContract.getAnimalsCount(cursor);
+        return animalsCount;
 
     }
 
 
-    public static HashMap<Integer,Integer> getAnimalsOnHistory(Veterinary veterinary){
+    public static HashMap<Integer, Integer> getAnimalsOnHistory(Veterinary veterinary) {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
 
-        String sql = " select animalId, count(animalId) as 'count' from " + VeterinaryContract.ANIMALSTABLE+ " where veterinaryId like "+veterinary.getId() +
+        String sql = " select animalId, count(animalId) as 'count' from " + VeterinaryContract.ANIMALSTABLE + " where veterinaryId like " + veterinary.getId() +
                 " group by animalId;";
 
-        Cursor cursor = db.rawQuery(sql,null);
+        Cursor cursor = db.rawQuery(sql, null);
+
+        HashMap<Integer, Integer> animalsCount = VeterinaryContract.getAnimalsCount(cursor);
 
         db.close();
         databaseHelper.close();
 
-        return VeterinaryContract.getAnimalsCount(cursor);
+        return animalsCount;
 
     }
 
 
-
-    public static List<Veterinary> getVeterinaries(){
+    public static List<Veterinary> getVeterinaries() {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
 
-        String sql = " Select v.id, e.image, e.name, e.age, e.cpf, e.startDate, e.endDate, e.salary, e.stamina from "
+        String sql = " Select v.id, v.currentAnimal, v.clock, v.isTreating,  e.image, e.name, e.age, e.cpf, e.startDate, e.endDate, e.salary, e.stamina,e.status from "
                 + EmployeeContract.TABLE + " e join " + VeterinaryContract.TABLE + " v on v.id = e.id;";
 
-        Cursor cursor = db.rawQuery(sql,null);
+        Cursor cursor = db.rawQuery(sql, null);
 
-        return VeterinaryContract.getVeterinaries(cursor);
+        List<Veterinary> veterinaries = VeterinaryContract.getVeterinaries(cursor);
+
+        databaseHelper.close();
+        db.close();
+
+        return veterinaries;
     }
 }

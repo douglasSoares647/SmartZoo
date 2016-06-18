@@ -13,17 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.br.smartzoo.R;
-import com.br.smartzoo.model.business.AnimalBusiness;
+import com.br.smartzoo.game.environment.ZooInfo;
 import com.br.smartzoo.model.business.BusinessRules;
 import com.br.smartzoo.model.business.CageBusiness;
-import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
-import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnBuyAnimalListener;
 import com.br.smartzoo.model.interfaces.OnSetAnimalNameListener;
 import com.br.smartzoo.presenter.BuyAnimalPresenter;
@@ -37,7 +34,6 @@ import com.br.smartzoo.util.AlertDialogUtil;
 import com.br.smartzoo.util.DialogUtil;
 import com.br.smartzoo.util.RecyclerItemClickListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

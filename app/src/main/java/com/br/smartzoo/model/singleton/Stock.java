@@ -1,8 +1,8 @@
 package com.br.smartzoo.model.singleton;
 
 import com.br.smartzoo.model.entity.Animal;
-import com.br.smartzoo.model.entity.Food;
 import com.br.smartzoo.model.entity.Cage;
+import com.br.smartzoo.model.entity.Food;
 
 import java.util.ArrayList;
 import java.util.Calendar;

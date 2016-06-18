@@ -79,10 +79,12 @@ public class JanitorRepository {
 
         Cursor cursor = db.rawQuery(sql, null);
 
+        HashMap<Integer, Integer> cagesCount = JanitorContract.getCagesCount(cursor);
+
         db.close();
         databaseHelper.close();
 
-        return FeederContract.getCagesCount(cursor);
+        return cagesCount;
 
     }
 
@@ -95,7 +97,12 @@ public class JanitorRepository {
 
         Cursor cursor = db.rawQuery(sql, null);
 
-        return FeederContract.getCagesCount(cursor);
+        HashMap<Integer, Integer> cagesCount = JanitorContract.getCagesCount(cursor);
+
+        databaseHelper.close();
+        db.close();
+
+        return cagesCount;
 
     }
 
@@ -103,25 +110,35 @@ public class JanitorRepository {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
 
-        String sql = " Select j.id, e.image, e.status, e.name, e.age, e.cpf, e.startDate," +
+        String sql = " Select j.id, j.currentCage, j.clock, j.currentDirtyCleaned, j.timeToCleanCage,j.isCleaning, e.image, e.status, e.name, e.age, e.cpf, e.startDate," +
                 " e.endDate, e.salary, e.stamina from " + EmployeeContract.TABLE + " e join "
                 + JanitorContract.TABLE + " j on j.id = e.id;";
 
         Cursor cursor = db.rawQuery(sql, null);
 
-        return JanitorContract.getJanitors(cursor);
+        List<Janitor> janitors = JanitorContract.getJanitors(cursor);
+
+        databaseHelper.close();
+        db.close();
+
+        return janitors;
     }
 
     public static List<Janitor> getJanitorsRested() {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
 
-        String sql = " Select j.id, e.image, e.status, e.name, e.age, e.cpf, e.startDate, " +
+        String sql = " Select j.id,j.currentCage, j.clock, j.currentDirtyCleaned, j.timeToCleanCage,j.isCleaning, e.image, e.status, e.name, e.age, e.cpf, e.startDate, " +
                 "e.endDate, e.salary, e.stamina from " + EmployeeContract.TABLE + " e join "
-                + JanitorContract.TABLE + " j on j.id = e.id where e.status = 'rested';";
+                + JanitorContract.TABLE + " j on j.id = e.id where e.status = 'ready';";
 
         Cursor cursor = db.rawQuery(sql, null);
 
-        return JanitorContract.getJanitors(cursor);
+        List<Janitor> janitors = JanitorContract.getJanitors(cursor);
+
+        databaseHelper.close();
+        db.close();
+
+        return janitors;
     }
 }

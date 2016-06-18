@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.SmartZooApplication;
-import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Food;
 import com.br.smartzoo.model.interfaces.OnChangeBuyListener;
 import com.bumptech.glide.Glide;

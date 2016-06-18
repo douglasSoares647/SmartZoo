@@ -4,8 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
-import com.br.smartzoo.presenter.MainActivityPresenter;
-
 /**
  * Created by adenilson on 16/06/16.
  */
@@ -35,14 +33,14 @@ public class GameState {
         int backStackEntryCount = activity.getSupportFragmentManager()
                 .getBackStackEntryCount();
 
-        if(backStackEntryCount != 1) {
+        if (backStackEntryCount != 1) {
             FragmentManager.BackStackEntry backEntry = activity.getSupportFragmentManager()
                     .getBackStackEntryAt(backStackEntryCount - 1);
             String str = backEntry.getName();
             fragment = activity.getSupportFragmentManager().findFragmentByTag(str);
 
         }
-            return fragment;
+        return fragment;
     }
 
 }

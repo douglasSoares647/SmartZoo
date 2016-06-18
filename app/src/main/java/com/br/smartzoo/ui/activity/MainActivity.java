@@ -6,11 +6,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.menu.MenuPresenter;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -20,6 +18,9 @@ import android.widget.TextView;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.game.GameState;
+import com.br.smartzoo.game.environment.Clock;
+import com.br.smartzoo.model.asynctask.LoadZooInfoAsyncTask;
+import com.br.smartzoo.model.asynctask.SaveZooStateAsyncTask;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.interfaces.OnClockTickListener;
 import com.br.smartzoo.model.interfaces.OnDrawerOptionClick;
@@ -39,7 +40,6 @@ import com.br.smartzoo.ui.fragment.StatusZooFragment;
 import com.br.smartzoo.ui.view.MainActivityView;
 import com.br.smartzoo.util.AlertDialogUtil;
 import com.br.smartzoo.util.AnimUtil;
-import com.br.smartzoo.model.environment.Clock;
 import com.br.smartzoo.util.ServiceHelper;
 import com.bumptech.glide.Glide;
 
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-            loadZooInfo();
+            new LoadZooInfoAsyncTask(this).execute();
         }
 
         bindmPresenter();
@@ -150,7 +150,6 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
                 mNormal.clearColorFilter();
                 mForward.setColorFilter(Color.parseColor("#757575"));
                 mFastForward.clearColorFilter();
-                //         mTextViewSpeed.setText(getString(R.string.speed) + Clock.speedFactor);
             }
         });
 
@@ -162,7 +161,6 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
                 mNormal.clearColorFilter();
                 mFastForward.setColorFilter(Color.parseColor("#757575"));
                 mForward.clearColorFilter();
-                //         mTextViewSpeed.setText(getString(R.string.speed) + Clock.speedFactor);
             }
         });
 
@@ -175,7 +173,6 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
                     mNormal.setColorFilter(Color.parseColor("#757575"));
                     mForward.clearColorFilter();
                     mFastForward.clearColorFilter();
-                    //            mTextViewSpeed.setText(getString(R.string.speed) + Clock.speedFactor);
                 }
             }
         });
@@ -239,6 +236,7 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     ZooInfoBusiness.onUpdateHeader = null;
+                    new SaveZooStateAsyncTask().execute();
                     finish();
 
                 }
@@ -345,24 +343,11 @@ public class MainActivity extends AppCompatActivity implements OnDrawerOptionCli
         mPresenter.startTransaction(mIdFrameContainer, fragment);
     }
 
-    private void loadZooInfo() {
-
-        ZooInfoBusiness.getFromPreferences();
-
-
-        if (!ZooInfoBusiness.isLoaded) {
-            ZooInfoBusiness.load();
-            ZooInfoBusiness.isLoaded = true;
-        }
-    }
-
-
     public void changeToolBarText(String text) {
         TextView textView = (TextView) mToolbar.findViewById(R.id.text_view_toolbar_title);
 
         textView.setText(text);
 
     }
-
 
 }

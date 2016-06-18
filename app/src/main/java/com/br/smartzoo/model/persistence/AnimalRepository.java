@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.br.smartzoo.model.entity.Animal;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

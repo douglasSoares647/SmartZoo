@@ -13,7 +13,7 @@ import java.util.Date;
 /**
  * Created by taibic on 14/04/16.
  */
-public abstract class Employee implements Observer, Parcelable{
+public abstract class Employee implements Observer, Parcelable {
 
     private String image;
     private Long id;
@@ -49,7 +49,6 @@ public abstract class Employee implements Observer, Parcelable{
         endDate = DateUtil.stringToDate(in.readString());
         salary = in.readDouble();
         profession = in.readString();
-        price = in.readDouble();
         status = in.readString();
         stamina = in.readInt();
     }
@@ -63,7 +62,6 @@ public abstract class Employee implements Observer, Parcelable{
         dest.writeString(DateUtil.dateToString(endDate));
         dest.writeDouble(salary);
         dest.writeString(profession);
-        dest.writeDouble(price);
         dest.writeString(status);
         dest.writeInt(stamina);
     }
@@ -168,10 +166,10 @@ public abstract class Employee implements Observer, Parcelable{
     public enum EmployeeEnum {
 
         Veterinary(R.drawable.ic_veterinary, 1000D, R.string.name_veterinary),
-        Janitor(R.drawable.ic_janitor, 1000D,R.string.name_janitor),
+        Janitor(R.drawable.ic_janitor, 1000D, R.string.name_janitor),
         Feeder(R.drawable.ic_feeder, 1600D, R.string.name_feeder);
 
-        private  int profession;
+        private int profession;
         private int image;
         private Double price;
 

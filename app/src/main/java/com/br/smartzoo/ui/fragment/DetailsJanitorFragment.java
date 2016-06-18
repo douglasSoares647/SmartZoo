@@ -1,7 +1,6 @@
 package com.br.smartzoo.ui.fragment;
 
 import android.app.Dialog;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
@@ -18,18 +17,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
-import com.br.smartzoo.SmartZooApplication;
+import com.br.smartzoo.game.environment.ZooInfo;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Janitor;
-import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnCleanCageListener;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.ListCageAdapter;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.util.DateUtil;
 import com.br.smartzoo.util.RecyclerItemClickListener;
-import com.bumptech.glide.Glide;
 
 /**
  * Created by Taibic on 6/15/2016.
@@ -152,21 +149,18 @@ public class DetailsJanitorFragment extends Fragment {
             @Override
             public void onCleanDirty(Integer currentDirtyCleaned) {
                 progressBarCleaningCage.setProgress(currentDirtyCleaned);
-                progressBarStamina.setProgress(selected_janitor.getStamina());
-
                 textViewProgressBarTask.setText(currentDirtyCleaned + "/" + cage.getDirtyFactor());
-                textViewJanitorStamina.setText(selected_janitor.getStamina() + " / " + Janitor.maxStamina);
-
             }
 
             @Override
             public void onCleanFinish() {
-                progressBarCleaningCage.setProgress(0);
-                textViewProgressBarTask.setText("");
+
 
                 buttonCleanCage.setAlpha(1f);
                 buttonCleanCage.setEnabled(true);
                 buttonCleanCage.setText(getString(R.string.button_clean));
+
+                setCurrentState();
 
                 updateZooInfo(cage);
             }
@@ -174,6 +168,12 @@ public class DetailsJanitorFragment extends Fragment {
             @Override
             public void onStatusChange() {
                 textViewStatusJanitor.setText(selected_janitor.getStatus());
+            }
+
+            @Override
+            public void onStaminaChange() {
+                progressBarStamina.setProgress(selected_janitor.getStamina());
+                textViewJanitorStamina.setText(selected_janitor.getStamina() + " / " + Janitor.maxStamina);
             }
         });
     }
@@ -240,6 +240,7 @@ public class DetailsJanitorFragment extends Fragment {
 
             setTaskProgressAttributes(selected_janitor.getCurrentCage());
             textViewCageJanitor.setText(selected_janitor.getCurrentCage().getName());
+            imageViewCageJanitor.setVisibility(View.VISIBLE);
 
 
             buttonCleanCage.setAlpha(0.5f);
@@ -250,6 +251,8 @@ public class DetailsJanitorFragment extends Fragment {
         else{
             imageViewCageJanitor.setVisibility(View.INVISIBLE);
             textViewCageJanitor.setText("");
+            progressBarCleaningCage.setProgress(0);
+            textViewProgressBarTask.setText("");
 
         }
 

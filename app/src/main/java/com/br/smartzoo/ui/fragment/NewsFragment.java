@@ -11,13 +11,11 @@ import android.view.ViewGroup;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.business.NewsFeedBusiness;
-import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.New;
 import com.br.smartzoo.model.interfaces.OnNewClick;
 import com.br.smartzoo.model.interfaces.OnNewFeedUpdate;
 import com.br.smartzoo.presenter.NewsPresenter;
 import com.br.smartzoo.ui.activity.MainActivity;
-import com.br.smartzoo.ui.adapter.AnimalListAdapter;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.NewListAdapter;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;

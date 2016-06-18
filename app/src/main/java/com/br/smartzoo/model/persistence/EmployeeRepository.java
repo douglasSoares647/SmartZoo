@@ -21,10 +21,10 @@ public class EmployeeRepository {
 
         long id;
 
-        if(EmployeeBusiness.existsEmployee(employee)){
+        if (EmployeeBusiness.existsEmployee(employee)) {
             String where = " id = " + employee.getId();
             id = db.update(EmployeeContract.TABLE, values, where, null);
-        }else{
+        } else {
             id = db.insert(EmployeeContract.TABLE, null, values);
         }
 

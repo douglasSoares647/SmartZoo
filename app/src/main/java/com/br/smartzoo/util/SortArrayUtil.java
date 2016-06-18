@@ -5,7 +5,6 @@ import android.app.Activity;
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.entity.Animal;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;

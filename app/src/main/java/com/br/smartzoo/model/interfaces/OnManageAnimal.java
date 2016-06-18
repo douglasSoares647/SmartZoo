@@ -6,8 +6,8 @@ import com.br.smartzoo.model.entity.Animal;
  * Created by adenilson on 31/05/16.
  */
 public interface OnManageAnimal {
-     void onSell(Animal animal);
+    void onSell(Animal animal);
 
-     void onClick(Animal animal);
+    void onClick(Animal animal);
 
 }

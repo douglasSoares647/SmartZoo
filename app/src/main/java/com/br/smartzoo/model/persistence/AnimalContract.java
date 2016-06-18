@@ -30,10 +30,13 @@ public class AnimalContract {
     public static String RESISTENCE = "resistence";
     public static String POPULARITY = "popularity";
     public static String ISHUNGRY = "isHungry";
+    public static String BIOLOGICALCLOCK = "clock";
+    public static String FOODEATEN = "foodEaten";
+    public static String ISDIGESTING = "isDigesting";
 
 
-    public static String[] COLUMNS = {ID, IMAGE, NAME,TYPE, PRICE, AGE, WEIGHT, SEX, STATUS, CAGEID, ISHEALTHY
-            , RESISTENCE, POPULARITY, ISHUNGRY};
+    public static String[] COLUMNS = {ID, IMAGE, NAME, TYPE, PRICE, AGE, WEIGHT, SEX, STATUS, CAGEID, ISHEALTHY
+            , RESISTENCE, POPULARITY, ISHUNGRY, BIOLOGICALCLOCK, FOODEATEN, ISDIGESTING};
 
 
     public static String createTable() {
@@ -53,7 +56,10 @@ public class AnimalContract {
         table.append(ISHEALTHY + " integer not null, ");
         table.append(RESISTENCE + " integer not null, ");
         table.append(POPULARITY + " integer not null, ");
-        table.append(ISHUNGRY + " integer ");
+        table.append(ISHUNGRY + " integer, ");
+        table.append(BIOLOGICALCLOCK + " integer not null, ");
+        table.append(FOODEATEN + " real, ");
+        table.append(ISDIGESTING + " integer not null ");
         table.append(" ); ");
 
         return table.toString();
@@ -77,7 +83,10 @@ public class AnimalContract {
         contentValues.put(ISHEALTHY, animal.isHealthy() ? 1 : 0);
         contentValues.put(RESISTENCE, animal.getResistance());
         contentValues.put(POPULARITY, animal.getPopularity());
-        contentValues.put(ISHUNGRY, animal.isHungry()? 1 : 0);
+        contentValues.put(ISHUNGRY, animal.isHungry() ? 1 : 0);
+        contentValues.put(BIOLOGICALCLOCK, animal.getBiologicalClock());
+        contentValues.put(FOODEATEN, animal.getFoodEaten());
+        contentValues.put(ISDIGESTING, animal.isDigesting() ? 1 : 0);
 
 
         return contentValues;
@@ -107,9 +116,13 @@ public class AnimalContract {
             animal.setPopularity(cursor.getInt(cursor.getColumnIndex(POPULARITY)));
 
             Integer isHungry = cursor.getInt(cursor.getColumnIndex(ISHUNGRY));
-            if(isHungry == 1){
-            animal.setHungry(true);
+            if (isHungry == 1) {
+                animal.setHungry(true);
             }
+
+            animal.setBiologicalClock(cursor.getInt(cursor.getColumnIndex(BIOLOGICALCLOCK)));
+            animal.setFoodEaten(cursor.getDouble(cursor.getColumnIndex(FOODEATEN)));
+            animal.setDigesting(cursor.getInt(cursor.getColumnIndex(ISDIGESTING)) == 1 ? true : false);
         }
 
         return animal;

@@ -49,11 +49,11 @@ public class DestroyCageAsyncTask extends AsyncTask<Long, Integer, Integer> {
     protected void onPostExecute(Integer id) {
         if (id != -1) {
             mCallBack.onDestroyCageSuccess();
-        }else{
+        } else {
             mCallBack.onDestroyCageFail();
         }
-            mProgressDialog.dismiss();
-        }
+        mProgressDialog.dismiss();
+    }
 
     private void setProgress(Integer progress) {
         mProgressDialog.setProgress(progress);

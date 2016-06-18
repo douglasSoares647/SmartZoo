@@ -1,10 +1,9 @@
 package com.br.smartzoo.model.persistence;
 
-import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.br.smartzoo.model.environment.ZooInfo;
+import com.br.smartzoo.game.environment.ZooInfo;
 
 /**
  * Created by Douglas on 5/11/2016.
@@ -37,5 +36,6 @@ public class ZooInfoRepository {
         ZooInfoContract.fillZooInfo(cursor);
 
         db.close();
+        databaseHelper.close();
     }
 }

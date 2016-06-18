@@ -4,16 +4,13 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.game.environment.ZooInfo;
 import com.br.smartzoo.model.asynctask.DemitEmployeeAsyncTask;
-import com.br.smartzoo.model.asynctask.LoadVeterinariesAsyncTask;
 import com.br.smartzoo.model.asynctask.UpdateSalaryAsyncTask;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Employee;
-import com.br.smartzoo.model.entity.Feeder;
 import com.br.smartzoo.model.entity.Veterinary;
-import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.ui.activity.MainActivity;
-import com.br.smartzoo.ui.fragment.DetailsJanitorFragment;
 import com.br.smartzoo.ui.fragment.DetailsVeterinaryFragment;
 import com.br.smartzoo.ui.view.VeterinaryListView;
 

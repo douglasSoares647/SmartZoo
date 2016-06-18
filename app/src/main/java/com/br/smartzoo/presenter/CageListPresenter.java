@@ -4,20 +4,18 @@ import android.app.Activity;
 import android.app.Dialog;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.game.environment.ZooInfo;
 import com.br.smartzoo.model.asynctask.CleanCageAsyncTask;
 import com.br.smartzoo.model.asynctask.DestroyCageAsyncTask;
-import com.br.smartzoo.model.asynctask.LoadCagesAsyncTask;
 import com.br.smartzoo.model.asynctask.LoadJanitorsRestedAsyncTask;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Janitor;
-import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnJanitorsRestedSelected;
 import com.br.smartzoo.ui.activity.MainActivity;
 import com.br.smartzoo.ui.view.CageListView;
 import com.br.smartzoo.util.DialogUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

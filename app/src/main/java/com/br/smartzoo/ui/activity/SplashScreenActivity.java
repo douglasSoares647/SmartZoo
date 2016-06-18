@@ -11,9 +11,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.br.smartzoo.R;
-import com.br.smartzoo.model.business.ZooInfoBusiness;
-import com.br.smartzoo.model.environment.ZooInfo;
-import com.br.smartzoo.util.ServiceHelper;
 import com.bumptech.glide.Glide;
 
 

@@ -3,7 +3,7 @@ package com.br.smartzoo.model.persistence;
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import com.br.smartzoo.model.environment.ZooInfo;
+import com.br.smartzoo.game.environment.ZooInfo;
 
 /**
  * Created by Douglas on 5/11/2016.
@@ -15,10 +15,10 @@ public class ZooInfoContract {
     public static String CASH = "cash";
     public static String REPUTATION = "reputation";
     public static String PRICE = "price";
-    public static String[] columns = {NAME,CASH,REPUTATION,PRICE};
+    public static String[] columns = {NAME, CASH, REPUTATION, PRICE};
 
 
-    public static String createTableZooInfo(){
+    public static String createTableZooInfo() {
         StringBuilder table = new StringBuilder();
 
         table.append("create table " + TABLE + " ( ");
@@ -32,7 +32,7 @@ public class ZooInfoContract {
     }
 
 
-    public static ContentValues createContentValues(){
+    public static ContentValues createContentValues() {
 
         ContentValues contentValues = new ContentValues();
 
@@ -46,11 +46,9 @@ public class ZooInfoContract {
     }
 
 
+    public static void fillZooInfo(Cursor cursor) {
 
-
-    public static void fillZooInfo(Cursor cursor){
-
-        if(!cursor.isBeforeFirst() || cursor.moveToNext()){
+        if (!cursor.isBeforeFirst() || cursor.moveToNext()) {
             ZooInfo.name = cursor.getString(cursor.getColumnIndex(NAME));
             ZooInfo.money = cursor.getDouble(cursor.getColumnIndex(CASH));
             ZooInfo.price = cursor.getDouble(cursor.getColumnIndex(PRICE));

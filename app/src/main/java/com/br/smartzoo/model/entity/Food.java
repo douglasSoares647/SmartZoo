@@ -76,15 +76,14 @@ public class Food {
     }
 
 
-
     public enum FoodEnum {
         ;
 
         public enum Meat {
 
-            Beef(R.drawable.ic_beef,  R.string.food_beef, 10.0, 1D),
-            Chicken(R.drawable.ic_chicken, R.string.food_chicken, 8.0,1D),
-            Pork(R.drawable.ic_pork,R.string.food_pork, 9.75,1D);
+            Beef(R.drawable.ic_beef, R.string.food_beef, 10.0, 1D),
+            Chicken(R.drawable.ic_chicken, R.string.food_chicken, 8.0, 1D),
+            Pork(R.drawable.ic_pork, R.string.food_pork, 9.75, 1D);
 
             private int image;
             private Double price;
@@ -111,7 +110,9 @@ public class Food {
                 return price;
             }
 
-            public int getImage() { return image; }
+            public int getImage() {
+                return image;
+            }
         }
 
         public enum Fruit {
@@ -125,7 +126,6 @@ public class Food {
                 this.name = fruit;
                 this.price = price;
                 this.weight = weight;
-
 
 
             }
@@ -143,7 +143,9 @@ public class Food {
                 return price;
             }
 
-            public int getImage() { return image; }
+            public int getImage() {
+                return image;
+            }
 
             public Double getWeight() {
                 return weight;

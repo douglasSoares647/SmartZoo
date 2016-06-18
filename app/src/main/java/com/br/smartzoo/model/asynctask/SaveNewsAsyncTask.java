@@ -10,13 +10,13 @@ import java.util.List;
 /**
  * Created by Taibic on 6/6/2016.
  */
-public class SaveNewsAsyncTask extends AsyncTask<List<New>,Void,Void> {
+public class SaveNewsAsyncTask extends AsyncTask<List<New>, Void, Void> {
 
 
     @Override
     protected Void doInBackground(List<New>... params) {
-        for(New aNew : params[0])
-        NewsFeedBusiness.save(aNew);
+        for (New aNew : params[0])
+            NewsFeedBusiness.save(aNew);
 
         return null;
     }

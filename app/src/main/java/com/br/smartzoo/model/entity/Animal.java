@@ -5,8 +5,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.game.environment.Clock;
 import com.br.smartzoo.model.business.NewsFeedBusiness;
-import com.br.smartzoo.model.environment.Clock;
 import com.br.smartzoo.model.interfaces.Observer;
 import com.br.smartzoo.util.ApplicationUtil;
 
@@ -77,6 +77,22 @@ public class Animal implements Observer, Parcelable {
 
     public void setBiologicalClock(int biologicalClock) {
         this.biologicalClock = biologicalClock;
+    }
+
+    public boolean isDigesting() {
+        return isDigesting;
+    }
+
+    public void setDigesting(boolean digesting) {
+        isDigesting = digesting;
+    }
+
+    public Double getFoodEaten() {
+        return foodEaten;
+    }
+
+    public void setFoodEaten(Double foodEaten) {
+        this.foodEaten = foodEaten;
     }
 
     public String getType() {
@@ -259,7 +275,7 @@ public class Animal implements Observer, Parcelable {
 
 
     public Integer getStaminaToBeCured() {
-        return staminaToBeCured == null? 0 : staminaToBeCured;
+        return staminaToBeCured == null ? 0 : staminaToBeCured;
     }
 
     public void setStaminaToBeCured(Integer staminaToBeCured) {
@@ -273,8 +289,7 @@ public class Animal implements Observer, Parcelable {
 
         if (isDigesting) {
             digest();
-        }
-        else if(biologicalClock==Clock.timeToFeelHungry){
+        } else if (biologicalClock == Clock.timeToFeelHungry) {
             setHungry(true);
         }
 

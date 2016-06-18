@@ -5,9 +5,11 @@ package com.br.smartzoo.model.interfaces;
  */
 public interface OnCleanCageListener {
 
-   void onCleanDirty(Integer currentDirtyCleaned);
+    void onCleanDirty(Integer currentDirtyCleaned);
 
-   void onCleanFinish();
+    void onCleanFinish();
 
-   void onStatusChange();
+    void onStatusChange();
+
+    void onStaminaChange();
 }

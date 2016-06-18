@@ -5,7 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.br.smartzoo.R;
-import com.br.smartzoo.model.environment.Clock;
+import com.br.smartzoo.game.environment.Clock;
 import com.br.smartzoo.model.interfaces.OnCleanCageListener;
 import com.br.smartzoo.util.ApplicationUtil;
 
@@ -18,11 +18,9 @@ import java.util.Map;
  * Created by adenilson on 18/04/16.
  */
 public class Janitor extends Employee implements Parcelable {
-    public static final Integer maxStamina=50;
+    public static final Integer maxStamina = 50;
     private int clock = 0;
 
-    private Long id;
-    private String status;
     private HashMap<Integer, Integer> cagesCleanedThisMonth;
 
 
@@ -36,14 +34,13 @@ public class Janitor extends Employee implements Parcelable {
     }
 
     public Janitor(String image, String name, Integer age, Date startDate, Date endDate, Double salary
-            , String profession,String status) {
+            , String profession, String status) {
         super(image, name, age, startDate, endDate, salary, profession, status);
     }
 
     public Janitor() {
+        setStatus(ApplicationUtil.applicationContext.getString(R.string.status_ready));
     }
-
-
 
 
     @Override
@@ -63,23 +60,13 @@ public class Janitor extends Employee implements Parcelable {
     }
 
 
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public void clear(final Cage cage) {
 
-        if(getStamina()>cage.getDirtyFactor()) {
+        if (getStamina() > cage.getDirtyFactor()) {
             clock = 0;
             timeToCleanCage = cage.getDirtyFactor() * Clock.timeToCleanEachDirty;
 
-            status = ApplicationUtil.applicationContext.getString(R.string.cleaning_cage) + cage.getName();
+            setStatus(ApplicationUtil.applicationContext.getString(R.string.cleaning_cage) + cage.getName());
             mOnCleanCageListener.onStatusChange();
 
             currentCage = cage;
@@ -94,49 +81,55 @@ public class Janitor extends Employee implements Parcelable {
         clock++;
 
 
-        if(isCleaning) {
+        if (isCleaning) {
             if (clock <= timeToCleanCage) {
                 if (clock % Clock.timeToCleanEachDirty == 0) {
                     currentDirtyCleaned++;
-                    mOnCleanCageListener.onCleanDirty(currentDirtyCleaned);
                     setStamina(getStamina() - 1);
+
+                    if (mOnCleanCageListener != null) {
+                        mOnCleanCageListener.onCleanDirty(currentDirtyCleaned);
+                        mOnCleanCageListener.onStaminaChange();
+                    }
                 }
-            }
-            else {
+            } else {
                 currentCage.setClean(true);
                 currentCage.setDirtyFactor(0);
                 clock = 0;
                 isCleaning = false;
                 currentDirtyCleaned = 0;
-                mOnCleanCageListener.onCleanFinish();
+
+                if (mOnCleanCageListener != null)
+                    mOnCleanCageListener.onCleanFinish();
+            }
+        } else {
+            setStatus(ApplicationUtil.applicationContext.getString(R.string.status_ready));
+
+            if (mOnCleanCageListener != null)
+                mOnCleanCageListener.onStatusChange();
+
+            if (clock == Clock.timeToRest) {
+                if (getStamina() < maxStamina) {
+                    setStamina(getStamina() + 1);
+                    if (mOnCleanCageListener != null)
+                        mOnCleanCageListener.onStaminaChange();
+                }
+                clock = 0;
+
+
             }
         }
 
-        else {
-            status = ApplicationUtil.applicationContext.getString(R.string.ready);
-
-            if(mOnCleanCageListener!=null)
-            mOnCleanCageListener.onStatusChange();
-        }
-
-        if(clock== Clock.timeToRest){
-            if(getStamina()<maxStamina)
-            setStamina(getStamina()+1);
-            clock =0;
-        }
 
     }
 
 
-    public void addOnCleanCageListener(OnCleanCageListener onCleanCageListener){
+    public void addOnCleanCageListener(OnCleanCageListener onCleanCageListener) {
         this.mOnCleanCageListener = onCleanCageListener;
     }
 
 
-
     protected Janitor(Parcel in) {
-        id = in.readLong();
-        status = in.readString();
         clock = in.readInt();
     }
 
@@ -147,8 +140,6 @@ public class Janitor extends Employee implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(id);
-        dest.writeString(status);
         dest.writeInt(clock);
     }
 
@@ -180,4 +171,27 @@ public class Janitor extends Employee implements Parcelable {
         return currentDirtyCleaned;
     }
 
+    public void setCleaning(Boolean cleaning) {
+        isCleaning = cleaning;
+    }
+
+    public void setClock(int clock) {
+        this.clock = clock;
+    }
+
+    public void setTimeToCleanCage(Integer timeToCleanCage) {
+        this.timeToCleanCage = timeToCleanCage;
+    }
+
+    public void setCurrentDirtyCleaned(Integer currentDirtyCleaned) {
+        this.currentDirtyCleaned = currentDirtyCleaned;
+    }
+
+    public void setCurrentCage(Cage currentCage) {
+        this.currentCage = currentCage;
+    }
+
+    public int getClock() {
+        return clock;
+    }
 }

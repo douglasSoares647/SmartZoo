@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Taibic on 6/6/2016.
  */
-public class SaveFoodAsyncTask extends AsyncTask<HashMap<String,List<Food>>,Void,Void> {
+public class SaveFoodAsyncTask extends AsyncTask<HashMap<String, List<Food>>, Void, Void> {
     @Override
     protected Void doInBackground(HashMap<String, List<Food>>... params) {
         FoodBusiness.saveAll(params[0]);

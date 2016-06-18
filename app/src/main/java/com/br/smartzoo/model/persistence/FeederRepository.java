@@ -108,12 +108,17 @@ public class FeederRepository {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
 
-        String sql = " Select f.id, e.name, e.image, e.age, e.cpf, e.startDate, e.endDate, e.salary, e.stamina from "
+        String sql = " Select f.id, e.name, e.image, e.age, e.cpf, e.startDate, e.endDate, e.salary, e.stamina, e.status from "
                 + EmployeeContract.TABLE + " e join " + FeederContract.TABLE + " f on f.id = e.id;";
 
         Cursor cursor = db.rawQuery(sql, null);
 
-        return FeederContract.getFeeders(cursor);
+        List<Feeder> feeders = FeederContract.getFeeders(cursor);
+
+        databaseHelper.close();
+        db.close();
+
+        return feeders;
     }
 
 

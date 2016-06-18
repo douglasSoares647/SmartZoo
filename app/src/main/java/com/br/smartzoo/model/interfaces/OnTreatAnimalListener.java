@@ -6,6 +6,10 @@ package com.br.smartzoo.model.interfaces;
 public interface OnTreatAnimalListener {
 
     void onTreatProgress(Integer progress);
+
     void onTreatFinish();
+
     void onStatusChange();
+
+    void onStaminaChange();
 }

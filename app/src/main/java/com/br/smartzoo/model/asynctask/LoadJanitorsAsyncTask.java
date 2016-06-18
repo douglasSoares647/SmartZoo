@@ -20,7 +20,7 @@ public class LoadJanitorsAsyncTask extends AsyncTask<Void, Integer, List<Janitor
     private OnLoadJanitorsList mCallBack;
     private ProgressDialog mProgressDialog;
 
-    public LoadJanitorsAsyncTask(Activity context, OnLoadJanitorsList onLoadJanitorsList){
+    public LoadJanitorsAsyncTask(Activity context, OnLoadJanitorsList onLoadJanitorsList) {
         this.mContext = context;
         this.mCallBack = onLoadJanitorsList;
     }
@@ -35,6 +35,7 @@ public class LoadJanitorsAsyncTask extends AsyncTask<Void, Integer, List<Janitor
                         mContext.getString(R.string.title_feeders));
         //mProgressDialog.show();
     }
+
     @Override
     protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);

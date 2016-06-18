@@ -7,5 +7,5 @@ import com.br.smartzoo.model.entity.Cage;
  */
 public interface OnSelectCageListener {
 
-     void onSelect(Cage cage);
+    void onSelect(Cage cage);
 }

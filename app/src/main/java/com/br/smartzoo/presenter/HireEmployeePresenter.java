@@ -4,11 +4,11 @@ import android.app.Activity;
 import android.content.res.Resources;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.game.environment.Clock;
 import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.entity.Feeder;
 import com.br.smartzoo.model.entity.Janitor;
 import com.br.smartzoo.model.entity.Veterinary;
-import com.br.smartzoo.model.environment.Clock;
 import com.br.smartzoo.ui.view.HireEmployeeView;
 import com.br.smartzoo.util.DateUtil;
 

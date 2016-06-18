@@ -3,7 +3,7 @@ package com.br.smartzoo.model.persistence;
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import com.br.smartzoo.model.entity.Employee;
+import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Janitor;
 import com.br.smartzoo.util.DateUtil;
 
@@ -19,6 +19,12 @@ public class JanitorContract {
 
     public static String TABLE = "janitor";
     public static String ID = "id";
+    public static String CURRENTCAGE = "currentCage";
+    public static String ISCLEANING = "isCleaning";
+    public static String CURRENTDIRTYCLEANED = "currentDirtyCleaned";
+    public static String TIMETOCLEANCAGE = "timeToCleanCage";
+    public static String CLOCK = "clock";
+
     public static String CAGEID = "cageId";
     public static String JANITORID = "janitorId";
     public static String CAGESTABLE = "cagesOfJanitor";
@@ -31,7 +37,12 @@ public class JanitorContract {
         StringBuilder table = new StringBuilder();
 
         table.append(" create table " + TABLE + " ( ");
-        table.append(ID + " integer primary key ");
+        table.append(ID + " integer primary key, ");
+        table.append(CURRENTCAGE + " integer, ");
+        table.append(ISCLEANING + " integer not null, ");
+        table.append(CURRENTDIRTYCLEANED + " integer, ");
+        table.append(TIMETOCLEANCAGE + " integer, ");
+        table.append(CLOCK + " integer not null ");
         table.append( " ); ");
 
         return table.toString();
@@ -58,6 +69,11 @@ public class JanitorContract {
         ContentValues values = new ContentValues();
 
         values.put(ID, janitor.getId());
+        values.put(CURRENTCAGE, janitor.getCurrentCage()==null?null:janitor.getCurrentCage().getId());
+        values.put(CURRENTDIRTYCLEANED, janitor.getCurrentDirtyCleaned());
+        values.put(ISCLEANING, janitor.getCleaning()? 1 : 0);
+        values.put(TIMETOCLEANCAGE, janitor.getTimeToCleanCage());
+        values.put(CLOCK, janitor.getClock());
 
         return values;
 
@@ -82,6 +98,15 @@ public class JanitorContract {
             janitor.setStamina(cursor.getInt(cursor.getColumnIndex(EmployeeContract.STAMINA)));
             janitor.setStartDate(startDate);
             janitor.setEndDate(endDate);
+
+
+            Cage cage = new Cage();
+            cage.setId(cursor.getLong(cursor.getColumnIndex(CURRENTCAGE)));
+            janitor.setCurrentCage(cage);
+            janitor.setCleaning(cursor.getInt(cursor.getColumnIndex(ISCLEANING))==1?true:false);
+            janitor.setClock(cursor.getInt(cursor.getColumnIndex(CLOCK)));
+            janitor.setTimeToCleanCage(cursor.getInt(cursor.getColumnIndex(TIMETOCLEANCAGE)));
+            janitor.setCurrentDirtyCleaned(cursor.getInt(cursor.getColumnIndex(CURRENTDIRTYCLEANED)));
         }
 
         return janitor;

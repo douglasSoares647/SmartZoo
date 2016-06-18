@@ -10,14 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.game.environment.ZooInfo;
 import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.entity.Veterinary;
-import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnManageEmployee;
 import com.br.smartzoo.presenter.VeterinaryListPresenter;
 import com.br.smartzoo.ui.activity.MainActivity;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
-import com.br.smartzoo.ui.adapter.JanitorListAdapter;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.ui.adapter.VeterinaryListAdapter;
 import com.br.smartzoo.ui.view.VeterinaryListView;

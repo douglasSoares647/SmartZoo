@@ -12,8 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
-import com.br.smartzoo.model.helper.AnimalHelper;
 import com.br.smartzoo.model.entity.Cage;
+import com.br.smartzoo.model.helper.AnimalHelper;
 import com.br.smartzoo.model.interfaces.OnManageCage;
 import com.br.smartzoo.util.AlertDialogUtil;
 import com.bumptech.glide.Glide;

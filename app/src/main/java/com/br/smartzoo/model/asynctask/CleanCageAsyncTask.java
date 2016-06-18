@@ -7,12 +7,7 @@ import android.os.AsyncTask;
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.business.CageBusiness;
 import com.br.smartzoo.model.business.EmployeeBusiness;
-import com.br.smartzoo.model.business.JanitorBusiness;
-import com.br.smartzoo.model.entity.Cage;
-import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.util.ProgressDialogUtil;
-
-import java.util.List;
 
 /**
  * Created by adenilson on 09/06/16.
@@ -47,9 +42,9 @@ public class CleanCageAsyncTask extends AsyncTask<Long, Integer, Integer> {
 
     @Override
     protected void onPostExecute(Integer result) {
-        if(result.equals(-1)){
+        if (result.equals(-1)) {
             mCallBack.onCleanCageFail();
-        }else{
+        } else {
             mCallBack.onCleanCageSuccess();
         }
 
@@ -83,7 +78,6 @@ public class CleanCageAsyncTask extends AsyncTask<Long, Integer, Integer> {
 
         return result;
     }
-
 
 
 }

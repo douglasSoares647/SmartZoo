@@ -1,16 +1,13 @@
-package com.br.smartzoo.model.environment;
+package com.br.smartzoo.game.environment;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 
+import com.br.smartzoo.model.asynctask.SaveAllPreferences;
 import com.br.smartzoo.model.business.BusinessRules;
-import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Employee;
-import com.br.smartzoo.model.environment.Visitor;
-import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.service.ClockService;
 import com.br.smartzoo.util.ApplicationUtil;
 
@@ -35,10 +32,9 @@ public class Clock {
     public static int timeToTreat = 1800;
 
 
-
-    public static int day=1;
-    public static int month=1;
-    public static int year=2016;
+    public static int day = 1;
+    public static int month = 1;
+    public static int year = 2016;
 
     public static int second = 0;
     public static int minute = 0;
@@ -60,12 +56,13 @@ public class Clock {
             public void run() {
                 while (isRunning) {
                     try {
-                        Thread.sleep(1000/speedFactor);
+                        if(!clock.isInterrupted())
+                        Thread.sleep(1000 / speedFactor);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     second++;
-                    if(second%5==0){
+                    if (second % 5 == 0) {
                         fiveSecondsTick();
                     }
                     if (second == 60) {
@@ -96,22 +93,23 @@ public class Clock {
                         @Override
                         public void run() {
                             //Send an message to update the current context
-                            if(ClockService.context!=null) {
-                                ClockService.context.onTick(getDateString(),getTimeString());
+                            if (ClockService.context != null) {
+                                ClockService.context.onTick(getDateString(), getTimeString());
                             }
-                            saveToPreferences();
-                            ZooInfoBusiness.saveToPreferences();
 
+
+                            //Save to preferences
+                            new SaveAllPreferences().execute();
 
                             //OBSERVERS
-                            for(Visitor visitor : ZooInfo.visitors){
+                            for (Visitor visitor : ZooInfo.visitors) {
                                 visitor.onTick();
                             }
-                            for(Employee employee : ZooInfo.employees){
+                            for (Employee employee : ZooInfo.employees) {
                                 employee.onTick();
                             }
-                            for(Cage cage : ZooInfo.cages){
-                                for(Animal animal : cage.getAnimals()){
+                            for (Cage cage : ZooInfo.cages) {
+                                for (Animal animal : cage.getAnimals()) {
                                     animal.onTick();
                                 }
                             }
@@ -126,6 +124,11 @@ public class Clock {
         clock.start();
     }
 
+    public static void stopClock(){
+        Clock.isRunning = false;
+        clock.interrupt();
+    }
+
     //Called every 5 ingame seconds to create visitors
     private static void fiveSecondsTick() {
 
@@ -135,10 +138,9 @@ public class Clock {
     }
 
 
-
-    public static void saveToPreferences(){
+    public static void saveToPreferences() {
         SharedPreferences preferences = ApplicationUtil.applicationContext
-                                        .getSharedPreferences(my_pref,ApplicationUtil.applicationContext.MODE_PRIVATE);
+                .getSharedPreferences(my_pref, ApplicationUtil.applicationContext.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("day", day);
         editor.putInt("month", month);
@@ -151,11 +153,11 @@ public class Clock {
     }
 
 
-    public static void getFromPreferences(){
+    public static void getFromPreferences() {
         SharedPreferences preferences = ApplicationUtil.applicationContext
-                .getSharedPreferences(my_pref,ApplicationUtil.applicationContext.MODE_PRIVATE);
+                .getSharedPreferences(my_pref, ApplicationUtil.applicationContext.MODE_PRIVATE);
 
-        if(preferences.contains("day")) {
+        if (preferences.contains("day")) {
             day = preferences.getInt("day", 1);
             month = preferences.getInt("month", 1);
             year = preferences.getInt("year", 2016);
@@ -168,52 +170,54 @@ public class Clock {
     }
 
 
-   public static String getTimeString(){
-       String strHour;
-       String strMinute;
-       String strSecond;
+    public static String getTimeString() {
+        String strHour;
+        String strMinute;
+        String strSecond;
 
-       if(hour<10)
-           strHour = "0" +hour;
-       else
-           strHour = String.valueOf(hour);
-
-
-       if(minute<10)
-           strMinute = "0" + minute;
-       else
-           strMinute = String.valueOf(minute);
+        if (hour < 10)
+            strHour = "0" + hour;
+        else
+            strHour = String.valueOf(hour);
 
 
-       if(second<10)
-           strSecond = "0" + second;
-       else
-           strSecond = String.valueOf(second);
-
-       return strHour + ":" + strMinute + ":" + strSecond;
-   }
+        if (minute < 10)
+            strMinute = "0" + minute;
+        else
+            strMinute = String.valueOf(minute);
 
 
-    public static String getDateString(){
+        if (second < 10)
+            strSecond = "0" + second;
+        else
+            strSecond = String.valueOf(second);
+
+        return strHour + ":" + strMinute + ":" + strSecond;
+    }
+
+
+    public static String getDateString() {
 
         String strDay;
         String strMonth;
         String strYear;
 
         strDay = String.valueOf(day);
-        if(day<10)
+        if (day < 10)
             strDay = "0" + strDay;
 
         strMonth = String.valueOf(month);
-        if(month<10)
-            strMonth = "0"+strMonth;
+        if (month < 10)
+            strMonth = "0" + strMonth;
 
 
         strYear = String.valueOf(year);
 
 
-       return strDay + "/" + strMonth + "/" + strYear;
+        return strDay + "/" + strMonth + "/" + strYear;
 
     }
+
+
 
 }

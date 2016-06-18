@@ -2,12 +2,10 @@ package com.br.smartzoo.model.persistence;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.text.format.DateUtils;
 
 import com.br.smartzoo.model.entity.New;
 import com.br.smartzoo.util.DateUtil;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 

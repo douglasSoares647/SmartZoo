@@ -1,13 +1,13 @@
 package com.br.smartzoo.model.business;
 
+import com.br.smartzoo.game.environment.Visitor;
 import com.br.smartzoo.model.asynctask.SaveNewsAsyncTask;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Food;
 import com.br.smartzoo.model.entity.New;
-import com.br.smartzoo.model.environment.Visitor;
+import com.br.smartzoo.model.helper.NewsHelper;
 import com.br.smartzoo.model.interfaces.OnNewFeedUpdate;
 import com.br.smartzoo.model.persistence.NewsRepository;
-import com.br.smartzoo.model.helper.NewsHelper;
 
 import java.util.ArrayList;
 import java.util.List;

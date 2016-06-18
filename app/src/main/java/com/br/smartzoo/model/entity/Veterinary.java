@@ -4,8 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.br.smartzoo.R;
-import com.br.smartzoo.model.environment.Clock;
-import com.br.smartzoo.model.interfaces.OnCleanCageListener;
+import com.br.smartzoo.game.environment.Clock;
 import com.br.smartzoo.model.interfaces.OnTreatAnimalListener;
 import com.br.smartzoo.util.ApplicationUtil;
 
@@ -17,46 +16,40 @@ import java.util.Map;
 /**
  * Created by adenilson on 18/04/16.
  */
-public class Veterinary extends Employee implements Parcelable{
+public class Veterinary extends Employee implements Parcelable {
     public static final Integer maxStamina = 20;
 
-    private OnTreatAnimalListener mOnTreatAnimalListener;
-
-    public String status;
-    private HashMap<Integer,Integer> animalsTreatedThisMonth;
     private int clock = 0;
 
+    private OnTreatAnimalListener mOnTreatAnimalListener;
+    private HashMap<Integer, Integer> animalsTreatedThisMonth;
 
     private Animal currentAnimal;
-    private Integer timeToTreatAnimal;
     private Boolean isTreating = false;
 
 
-    public Veterinary(){
+    public Veterinary() {
 
     }
 
     public Veterinary(List<Animal> animals) {
-        status = ApplicationUtil.applicationContext.getString(R.string.veterinary_idle);
+        setStatus(ApplicationUtil.applicationContext.getString(R.string.status_ready));
     }
 
     public Veterinary(String image, String name, Integer age, Date startDate, Date endDate
             , Double salary, String profession, String status) {
         super(image, name, age, startDate, endDate, salary, profession, status);
-        status = ApplicationUtil.applicationContext.getString(R.string.veterinary_idle);
     }
 
 
     protected Veterinary(Parcel in) {
         super(in);
-        status = in.readString();
         clock = in.readInt();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeString(status);
         dest.writeInt(clock);
     }
 
@@ -79,11 +72,11 @@ public class Veterinary extends Employee implements Parcelable{
 
     public void treat(final Animal animal) {
 
-        if(getStamina()>animal.getStaminaToBeCured()) {
-            status = ApplicationUtil.applicationContext.getString(R.string.treating_animal) + animal.getName();
+        if (getStamina() > animal.getStaminaToBeCured()) {
+            setStatus(ApplicationUtil.applicationContext.getString(R.string.treating_animal) + animal.getName());
 
-            if(mOnTreatAnimalListener!=null)
-            mOnTreatAnimalListener.onStatusChange();
+            if (mOnTreatAnimalListener != null)
+                mOnTreatAnimalListener.onStatusChange();
 
             clock = 0;
 
@@ -93,65 +86,66 @@ public class Veterinary extends Employee implements Parcelable{
 
     }
 
-    
+
     @Override
     public Double calculateSalary() {
-        if(animalsTreatedThisMonth.isEmpty()){
+        if (animalsTreatedThisMonth.isEmpty()) {
             return super.getSalary();
-        }
-        else {
+        } else {
             int sum = 0;
-            for(Map.Entry<Integer,Integer> entry : animalsTreatedThisMonth.entrySet()){
+            for (Map.Entry<Integer, Integer> entry : animalsTreatedThisMonth.entrySet()) {
                 Integer animalId = entry.getKey();
                 Integer quantity = entry.getValue();
                 sum += quantity;
             }
 
-            return super.getSalary()* + 20*sum;
+            return super.getSalary() * +20 * sum;
         }
     }
 
-
-    public String getStatus() {
-        return status;
-    }
 
     @Override
     public void onTick() {
         clock++;
 
-        if(isTreating) {
+        if (isTreating) {
             if (clock == Clock.timeToTreat) {
                 currentAnimal.setIsHealthy(true);
-                status = ApplicationUtil.applicationContext.getString(R.string.animal_treatment) + currentAnimal.getName() + ApplicationUtil.applicationContext.getString(R.string.done);
-                setStamina(getStamina()-currentAnimal.getStaminaToBeCured());
+                setStatus(ApplicationUtil.applicationContext.getString(R.string.animal_treatment) + currentAnimal.getName() + ApplicationUtil.applicationContext.getString(R.string.done));
+                setStamina(getStamina() - currentAnimal.getStaminaToBeCured());
+                currentAnimal = null;
+                isTreating = false;
 
-                if(mOnTreatAnimalListener!=null) {
-                        mOnTreatAnimalListener.onStatusChange();
-                        mOnTreatAnimalListener.onTreatFinish();
-                    }
-            }else{
-                if(mOnTreatAnimalListener!=null)
-                mOnTreatAnimalListener.onTreatProgress(clock);
+                if (mOnTreatAnimalListener != null) {
+                    mOnTreatAnimalListener.onStatusChange();
+                    mOnTreatAnimalListener.onTreatFinish();
+                }
+            } else {
+                if (mOnTreatAnimalListener != null)
+                    mOnTreatAnimalListener.onTreatProgress(clock);
             }
-        }
-        else {
-            status = ApplicationUtil.applicationContext.getString(R.string.ready);
-            if(mOnTreatAnimalListener!=null)
+        } else {
+            setStatus(ApplicationUtil.applicationContext.getString(R.string.status_ready));
+            if (mOnTreatAnimalListener != null)
                 mOnTreatAnimalListener.onStatusChange();
 
-            if(clock== Clock.timeToRest){
-                if(getStamina()<maxStamina)
-                    setStamina(getStamina()+1);
+            if (clock == Clock.timeToRest) {
+                if (getStamina() < maxStamina) {
+                    setStamina(getStamina() + 1);
+                    if (mOnTreatAnimalListener != null)
+                        mOnTreatAnimalListener.onStaminaChange();
+                }
                 clock = 0;
+
+
             }
 
         }
 
     }
 
-    public Integer getNumberAnimalTreated(){
-       return animalsTreatedThisMonth != null ? animalsTreatedThisMonth.size() : 0;
+    public Integer getNumberAnimalTreated() {
+        return animalsTreatedThisMonth != null ? animalsTreatedThisMonth.size() : 0;
     }
 
     public void addOnTreatAnimalListener(OnTreatAnimalListener onTreatAnimalListener) {
@@ -166,4 +160,19 @@ public class Veterinary extends Employee implements Parcelable{
         return currentAnimal;
     }
 
+    public void setTreating(Boolean treating) {
+        isTreating = treating;
+    }
+
+    public void setCurrentAnimal(Animal currentAnimal) {
+        this.currentAnimal = currentAnimal;
+    }
+
+    public int getClock() {
+        return clock;
+    }
+
+    public void setClock(int clock) {
+        this.clock = clock;
+    }
 }

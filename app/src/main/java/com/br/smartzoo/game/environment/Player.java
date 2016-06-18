@@ -1,4 +1,4 @@
-package com.br.smartzoo.model.environment;
+package com.br.smartzoo.game.environment;
 
 /**
  * Created by douglas on 03/05/16.

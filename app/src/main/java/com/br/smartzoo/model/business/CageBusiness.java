@@ -1,8 +1,8 @@
 package com.br.smartzoo.model.business;
 
+import com.br.smartzoo.game.environment.ZooInfo;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
-import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.persistence.CageRepository;
 
 import java.util.ArrayList;

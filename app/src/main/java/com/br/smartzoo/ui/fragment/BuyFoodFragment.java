@@ -14,17 +14,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
-import com.br.smartzoo.model.business.FoodBusiness;
-import com.br.smartzoo.model.business.ZooInfoBusiness;
+import com.br.smartzoo.game.environment.ZooInfo;
 import com.br.smartzoo.model.entity.Food;
-import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnChangeBuyListener;
-import com.br.smartzoo.model.singleton.Stock;
-import com.br.smartzoo.model.singleton.Supplier;
 import com.br.smartzoo.presenter.BuyFoodPresenter;
 import com.br.smartzoo.ui.activity.MainActivity;
 import com.br.smartzoo.ui.adapter.BuyFoodListAdapter;
-import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.ui.view.BuyFoodView;
 import com.br.smartzoo.util.AlertDialogUtil;

@@ -11,8 +11,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.game.environment.ZooInfo;
 import com.br.smartzoo.model.business.BusinessRules;
-import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.presenter.StatusZooPresenter;
 import com.br.smartzoo.ui.activity.MainActivity;
 import com.br.smartzoo.ui.view.StatusZooView;

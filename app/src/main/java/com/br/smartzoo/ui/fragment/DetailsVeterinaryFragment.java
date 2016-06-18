@@ -19,23 +19,19 @@ import android.widget.TextView;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.SmartZooApplication;
+import com.br.smartzoo.game.environment.Clock;
 import com.br.smartzoo.model.business.AnimalBusiness;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Animal;
-import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Veterinary;
-import com.br.smartzoo.model.environment.Clock;
-import com.br.smartzoo.model.environment.ZooInfo;
 import com.br.smartzoo.model.interfaces.OnTreatAnimalListener;
 import com.br.smartzoo.ui.adapter.AnimalsToTreatAdapter;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
-import com.br.smartzoo.util.ApplicationUtil;
 import com.br.smartzoo.util.DateUtil;
 import com.br.smartzoo.util.RecyclerItemClickListener;
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -158,18 +154,15 @@ public class DetailsVeterinaryFragment extends Fragment {
             public void onTreatProgress(Integer progress) {
                 progressBarTreatingAnimal.setProgress(progress);
                 textViewProgressBarTask.setText(progress + "/" +Clock.timeToTreat);
-
-                textViewVeterinaryStamina.setText(selected_veterinary.getStamina()+ "/" + Veterinary.maxStamina);
             }
 
             @Override
             public void onTreatFinish() {
-                progressBarTreatingAnimal.setProgress(0);
-                textViewProgressBarTask.setText("");
-
                 buttonTreat.setAlpha(1f);
                 buttonTreat.setEnabled(true);
                 buttonTreat.setText(getString(R.string.button_treat));
+
+                setCurrentState();
 
 
                 updateZooInfo(animal);
@@ -178,6 +171,12 @@ public class DetailsVeterinaryFragment extends Fragment {
             @Override
             public void onStatusChange() {
                 textViewStatusVeterinary.setText(selected_veterinary.getStatus());
+            }
+
+            @Override
+            public void onStaminaChange() {
+                progressBarStamina.setProgress(selected_veterinary.getStamina());
+                textViewVeterinaryStamina.setText(selected_veterinary.getStamina()+ "/" + Veterinary.maxStamina);
             }
         });
 
@@ -245,6 +244,7 @@ public class DetailsVeterinaryFragment extends Fragment {
 
             setTaskProgressAttributes(selected_veterinary.getCurrentAnimal());
             textViewAnimalVeterinary.setText(selected_veterinary.getCurrentAnimal().getName());
+            imageViewAnimalVeterinary.setVisibility(View.VISIBLE);
 
             Resources resources = getResources();
             int image = resources.getIdentifier(selected_veterinary.getCurrentAnimal().getImage(),"drawable", SmartZooApplication.NAME_PACKAGE);
@@ -257,7 +257,8 @@ public class DetailsVeterinaryFragment extends Fragment {
         else{
             imageViewAnimalVeterinary.setVisibility(View.INVISIBLE);
             textViewAnimalVeterinary.setText("");
-
+            progressBarTreatingAnimal.setProgress(0);
+            textViewProgressBarTask.setText("");
         }
 
     }

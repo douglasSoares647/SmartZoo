@@ -60,10 +60,10 @@
     <string name="digesting">Digesting</string>
     <string name="digestion_finished">Digestion finished</string>
     <string name="not_hungry">No hungry</string>
-    <string name="cleaning_cage">"Cleaning cage"</string>
+    <string name="cleaning_cage">"Cleaning cage "</string>
     <string name="resting">Resting</string>
     <string name="ready">Ready</string>
-    <string name="veterinary_idle">" Idle "</string>
+    <string name="status_ready">" Ready "</string>
     <string name="treating_animal">"Treating animal "</string>
     <string name="animal_treatment">"Treatment of animal "</string>
     <string name="done">" Finished!"</string>
@@ -192,6 +192,12 @@
     <string name="title_select_dirty_cage">Select any dirty cage</string>
     <string name="button_treat">Treat</string>
     <string name="title_select_animal_treat">Select an animal to treat</string>
+    <string name="msg_save_zoo">Saving Zoo</string>
+    <string name="title_saving">Saving</string>
+    <string name="title_loading">Loading</string>
+    <string name="msg_loading_zoo">Loading Zoo</string>
+    <string name="msg_game_running">Your game is running, touch to open!</string>
+    <string name="title_smart_zoo">Smart Zoo</string>
 
 
 </resources>

@@ -22,14 +22,13 @@ public class CageContract {
     public static String IS_SUPPLIED = "isSupplied";
 
 
-    public static String[] columns = {ID,NAME, ANIMAL_TYPE,CAPACITY, IS_CLEAN, IS_SUPPLIED};
+    public static String[] columns = {ID, NAME, ANIMAL_TYPE, CAPACITY, IS_CLEAN, IS_SUPPLIED};
 
 
-
-    public static String createTable(){
+    public static String createTable() {
         StringBuilder table = new StringBuilder();
 
-        table.append(" create table "+ TABLE + " ( ");
+        table.append(" create table " + TABLE + " ( ");
         table.append(ID + " integer primary key, ");
         table.append(NAME + " text , ");
         table.append(ANIMAL_TYPE + " text not null, ");
@@ -42,8 +41,7 @@ public class CageContract {
     }
 
 
-
-    public static ContentValues getContentValues(Cage cage){
+    public static ContentValues getContentValues(Cage cage) {
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(ID, cage.getId());
@@ -51,17 +49,16 @@ public class CageContract {
         contentValues.put(ANIMAL_TYPE, cage.getAnimalType());
         contentValues.put(CAPACITY, cage.getCapacity());
         contentValues.put(IS_CLEAN, cage.isClean() ? 1 : 0);
-        contentValues.put(IS_SUPPLIED, cage.isSupplied()==true? 1 : 0);
+        contentValues.put(IS_SUPPLIED, cage.isSupplied() == true ? 1 : 0);
 
         return contentValues;
     }
 
 
-
-    public static Cage getCage(Cursor cursor){
+    public static Cage getCage(Cursor cursor) {
         Cage cage = new Cage();
 
-        if(!cursor.isBeforeFirst()||cursor.moveToNext()){
+        if (!cursor.isBeforeFirst() || cursor.moveToNext()) {
 
             cage.setId(cursor.getLong(cursor.getColumnIndex(ID)));
             cage.setName(cursor.getString(cursor.getColumnIndex(NAME)));
@@ -74,10 +71,10 @@ public class CageContract {
     }
 
 
-    public static List<Cage> getCages(Cursor cursor){
+    public static List<Cage> getCages(Cursor cursor) {
         List<Cage> cages = new ArrayList<>();
 
-        while(cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             cages.add(getCage(cursor));
         }
 
@@ -87,6 +84,6 @@ public class CageContract {
     public static ContentValues createUpdateClean() {
         ContentValues values = new ContentValues();
         values.put(IS_CLEAN, 1);
-        return values ;
+        return values;
     }
 }
