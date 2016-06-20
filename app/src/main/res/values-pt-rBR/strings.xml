@@ -195,5 +195,6 @@
     <string name="msg_loading_zoo">Carregando Zoo</string>
     <string name="msg_game_running">Seu jogo está rodando, toque para acessá-lo</string>
     <string name="title_smart_zoo">Smart Zoo</string>
+    <string name="msg_animal_type_changed">Animal type changed</string>
 
 </resources>

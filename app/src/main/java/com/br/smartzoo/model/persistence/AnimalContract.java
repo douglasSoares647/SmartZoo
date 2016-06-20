@@ -52,7 +52,7 @@ public class AnimalContract {
         table.append(AGE + " integer, ");
         table.append(WEIGHT + " double not null, ");
         table.append(SEX + " text not null, ");
-        table.append(CAGEID + " integer not null, ");
+        table.append(CAGEID + " integer, ");
         table.append(ISHEALTHY + " integer not null, ");
         table.append(RESISTENCE + " integer not null, ");
         table.append(POPULARITY + " integer not null, ");
@@ -88,6 +88,14 @@ public class AnimalContract {
         contentValues.put(FOODEATEN, animal.getFoodEaten());
         contentValues.put(ISDIGESTING, animal.isDigesting() ? 1 : 0);
 
+
+        return contentValues;
+    }
+
+    public static ContentValues updateCage() {
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(CAGEID, -1);
 
         return contentValues;
     }
@@ -138,5 +146,12 @@ public class AnimalContract {
             animals.add(getAnimal(cursor));
         }
         return animals;
+    }
+
+    public static ContentValues createContentValuesCage(Cage cage) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(CAGEID, cage.getId());
+
+        return contentValues;
     }
 }

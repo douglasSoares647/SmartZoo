@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.br.smartzoo.model.entity.Animal;
+import com.br.smartzoo.model.entity.Cage;
 
 import java.util.List;
 
@@ -63,5 +64,56 @@ public class AnimalRepository {
         databaseHelper.close();
 
         return delete;
+    }
+
+    public static void removeAnimalsFromCage(List<Animal> animals) {
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
+        SQLiteDatabase db = databaseHelper.getWritableDatabase();
+
+        ContentValues values = AnimalContract.updateCage();
+
+        for (Animal a : animals) {
+            String where = " id = " + a.getId();
+            db.update(AnimalContract.TABLE, values, where, null);
+        }
+
+
+        db.close();
+        databaseHelper.close();
+
+    }
+
+    public static List<Animal> getAnimalsByCage(Long idCage) {
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
+        SQLiteDatabase db = databaseHelper.getReadableDatabase();
+
+        String where = AnimalContract.CAGEID + " = " + idCage;
+        List<Animal> animals;
+        Cursor cursor = db.query(AnimalContract.TABLE,
+                AnimalContract.COLUMNS, where, null, null, null, AnimalContract.NAME);
+
+        animals = AnimalContract.getAnimals(cursor);
+
+        db.close();
+        databaseHelper.close();
+
+
+        return animals;
+
+    }
+
+    public static void putAnimalInCage(Cage cage, Animal animal) {
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
+        SQLiteDatabase db = databaseHelper.getWritableDatabase();
+
+        ContentValues values = AnimalContract.createContentValuesCage(cage);
+
+
+        String where = " id = " + animal.getId();
+        db.update(AnimalContract.TABLE, values, where, null);
+
+
+        db.close();
+        databaseHelper.close();
     }
 }

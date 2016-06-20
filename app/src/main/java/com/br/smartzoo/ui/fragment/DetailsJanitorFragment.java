@@ -36,7 +36,7 @@ public class DetailsJanitorFragment extends Fragment {
     private static final int VERTICAL_ITEM_SPACE = 30;
     public static final String SELECTED_JANITOR = "SELECTED_VETERINARY";
 
-    private Janitor selected_janitor;
+    private Janitor selectedJanitor;
     private ProgressBar progressBarCleaningCage;
     private ProgressBar progressBarStamina;
     private TextView textViewCageJanitor;
@@ -118,7 +118,7 @@ public class DetailsJanitorFragment extends Fragment {
 
                 setTaskProgressAttributes(cage);
 
-                selected_janitor.clear(cage);
+                selectedJanitor.clear(cage);
                 setCurrentState();
 
 
@@ -140,12 +140,12 @@ public class DetailsJanitorFragment extends Fragment {
     private void setTaskProgressAttributes(final Cage cage) {
         progressBarCleaningCage.setMax(cage.getDirtyFactor());
 
-        if(selected_janitor.getCurrentDirtyCleaned()>0) {
-            progressBarCleaningCage.setProgress(selected_janitor.getCurrentDirtyCleaned());
-            textViewProgressBarTask.setText(selected_janitor.getCurrentDirtyCleaned() + "/" + selected_janitor.getCurrentCage().getDirtyFactor());
+        if(selectedJanitor.getCurrentDirtyCleaned()>0) {
+            progressBarCleaningCage.setProgress(selectedJanitor.getCurrentDirtyCleaned());
+            textViewProgressBarTask.setText(selectedJanitor.getCurrentDirtyCleaned() + "/" + selectedJanitor.getCurrentCage().getDirtyFactor());
         }
 
-        selected_janitor.addOnCleanCageListener(new OnCleanCageListener() {
+        selectedJanitor.addOnCleanCageListener(new OnCleanCageListener() {
             @Override
             public void onCleanDirty(Integer currentDirtyCleaned) {
                 progressBarCleaningCage.setProgress(currentDirtyCleaned);
@@ -167,13 +167,13 @@ public class DetailsJanitorFragment extends Fragment {
 
             @Override
             public void onStatusChange() {
-                textViewStatusJanitor.setText(selected_janitor.getStatus());
+                textViewStatusJanitor.setText(selectedJanitor.getStatus());
             }
 
             @Override
             public void onStaminaChange() {
-                progressBarStamina.setProgress(selected_janitor.getStamina());
-                textViewJanitorStamina.setText(selected_janitor.getStamina() + " / " + Janitor.maxStamina);
+                progressBarStamina.setProgress(selectedJanitor.getStamina());
+                textViewJanitorStamina.setText(selectedJanitor.getStamina() + " / " + Janitor.maxStamina);
             }
         });
     }
@@ -186,10 +186,10 @@ public class DetailsJanitorFragment extends Fragment {
 
         progressBarStamina = (ProgressBar) view.findViewById(R.id.progress_bar_stamina_janitor);
         progressBarStamina.setMax(Janitor.maxStamina);
-        progressBarStamina.setProgress(selected_janitor.getStamina());
+        progressBarStamina.setProgress(selectedJanitor.getStamina());
 
         textViewJanitorStamina = (TextView) view.findViewById(R.id.text_view_progress_bar_stamina_janitor);
-        textViewJanitorStamina.setText(selected_janitor.getStamina() + " / " + Janitor.maxStamina);
+        textViewJanitorStamina.setText(selectedJanitor.getStamina() + " / " + Janitor.maxStamina);
     }
 
     private void bindProgressBarCleaningCageJanitor(View view) {
@@ -207,39 +207,39 @@ public class DetailsJanitorFragment extends Fragment {
     private void bindTextViewStatusJanitor(View view) {
 
         textViewStatusJanitor = (TextView) view.findViewById(R.id.text_view_status_janitor);
-        textViewStatusJanitor.setText(selected_janitor.getStatus());
+        textViewStatusJanitor.setText(selectedJanitor.getStatus());
     }
 
     private void bindTextViewSalaryJanitor(View view) {
         TextView textViewSalaryJanitor = (TextView) view.findViewById(R.id.text_view_salary_janitor);
-        textViewSalaryJanitor.setText(String.valueOf(selected_janitor.getSalary()));
+        textViewSalaryJanitor.setText(String.format("%02d", selectedJanitor.getSalary()));
     }
 
     private void bindTextViewInitJanitor(View view) {
         TextView textViewInitJanitor = (TextView) view.findViewById(R.id.text_view_init_janitor);
-        textViewInitJanitor.setText(DateUtil.dateToString(selected_janitor.getStartDate()));
+        textViewInitJanitor.setText(DateUtil.dateToString(selectedJanitor.getStartDate()));
     }
 
     private void bindTextViewNameJanitor(View view) {
 
         TextView textViewNameJanitor = (TextView) view.findViewById(R.id.text_view_name_janitor);
 
-        textViewNameJanitor.setText(selected_janitor.getName());
+        textViewNameJanitor.setText(selectedJanitor.getName());
     }
 
 
     private void initJanitorSelected() {
         Bundle values = getArguments();
         Parcelable parcelable = values.getParcelable(SELECTED_JANITOR);
-        selected_janitor = parcelable !=null ? (Janitor) parcelable : new Janitor();
+        selectedJanitor = parcelable !=null ? (Janitor) parcelable : new Janitor();
     }
 
 
     private void setCurrentState() {
-        if(selected_janitor.getCleaning()) {
+        if(selectedJanitor.getCleaning()) {
 
-            setTaskProgressAttributes(selected_janitor.getCurrentCage());
-            textViewCageJanitor.setText(selected_janitor.getCurrentCage().getName());
+            setTaskProgressAttributes(selectedJanitor.getCurrentCage());
+            textViewCageJanitor.setText(selectedJanitor.getCurrentCage().getName());
             imageViewCageJanitor.setVisibility(View.VISIBLE);
 
 

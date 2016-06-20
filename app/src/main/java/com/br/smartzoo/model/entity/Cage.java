@@ -128,7 +128,7 @@ public class Cage implements Comparable<Cage>, Parcelable {
         }
     }
 
-    public int getAvaibleSpace() {
+    public int getAvaiableSpace() {
         return capacity - animals.size();
     }
 

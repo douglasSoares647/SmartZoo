@@ -48,11 +48,18 @@ public class CageBusiness {
     }
 
     public static int destroyCage(Long idCage) {
+
+        AnimalBusiness.removeAnimalsFromCage(idCage);
         return CageRepository.delete(idCage);
 
     }
 
     public static int clearCage(Long idCage) {
         return CageRepository.clearCage(idCage);
+    }
+
+    public static void updateTypeAnimal(Cage cage) {
+        AnimalBusiness.removeAnimalsFromCage(cage.getId());
+        CageRepository.updateTypeAnimal(cage);
     }
 }

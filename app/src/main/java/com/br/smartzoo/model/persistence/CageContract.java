@@ -86,4 +86,10 @@ public class CageContract {
         values.put(IS_CLEAN, 1);
         return values;
     }
+
+    public static ContentValues getContentValuesAnimalType(Cage cage) {
+        ContentValues values = new ContentValues();
+        values.put(ANIMAL_TYPE, cage.getAnimalType());
+        return values;
+    }
 }

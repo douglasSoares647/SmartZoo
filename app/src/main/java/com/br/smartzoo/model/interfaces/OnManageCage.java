@@ -11,4 +11,6 @@ public interface OnManageCage {
     void onDestroyCage(Cage cage);
 
     void onCleanCage(Cage cage);
+
+    void onChangeType(Cage cage);
 }

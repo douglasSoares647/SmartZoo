@@ -1,5 +1,6 @@
 package com.br.smartzoo.ui.fragment;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,16 +9,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.model.business.CageBusiness;
+import com.br.smartzoo.model.business.ZooInfoBusiness;
+import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.interfaces.OnManageCage;
 import com.br.smartzoo.presenter.CageListPresenter;
 import com.br.smartzoo.ui.activity.MainActivity;
+import com.br.smartzoo.ui.adapter.AnimalTypeListAdapter;
 import com.br.smartzoo.ui.adapter.CageListAdapter;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.ui.view.CageListView;
+import com.br.smartzoo.util.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +86,8 @@ public class CageListFragment extends Fragment implements CageListView, OnManage
         mPresenter.attachView(this);
     }
 
+
+
     @Override
     public void onDestroyCage(Cage cage) {
         mPresenter.destroyCage(cage);
@@ -88,12 +99,23 @@ public class CageListFragment extends Fragment implements CageListView, OnManage
     }
 
     @Override
+    public void onChangeType(Cage cage) {
+        mPresenter.changeAnimalType(cage);
+    }
+
+    @Override
     public void onLoadCageList(List<Cage> cages) {
         mAdapter.setCageList(cages);
     }
 
     @Override
     public void onCageDestroyed(Cage cage) {
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onAnimalTypeChanged(Cage cage) {
+
         mAdapter.notifyDataSetChanged();
     }
 }

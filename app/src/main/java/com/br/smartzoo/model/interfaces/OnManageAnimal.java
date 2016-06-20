@@ -10,4 +10,5 @@ public interface OnManageAnimal {
 
     void onClick(Animal animal);
 
+    void onPut(Animal animal);
 }

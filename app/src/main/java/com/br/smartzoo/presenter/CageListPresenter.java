@@ -2,19 +2,31 @@ package com.br.smartzoo.presenter;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.game.environment.ZooInfo;
 import com.br.smartzoo.model.asynctask.CleanCageAsyncTask;
 import com.br.smartzoo.model.asynctask.DestroyCageAsyncTask;
 import com.br.smartzoo.model.asynctask.LoadJanitorsRestedAsyncTask;
+import com.br.smartzoo.model.business.CageBusiness;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
+import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Janitor;
 import com.br.smartzoo.model.interfaces.OnJanitorsRestedSelected;
 import com.br.smartzoo.ui.activity.MainActivity;
+import com.br.smartzoo.ui.adapter.AnimalTypeListAdapter;
+import com.br.smartzoo.ui.adapter.DividerItemDecoration;
+import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.ui.view.CageListView;
 import com.br.smartzoo.util.DialogUtil;
+import com.br.smartzoo.util.RecyclerItemClickListener;
 
 import java.util.List;
 
@@ -24,9 +36,11 @@ import java.util.List;
 
 public class CageListPresenter implements OnJanitorsRestedSelected {
 
+    private static final int VERTICAL_SPACE = 30;
     private Activity mContext;
     private CageListView mCageListView;
     private Dialog mDialogRested;
+    private Dialog dialogSelectAnimalType;
 
     public CageListPresenter(Activity context) {
         this.mContext = context;
@@ -60,7 +74,8 @@ public class CageListPresenter implements OnJanitorsRestedSelected {
     }
 
     public void cleanCage(final Cage cage) {
-        new LoadJanitorsRestedAsyncTask(mContext, new LoadJanitorsRestedAsyncTask.OnLoadJanitorsRested() {
+        new LoadJanitorsRestedAsyncTask(mContext, new LoadJanitorsRestedAsyncTask
+                .OnLoadJanitorsRested() {
             @Override
             public void onLoadJanitorsRestedSuccess(List<Janitor> janitors) {
                 createDialogJanitorsRested(janitors, cage);
@@ -105,4 +120,66 @@ public class CageListPresenter implements OnJanitorsRestedSelected {
             }
         }).execute(janitor.getId(), cage.getId());
     }
+
+    public void changeAnimalType(final Cage cage) {
+        dialogSelectAnimalType = new Dialog(mContext);
+        dialogSelectAnimalType.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogSelectAnimalType.setContentView(R.layout.dialog_select_animal_type);
+
+
+        final RecyclerView recyclerViewAnimalType = (RecyclerView) dialogSelectAnimalType
+                .findViewById(R.id.recycler_view_cage_animal_type);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerViewAnimalType.setLayoutManager(layoutManager);
+        recyclerViewAnimalType.addItemDecoration(new VerticalSpaceItemDecoration(VERTICAL_SPACE));
+        recyclerViewAnimalType.addItemDecoration(
+                new DividerItemDecoration(mContext, R.drawable.divider_recycler_view));
+        recyclerViewAnimalType.setItemViewCacheSize(Animal.AnimalEnum.values().length);
+
+        AnimalTypeListAdapter animalTypeListAdapter = new AnimalTypeListAdapter(mContext,
+                Animal.AnimalEnum.values());
+        recyclerViewAnimalType.setAdapter(animalTypeListAdapter);
+
+
+        recyclerViewAnimalType.addOnItemTouchListener(new RecyclerItemClickListener(mContext,
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+
+                        String animalType = ((AnimalTypeListAdapter) recyclerViewAnimalType
+                                .getAdapter())
+                                .getAnimalType(position);
+                        cage.setAnimalType(animalType);
+
+                        CageBusiness.updateTypeAnimal(cage);
+                        cage.getAnimals().clear();
+
+
+                        Toast.makeText(mContext, mContext.getString(R.string
+                                .msg_animal_type_changed),
+                                Toast.LENGTH_SHORT).show();
+
+                        dialogSelectAnimalType.dismiss();
+
+                        mCageListView.onAnimalTypeChanged(cage);
+                    }
+                }));
+
+        Button buttonCancel = (Button) dialogSelectAnimalType.findViewById(R.id
+                .button_cancel_dialog);
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogSelectAnimalType.dismiss();
+            }
+        });
+
+        dialogSelectAnimalType.show();
+
+
+    }
+
+
 }

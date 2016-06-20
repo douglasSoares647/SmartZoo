@@ -7,6 +7,7 @@ import com.br.smartzoo.model.persistence.AnimalRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by dhb_s on 5/7/2016.
@@ -43,5 +44,18 @@ public class AnimalBusiness {
             }
         }
         return animalsToTreat;
+    }
+
+    public static void removeAnimalsFromCage(Long idCage) {
+        List<Animal> animalsByCage = getAnimalsByCage(idCage);
+        AnimalRepository.removeAnimalsFromCage(animalsByCage);
+    }
+
+    private static List<Animal> getAnimalsByCage(Long idCage) {
+        return AnimalRepository.getAnimalsByCage(idCage);
+    }
+
+    public static void putAnimalInCage(Cage cage, Animal animal) {
+        AnimalRepository.putAnimalInCage(cage, animal);
     }
 }

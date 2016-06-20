@@ -118,7 +118,8 @@ public class NavigationDrawerFragment extends Fragment implements OnUpdateInform
 
         textViewNumberFeeders = (TextView) view.findViewById(R.id.text_view_number_feeders);
 
-        textViewNumberVeterinaries = (TextView) view.findViewById(R.id.text_view_number_veterinaries);
+        textViewNumberVeterinaries = (TextView) view.findViewById(R.id
+                .text_view_number_veterinaries);
 
         textViewReputation = (TextView) view.findViewById(R.id.text_view_reputation_value);
 
@@ -128,14 +129,14 @@ public class NavigationDrawerFragment extends Fragment implements OnUpdateInform
 
 
         imageViewCash = (ImageView) view.findViewById(R.id.image_view_cash);
-        Glide.with(getActivity()).load(R.drawable.ic_money).centerCrop().fitCenter().into(imageViewCash);
+        Glide.with(getActivity()).load(R.drawable.ic_money).centerCrop().fitCenter().into
+                (imageViewCash);
 
         imageViewReputation = (ImageView) view.findViewById(R.id.image_view_reputation);
-        Glide.with(getActivity()).load(R.drawable.ic_reputation).fitCenter().into(imageViewReputation);
+        Glide.with(getActivity()).load(R.drawable.ic_reputation).fitCenter().into
+                (imageViewReputation);
 
     }
-
-
 
 
     private void bindOptionStock(View view) {
@@ -342,7 +343,7 @@ public class NavigationDrawerFragment extends Fragment implements OnUpdateInform
         };
 
         if (!mUserLearnedDrawer && !mFromSavedInstanceState) {
-       //     mDrawerLayout.openDrawer(mContainerView);
+            //     mDrawerLayout.openDrawer(mContainerView);
         }
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
@@ -377,14 +378,16 @@ public class NavigationDrawerFragment extends Fragment implements OnUpdateInform
 
     @Override
     public void onUpdate() {
-        textViewNumberCages.setText(getString(R.string.cages)+String.valueOf(ZooInfo.cages.size()));
+        if (textViewNumberCages != null)
+            textViewNumberCages.setText(getString(R.string.cages) + String.valueOf(ZooInfo.cages
+                    .size()));
 
         int numberAnimals = 0;
         for (Cage cage : ZooInfo.cages) {
             numberAnimals += cage.getAnimals().size();
         }
 
-        textViewNumberAnimals.setText(getString(R.string.animals)+String.valueOf(numberAnimals));
+        textViewNumberAnimals.setText(getString(R.string.animals) + String.valueOf(numberAnimals));
 
 
         int numberJanitors = 0;
@@ -400,15 +403,17 @@ public class NavigationDrawerFragment extends Fragment implements OnUpdateInform
                 numberVets++;
         }
 
-        textViewNumberFeeders.setText(getString(R.string.feeders)+String.valueOf(numberFeeders));
-        textViewNumberVeterinaries.setText(getString(R.string.veterinaries)+String.valueOf(numberVets));
-        textViewNumberJanitor.setText(getString(R.string.janitors)+String.valueOf(numberJanitors));
+        textViewNumberFeeders.setText(getString(R.string.feeders) + String.valueOf(numberFeeders));
+        textViewNumberVeterinaries.setText(getString(R.string.veterinaries) + String.valueOf
+                (numberVets));
+        textViewNumberJanitor.setText(getString(R.string.janitors) + String.valueOf
+                (numberJanitors));
 
 
-        textViewReputation.setText(String.format("%.2f",ZooInfo.reputation));
-        textViewCash.setText(String.format("%.2f",ZooInfo.money));
+        textViewReputation.setText(String.format("%.2f", ZooInfo.reputation));
+        textViewCash.setText(String.format("%.2f", ZooInfo.money));
 
-        textViewVisitors.setText(getString(R.string.visitors)+String.valueOf(ZooInfo.visitors.size()));
+        textViewVisitors.setText(getString(R.string.visitors) + String.valueOf(ZooInfo.visitors.size()));
     }
 
 }

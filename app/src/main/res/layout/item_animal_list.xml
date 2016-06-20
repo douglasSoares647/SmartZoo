@@ -72,6 +72,14 @@
         android:layout_marginRight="10dp"
         android:layout_toLeftOf="@+id/image_view_sell_animal" />
 
+    <ImageView
+        android:id="@+id/image_view_put_cage"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="10dp"
+        android:visibility="gone"
+        android:layout_toLeftOf="@+id/image_view_treat_animal" />
+
     <TextView
         android:id="@+id/text_view_price_animal"
         android:layout_width="wrap_content"

@@ -57,7 +57,8 @@ public class CageRepository {
 
         String where = " id = " + id;
 
-        Cursor cursor = db.query(CageContract.TABLE, CageContract.columns, where, null, null, null, CageContract.NAME);
+        Cursor cursor = db.query(CageContract.TABLE, CageContract.columns, where, null, null,
+                null, CageContract.NAME);
 
         Cage cageById = CageContract.getCage(cursor);
         return cageById;
@@ -91,5 +92,20 @@ public class CageRepository {
 
 
         return update;
+    }
+
+    public static void updateTypeAnimal(Cage cage) {
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
+        SQLiteDatabase db = databaseHelper.getWritableDatabase();
+
+        ContentValues values = CageContract.getContentValuesAnimalType(cage);
+
+        String where = " id = " + cage.getId();
+
+        db.update(CageContract.TABLE, values, where, null);
+
+
+        db.close();
+        databaseHelper.close();
     }
 }

@@ -15,6 +15,8 @@ import com.br.smartzoo.SmartZooApplication;
 import com.br.smartzoo.model.entity.Animal;
 import com.bumptech.glide.Glide;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by adenilson on 12/06/16.
  */
@@ -60,8 +62,9 @@ public class DetailsAnimalFragment extends Fragment {
         TextView textViewFoodSatisfied = (TextView) view.findViewById(R.id
                 .text_view_food_satisfied_animal);
         if (selectedAnimal.getFoodToBeSatisfied() != null) {
-            textViewFoodSatisfied.setText(String.valueOf
-                    (selectedAnimal.getFoodToBeSatisfied() + "kg"));
+            DecimalFormat decimalFormat = new DecimalFormat("0,00");
+            textViewFoodSatisfied.setText(decimalFormat.format(selectedAnimal
+                    .getFoodToBeSatisfied()) + "kg");
         } else {
             textViewFoodSatisfied.setText("Unknown");
             textViewFoodSatisfied.setTextSize(24);
@@ -108,8 +111,9 @@ public class DetailsAnimalFragment extends Fragment {
     private void bindTextViewPrice(View view) {
         TextView textViewPrice = (TextView) view.findViewById(R.id.text_view_price_animal);
         if (selectedAnimal.getPrice() != null) {
-            textViewPrice.setText(String.valueOf(selectedAnimal
-                    .getPrice() + " $"));
+            DecimalFormat decimalFormat = new DecimalFormat("0,00");
+
+            textViewPrice.setText(decimalFormat.format(selectedAnimal.getPrice()) + " $");
         } else {
             textViewPrice.setText("Unknown");
             textViewPrice.setTextSize(24);
@@ -142,8 +146,9 @@ public class DetailsAnimalFragment extends Fragment {
     private void bindTextViewWeight(View view) {
         TextView textViewWeight = (TextView) view.findViewById(R.id.text_view_weight_animal);
         if (selectedAnimal.getWeight() != null) {
-            textViewWeight.setText(String.valueOf(selectedAnimal
-                    .getWeight() + "kg"));
+            DecimalFormat decimalFormat = new DecimalFormat("0,00");
+
+            textViewWeight.setText(decimalFormat.format(selectedAnimal.getWeight()) + "kg");
         } else {
             textViewWeight.setText("Unknown");
             textViewWeight.setTextSize(24);

@@ -54,10 +54,25 @@ public class AnimalListAdapter extends RecyclerView.Adapter<AnimalListAdapter.Vi
                 SmartZooApplication.NAME_PACKAGE)).into(holder.mImageViewAnimal);
         Glide.with(mContext).load(R.drawable.ic_sell).into(holder.mImageViewSell);
         Glide.with(mContext).load(R.drawable.ic_treatments).into(holder.mImageViewTreat);
+        if (animal.getCage().getId().equals(-1L)) {
+            Glide.with(mContext).load(R.drawable.ic_cage).into(holder.mImageViewPutCage);
+            holder.mRelativeAnimal.setBackgroundColor(mContext.getResources().getColor(R.color
+                    .red_200));
+            holder.mImageViewPutCage.setVisibility(View.VISIBLE);
+
+            holder.mImageViewPutCage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnManageAnimal.onPut(animal);
+                }
+            });
+
+        }
+
         holder.mTextViewName.setText(animal.getName());
         holder.mTextViewStatus.setText(animal.getStatus());
-        holder.mTextViewPrice.setText("$" + String.format("%.2f",animal.getPrice()));
-        holder.mTextViewSatisfaction.setText(String.format("%.2f",animal.getFoodToBeSatisfied()));
+        holder.mTextViewPrice.setText("$" + String.format("%.2f", animal.getPrice()));
+        holder.mTextViewSatisfaction.setText(String.format("%.2f", animal.getFoodToBeSatisfied()));
 
         holder.mImageViewSell.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,11 +80,11 @@ public class AnimalListAdapter extends RecyclerView.Adapter<AnimalListAdapter.Vi
                 AlertDialogUtil.makeAlertDialogExit(mContext, mContext.getString(R.string.sell)
                         , mContext.getString(R.string.message_sell),
                         new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mOnManageAnimal.onSell(animal);
-                    }
-                }).show();
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                mOnManageAnimal.onSell(animal);
+                            }
+                        }).show();
             }
         });
 
@@ -87,7 +102,9 @@ public class AnimalListAdapter extends RecyclerView.Adapter<AnimalListAdapter.Vi
         return mAnimalList.size();
     }
 
+
     public class ViewHolder extends RecyclerView.ViewHolder {
+        private ImageView mImageViewPutCage;
         private RelativeLayout mRelativeAnimal;
         private ImageView mImageViewAnimal;
         private TextView mTextViewName;
@@ -109,6 +126,7 @@ public class AnimalListAdapter extends RecyclerView.Adapter<AnimalListAdapter.Vi
             mTextViewPrice = (TextView) itemView.findViewById(R.id.text_view_price_animal);
             mImageViewSell = (ImageView) itemView.findViewById(R.id.image_view_sell_animal);
             mImageViewTreat = (ImageView) itemView.findViewById(R.id.image_view_treat_animal);
+            mImageViewPutCage = (ImageView) itemView.findViewById(R.id.image_view_put_cage);
         }
     }
 
@@ -117,7 +135,7 @@ public class AnimalListAdapter extends RecyclerView.Adapter<AnimalListAdapter.Vi
         notifyDataSetChanged();
     }
 
-    public void removeAnimal(Animal animal){
+    public void removeAnimal(Animal animal) {
         this.mAnimalList.remove(animal);
         notifyDataSetChanged();
     }

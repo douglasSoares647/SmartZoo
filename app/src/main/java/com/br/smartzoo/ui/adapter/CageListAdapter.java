@@ -56,12 +56,12 @@ public class CageListAdapter extends RecyclerView.Adapter<CageListAdapter.ViewHo
                 .into(holder.mImageViewTypeAnimal);
         holder.mTextViewName.setText(cage.getName());
 
-        if(cage.getAvaibleSpace()>0)
+        if(cage.getAvaiableSpace()>0)
             holder.mTextViewCapacity.setTextColor(ContextCompat.getColor(mContext,R.color.green_500));
         else
             holder.mTextViewCapacity.setTextColor(ContextCompat.getColor(mContext,R.color.red_500));
 
-        holder.mTextViewCapacity.setText(mContext.getString(R.string.label_avaible_space) + cage.getAvaibleSpace() + mContext.getString(R.string.label_avaible_space_animals));
+        holder.mTextViewCapacity.setText(mContext.getString(R.string.label_avaible_space) + cage.getAvaiableSpace() + mContext.getString(R.string.label_avaible_space_animals));
 
         holder.mImageViewClean.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +70,12 @@ public class CageListAdapter extends RecyclerView.Adapter<CageListAdapter.ViewHo
             }
         });
 
+        holder.mImageViewTypeAnimal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnManageCage.onChangeType(cage);
+            }
+        });
 
         final DialogInterface.OnClickListener okListener = new DialogInterface.OnClickListener() {
             @Override

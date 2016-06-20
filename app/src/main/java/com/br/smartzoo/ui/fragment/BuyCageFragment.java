@@ -59,7 +59,7 @@ public class BuyCageFragment extends Fragment implements BuyCageView, OnConstruc
     }
 
     private void bindToolbarName() {
-        ((MainActivity)getActivity()).changeToolBarText(getString(R.string.option_build_cages));
+        ((MainActivity) getActivity()).changeToolBarText(getString(R.string.option_build_cages));
     }
 
     private void populateCagesList() {
@@ -89,20 +89,19 @@ public class BuyCageFragment extends Fragment implements BuyCageView, OnConstruc
     public void onConstruct(Cage cage) {
 
         Boolean haveMoney = BusinessRules.haveMoneyToBuyCage(cage);
-        if(haveMoney) {
+        if (haveMoney) {
             showConfirmationDialog(cage);
 
-        }
-
-        else{
-            Toast.makeText(getContext(),R.string.msg_dont_have_money,Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getContext(), R.string.msg_dont_have_money, Toast.LENGTH_SHORT).show();
         }
     }
 
 
-
     private void showConfirmationDialog(final Cage cage) {
-        AlertDialog.Builder dialog = AlertDialogUtil.makeConfirmationDialog(getActivity(), getActivity().getString(R.string.title_confirm), getActivity().getString(R.string.msg_construct_cage_confirm),
+        AlertDialog.Builder dialog = AlertDialogUtil.makeConfirmationDialog(getActivity(),
+                getActivity().getString(R.string.title_confirm), getActivity().getString(R.string
+                        .msg_construct_cage_confirm),
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -115,7 +114,6 @@ public class BuyCageFragment extends Fragment implements BuyCageView, OnConstruc
         dialog.show();
 
 
-
     }
 
     private void showSelectAnimalTypeDialog(final Cage cage) {
@@ -125,7 +123,8 @@ public class BuyCageFragment extends Fragment implements BuyCageView, OnConstruc
         dialogSelectAnimalType.setContentView(R.layout.dialog_select_animal_type);
 
 
-        final RecyclerView recyclerViewAnimalType = (RecyclerView) dialogSelectAnimalType.findViewById(R.id.recycler_view_cage_animal_type);
+        final RecyclerView recyclerViewAnimalType = (RecyclerView) dialogSelectAnimalType
+                .findViewById(R.id.recycler_view_cage_animal_type);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -135,31 +134,36 @@ public class BuyCageFragment extends Fragment implements BuyCageView, OnConstruc
                 new DividerItemDecoration(getActivity(), R.drawable.divider_recycler_view));
         recyclerViewAnimalType.setItemViewCacheSize(Animal.AnimalEnum.values().length);
 
-        AnimalTypeListAdapter  animalTypeListAdapter = new AnimalTypeListAdapter(getActivity(), Animal.AnimalEnum.values());
+        AnimalTypeListAdapter animalTypeListAdapter = new AnimalTypeListAdapter(getActivity(),
+                Animal.AnimalEnum.values());
         recyclerViewAnimalType.setAdapter(animalTypeListAdapter);
 
 
-        recyclerViewAnimalType.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), new RecyclerItemClickListener.OnItemClickListener() {
+        recyclerViewAnimalType.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),
+                new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
 
-                String animalType = ((AnimalTypeListAdapter) recyclerViewAnimalType.getAdapter()).getAnimalType(position);
+                String animalType = ((AnimalTypeListAdapter) recyclerViewAnimalType.getAdapter())
+                        .getAnimalType(position);
                 cage.setAnimalType(animalType);
 
-                Long insertedCageId =  CageBusiness.save(cage);
+                Long insertedCageId = CageBusiness.save(cage);
                 cage.setId(insertedCageId);
 
                 ZooInfoBusiness.addCage(cage);
                 ZooInfoBusiness.takeMoney(cage.getPrice());
 
 
-                Toast.makeText(getContext(), getString(R.string.msg_cage_sucessfully_built), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getString(R.string.msg_cage_sucessfully_built),
+                        Toast.LENGTH_SHORT).show();
 
                 dialogSelectAnimalType.dismiss();
             }
         }));
 
-        Button buttonCancel = (Button) dialogSelectAnimalType.findViewById(R.id.button_cancel_dialog);
+        Button buttonCancel = (Button) dialogSelectAnimalType.findViewById(R.id
+                .button_cancel_dialog);
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

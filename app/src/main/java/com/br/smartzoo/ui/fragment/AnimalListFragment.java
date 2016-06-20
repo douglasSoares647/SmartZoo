@@ -138,6 +138,11 @@ public class AnimalListFragment extends Fragment implements AnimalListView, OnMa
     }
 
     @Override
+    public void onPut(Animal animal) {
+        mPresenter.putAnimalInCage(animal);
+    }
+
+    @Override
     public void onAnimalListLoad(List<Animal> animalList) {
         mRecyclerViewAnimals.setItemViewCacheSize(animalList.size());
         mAdapter.setAnimalList(animalList);
@@ -149,5 +154,10 @@ public class AnimalListFragment extends Fragment implements AnimalListView, OnMa
         if(mRecyclerViewAnimals!=null){
             ((AnimalListAdapter) mRecyclerViewAnimals.getAdapter()).removeAnimal(animal);
         }
+    }
+
+    @Override
+    public void onAnimalPutted(Animal animal) {
+       mPresenter.loadAnimalList();
     }
 }
