@@ -130,7 +130,7 @@ public class JanitorRepository {
 
         String sql = " Select j.id,j.currentCage, j.clock, j.currentDirtyCleaned, j.timeToCleanCage,j.isCleaning, e.image, e.status, e.name, e.age, e.cpf, e.startDate, " +
                 "e.endDate, e.salary, e.stamina from " + EmployeeContract.TABLE + " e join "
-                + JanitorContract.TABLE + " j on j.id = e.id where e.status = 'ready';";
+                + JanitorContract.TABLE + " j on j.id = e.id where e.status = 'Ready';";
 
         Cursor cursor = db.rawQuery(sql, null);
 

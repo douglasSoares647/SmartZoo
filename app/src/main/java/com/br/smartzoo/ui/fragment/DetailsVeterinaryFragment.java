@@ -148,6 +148,8 @@ public class DetailsVeterinaryFragment extends Fragment {
 
     private void setTaskProgressAttributes(final Animal animal) {
         progressBarTreatingAnimal.setMax(Clock.timeToTreat);
+        progressBarTreatingAnimal.setProgress(selected_veterinary.getClock());
+        textViewProgressBarTask.setText(selected_veterinary.getClock() + "/" +Clock.timeToTreat);
 
         selected_veterinary.addOnTreatAnimalListener(new OnTreatAnimalListener() {
             @Override
@@ -200,6 +202,9 @@ public class DetailsVeterinaryFragment extends Fragment {
     private void bindProgressBarTreatingAnimal(View view) {
         progressBarTreatingAnimal = (ProgressBar) view.findViewById(R.id.progress_bar_task_veterinary);
         textViewProgressBarTask = (TextView) view.findViewById(R.id.text_view_progress_bar_task_veterinary);
+
+
+
 
     }
 

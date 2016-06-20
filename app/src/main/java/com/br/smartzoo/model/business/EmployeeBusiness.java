@@ -11,9 +11,10 @@ import com.br.smartzoo.model.persistence.EmployeeRepository;
  */
 public class EmployeeBusiness {
 
-    public static void save(Employee employee) {
+    public static Long save(Employee employee) {
 
-        employee.setId(EmployeeRepository.save(employee));
+        Long id = EmployeeRepository.save(employee);
+        employee.setId(id);
 
         if (employee instanceof Veterinary) {
             VeterinaryBusiness.save((Veterinary) employee);
@@ -23,6 +24,7 @@ public class EmployeeBusiness {
             FeederBusiness.save((Feeder) employee);
         }
 
+        return id;
 
     }
 

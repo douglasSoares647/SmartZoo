@@ -71,6 +71,7 @@ public class FeederContract {
             feeder.setAge(cursor.getInt(cursor.getColumnIndex(EmployeeContract.AGE)));
             feeder.setName(cursor.getString(cursor.getColumnIndex(EmployeeContract.NAME)));
             feeder.setSalary(cursor.getDouble(cursor.getColumnIndex(EmployeeContract.SALARY)));
+            feeder.setStatus(cursor.getString(cursor.getColumnIndex(EmployeeContract.STATUS)));
 
             Date startDate = DateUtil.stringToDate(cursor.getString(cursor.getColumnIndex(EmployeeContract.STARTDATE)));
             Date endDate = DateUtil.stringToDate(cursor.getString(cursor.getColumnIndex(EmployeeContract.ENDDATE)));

@@ -48,16 +48,27 @@ public class Clock {
 
 
     public static void startClock() {
+        clock = new Thread(createClock());
+        clock.start();
+
+    }
+
+    public static void stopClock(){
+        Clock.isRunning = false;
+        clock.interrupt();
+    }
+
+    private static Runnable createClock(){
         final Handler accessUIHandler = new Handler();
 
         //Creation of the timer. It was created manually so we can change his speed
-        clock = new Thread(new Runnable() {
+        Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 while (isRunning) {
                     try {
-                        if(!clock.isInterrupted())
-                        Thread.sleep(1000 / speedFactor);
+                        if (!clock.isInterrupted())
+                            Thread.sleep(1000 / speedFactor);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -119,15 +130,12 @@ public class Clock {
 
                 }
             }
-        });
+        };
 
-        clock.start();
+        return runnable;
+
     }
 
-    public static void stopClock(){
-        Clock.isRunning = false;
-        clock.interrupt();
-    }
 
     //Called every 5 ingame seconds to create visitors
     private static void fiveSecondsTick() {
@@ -217,6 +225,8 @@ public class Clock {
         return strDay + "/" + strMonth + "/" + strYear;
 
     }
+
+
 
 
 

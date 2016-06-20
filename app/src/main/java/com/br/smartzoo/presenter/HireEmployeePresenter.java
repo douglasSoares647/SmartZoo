@@ -10,6 +10,7 @@ import com.br.smartzoo.model.entity.Feeder;
 import com.br.smartzoo.model.entity.Janitor;
 import com.br.smartzoo.model.entity.Veterinary;
 import com.br.smartzoo.ui.view.HireEmployeeView;
+import com.br.smartzoo.util.ApplicationUtil;
 import com.br.smartzoo.util.DateUtil;
 
 import java.util.ArrayList;
@@ -91,6 +92,7 @@ public class HireEmployeePresenter {
         employee.setName(name1 + " " + name2);
         employee.setAge(random.nextInt(50));
 
+        employee.setStatus(mContext.getString(R.string.status_ready));
         employee.setStartDate(DateUtil.stringToDateWithBrazilianFormat(Clock.getDateString()));
 
 

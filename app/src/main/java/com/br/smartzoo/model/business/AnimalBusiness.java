@@ -14,9 +14,11 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class AnimalBusiness {
 
-    public static void save(Animal animal) {
+    public static Long save(Animal animal) {
 
-        AnimalRepository.save(animal);
+       Long id =  AnimalRepository.save(animal);
+
+        return id;
     }
 
 

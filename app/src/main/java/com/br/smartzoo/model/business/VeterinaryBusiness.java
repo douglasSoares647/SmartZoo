@@ -38,7 +38,6 @@ public class VeterinaryBusiness {
         List<Veterinary> veterinaries = VeterinaryRepository.getVeterinaries();
 
         for (Veterinary veterinary : veterinaries) {
-
             for (Cage cage : ZooInfo.cages) {
                 for (Animal animal : cage.getAnimals()) {
                     if (animal.getId().equals(veterinary.getCurrentAnimal().getId())) {

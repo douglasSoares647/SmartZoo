@@ -15,23 +15,26 @@ import java.util.List;
 public class AnimalRepository {
 
 
-    public static void save(Animal animal) {
+    public static Long save(Animal animal) {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
         ContentValues values = AnimalContract.createContentValues(animal);
 
 
+        Long id;
         if (animal.getId() == null) {
-            db.insert(AnimalContract.TABLE, null, values);
+            id = db.insert(AnimalContract.TABLE, null, values);
         } else {
             String where = " id = " + animal.getId();
             db.update(AnimalContract.TABLE, values, where, null);
+            id = animal.getId();
         }
 
         db.close();
         databaseHelper.close();
 
+        return id;
     }
 
 

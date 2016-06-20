@@ -187,18 +187,20 @@ public class BuyAnimalFragment extends Fragment implements BuyAnimalView, OnBuyA
     public void afterSetAnimalName(Animal animal) {
         List<Cage> cagesByAnimalType = CageBusiness.getCagesByAnimalType(animal);
         if(cagesByAnimalType.isEmpty()) {
-            showBuyNewCageDialog();
+            showBuyNewCageDialog(animal);
         }
         else {
             showSelectCageDialog(cagesByAnimalType, animal);
         }
     }
 
-    private void showBuyNewCageDialog() {
+    private void showBuyNewCageDialog(final Animal animal) {
         AlertDialog.Builder dialog = AlertDialogUtil.makeConfirmationDialog(getActivity(), getActivity().getString(R.string.title_no_cages), getActivity().getString(R.string.msg_buy_new_cage_for_animal_type),
                 new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+                mPresenter.buyCageForCurrentAnimalType(animal.getType());
 
                 dialog.dismiss();
             }

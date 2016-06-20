@@ -30,7 +30,7 @@ public class JanitorContract {
     public static String CAGESTABLE = "cagesOfJanitor";
 
 
-    public static String[] columns = {ID};
+    public static String[] columns = {ID,CURRENTCAGE,ISCLEANING,CURRENTDIRTYCLEANED,TIMETOCLEANCAGE,CLOCK};
 
 
     public static String createTable(){

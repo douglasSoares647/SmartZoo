@@ -38,11 +38,15 @@ import java.util.List;
  * Created by adenilson on 17/05/16.
  */
 public class BuyCageFragment extends Fragment implements BuyCageView, OnConstructListener {
+
+    public static final String SELECTED_ANIMAL_TYPE = "SELECTEDANIMALTYPE";
+
     private static final int VERTICAL_SPACE = 30;
     private RecyclerView mRecyclerViewCages;
     private BuyCagePresenter mPresenter;
     private List<Cage> mCagesList;
     private Dialog dialogSelectAnimalType;
+    private String animalType;
 
     @Nullable
     @Override
@@ -50,12 +54,24 @@ public class BuyCageFragment extends Fragment implements BuyCageView, OnConstruc
             , @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_buy_cage, container, false);
 
+        initAnimalType();
         bindPresenter();
         populateCagesList();
         bindRecyclerViewCages(view);
         bindToolbarName();
 
+
+
         return view;
+    }
+
+    private void initAnimalType() {
+        Bundle bundle = getArguments();
+        if(bundle!=null && bundle.getString(SELECTED_ANIMAL_TYPE)!=null){
+            animalType = bundle.getString(SELECTED_ANIMAL_TYPE);
+        }
+        else
+            animalType = null;
     }
 
     private void bindToolbarName() {
@@ -105,7 +121,12 @@ public class BuyCageFragment extends Fragment implements BuyCageView, OnConstruc
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        if(animalType==null)
                         showSelectAnimalTypeDialog(cage);
+                        else {
+                            cage.setAnimalType(animalType);
+                            finishCageConstruction(cage);
+                        }
                     }
 
 
@@ -148,15 +169,7 @@ public class BuyCageFragment extends Fragment implements BuyCageView, OnConstruc
                         .getAnimalType(position);
                 cage.setAnimalType(animalType);
 
-                Long insertedCageId = CageBusiness.save(cage);
-                cage.setId(insertedCageId);
-
-                ZooInfoBusiness.addCage(cage);
-                ZooInfoBusiness.takeMoney(cage.getPrice());
-
-
-                Toast.makeText(getContext(), getString(R.string.msg_cage_sucessfully_built),
-                        Toast.LENGTH_SHORT).show();
+                finishCageConstruction(cage);
 
                 dialogSelectAnimalType.dismiss();
             }
@@ -174,5 +187,17 @@ public class BuyCageFragment extends Fragment implements BuyCageView, OnConstruc
         dialogSelectAnimalType.show();
 
 
+    }
+
+    private void finishCageConstruction(Cage cage) {
+        Long insertedCageId = CageBusiness.save(cage);
+        cage.setId(insertedCageId);
+
+        ZooInfoBusiness.addCage(cage);
+        ZooInfoBusiness.takeMoney(cage.getPrice());
+
+
+        Toast.makeText(getContext(), getString(R.string.msg_cage_sucessfully_built),
+                Toast.LENGTH_SHORT).show();
     }
 }

@@ -2,12 +2,17 @@ package com.br.smartzoo.presenter;
 
 import android.app.Activity;
 import android.content.res.Resources;
+import android.os.Bundle;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.business.AnimalBusiness;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
+import com.br.smartzoo.ui.activity.MainActivity;
+import com.br.smartzoo.ui.fragment.BuyAnimalFragment;
+import com.br.smartzoo.ui.fragment.BuyCageFragment;
+import com.br.smartzoo.ui.fragment.DetailsAnimalFragment;
 import com.br.smartzoo.ui.view.BuyAnimalView;
 
 import java.util.ArrayList;
@@ -72,8 +77,22 @@ public class BuyAnimalPresenter {
 
     public void finishAnimalCreation(Cage cage,Animal animal){
         animal.setCage(cage);
-        AnimalBusiness.save(animal);
+        Long id = AnimalBusiness.save(animal);
+        animal.setId(id);
 
         ZooInfoBusiness.takeMoney(animal.getPrice());
+    }
+
+    public void buyCageForCurrentAnimalType(String type) {
+        startTransaction(type);
+    }
+
+
+    public void startTransaction(String type) {
+        Bundle bundle = new Bundle();
+        bundle.putString(BuyCageFragment.SELECTED_ANIMAL_TYPE, type);
+        BuyCageFragment buyCageFragment = new BuyCageFragment();
+        buyCageFragment.setArguments(bundle);
+        ((MainActivity)mContext).startTransaction(buyCageFragment);
     }
 }

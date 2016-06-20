@@ -29,7 +29,7 @@ public class VeterinaryContract {
     public static String DATE = "date" ;
 
 
-    public static String[] columns = {ID};
+    public static String[] columns = {ID,CURRENTANIMAL,ISTREATING,CLOCK};
 
 
     public static String createTable() {
@@ -83,6 +83,7 @@ public class VeterinaryContract {
             veterinary.setName(cursor.getString(cursor.getColumnIndex(EmployeeContract.NAME)));
             veterinary.setSalary(cursor.getDouble(cursor.getColumnIndex(EmployeeContract.SALARY)));
             veterinary.setImage(cursor.getString(cursor.getColumnIndex(EmployeeContract.IMAGE)));
+            veterinary.setStatus(cursor.getString(cursor.getColumnIndex(EmployeeContract.STATUS)));
             Date startDate = DateUtil.stringToDate(cursor.getString(cursor.getColumnIndex(EmployeeContract.STARTDATE)));
             Date endDate = DateUtil.stringToDate(cursor.getString(cursor.getColumnIndex(EmployeeContract.ENDDATE)));
             veterinary.setStartDate(startDate);
