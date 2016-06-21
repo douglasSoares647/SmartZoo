@@ -6,32 +6,32 @@
                 android:padding="4dp">
 
     <ImageView
-        android:id="@+id/image_view_food_avaiable"
+        android:id="@+id/image_view_cage_available"
         android:layout_width="55dp"
         android:layout_height="55dp"/>
 
 
     <TextView
-        android:id="@+id/text_view_name_food_avaiable"
+        android:id="@+id/text_view_name_cage_available"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@id/image_view_food_avaiable"
+        android:layout_toRightOf="@id/image_view_cage_available"
         android:text="Name"
 
         />
 
 
     <Button
-        android:id="@+id/button_add_food"
+        android:id="@+id/button_add_into_cage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="8dp"
         android:background="@drawable/button_buy"
-        android:text="ADD"
+        android:text="PUT"
         android:textColor="@color/white"/>
 
 </RelativeLayout>

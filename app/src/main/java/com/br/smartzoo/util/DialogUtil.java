@@ -13,6 +13,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.game.environment.ZooInfo;
 import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Employee;
@@ -21,8 +22,9 @@ import com.br.smartzoo.model.interfaces.OnJanitorsRestedSelected;
 import com.br.smartzoo.model.interfaces.OnManageCage;
 import com.br.smartzoo.model.interfaces.OnManageEmployee;
 import com.br.smartzoo.model.interfaces.OnSetAnimalNameListener;
+import com.br.smartzoo.model.singleton.Stock;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
-import com.br.smartzoo.ui.adapter.FoodsAvaiableListAdapter;
+import com.br.smartzoo.ui.adapter.CagesAvailableListAdapter;
 import com.br.smartzoo.ui.adapter.JanitorsRestedAdapter;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.ui.view.DetailsFeederView;
@@ -147,24 +149,25 @@ public class DialogUtil{
         return dialog;
     }
 
-    public static Dialog makeDialogShowFruits(FragmentActivity activity, DetailsFeederView
+    public static Dialog makeDialogShowCage(FragmentActivity activity, DetailsFeederView
             callBack) {
 
         final Dialog dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_foods_avaiable);
+        dialog.setContentView(R.layout.dialog_cages_food);
 
         RecyclerView recyclerView
-                = (RecyclerView) dialog.findViewById(R.id.recycler_view_foods_avaliable);
-        FoodsAvaiableListAdapter janitorsRestedAdapter = new FoodsAvaiableListAdapter(context, janitors,cage);
-//        janitorsRestedAdapter.addOnJanitorRestedSelected(onJanitorsRestedSelected);
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
-//        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//        recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(VERTICAL_ITEM_SPACE));
-//        recyclerView.addItemDecoration(
-//                new DividerItemDecoration(context, R.drawable.divider_recycler_view));
-//        recyclerView.setItemViewCacheSize(janitors.size());
+                = (RecyclerView) dialog.findViewById(R.id.recycler_view_cages_avaliable);
+        CagesAvailableListAdapter cageAdapter = new CagesAvailableListAdapter(activity,
+                ZooInfo.cages);
+        cageAdapter.addCallBack(callBack);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(VERTICAL_ITEM_SPACE));
+        recyclerView.addItemDecoration(
+                new DividerItemDecoration(activity, R.drawable.divider_recycler_view));
+        recyclerView.setItemViewCacheSize(ZooInfo.cages.size());
 
         return dialog;
 

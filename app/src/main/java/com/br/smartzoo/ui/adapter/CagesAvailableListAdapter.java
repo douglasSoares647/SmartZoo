@@ -10,7 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
-import com.br.smartzoo.model.entity.Food;
+import com.br.smartzoo.model.entity.Cage;
+import com.br.smartzoo.ui.view.DetailsFeederView;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -19,16 +20,17 @@ import java.util.List;
  * Created by adenilson on 20/06/16.
  */
 
-public class FoodsAvaiableListAdapter extends RecyclerView.Adapter<FoodsAvaiableListAdapter
+public class CagesAvailableListAdapter extends RecyclerView.Adapter<CagesAvailableListAdapter
         .ViewHolder> {
 
 
     private Activity mContext;
-    private List<Food> mFoodList;
+    private List<Cage> mCageList;
+    private DetailsFeederView mCallBack;
 
-    public FoodsAvaiableListAdapter(Activity context, List<Food> foodList) {
+    public CagesAvailableListAdapter(Activity context, List<Cage> foodList) {
         this.mContext = context;
-        this.mFoodList = foodList;
+        this.mCageList = foodList;
     }
 
     @Override
@@ -41,9 +43,9 @@ public class FoodsAvaiableListAdapter extends RecyclerView.Adapter<FoodsAvaiable
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Food food = mFoodList.get(position);
-        Glide.with(mContext).load(food.getImage()).into(holder.mImageViewFood);
-        holder.mTextViewName.setText(food.getName());
+        Cage cage = mCageList.get(position);
+        Glide.with(mContext).load(R.drawable.ic_cage).into(holder.mImageViewCage);
+        holder.mTextViewName.setText(cage.getName());
         holder.mButtonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,21 +56,25 @@ public class FoodsAvaiableListAdapter extends RecyclerView.Adapter<FoodsAvaiable
 
     @Override
     public int getItemCount() {
-        return mFoodList.size();
+        return mCageList.size();
+    }
+
+    public void addCallBack(DetailsFeederView callBack) {
+        this.mCallBack = callBack;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView mTextViewName;
         private Button mButtonAdd;
-        private ImageView mImageViewFood;
+        private ImageView mImageViewCage;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            mTextViewName = (TextView) itemView.findViewById(R.id.text_view_name_food_avaiable);
+            mTextViewName = (TextView) itemView.findViewById(R.id.text_view_name_cage_available);
             mButtonAdd = (Button) itemView.findViewById(R.id
-                    .button_add_food);
-            mImageViewFood = (ImageView) itemView.findViewById(R.id.image_view_food_avaiable);
+                    .button_add_into_cage);
+            mImageViewCage = (ImageView) itemView.findViewById(R.id.image_view_cage_available);
         }
     }
 }

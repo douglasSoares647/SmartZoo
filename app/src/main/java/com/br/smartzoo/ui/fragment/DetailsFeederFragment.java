@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.entity.Feeder;
-import com.br.smartzoo.model.entity.Veterinary;
 import com.br.smartzoo.presenter.DetailsFeederPresenter;
 import com.br.smartzoo.ui.view.DetailsFeederView;
 import com.br.smartzoo.util.DateUtil;
@@ -53,7 +52,7 @@ public class DetailsFeederFragment extends Fragment implements DetailsFeederView
         buttonFeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogUtil.makeDialogShowFruits(getActivity(), DetailsFeederFragment.this);
+                DialogUtil.makeDialogShowCage(getActivity(), DetailsFeederFragment.this);
             }
         });
     }
