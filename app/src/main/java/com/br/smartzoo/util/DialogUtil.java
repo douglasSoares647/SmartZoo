@@ -169,6 +169,8 @@ public class DialogUtil{
                 new DividerItemDecoration(activity, R.drawable.divider_recycler_view));
         recyclerView.setItemViewCacheSize(ZooInfo.cages.size());
 
+        recyclerView.setAdapter(cageAdapter);
+
         return dialog;
 
     }

@@ -43,13 +43,13 @@ public class CagesAvailableListAdapter extends RecyclerView.Adapter<CagesAvailab
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Cage cage = mCageList.get(position);
+        final Cage cage = mCageList.get(position);
         Glide.with(mContext).load(R.drawable.ic_cage).into(holder.mImageViewCage);
         holder.mTextViewName.setText(cage.getName());
         holder.mButtonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                mCallBack.feedCage(cage);
             }
         });
     }

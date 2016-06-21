@@ -160,9 +160,13 @@ public class DetailsVeterinaryFragment extends Fragment {
 
             @Override
             public void onTreatFinish() {
-                buttonTreat.setAlpha(1f);
-                buttonTreat.setEnabled(true);
-                buttonTreat.setText(getString(R.string.button_treat));
+
+                if(isVisible()) {
+                    buttonTreat.setAlpha(1f);
+                    buttonTreat.setEnabled(true);
+                    buttonTreat.setText(getActivity().getString(R.string.button_treat));
+
+                }
 
                 setCurrentState();
 

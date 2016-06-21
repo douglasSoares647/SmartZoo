@@ -286,6 +286,10 @@ public class Animal implements Observer, Parcelable {
     public void onTick() {
         biologicalClock++;
 
+        if(isHungry){
+            eat();
+        }
+
         if (isDigesting) {
             digest();
         } else if (biologicalClock == Clock.timeToFeelHungry) {

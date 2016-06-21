@@ -28,7 +28,7 @@ public class Clock {
     public static int timeToRest = 50;//300; //5 minutes
 
     //Veterinary
-    public static int timeToTreat = 300;//1800;
+    public static int timeToTreat = 10;//1800;
 
 
     public static int day = 1;
