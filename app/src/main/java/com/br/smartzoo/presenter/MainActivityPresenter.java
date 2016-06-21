@@ -12,6 +12,7 @@ import com.br.smartzoo.ui.fragment.BuyFoodFragment;
 import com.br.smartzoo.ui.fragment.CageListFragment;
 import com.br.smartzoo.ui.fragment.ChooseEmployeeFragment;
 import com.br.smartzoo.ui.fragment.DetailsAnimalFragment;
+import com.br.smartzoo.ui.fragment.DetailsFeederFragment;
 import com.br.smartzoo.ui.fragment.DetailsJanitorFragment;
 import com.br.smartzoo.ui.fragment.DetailsVeterinaryFragment;
 import com.br.smartzoo.ui.fragment.FeederListFragment;
@@ -134,6 +135,13 @@ public class MainActivityPresenter {
             transaction.replace(container, detailsVeterinaryFragment, GameState
                     .DETAILS_VETERINARY_FRAGMENT);
             transaction.addToBackStack(GameState.DETAILS_VETERINARY_FRAGMENT);
+            transaction.commit();
+        }else if(fragment instanceof DetailsFeederFragment){
+            DetailsFeederFragment detailsFeederFragment = (DetailsFeederFragment)
+                    fragment;
+            transaction.replace(container, detailsFeederFragment, GameState
+                    .DETAILS_FEEDER_FRAGMENT);
+            transaction.addToBackStack(GameState.DETAILS_FEEDER_FRAGMENT);
             transaction.commit();
         }
 

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -16,13 +17,16 @@ import com.br.smartzoo.model.entity.Veterinary;
 import com.br.smartzoo.presenter.DetailsFeederPresenter;
 import com.br.smartzoo.ui.view.DetailsFeederView;
 import com.br.smartzoo.util.DateUtil;
+import com.br.smartzoo.util.DialogUtil;
+
+import java.text.DecimalFormat;
 
 /**
  * Created by adenilson on 19/06/16.
  */
 
 public class DetailsFeederFragment extends Fragment implements DetailsFeederView {
-    private static final String SELECTED_FEEDER = "SELECTED_FEEDER";
+    public static final String SELECTED_FEEDER = "SELECTED_FEEDER";
     private DetailsFeederPresenter mPresenter;
     private Feeder mSelectedFeeder;
 
@@ -39,13 +43,25 @@ public class DetailsFeederFragment extends Fragment implements DetailsFeederView
         bindTextViewSalaryFeeder(view);
         bindTextViewStatusFeeder(view);
         bindProgressBarStaminaFeeder(view);
+        bindButtonFeed(view);
 
         return view;
+    }
+
+    private void bindButtonFeed(View view) {
+        Button buttonFeed = (Button) view.findViewById(R.id.button_feed);
+        buttonFeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogUtil.makeDialogShowFruits(getActivity(), DetailsFeederFragment.this);
+            }
+        });
     }
 
     private void bindProgressBarStaminaFeeder(View view) {
         ProgressBar progressBarStamina = (ProgressBar) view.findViewById(R.id
                 .progress_bar_stamina_feeder);
+
     }
 
     private void bindTextViewStatusFeeder(View view) {
@@ -56,8 +72,10 @@ public class DetailsFeederFragment extends Fragment implements DetailsFeederView
 
     private void bindTextViewSalaryFeeder(View view) {
         TextView textViewSalary = (TextView) view.findViewById(R.id.text_view_salary_feeder);
-        textViewSalary.setText(mSelectedFeeder.getSalary() != null ? String.format("%02d",
-                mSelectedFeeder.getSalary()) : "Unknown");
+        DecimalFormat decimalFormat = new DecimalFormat("0,00");
+
+        textViewSalary.setText(mSelectedFeeder.getSalary() != null ? decimalFormat.format
+                (mSelectedFeeder.getSalary()) : "Unknown");
     }
 
     private void bindTextViewInitFeeder(View view) {

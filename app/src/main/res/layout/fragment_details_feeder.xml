@@ -5,6 +5,7 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
+        android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -88,6 +89,19 @@
             android:textSize="16dp"
             android:textStyle="bold"/>
 
+
+        <Button
+            android:id="@+id/button_feed"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/text_view_status_feeder"
+            android:textColor="@color/white"
+            android:background="@drawable/button_buy"
+            android:layout_centerHorizontal="true"
+            android:text="feed"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            />
+
         <TextView
             android:id="@+id/label_aliment_feeder"
             android:layout_width="wrap_content"
@@ -102,7 +116,7 @@
             android:id="@+id/image_view_food_feeder"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_below="@id/text_view_status_feeder"
+            android:layout_below="@id/button_feed"
             android:layout_marginTop="8dp"
             android:layout_toRightOf="@id/label_aliment_feeder"
             android:src="@drawable/ic_feeder"/>

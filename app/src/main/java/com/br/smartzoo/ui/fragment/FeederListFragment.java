@@ -58,7 +58,7 @@ public class FeederListFragment extends Fragment implements FeederListView, OnMa
         mRecyclerViewFeeder = (RecyclerView) view.findViewById(R.id.recycler_view_feeders);
         mAdapter = new FeederListAdapter(getActivity()
                 , mFeederList);
-        mAdapter.addOnMaganeEmployee(this);
+        mAdapter.addOnManageEmployee(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerViewFeeder.setLayoutManager(layoutManager);
@@ -101,6 +101,8 @@ public class FeederListFragment extends Fragment implements FeederListView, OnMa
 
     @Override
     public void onClick(Employee employee) {
-
+        mPresenter.startTransaction((Feeder)employee);
     }
+
+
 }

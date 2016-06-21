@@ -2,6 +2,7 @@ package com.br.smartzoo.util;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -21,10 +22,14 @@ import com.br.smartzoo.model.interfaces.OnManageCage;
 import com.br.smartzoo.model.interfaces.OnManageEmployee;
 import com.br.smartzoo.model.interfaces.OnSetAnimalNameListener;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
+import com.br.smartzoo.ui.adapter.FoodsAvaiableListAdapter;
 import com.br.smartzoo.ui.adapter.JanitorsRestedAdapter;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
+import com.br.smartzoo.ui.view.DetailsFeederView;
 
 import java.util.List;
+
+import static com.br.smartzoo.R.string.janitors;
 
 /**
  * Created by adenilson on 26/05/16.
@@ -140,5 +145,28 @@ public class DialogUtil{
         recyclerView.setItemViewCacheSize(janitors.size());
 
         return dialog;
+    }
+
+    public static Dialog makeDialogShowFruits(FragmentActivity activity, DetailsFeederView
+            callBack) {
+
+        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_foods_avaiable);
+
+        RecyclerView recyclerView
+                = (RecyclerView) dialog.findViewById(R.id.recycler_view_foods_avaliable);
+        FoodsAvaiableListAdapter janitorsRestedAdapter = new FoodsAvaiableListAdapter(context, janitors,cage);
+//        janitorsRestedAdapter.addOnJanitorRestedSelected(onJanitorsRestedSelected);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+//        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+//        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(VERTICAL_ITEM_SPACE));
+//        recyclerView.addItemDecoration(
+//                new DividerItemDecoration(context, R.drawable.divider_recycler_view));
+//        recyclerView.setItemViewCacheSize(janitors.size());
+
+        return dialog;
+
     }
 }

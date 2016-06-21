@@ -1,15 +1,19 @@
 package com.br.smartzoo.presenter;
 
 import android.app.Activity;
+import android.os.Bundle;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.game.environment.ZooInfo;
 import com.br.smartzoo.model.asynctask.DemitEmployeeAsyncTask;
 import com.br.smartzoo.model.asynctask.UpdateSalaryAsyncTask;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
+import com.br.smartzoo.model.entity.Animal;
 import com.br.smartzoo.model.entity.Employee;
 import com.br.smartzoo.model.entity.Feeder;
 import com.br.smartzoo.ui.activity.MainActivity;
+import com.br.smartzoo.ui.fragment.DetailsAnimalFragment;
+import com.br.smartzoo.ui.fragment.DetailsFeederFragment;
 import com.br.smartzoo.ui.view.FeederListView;
 
 import java.util.ArrayList;
@@ -37,9 +41,9 @@ public class FeederListPresenter {
 
     public void loadFeederList() {
         List<Feeder> feeders = new ArrayList<>();
-        for(Employee employee : ZooInfo.employees){
-            if(employee instanceof Feeder)
-                feeders.add((Feeder)employee);
+        for (Employee employee : ZooInfo.employees) {
+            if (employee instanceof Feeder)
+                feeders.add((Feeder) employee);
         }
 
         mFeederListView.onLoadFeederSuccess(feeders);
@@ -77,5 +81,15 @@ public class FeederListPresenter {
                         .getString(R.string.message_update_salary_failed));
             }
         }).execute(employee, value);
+    }
+
+    public void startTransaction(Feeder feeder) {
+
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(DetailsFeederFragment.SELECTED_FEEDER, feeder);
+        DetailsFeederFragment detailsFeederFragment = new DetailsFeederFragment();
+        detailsFeederFragment.setArguments(bundle);
+        ((MainActivity) mContext).startTransaction(detailsFeederFragment);
+
     }
 }

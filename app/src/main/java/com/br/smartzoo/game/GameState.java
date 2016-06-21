@@ -26,6 +26,7 @@ public class GameState {
     public static final String MANAGE_STOCK_FRAGMENT = "MANAGE_STOCK_FRAGMENT";
     public static final String STATUS_ZOO_FRAGMENT = "STATUS_ZOO_FRAGMENT";
     public static final String VETERINARY_LIST_FRAGMENT = "VETERINARY_LIST_FRAGMENT";
+    public static final String DETAILS_FEEDER_FRAGMENT = "DETAILS_FEEDER_FRAGMENT";
 
     public static Fragment previousState(AppCompatActivity activity) {
         Fragment fragment = null;

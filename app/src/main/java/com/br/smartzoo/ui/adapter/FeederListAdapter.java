@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
@@ -33,6 +34,7 @@ public class FeederListAdapter extends RecyclerView.Adapter<FeederListAdapter.Vi
     private OnManageEmployee mOnManageEmployee;
     private AlertDialog.Builder mAlertDialog;
 
+
     public FeederListAdapter(Activity context, List<Feeder> feeders) {
         this.mContext = context;
         this.mFeederList = feeders;
@@ -43,7 +45,7 @@ public class FeederListAdapter extends RecyclerView.Adapter<FeederListAdapter.Vi
         notifyDataSetChanged();
     }
 
-    public void addOnMaganeEmployee(OnManageEmployee onManageEmployee) {
+    public void addOnManageEmployee(OnManageEmployee onManageEmployee) {
         this.mOnManageEmployee = onManageEmployee;
     }
 
@@ -56,7 +58,7 @@ public class FeederListAdapter extends RecyclerView.Adapter<FeederListAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Feeder feeder = mFeederList.get(position);
+        final Feeder feeder = mFeederList.get(position);
 
         Resources resources = mContext.getResources();
 
@@ -68,6 +70,12 @@ public class FeederListAdapter extends RecyclerView.Adapter<FeederListAdapter.Vi
         holder.mTextViewSalary.setText(String.valueOf(feeder.getSalary()));
         Glide.with(mContext).load(R.drawable.ic_salary).into(holder.mImageViewSalary);
         Glide.with(mContext).load(R.drawable.ic_demit).into(holder.mImageViewDemission);
+        holder.mRelativeFeeder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnManageEmployee.onClick(feeder);
+            }
+        });
 
         addListenerToDemission(holder, feeder);
         addListenerToSalary(holder, feeder);
@@ -123,10 +131,12 @@ public class FeederListAdapter extends RecyclerView.Adapter<FeederListAdapter.Vi
         private TextView mTextViewSalary;
         private ImageView mImageViewDemission;
         private ImageView mImageViewSalary;
+        private RelativeLayout mRelativeFeeder;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
+            mRelativeFeeder = (RelativeLayout) itemView.findViewById(R.id.relative_feeder);
             mImageViewFeeder = (ImageView) itemView.findViewById(R.id.image_view_feeder);
             mTextViewName = (TextView) itemView.findViewById(R.id.text_view_name_feeder);
             mTextViewAge = (TextView) itemView.findViewById(R.id.text_view_age_feeder);
