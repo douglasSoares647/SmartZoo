@@ -114,6 +114,7 @@ public class DetailsJanitorFragment extends Fragment {
                 final Cage cage = ((ListCageAdapter) recyclerViewCages.getAdapter()).getCage(position);
                 selectCageDialog.dismiss();
 
+                cage.setDirtyFactor(10);
 
                 setTaskProgressAttributes(cage);
 
@@ -154,10 +155,11 @@ public class DetailsJanitorFragment extends Fragment {
             @Override
             public void onCleanFinish() {
 
-
-                buttonCleanCage.setAlpha(1f);
-                buttonCleanCage.setEnabled(true);
-                buttonCleanCage.setText(getString(R.string.button_clean));
+                if(isVisible()) {
+                    buttonCleanCage.setAlpha(1f);
+                    buttonCleanCage.setEnabled(true);
+                    buttonCleanCage.setText(getString(R.string.button_clean));
+                }
 
                 setCurrentState();
 

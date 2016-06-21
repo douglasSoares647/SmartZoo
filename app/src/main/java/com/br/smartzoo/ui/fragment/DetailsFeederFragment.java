@@ -1,5 +1,6 @@
 package com.br.smartzoo.ui.fragment;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
@@ -12,13 +13,17 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.model.entity.Cage;
 import com.br.smartzoo.model.entity.Feeder;
+import com.br.smartzoo.model.entity.Food;
+import com.br.smartzoo.model.singleton.Stock;
 import com.br.smartzoo.presenter.DetailsFeederPresenter;
 import com.br.smartzoo.ui.view.DetailsFeederView;
 import com.br.smartzoo.util.DateUtil;
 import com.br.smartzoo.util.DialogUtil;
 
 import java.text.DecimalFormat;
+import java.util.List;
 
 /**
  * Created by adenilson on 19/06/16.
@@ -28,6 +33,7 @@ public class DetailsFeederFragment extends Fragment implements DetailsFeederView
     public static final String SELECTED_FEEDER = "SELECTED_FEEDER";
     private DetailsFeederPresenter mPresenter;
     private Feeder mSelectedFeeder;
+    private Dialog dialog;
 
     @Nullable
     @Override
@@ -52,7 +58,8 @@ public class DetailsFeederFragment extends Fragment implements DetailsFeederView
         buttonFeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogUtil.makeDialogShowCage(getActivity(), DetailsFeederFragment.this);
+                dialog = DialogUtil.makeDialogShowCage(getActivity(), DetailsFeederFragment.this);
+                dialog.show();
             }
         });
     }
@@ -102,4 +109,9 @@ public class DetailsFeederFragment extends Fragment implements DetailsFeederView
         mPresenter.attachView(this);
     }
 
+    @Override
+    public void feedCage(Cage cage) {
+        mSelectedFeeder.feedCage(cage);
+        dialog.dismiss();
+    }
 }

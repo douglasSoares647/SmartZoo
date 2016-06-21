@@ -50,13 +50,20 @@ public class Visitor implements Observer{
             Integer timeToVisitCage = 0;
             for(Animal animal : cage.getAnimals()){
                 Random random = new Random();
-                int chance = random.nextInt(11)+1;
-                if( chance < animal.getPopularity()){
-                    reputationGenerated +=  animal.getPopularity()*0.01;
-                    timeToVisitCage+= chance*60;
+
+
+                if(!animal.isHealthy()){
+                    reputationGenerated-= animal.getPopularity()*0.01;
                 }
                 else{
-                    timeToVisitCage+= 60;
+                    int chance = random.nextInt(11)+1;
+                    if( chance < animal.getPopularity()){
+                        reputationGenerated +=  animal.getPopularity()*0.01;
+                        timeToVisitCage+= chance*60;
+                    }
+                    else{
+                        timeToVisitCage+= 60;
+                    }
                 }
             }
 

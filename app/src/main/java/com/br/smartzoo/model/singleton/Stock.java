@@ -64,20 +64,20 @@ public class Stock {
     	List<Food> foodsToTake = new ArrayList<Food>();
     	List<Food> stockFoods = foods.get(name);
     	List<Food> expiratedFoods = new ArrayList<Food>();
-    	
+
     	Double weightOfFood = new Double(0);
-    	
+
     	for(Animal animal : cage.getAnimals()){
     		weightOfFood += animal.getWeight()/12;
     	}
-    	
+
     	if(stockFoods!=null){
     		for(Food food : stockFoods){
     			 Calendar expirationDate = Calendar.getInstance();
                  expirationDate.setTime(food.getExpirationDate());
 
                  Calendar currentDate = Calendar.getInstance();
-                 
+
                  if(currentDate.before(expirationDate)){
 	    			while(weightOfFood >0){
 	    			foodsToTake.add(food);
@@ -93,7 +93,43 @@ public class Stock {
     	stockFoods.removeAll(expiratedFoods);
     	return foodsToTake;
     }
-    
+
+
+	public List<Food> takeFoods(Cage cage){
+		List<Food> foodsToTake = new ArrayList<Food>();
+		List<Food> expiratedFoods = new ArrayList<Food>();
+
+		Double weightOfFood = new Double(0);
+
+		for(Animal animal : cage.getAnimals()){
+			weightOfFood += animal.getWeight()/12;
+		}
+
+		for(Map.Entry<String,List<Food>> entry : foods.entrySet()){
+			List<Food> foods = entry.getValue();
+
+			for(Food food: foods){
+
+				Calendar expirationDate = Calendar.getInstance();
+				expirationDate.setTime(food.getExpirationDate());
+
+				Calendar currentDate = Calendar.getInstance();
+
+				if(currentDate.before(expirationDate)){
+					while(weightOfFood >0){
+						foodsToTake.add(food);
+						weightOfFood -= food.getWeight();
+					}
+				}
+				else{
+					expiratedFoods.add(food);
+				}
+			}
+		}
+		return foodsToTake;
+	}
+
+
     @Override
     public String toString(){
     	StringBuilder stock = new StringBuilder();

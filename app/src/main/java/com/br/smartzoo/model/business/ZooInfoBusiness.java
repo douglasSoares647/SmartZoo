@@ -187,6 +187,7 @@ public class ZooInfoBusiness {
             for (Animal originalAnimal : cage.getAnimals()) {
                 if (originalAnimal.equals(animal)) {
                     originalAnimal.setIsHealthy(animal.isHealthy());
+                    AnimalBusiness.save(originalAnimal);
                     break;
                 }
 

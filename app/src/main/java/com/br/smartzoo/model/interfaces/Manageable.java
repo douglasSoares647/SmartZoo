@@ -9,7 +9,7 @@ import com.br.smartzoo.model.entity.Cage;
 public interface Manageable {
 
 
-    void feedCage(String foodName, Cage cage);
+    void feedCage(Cage cage);
 
     void toRetain(Cage cage);
 

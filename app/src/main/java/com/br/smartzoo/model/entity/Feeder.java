@@ -83,8 +83,8 @@ public class Feeder extends Employee implements Manageable, Parcelable {
 
 
     @Override
-    public void feedCage(String foodName, Cage cage) {
-        List<Food> foodsFromStock = stock.takeFoods(foodName, cage);
+    public void feedCage( Cage cage) {
+        List<Food> foodsFromStock = stock.getInstance().takeFoods(cage);
 
         Double foodWeight = 0D;
 
@@ -98,10 +98,6 @@ public class Feeder extends Employee implements Manageable, Parcelable {
             cage.setIsSupplied(true);
         } else {
             stock.putFoods(foodsFromStock);
-        }
-
-        for (Animal animal : cage.getAnimals()) {
-            animal.eat();
         }
 
 
