@@ -9,6 +9,7 @@ import com.br.smartzoo.model.entity.New;
 import com.br.smartzoo.ui.activity.MainActivity;
 import com.br.smartzoo.ui.view.NewsView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,6 +45,7 @@ public class NewsPresenter {
             @Override
             public void onLoadListEmpty() {
                 mNewsView.showSnackBar(mContext.getString(R.string.msg_no_news_to_load));
+                mNewsView.onLoadNewsEmpty(new ArrayList<New>());
             }
         }, mContext).execute();
 

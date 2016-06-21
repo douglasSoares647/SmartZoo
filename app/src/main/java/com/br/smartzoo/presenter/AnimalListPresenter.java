@@ -65,6 +65,7 @@ public class AnimalListPresenter {
 
             @Override
             public void onLoadAnimalsListEmpty() {
+                mAnimalListView.onAnimalListEmpty();
 
             }
 

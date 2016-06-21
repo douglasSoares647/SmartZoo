@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.business.NewsFeedBusiness;
@@ -20,6 +22,7 @@ import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.NewListAdapter;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.ui.view.NewsView;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,13 +35,16 @@ public class NewsFragment extends Fragment implements NewsView, OnNewClick, OnNe
     private NewsPresenter mPresenter;
     private RecyclerView mRecyclerViewNews;
     private NewListAdapter mAdapter;
+    private RelativeLayout mRelative;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
+            savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_news, container, false);
 
         bindFragmentToBusiness();
+        bindRelativeEmpty(view);
         bindPresenter();
         bindRecyclerViewNews(view);
         bindToolbarName();
@@ -47,8 +53,16 @@ public class NewsFragment extends Fragment implements NewsView, OnNewClick, OnNe
         return view;
     }
 
+    private void bindRelativeEmpty(View view) {
+        mRelative = (RelativeLayout) view.findViewById(R.id.relative_empty);
+        ImageView imageViewEmpty = (ImageView) view.findViewById(R.id.image_view_empty);
+        Glide.with(getActivity()).load(R.drawable.ic_empty).into(imageViewEmpty);
+        mRelative.setVisibility(View.GONE);
+
+    }
+
     private void bindToolbarName() {
-        ((MainActivity)getActivity()).changeToolBarText(getString(R.string.option_news));
+        ((MainActivity) getActivity()).changeToolBarText(getString(R.string.option_news));
     }
 
     private void bindFragmentToBusiness() {
@@ -85,6 +99,8 @@ public class NewsFragment extends Fragment implements NewsView, OnNewClick, OnNe
     @Override
     public void onLoadNews(List<New> news) {
         mAdapter.setNewList(news);
+        mRelative.setVisibility(View.GONE);
+
     }
 
     @Override
@@ -93,14 +109,24 @@ public class NewsFragment extends Fragment implements NewsView, OnNewClick, OnNe
     }
 
     @Override
+    public void onLoadNewsEmpty(ArrayList<New> news) {
+        mRelative.setVisibility(View.VISIBLE);
+    }
+
+    @Override
     public void update(New news) {
         NewListAdapter adapter = (NewListAdapter) mRecyclerViewNews.getAdapter();
         adapter.addNewToList(news);
 
-        LinearLayoutManager linearLayoutManager = (LinearLayoutManager) mRecyclerViewNews.getLayoutManager();
+        LinearLayoutManager linearLayoutManager = (LinearLayoutManager) mRecyclerViewNews
+                .getLayoutManager();
 
-        if(linearLayoutManager.findFirstCompletelyVisibleItemPosition()==0){
+        if (linearLayoutManager.findFirstCompletelyVisibleItemPosition() == 0) {
             mRecyclerViewNews.scrollToPosition(0);
+        }
+        if (adapter.getItemCount() > 0) {
+            if (mRelative != null)
+                mRelative.setVisibility(View.GONE);
         }
     }
 

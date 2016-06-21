@@ -12,6 +12,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
 import com.br.smartzoo.R;
@@ -23,6 +25,7 @@ import com.br.smartzoo.ui.adapter.AnimalListAdapter;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.ui.view.AnimalListView;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +43,7 @@ public class AnimalListFragment extends Fragment implements AnimalListView, OnMa
     private List<Animal> animals;
     private Toolbar toolbar;
     private Spinner spinner;
+    private RelativeLayout mRelative;
 
     @Nullable
     @Override
@@ -47,6 +51,7 @@ public class AnimalListFragment extends Fragment implements AnimalListView, OnMa
         View view = inflater.inflate(R.layout.fragment_animal_list, container, false);
 
         bindPresenter();
+        bindRelativeEmpty(view);
         bindRecyclerViewAnimal(view);
         loadAnimalList();
 
@@ -56,6 +61,15 @@ public class AnimalListFragment extends Fragment implements AnimalListView, OnMa
         bindToolbarName();
 
         return view;
+    }
+
+
+    private void bindRelativeEmpty(View view) {
+        mRelative = (RelativeLayout) view.findViewById(R.id.relative_empty);
+        ImageView imageViewEmpty = (ImageView) view.findViewById(R.id.image_view_empty);
+        Glide.with(getActivity()).load(R.drawable.ic_empty).into(imageViewEmpty);
+        mRelative.setVisibility(View.GONE);
+
     }
 
     private void bindToolbarName() {
@@ -147,6 +161,7 @@ public class AnimalListFragment extends Fragment implements AnimalListView, OnMa
         mRecyclerViewAnimals.setItemViewCacheSize(animalList.size());
         mAdapter.setAnimalList(animalList);
         animals = animalList;
+        mRelative.setVisibility(View.GONE);
     }
 
     @Override
@@ -159,5 +174,10 @@ public class AnimalListFragment extends Fragment implements AnimalListView, OnMa
     @Override
     public void onAnimalPutted(Animal animal) {
        mPresenter.loadAnimalList();
+    }
+
+    @Override
+    public void onAnimalListEmpty() {
+        mRelative.setVisibility(View.VISIBLE);
     }
 }

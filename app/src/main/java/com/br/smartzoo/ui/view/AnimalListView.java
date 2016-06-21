@@ -14,4 +14,6 @@ public interface AnimalListView {
     void updateList(Animal animal);
 
     void onAnimalPutted(Animal animal);
+
+    void onAnimalListEmpty();
 }

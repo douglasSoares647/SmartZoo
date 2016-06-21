@@ -11,4 +11,5 @@ public interface VeterinaryListView {
 
     void onLoadVeterinaryList(List<Veterinary> veterinaries);
 
+    void onLoadVeterinaryListEmpty();
 }

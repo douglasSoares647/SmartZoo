@@ -25,22 +25,26 @@ public class JanitorListPresenter {
     private Activity mContext;
     private JanitorListView mJanitorListView;
 
-    public JanitorListPresenter(Activity context){
+    public JanitorListPresenter(Activity context) {
         this.mContext = context;
     }
 
-    public void attachView(JanitorListView janitorListView){
+    public void attachView(JanitorListView janitorListView) {
         this.mJanitorListView = janitorListView;
     }
 
-    public void loadJanitors(){
+    public void loadJanitors() {
         List<Janitor> janitors = new ArrayList<>();
-        for(Employee employee : ZooInfo.employees){
-            if(employee instanceof Janitor)
-                janitors.add((Janitor)employee);
+        for (Employee employee : ZooInfo.employees) {
+            if (employee instanceof Janitor)
+                janitors.add((Janitor) employee);
         }
 
-        mJanitorListView.onLoadJanitorList(janitors);
+        if (janitors.isEmpty()) {
+            mJanitorListView.onLoadJanitorListEmpty();
+        } else {
+            mJanitorListView.onLoadJanitorList(janitors);
+        }
     }
 
     public void demitJanitor(final Employee janitor) {
@@ -87,12 +91,11 @@ public class JanitorListPresenter {
     }
 
 
-
     public void startTransaction(Employee employee) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(DetailsJanitorFragment.SELECTED_JANITOR, employee);
         DetailsJanitorFragment detailsJanitorFragment = new DetailsJanitorFragment();
         detailsJanitorFragment.setArguments(bundle);
-        ((MainActivity)mContext).startTransaction(detailsJanitorFragment);
+        ((MainActivity) mContext).startTransaction(detailsJanitorFragment);
     }
 }

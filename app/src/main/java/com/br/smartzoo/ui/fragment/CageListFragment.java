@@ -11,9 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.br.smartzoo.R;
+import com.br.smartzoo.game.environment.ZooInfo;
 import com.br.smartzoo.model.business.CageBusiness;
 import com.br.smartzoo.model.business.ZooInfoBusiness;
 import com.br.smartzoo.model.entity.Animal;
@@ -27,6 +30,7 @@ import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.ui.view.CageListView;
 import com.br.smartzoo.util.RecyclerItemClickListener;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +45,7 @@ public class CageListFragment extends Fragment implements CageListView, OnManage
     private List<Cage> mCageList = new ArrayList<>();
     private CageListAdapter mAdapter;
     private RecyclerView mRecyclerView;
+    private RelativeLayout mRelative;
 
 
     @Nullable
@@ -51,11 +56,21 @@ public class CageListFragment extends Fragment implements CageListView, OnManage
         View view = inflater.inflate(R.layout.fragment_cage_list, container, false);
 
         bindPresenter();
+        bindRelativeEmpty(view);
         bindRecyclerViewCage(view);
         bindToolbarName();
         loadCageList();
 
         return view;
+    }
+
+
+    private void bindRelativeEmpty(View view) {
+        mRelative = (RelativeLayout) view.findViewById(R.id.relative_empty);
+        ImageView imageViewEmpty = (ImageView) view.findViewById(R.id.image_view_empty);
+        Glide.with(getActivity()).load(R.drawable.ic_empty).into(imageViewEmpty);
+        mRelative.setVisibility(View.GONE);
+
     }
 
     private void bindToolbarName() {
@@ -106,6 +121,7 @@ public class CageListFragment extends Fragment implements CageListView, OnManage
     @Override
     public void onLoadCageList(List<Cage> cages) {
         mAdapter.setCageList(cages);
+        mRelative.setVisibility(View.GONE);
     }
 
     @Override
@@ -117,5 +133,13 @@ public class CageListFragment extends Fragment implements CageListView, OnManage
     public void onAnimalTypeChanged(Cage cage) {
 
         mAdapter.notifyDataSetChanged();
+        if(ZooInfo.cages.isEmpty()){
+            mRelative.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onLoadCageListEmpty() {
+        mRelative.setVisibility(View.VISIBLE);
     }
 }

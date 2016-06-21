@@ -39,12 +39,17 @@ public class VeterinaryListPresenter {
 
     public void loadVeterinaries() {
         List<Veterinary> veterinaries = new ArrayList<>();
-        for(Employee employee : ZooInfo.employees){
-            if(employee instanceof Veterinary)
-                veterinaries.add((Veterinary)employee);
+
+        for (Employee employee : ZooInfo.employees) {
+            if (employee instanceof Veterinary)
+                veterinaries.add((Veterinary) employee);
         }
 
-        mVeterinaryListView.onLoadVeterinaryList(veterinaries);
+        if (veterinaries.isEmpty()) {
+            mVeterinaryListView.onLoadVeterinaryListEmpty();
+        } else {
+            mVeterinaryListView.onLoadVeterinaryList(veterinaries);
+        }
     }
 
     public void demitVeterinary(final Employee veterinary) {
@@ -56,10 +61,9 @@ public class VeterinaryListPresenter {
             }
 
 
-
             @Override
             public void onDemitFailed() {
-                ((MainActivity)mContext)
+                ((MainActivity) mContext)
                         .showSnackBar(mContext.getString(R.string.message_demit_failed));
 
             }
@@ -75,14 +79,14 @@ public class VeterinaryListPresenter {
         new UpdateSalaryAsyncTask(mContext, new UpdateSalaryAsyncTask.onSalaryChanged() {
             @Override
             public void onSalaryChangedSuccess() {
-                ((MainActivity)mContext).showSnackBar(mContext
+                ((MainActivity) mContext).showSnackBar(mContext
                         .getString(R.string.message_update_salary_success));
                 loadVeterinaries();
             }
 
             @Override
             public void onSalaryChangedFailed() {
-                ((MainActivity)mContext).showSnackBar(mContext
+                ((MainActivity) mContext).showSnackBar(mContext
                         .getString(R.string.message_update_salary_failed));
             }
         }).execute(veterinary, value);
@@ -99,6 +103,6 @@ public class VeterinaryListPresenter {
         bundle.putParcelable(DetailsVeterinaryFragment.SELECTED_VETERINARY, employee);
         DetailsVeterinaryFragment detailsVeterinaryFragment = new DetailsVeterinaryFragment();
         detailsVeterinaryFragment.setArguments(bundle);
-        ((MainActivity)mContext).startTransaction(detailsVeterinaryFragment);
+        ((MainActivity) mContext).startTransaction(detailsVeterinaryFragment);
     }
 }

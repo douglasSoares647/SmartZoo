@@ -10,4 +10,6 @@ import java.util.List;
 public interface FeederListView {
 
     void onLoadFeederSuccess(List<Feeder> veterinaries);
+
+    void onLoadFeederEmpty();
 }

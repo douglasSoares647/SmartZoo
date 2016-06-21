@@ -14,4 +14,7 @@ public interface CageListView {
     void onCageDestroyed(Cage cage);
 
     void onAnimalTypeChanged(Cage cage);
+
+    void onLoadCageListEmpty();
+
 }

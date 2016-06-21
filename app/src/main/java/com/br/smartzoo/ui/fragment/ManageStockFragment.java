@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.model.entity.Food;
@@ -19,6 +21,7 @@ import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.StockListAdapter;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.ui.view.ManageStockView;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +35,7 @@ public class ManageStockFragment extends Fragment implements ManageStockView, On
     private ManageStockPresenter mPresenter;
     private RecyclerView mRecyclerViewFoods;
     private StockListAdapter mAdapter;
+    private RelativeLayout mRelative;
 
     @Nullable
     @Override
@@ -39,11 +43,21 @@ public class ManageStockFragment extends Fragment implements ManageStockView, On
         View view = inflater.inflate(R.layout.fragment_stock, container, false);
 
         bindPresenter();
+        bindRelativeEmpty(view);
         bindRecyclerViewFoodList(view);
         populateFoodList();
         bindToolbarName();
 
         return view;
+    }
+
+
+    private void bindRelativeEmpty(View view) {
+        mRelative = (RelativeLayout) view.findViewById(R.id.relative_empty);
+        ImageView imageViewEmpty = (ImageView) view.findViewById(R.id.image_view_empty);
+        Glide.with(getActivity()).load(R.drawable.ic_empty).into(imageViewEmpty);
+        mRelative.setVisibility(View.GONE);
+
     }
 
     private void bindToolbarName() {
@@ -75,6 +89,7 @@ public class ManageStockFragment extends Fragment implements ManageStockView, On
 
     @Override
     public void onFoodListLoaded() {
+        mRelative.setVisibility(View.GONE);
         if(mAdapter != null){
             List<Food> foods = Stock._INSTANCE.getFoods();
             mAdapter.setFoodList(foods);
@@ -86,6 +101,11 @@ public class ManageStockFragment extends Fragment implements ManageStockView, On
     @Override
     public void showSnackBar(String message) {
         ((MainActivity) getActivity()).showSnackBar(message);
+    }
+
+    @Override
+    public void onFoodListEmpty() {
+        mRelative.setVisibility(View.VISIBLE);
     }
 
     @Override

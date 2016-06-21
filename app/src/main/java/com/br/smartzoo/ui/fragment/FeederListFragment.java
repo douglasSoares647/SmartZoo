@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.br.smartzoo.R;
 import com.br.smartzoo.game.environment.ZooInfo;
@@ -20,6 +22,7 @@ import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.FeederListAdapter;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
 import com.br.smartzoo.ui.view.FeederListView;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,13 +30,14 @@ import java.util.List;
 /**
  * Created by adenilson on 26/05/16.
  */
-public class FeederListFragment extends Fragment implements FeederListView, OnManageEmployee{
+public class FeederListFragment extends Fragment implements FeederListView, OnManageEmployee {
 
     private static final int VERTICAL_ITEM_SPACE = 30;
     private RecyclerView mRecyclerViewFeeder;
     private FeederListPresenter mPresenter;
     private FeederListAdapter mAdapter;
     private List<Feeder> mFeederList = new ArrayList<>();
+    private RelativeLayout mRelative;
 
     @Nullable
     @Override
@@ -42,6 +46,7 @@ public class FeederListFragment extends Fragment implements FeederListView, OnMa
         View view = inflater.inflate(R.layout.fragment_feeder_list, container, false);
 
         bindPresenter();
+        bindRelativeEmpty(view);
         bindRecyclerViewFeeder(view);
         loadFeederList();
         bindToolbarName();
@@ -50,8 +55,17 @@ public class FeederListFragment extends Fragment implements FeederListView, OnMa
         return view;
     }
 
+
+    private void bindRelativeEmpty(View view) {
+        mRelative = (RelativeLayout) view.findViewById(R.id.relative_empty);
+        ImageView imageViewEmpty = (ImageView) view.findViewById(R.id.image_view_empty);
+        Glide.with(getActivity()).load(R.drawable.ic_empty).into(imageViewEmpty);
+        mRelative.setVisibility(View.GONE);
+
+    }
+
     private void bindToolbarName() {
-        ((MainActivity)getActivity()).changeToolBarText(getString(R.string.title_feeders));
+        ((MainActivity) getActivity()).changeToolBarText(getString(R.string.title_feeders));
     }
 
     private void bindRecyclerViewFeeder(View view) {
@@ -80,7 +94,13 @@ public class FeederListFragment extends Fragment implements FeederListView, OnMa
 
     @Override
     public void onLoadFeederSuccess(List<Feeder> feeder) {
+        mRelative.setVisibility(View.GONE);
         mAdapter.setFeederList(feeder);
+    }
+
+    @Override
+    public void onLoadFeederEmpty() {
+        mRelative.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -91,8 +111,8 @@ public class FeederListFragment extends Fragment implements FeederListView, OnMa
 
     @Override
     public void onSalaryChange(Employee employee, Double value) {
-        for(Employee zooInfoemployee : ZooInfo.employees){
-            if(zooInfoemployee.equals(employee)){
+        for (Employee zooInfoemployee : ZooInfo.employees) {
+            if (zooInfoemployee.equals(employee)) {
                 zooInfoemployee.setSalary(value);
             }
         }
@@ -101,7 +121,7 @@ public class FeederListFragment extends Fragment implements FeederListView, OnMa
 
     @Override
     public void onClick(Employee employee) {
-        mPresenter.startTransaction((Feeder)employee);
+        mPresenter.startTransaction((Feeder) employee);
     }
 
 

@@ -51,6 +51,7 @@ public class ManageStockPresenter {
             public void onLoadFoodListEmpty() {
                 mManageStockView.showSnackBar(mContext
                         .getString(R.string.message_load_food_list_empty));
+                mManageStockView.onFoodListEmpty();
             }
         }).execute();
 

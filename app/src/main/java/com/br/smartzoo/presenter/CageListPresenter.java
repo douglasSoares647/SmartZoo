@@ -51,7 +51,11 @@ public class CageListPresenter implements OnJanitorsRestedSelected {
     }
 
     public void loadCageList() {
-        mCageListView.onLoadCageList(ZooInfo.cages);
+        if(ZooInfo.cages.isEmpty()) {
+            mCageListView.onLoadCageListEmpty();
+        }else{
+            mCageListView.onLoadCageList(ZooInfo.cages);
+        }
     }
 
     public void destroyCage(final Cage cage) {

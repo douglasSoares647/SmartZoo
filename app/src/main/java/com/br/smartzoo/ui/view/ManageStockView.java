@@ -8,4 +8,6 @@ public interface ManageStockView {
    void  onFoodListLoaded();
 
     void showSnackBar(String message);
+
+    void onFoodListEmpty();
 }

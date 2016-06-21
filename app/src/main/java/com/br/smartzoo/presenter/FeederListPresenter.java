@@ -46,7 +46,11 @@ public class FeederListPresenter {
                 feeders.add((Feeder) employee);
         }
 
-        mFeederListView.onLoadFeederSuccess(feeders);
+        if (feeders.isEmpty()) {
+            mFeederListView.onLoadFeederEmpty();
+        } else {
+            mFeederListView.onLoadFeederSuccess(feeders);
+        }
     }
 
     public void demitFeeder(final Employee feeder) {

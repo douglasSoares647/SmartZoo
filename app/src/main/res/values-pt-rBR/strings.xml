@@ -172,7 +172,7 @@
     <string name="message_load_cages">Buscando Jaulas</string>
     <string name="messa_load_cages_successful">Lista de Jaulas atualizada!</string>
     <string name="messa_destroy_cage">Destruindo Jaula</string>
-    <string name="message_destroy_success">Jaula destruida</string>
+    <string name="message_destroy_success">Jaula destruída</string>
     <string name="text_clean">Limpar</string>
     <string name="text_dirt">Sujo</string>
     <string name="title_janitors">Limpadores</string>
@@ -182,7 +182,7 @@
     <string name="message_cleaned_failed">Falha ao limpar a jaula!</string>
     <string name="init_date">Data de inicio:</string>
     <string name="salary">Salario:</string>
-    <string name="lbl_available_space">"Espaço disponível : "</string>
+    <string name="lbl_available_space">"Espaço disponível: "</string>
     <string name="lbl_available_space_animals">" animais"</string>
     <string name="txt_years">" anos"</string>
     <string name="button_clean">Limpar</string>
