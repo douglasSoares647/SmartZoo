@@ -62,8 +62,7 @@ public class DetailsAnimalFragment extends Fragment {
         TextView textViewFoodSatisfied = (TextView) view.findViewById(R.id
                 .text_view_food_satisfied_animal);
         if (selectedAnimal.getFoodToBeSatisfied() != null) {
-            DecimalFormat decimalFormat = new DecimalFormat("0,00");
-            textViewFoodSatisfied.setText(decimalFormat.format(selectedAnimal
+            textViewFoodSatisfied.setText(String.format("%.2f",selectedAnimal
                     .getFoodToBeSatisfied()) + "kg");
         } else {
             textViewFoodSatisfied.setText("Unknown");

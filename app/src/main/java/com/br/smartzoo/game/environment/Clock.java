@@ -19,17 +19,16 @@ public class Clock {
     public static String my_pref = "timePreferences";
 
     //Animal
-    public static int timeToFeelHungry = 10800;// 3 hours
-    public static int timeToDigest = 1800; // 30 minutes
-    public static int digestingInterval = 60; // 1 minute
-    public static int starvingTime = 600; // 10 minutes
+    public static int timeToFeelHungry =  500; //10800;// 3 hours
+    public static int timeToDigest =  100; //1800; // 30 minutes
+    public static int digestingInterval = 10;//60; // 1 minute
 
     //Janitor
     public static int timeToCleanEachDirty = 5; //30 seconds
-    public static int timeToRest = 300; //5 minutes
+    public static int timeToRest = 50;//300; //5 minutes
 
     //Veterinary
-    public static int timeToTreat = 1800;
+    public static int timeToTreat = 300;//1800;
 
 
     public static int day = 1;

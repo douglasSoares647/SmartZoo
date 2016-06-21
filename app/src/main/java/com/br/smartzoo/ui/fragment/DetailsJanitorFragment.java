@@ -114,7 +114,6 @@ public class DetailsJanitorFragment extends Fragment {
                 final Cage cage = ((ListCageAdapter) recyclerViewCages.getAdapter()).getCage(position);
                 selectCageDialog.dismiss();
 
-                cage.setDirtyFactor(10);
 
                 setTaskProgressAttributes(cage);
 
@@ -212,7 +211,7 @@ public class DetailsJanitorFragment extends Fragment {
 
     private void bindTextViewSalaryJanitor(View view) {
         TextView textViewSalaryJanitor = (TextView) view.findViewById(R.id.text_view_salary_janitor);
-        textViewSalaryJanitor.setText(String.format("%02d", selectedJanitor.getSalary()));
+        textViewSalaryJanitor.setText(String.format("%.2f", selectedJanitor.getSalary()));
     }
 
     private void bindTextViewInitJanitor(View view) {

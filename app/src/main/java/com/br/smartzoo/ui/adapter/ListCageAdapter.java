@@ -1,6 +1,7 @@
 package com.br.smartzoo.ui.adapter;
 
 import android.app.Activity;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +43,16 @@ public class ListCageAdapter extends RecyclerView.Adapter<ListCageAdapter.ViewHo
 
         Glide.with(mContext).load(R.drawable.ic_cage).into(holder.mImageViewCage);
         holder.mTextViewName.setText(cage.getName());
-        holder.mTextViewCapacity.setText(String.valueOf(cage.getCapacity()));
+        holder.mTextViewStatus.setText(cage.isClean()?mContext.getString(R.string.lbl_clean):mContext.getString(R.string.lbl_dirty));
+        holder.mTextViewDirtyFactor.setText(mContext.getString(R.string.lbl_dirty_level) + cage.getDirtyFactor());
+
+        if(cage.getAvaiableSpace()>0)
+            holder.mTextViewCapacity.setTextColor(ContextCompat.getColor(mContext,R.color.green_500));
+        else
+            holder.mTextViewCapacity.setTextColor(ContextCompat.getColor(mContext,R.color.red_500));
+
+        holder.mTextViewCapacity.setText(mContext.getString(R.string.lbl_available_space) + cage.getAvaiableSpace() + mContext.getString(R.string.lbl_available_space_animals));
+        
     }
 
     @Override
@@ -54,6 +64,8 @@ public class ListCageAdapter extends RecyclerView.Adapter<ListCageAdapter.ViewHo
         private ImageView mImageViewCage;
         private TextView mTextViewName;
         private TextView mTextViewCapacity;
+        private TextView mTextViewStatus;
+        private TextView mTextViewDirtyFactor;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -61,6 +73,8 @@ public class ListCageAdapter extends RecyclerView.Adapter<ListCageAdapter.ViewHo
             mImageViewCage = (ImageView) itemView.findViewById(R.id.image_view_list_cage);
             mTextViewName = (TextView) itemView.findViewById(R.id.text_view_name_list_cage);
             mTextViewCapacity = (TextView) itemView.findViewById(R.id.text_view_capacity_list_cage);
+            mTextViewStatus = (TextView) itemView.findViewById(R.id.text_view_status_cage);
+            mTextViewDirtyFactor = (TextView) itemView.findViewById(R.id.text_view_dirty_factor);
         }
     }
 

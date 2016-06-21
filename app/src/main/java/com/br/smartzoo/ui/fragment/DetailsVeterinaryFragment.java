@@ -221,7 +221,7 @@ public class DetailsVeterinaryFragment extends Fragment {
 
     private void bindTextViewSalaryVeterinary(View view) {
         TextView textViewSalaryJanitor = (TextView) view.findViewById(R.id.text_view_salary_veterinary);
-        textViewSalaryJanitor.setText(String.format("%02d", selected_veterinary.getSalary()));
+        textViewSalaryJanitor.setText(String.format("%.2f", selected_veterinary.getSalary()));
     }
 
     private void bindTextViewInitVeterinary(View view) {

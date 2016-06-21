@@ -129,6 +129,7 @@ public class NewListAdapter extends RecyclerView.Adapter<NewListAdapter.ViewHold
         if(mNewList != null){
             if(mNewList.size()==50){
                 mNewList.remove(mNewList.size()-1);
+                notifyItemRemoved(50);
 
             }
             mNewList.add(0,aNew);

@@ -2,7 +2,6 @@ package com.br.smartzoo.ui.adapter;
 
 import android.app.Activity;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -49,6 +48,16 @@ public class CageListAdapter extends RecyclerView.Adapter<CageListAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Cage cage = mCageList.get(position);
 
+        if(cage.isClean()) {
+            holder.mTextViewStatus.setText(R.string.text_clean);
+            holder.mTextViewStatus.setTextColor(ContextCompat.getColor(mContext,R.color.green_500));
+        }else{
+            holder.mTextViewStatus.setText(R.string.text_dirt);
+            holder.mTextViewStatus.setTextColor(ContextCompat.getColor(mContext,R.color.red_500));
+        }
+
+        holder.mTextViewDirtyFactor.setText(mContext.getString(R.string.lbl_dirty_level) + cage.getDirtyFactor() + "");
+
         Glide.with(mContext).load(R.drawable.ic_cage).into(holder.mImageViewCage);
         Glide.with(mContext).load(R.drawable.ic_destroy).into(holder.mImageViewDestroy);
         Glide.with(mContext).load(R.drawable.ic_clean).into(holder.mImageViewClean);
@@ -61,7 +70,7 @@ public class CageListAdapter extends RecyclerView.Adapter<CageListAdapter.ViewHo
         else
             holder.mTextViewCapacity.setTextColor(ContextCompat.getColor(mContext,R.color.red_500));
 
-        holder.mTextViewCapacity.setText(mContext.getString(R.string.label_avaible_space) + cage.getAvaiableSpace() + mContext.getString(R.string.label_avaible_space_animals));
+        holder.mTextViewCapacity.setText(mContext.getString(R.string.lbl_available_space) + cage.getAvaiableSpace() + mContext.getString(R.string.lbl_available_space_animals));
 
         holder.mImageViewClean.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,13 +103,7 @@ public class CageListAdapter extends RecyclerView.Adapter<CageListAdapter.ViewHo
             }
         });
 
-        if(cage.isClean()) {
-            holder.mTextViewStatus.setText(R.string.text_clean);
-            holder.mTextViewStatus.setTextColor(Color.parseColor("#43A047"));
-        }else{
-            holder.mTextViewStatus.setText(R.string.text_dirt);
-            holder.mTextViewStatus.setTextColor(Color.parseColor("#E53935"));
-        }
+
 
     }
 
@@ -124,6 +127,7 @@ public class CageListAdapter extends RecyclerView.Adapter<CageListAdapter.ViewHo
         private TextView mTextViewCapacity;
         private ImageView mImageViewTypeAnimal;
         private TextView mTextViewStatus;
+        private TextView mTextViewDirtyFactor;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -135,6 +139,7 @@ public class CageListAdapter extends RecyclerView.Adapter<CageListAdapter.ViewHo
             mTextViewName = (TextView) itemView.findViewById(R.id.text_view_name_list_cage);
             mTextViewCapacity = (TextView) itemView.findViewById(R.id.text_view_capacity_list_cage);
             mImageViewTypeAnimal = (ImageView) itemView.findViewById(R.id.image_view_type_animal);
+            mTextViewDirtyFactor = (TextView) itemView.findViewById(R.id.text_view_dirty_factor);
         }
     }
 

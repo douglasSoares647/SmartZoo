@@ -3,6 +3,7 @@ package com.br.smartzoo.ui.adapter;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,7 +57,7 @@ public class AnimalListAdapter extends RecyclerView.Adapter<AnimalListAdapter.Vi
         Glide.with(mContext).load(R.drawable.ic_treatments).into(holder.mImageViewTreat);
         if (animal.getCage().getId().equals(-1L)) {
             Glide.with(mContext).load(R.drawable.ic_cage).into(holder.mImageViewPutCage);
-            holder.mRelativeAnimal.setBackgroundColor(mContext.getResources().getColor(R.color
+            holder.mRelativeAnimal.setBackgroundColor(ContextCompat.getColor(mContext,R.color
                     .red_200));
             holder.mImageViewPutCage.setVisibility(View.VISIBLE);
 
@@ -66,6 +67,11 @@ public class AnimalListAdapter extends RecyclerView.Adapter<AnimalListAdapter.Vi
                     mOnManageAnimal.onPut(animal);
                 }
             });
+
+        }
+        else{
+            holder.mImageViewPutCage.setVisibility(View.INVISIBLE);
+            holder.mRelativeAnimal.setBackgroundColor(ContextCompat.getColor(mContext,R.color.white));
 
         }
 
@@ -131,7 +137,8 @@ public class AnimalListAdapter extends RecyclerView.Adapter<AnimalListAdapter.Vi
     }
 
     public void setAnimalList(List<Animal> animalList) {
-        this.mAnimalList = animalList;
+        this.mAnimalList.clear();
+        this.mAnimalList.addAll(animalList);
         notifyDataSetChanged();
     }
 
@@ -139,4 +146,6 @@ public class AnimalListAdapter extends RecyclerView.Adapter<AnimalListAdapter.Vi
         this.mAnimalList.remove(animal);
         notifyDataSetChanged();
     }
+
+
 }

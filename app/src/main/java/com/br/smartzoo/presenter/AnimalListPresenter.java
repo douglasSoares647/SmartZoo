@@ -26,6 +26,7 @@ import com.br.smartzoo.ui.adapter.BuyAnimalListAdapter;
 import com.br.smartzoo.ui.adapter.DividerItemDecoration;
 import com.br.smartzoo.ui.adapter.ListCageAdapter;
 import com.br.smartzoo.ui.adapter.VerticalSpaceItemDecoration;
+import com.br.smartzoo.ui.fragment.BuyCageFragment;
 import com.br.smartzoo.ui.fragment.DetailsAnimalFragment;
 import com.br.smartzoo.ui.view.AnimalListView;
 import com.br.smartzoo.util.AlertDialogUtil;
@@ -115,24 +116,33 @@ public class AnimalListPresenter {
     public void putAnimalInCage(Animal animal) {
         List<Cage> cagesByAnimalType = CageBusiness.getCagesByAnimalType(animal);
         if (cagesByAnimalType.isEmpty()) {
-            showBuyNewCageDialog();
+            showBuyNewCageDialog(animal);
         } else {
             showSelectCageDialog(cagesByAnimalType, animal);
         }
     }
 
-    private void showBuyNewCageDialog() {
+    private void showBuyNewCageDialog(final Animal animal) {
         AlertDialog.Builder dialog = AlertDialogUtil.makeConfirmationDialog(mContext,
                 mContext.getString(R.string.title_no_cages), mContext.getString(R
                         .string.msg_buy_new_cage_for_animal_type),
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        buyCageForCurrentAnimalType(animal.getType());
                         dialog.dismiss();
                     }
                 });
         dialog.show();
+    }
+
+    private void buyCageForCurrentAnimalType(String type) {
+
+        Bundle bundle = new Bundle();
+        bundle.putString(BuyCageFragment.SELECTED_ANIMAL_TYPE, type);
+        BuyCageFragment buyCageFragment = new BuyCageFragment();
+        buyCageFragment.setArguments(bundle);
+        ((MainActivity)mContext).startTransaction(buyCageFragment);
     }
 
     private void showSelectCageDialog(List<Cage> cagesByAnimalType, final Animal animal) {
@@ -168,7 +178,6 @@ public class AnimalListPresenter {
 
                     AnimalBusiness.putAnimalInCage(cage, animal);
                     animal.setCage(cage);
-                    cage.getAnimals().add(animal);
 
                     Toast.makeText(mContext, R.string.msg_animal_succesfully_bought, Toast
                             .LENGTH_SHORT).show();

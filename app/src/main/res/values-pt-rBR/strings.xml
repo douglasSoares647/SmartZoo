@@ -182,8 +182,8 @@
     <string name="message_cleaned_failed">Falha ao limpar a jaula!</string>
     <string name="init_date">Data de inicio:</string>
     <string name="salary">Salario:</string>
-    <string name="label_avaible_space">"Espaço disponível : "</string>
-    <string name="label_avaible_space_animals">" animais"</string>
+    <string name="lbl_available_space">"Espaço disponível : "</string>
+    <string name="lbl_available_space_animals">" animais"</string>
     <string name="txt_years">" anos"</string>
     <string name="button_clean">Limpar</string>
     <string name="title_select_dirty_cage">Selecione alguma jaula suja</string>
@@ -195,6 +195,9 @@
     <string name="msg_loading_zoo">Carregando Zoo</string>
     <string name="msg_game_running">Seu jogo está rodando, toque para acessá-lo</string>
     <string name="title_smart_zoo">Smart Zoo</string>
-    <string name="msg_animal_type_changed">Animal type changed</string>
+    <string name="msg_animal_type_changed">Tipo de animal modificado!</string>
+    <string name="lbl_dirty">Sujo</string>
+    <string name="lbl_clean">Limpo</string>
+    <string name="lbl_dirty_level">"Sujeira : "</string>
 
 </resources>

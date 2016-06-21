@@ -185,8 +185,8 @@
     <string name="message_cleaned_failed">Cage can\'t be cleaned</string>
     <string name="init_date">Init date:</string>
     <string name="salary">Salary:</string>
-    <string name="label_avaible_space">"Avaible space : "</string>
-    <string name="label_avaible_space_animals">" animals"</string>
+    <string name="lbl_available_space">"Available space : "</string>
+    <string name="lbl_available_space_animals">" animals"</string>
     <string name="txt_years">" years"</string>
     <string name="button_clean">Clean</string>
     <string name="title_select_dirty_cage">Select any dirty cage</string>
@@ -199,6 +199,9 @@
     <string name="msg_game_running">Your game is running, touch to open!</string>
     <string name="title_smart_zoo">Smart Zoo</string>
     <string name="msg_animal_type_changed">Animal type changed</string>
+    <string name="lbl_dirty">Dirty</string>
+    <string name="lbl_clean">Clean</string>
+    <string name="lbl_dirty_level">"Dirt : "</string>
 
 
 </resources>

@@ -286,7 +286,6 @@ public class Animal implements Observer, Parcelable {
     public void onTick() {
         biologicalClock++;
 
-
         if (isDigesting) {
             digest();
         } else if (biologicalClock == Clock.timeToFeelHungry) {
@@ -307,11 +306,8 @@ public class Animal implements Observer, Parcelable {
     private void afterDigest() {
         cage.setDirtyFactor(cage.getDirtyFactor() + 1);
         status = ApplicationUtil.applicationContext.getString(R.string.not_hungry);
-
         isDigesting = false;
         foodEaten = 0.0;
-
-
     }
 
     public String getImage() {

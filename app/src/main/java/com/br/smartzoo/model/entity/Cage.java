@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class Cage implements Comparable<Cage>, Parcelable {
 
-    private int dirtyFactor;
+    private int dirtyFactor = 0;
 
     private Long id;
     private String name;
@@ -19,7 +19,7 @@ public class Cage implements Comparable<Cage>, Parcelable {
     private Double price;
     private List<Animal> animals;
     private List<Food> foods;
-    private Integer capacity;
+    private Integer capacity = 0;
     private boolean isClean;
     private boolean isSupplied;
 
@@ -83,6 +83,9 @@ public class Cage implements Comparable<Cage>, Parcelable {
 
     public void setIsClean(boolean isClean) {
         this.isClean = isClean;
+
+        if(isClean)
+            dirtyFactor = 0;
     }
 
     public boolean isSupplied() {
